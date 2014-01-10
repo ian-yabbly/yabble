@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<beans
+    xmlns='http://www.springframework.org/schema/beans'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:c='http://www.springframework.org/schema/c'
+    xmlns:p='http://www.springframework.org/schema/p'
+    xsi:schemaLocation='
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd'
+        >
+
+  <bean
+      class='org.springframework.beans.factory.config.PropertyPlaceholderConfigurer'
+      p:system-properties-mode-name='SYSTEM_PROPERTIES_MODE_OVERRIDE'
+      p:ignore-unresolvable-placeholders='true'
+      p:ignore-resource-not-found='true'
+      >
+    <property name='locations'>
+      <list>
+        <value>classpath:service.properties</value>
+        <value>file://${app.home}/etc/override.properties</value>
+        <value>file://${app.home}/etc/local.properties</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean
+      id='service.data-source'
+      class='org.apache.commons.dbcp.BasicDataSource'
+      destroy-method='close'
+      p:driver-class-name='org.postgresql.Driver'
+      p:url='${db.url}'
+      p:username='${db.username}'
+      p:password='${db.password}'
+      p:max-active='${db.pool.max-active-connections}'
+      p:max-idle='${db.pool.max-idle-connections}'
+      p:max-wait='${db.pool.max-wait-ms}'
+      p:default-auto-commit='false'
+      />
+
+  <bean
+      id='service.jdbc-template'
+      class='org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate'
+      c:data-source-ref='service.data-source'
+      />
+
+  <bean
+      id='service.txn-manager'
+      class='org.springframework.jdbc.datasource.DataSourceTransactionManager'
+      p:data-source-ref='service.data-source'
+      />
+
+  <bean
+      id='service.txn-template'
+      class='org.springframework.transaction.support.TransactionTemplate'
+      p:transaction-manager-ref='service.txn-manager'
+      />
+
+  <!-- DAO -->
+  <bean
+      id='service.user-dao'
+      class='me.yabble.service.dao.UserDao'
+      c:npt-ref='service.jdbc-template'
+      />
+  <!-- END DAO -->
+
+  <!-- Service -->
+  <bean
+      id='service.user-service'
+      class='me.yabble.service.UserService'
+      c:user-dao-ref='service.user-dao'
+      />
+  <!-- END Service -->
+
+</beans>

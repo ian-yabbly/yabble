@@ -1,0 +1,76 @@
+<project name='yabble' default='compile' basedir='.'>
+
+  <path id='classpath'>
+    <fileset dir='build-lib'>
+      <include name='*.jar'/>
+    </fileset>
+    <fileset dir='lib'>
+      <include name='*.jar'/>
+    </fileset>
+  </path>
+
+  <loadfile property='version' srcFile='${basedir}/.version'>
+    <filterchain>
+      <striplinebreaks/>
+    </filterchain>
+  </loadfile>
+
+  <target name='compile'>
+    <ant antfile='common/build.xml' target='share' inheritAll='false'/>
+    <ant antfile='service/build.xml' target='share' inheritAll='false'/>
+    <ant antfile='web/build.xml' target='share' inheritAll='false'/>
+  </target>
+
+  <target name='clean'>
+    <taskdef resource='scala/tools/ant/antlib.xml' classpathref='classpath'/>
+    <mkdir dir='.____src'/>
+    <fsc srcdir='.____src' reset='true'/>
+    <delete dir='.____src'/>
+
+    <delete dir='target'/>
+    <delete dir='artifact'/>
+    <ant antfile='web/build.xml' target='clean' inheritAll='false'/>
+    <ant antfile='service/build.xml' target='clean' inheritAll='false'/>
+    <ant antfile='common/build.xml' target='clean' inheritAll='false'/>
+  </target>
+
+  <target name='dist' depends='compile'>
+    <mkdir dir='target/yabble-${version}/bin'/>
+    <mkdir dir='target/yabble-${version}/lib'/>
+    <mkdir dir='target/yabble-${version}/artifact'/>
+    <mkdir dir='target/yabble-${version}/db-schema'/>
+
+    <exec executable='git' output='target/yabble-${version}/.source-version-hash'>
+      <arg line='log --pretty=format:"%h" -n 1'/>
+    </exec>
+
+    <copy todir='target/yabble-${version}/bin'>
+      <fileset dir='bin'/>
+    </copy>
+
+    <copy todir='target/yabble-${version}/lib'>
+      <fileset dir='lib'/>
+    </copy>
+
+    <copy todir='target/yabble-${version}/db-schema'>
+      <fileset dir='db-schema'/>
+    </copy>
+
+    <copy todir='target/yabble-${version}/artifact'>
+      <fileset dir='artifact'/>
+    </copy>
+
+    <copy todir='target/yabble-${version}'>
+      <fileset file='.env'/>
+      <fileset file='.version'/>
+      <fileset file='.version-hash'/>
+    </copy>
+
+    <chmod perm='755' dir='target/yabble-${version}/bin' includes='*'/>
+  </target>
+
+  <target name='dist-archive' depends='dist'>
+    <tar destfile='target/yabble-${version}.tar.gz' basedir='target/yabble-${version}' compression='gzip'/>
+  </target>
+
+</project>

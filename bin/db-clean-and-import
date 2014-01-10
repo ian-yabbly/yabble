@@ -1,0 +1,33 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+if test $YABBLY_ENV == 'prod'; then
+  fatal "Do not run this in prod!"
+fi
+
+$BASEDIR/sbin/db-clean
+createdb $DB_NAME
+if [[ $1 == *.gz ]]; then
+  zcat $1 | psql $DB_NAME
+else
+  psql $DB_NAME <$1
+fi
+$BASEDIR/sbin/db-migrate
+
+while [ true ]; do
+  read -p'Make DB dev-safe? ([y]/n)> ' typed
+
+  if test "$typed" = 'y' -o "$typed" = ''; then
+    $BASEDIR/sbin/db-make-dev-safe
+    echo "update users set email = 'ian@yabbly.com' where id = 1" | psql $DB_NAME
+    break
+  fi
+
+  if test "$typed" = 'n'; then
+    warn "I hope you know what you're doing..."
+    break
+  fi
+
+  warn "Invalid input. Please type a 'y' or 'n'"
+done

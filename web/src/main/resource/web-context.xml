@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<beans
+    xmlns='http://www.springframework.org/schema/beans'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:c='http://www.springframework.org/schema/c'
+    xmlns:p='http://www.springframework.org/schema/p'
+    xsi:schemaLocation='
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd'
+        >
+
+  <bean
+      class='org.springframework.beans.factory.config.PropertyPlaceholderConfigurer'
+      p:system-properties-mode-name='SYSTEM_PROPERTIES_MODE_OVERRIDE'
+      p:ignore-unresolvable-placeholders='true'
+      p:ignore-resource-not-found='true'
+      >
+    <property name='locations'>
+      <list>
+        <value>classpath:web.properties</value>
+        <value>file://${app.home}/etc/override.properties</value>
+        <value>file://${app.home}/etc/local.properties</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean
+      id='web.session-service'
+      class='me.yabble.web.service.SessionService'
+      c:redis-client-ref='common.redis-client'
+      c:session-cookie-name='${web.session.cookie-name}'
+      />
+
+  <bean
+      class='me.yabble.web.server.Server'
+      c:router-ref='web.router'
+      c:port='${web.port}'
+      />
+
+  <bean
+      id='web.router'
+      class='me.yabble.web.server.Router'
+      >
+    <constructor-arg>
+      <list>
+        <ref bean='web.index-handler'/>
+      </list>
+    </constructor-arg>
+  </bean>
+
+  <bean
+      id='web.index-handler'
+      class='me.yabble.web.server.IndexHandler'
+      c:user-service-ref='service.user-service'
+      c:session-service-ref='web.session-service'
+      />
+
+</beans>

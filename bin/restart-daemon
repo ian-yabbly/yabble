@@ -1,0 +1,54 @@
+#!/bin/bash
+
+set -e
+
+source $(dirname $0)/include
+
+function print-usage() {
+  if test -n "$1"; then echo $1 1>&2; fi
+  echo 1>&2
+
+  echo "Usage: $(basename $0) [options] name logback-config-path java-class-name" 1>&2
+  echo "    -h    Print help message" 1>&2
+  echo "    -D    Set java system property" 1>&2
+  echo "    -d    Debug" 1>&2
+  echo "    -9    kill process with KILL signal" 1>&2
+  echo "    -3    kill process with QUIT signal" 1>&2
+  echo 1>&2
+  echo "Default signal is TERM (15)." 1>&2
+  echo 1>&2
+
+  log "Exiting"
+  exit 1;
+}
+
+signal=15
+startOpts=
+
+while getopts "hd93D:p:" option; do
+  case $option in
+    h ) print-usage;;
+    D ) export JAVA_OPTS="$JAVA_OPTS -D$OPTARG";;
+    d ) startOpts="$startOpts -d";;
+    9 ) signal=9;;
+    3 ) signal=3;;
+    * ) print-usage "Unknown option: $option";;
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+if test $# -lt 3; then
+  print-usage "At least two arguments are required"
+fi
+
+name=$1
+logbackConfigPath=$2
+class=$3
+shift 3
+
+if $BASEDIR/bin/is-running $name; then
+  $BASEDIR/bin/kill-daemon -s$signal $name
+fi
+
+$BASEDIR/bin/start-daemon $startOpts $name $logbackConfigPath $class "$@"

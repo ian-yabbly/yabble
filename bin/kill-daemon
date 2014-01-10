@@ -1,0 +1,73 @@
+#!/bin/bash
+
+set -e
+
+source $(dirname $0)/include
+
+function print-usage() {
+  if test -n "$1"; then echo $1 1>&2; fi
+  echo 1>&2
+
+  echo "Usage: $(basename $0) [options] pidName" 1>&2
+  echo "    -h    Print help message" 1>&2
+  echo "    -9    kill process with KILL signal" 1>&2
+  echo "    -3    kill process with QUIT signal" 1>&2
+  echo "    -s    Send given signal (e.g. -s15)" 1>&2
+  echo 1>&2
+  echo "Default signal is TERM (15)." 1>&2
+  echo 1>&2
+
+  log "Exiting"
+  exit 1;
+}
+
+signal=15
+
+while getopts "h93s:" option; do
+  case $option in
+    h ) print-usage;;
+    9 ) signal=9;;
+    3 ) signal=3;;
+    s ) signal=$OPTARG;;
+    * ) print-usage "Unknown option: $option";;
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+if test $# -ne 1; then
+  print-usage "One and only one argument is required"
+fi
+
+pidFile=$YABBLY_HOME/pid/$1.pid
+
+if test ! -e $pidFile; then
+  fatal "PID file does not exist: $pidFile"
+fi
+
+if kill -0 $(cat $pidFile) 2>/dev/null; then
+  kill -$signal $(cat $pidFile)
+
+  # Wait for process to die
+  if test $signal -eq 15 -o $signal -eq 9; then
+    if kill -0 $(cat $pidFile) 2>/dev/null; then
+      sleep 0.5s
+    fi
+    if kill -0 $(cat $pidFile) 2>/dev/null; then
+      while kill -0 $(cat $pidFile) 2>/dev/null; do
+        echo -n .
+        sleep 1s
+      done
+      echo
+    fi
+  fi
+else
+  rm $pidFile
+  fatal "Process is not running: $pidFile"
+fi
+
+if ! kill -0 $(cat $pidFile) 2>/dev/null; then
+  rm $pidFile
+else
+  debug "PID file will not be removed because process is still running: $pidFile"
+fi

@@ -1,0 +1,83 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+function print-usage() {
+  if test -n "$1"; then echo $1 1>&2; fi
+  echo 1>&2
+
+  echo "Usage: $(basename $0) [options] name logback-config-path java-class-name" 1>&2
+  echo "    -h    Print help message" 1>&2
+  echo "    -D    Set java system property" 1>&2
+  echo "    -T    Do not tee std{out,err}" 1>&2
+  echo "    -d    Debug" 1>&2
+  echo 1>&2
+
+  log "Exiting"
+  exit 1;
+}
+
+tee=true
+
+while getopts "hdp:D:T" option; do
+  case $option in
+    h ) print-usage;;
+    D ) export JAVA_OPTS="$JAVA_OPTS -D$OPTARG";;
+    d ) export JAVA_OPTS="$JAVA_OPTS -Xdebug -agentlib:jdwp=transport=dt_socket,server=y,suspend=n";;
+    T ) tee=false;;
+    * ) print-usage "Unknown option: $option";;
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+if test $# -lt 3; then
+  print-usage "At least two arguments (name and Java class) are required"
+fi
+
+name=$1
+logbackConfigPath=$2
+class=$3
+shift 3
+
+if test ! -e $APP_HOME/pid; then
+  fatal "Directory does not exits: $APP_HOME/pid"
+fi
+
+pidFile=$APP_HOME/pid/$name.pid
+
+if test -n "$pidFile"; then
+  if test -e $pidFile; then
+    if kill -0 $(cat $pidFile) 2>/dev/null; then
+      fatal "Process is running: $pidFile"
+    fi
+  fi
+fi
+
+if test -e $APP_HOME/.include; then
+  source $APP_HOME/.include
+fi
+
+if test -e $APP_HOME/.$name; then
+  source $APP_HOME/.$name
+fi
+
+if test "$APP_ENV" = "dev"; then
+  JAVA_OPTS="$JAVA_OPTS -Dsource.home=$BASEDIR"
+fi
+
+source $BINDIR/include-java
+APP_JAVA_OPTS="$APP_JAVA_OPTS -Dapp.name=$name -Dlogback.configurationFile=$logbackConfigPath"
+
+if test "$tee" = "true"; then
+  ( java \
+  $APP_JAVA_OPTS \
+  -classpath $BASEDIR/lib/\*:$BASEDIR/artifact/\* \
+  $class "$@" 2>&1 & echo $! >&3 ) 3>$pidFile | tee -a $APP_HOME/var/log/$name.out &
+else
+  echo java \
+  $APP_JAVA_OPTS \
+  -classpath $BASEDIR/lib/\*:$BASEDIR/artifact/\* \
+  $class "$@" 2>&1 >> $APP_HOME/var/log/$name.out &
+  echo $! >$pidFile
+fi

@@ -1,0 +1,25 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+function add-version() {
+  psql -c "update schema_versions set is_active = false where is_active = true" $DB_NAME
+  psql -c "insert into schema_versions (version, is_active) values ('$1', true)" $DB_NAME
+}
+
+v=$(psql -tc "select version from schema_versions where is_active = true" $DB_NAME)
+
+for f in $(ls -1 $BASEDIR/db-schema/*.sql | sort --version-sort); do
+#for f in $(ls -1 $BASEDIR/db-schema/*.sql | sort); do
+  version=$(basename $f .sql)
+  v=$(psql -tc "select count(*) from schema_versions where version = '$version'" $DB_NAME)
+  if test $v -eq 0; then
+    info "Migrating to version $f"
+    psql -vON_ERROR_STOP= -1f $f $DB_NAME
+    # No need to check return code because of the 'set -e'
+    add-version $version
+  fi
+done
+
+psql -c "grant all on all tables in schema public to $DB_USER" $DB_NAME
+psql -c "grant all on all sequences in schema public to $DB_USER" $DB_NAME

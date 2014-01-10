@@ -1,0 +1,43 @@
+#!/bin/bash
+
+BINDIR=$(dirname $0)
+cd $BINDIR/..
+BASEDIR=$PWD
+cd - >/dev/null
+
+source $BASEDIR/.env
+source $BINDIR/functions
+
+version=$(cat $BASEDIR/.version)
+
+if test -e $BASEDIR/etc/override.properties; then
+  if test -n "$APP_HOME" -a "$APP_HOME" != "$BASEDIR"; then
+    warn "This script is running from: $BASEDIR"
+    warn "Your APP_HOME is set to: $APP_HOME"
+    fatal "Your APP_HOME is probably misconfigured"
+  fi
+fi
+
+if test -n "$APP_HOME" -a "$APP_HOME" != "$BASEDIR"; then
+  if test -e $BASEDIR/etc/override.properties; then
+    warn "This script is running from: $BASEDIR"
+    warn "Your APP_HOME is set to: $APP_HOME"
+    fatal "Your APP_HOME is probably misconfigured"
+  fi
+fi
+
+if test -z "$APP_HOME"; then
+  if test -e $BASEDIR/etc/override.properties; then
+    info "Setting APP_HOME to $BASEDIR"
+    export APP_HOME=$BASEDIR
+  elif test -e $HOME/opt/yabble/etc/override.propertie; then
+    info "Setting APP_HOME to $HOME/opt/yabble"
+    export APP_HOME=$HOME/opt/yabble
+  else
+    fatal "Please set APP_HOME"
+  fi
+fi
+
+if test -r $APP_HOME/etc/env.sh; then
+  source $APP_HOME/etc/env.sh
+fi

@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+if test $YABBLY_ENV == 'prod'; then
+  fatal "Do not run this in prod!"
+fi
+
+$BASEDIR/sbin/db-clean
+$BASEDIR/sbin/db-init
+$BASEDIR/sbin/db-migrate

@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+function print-usage() {
+  if test -n "$1"; then echo $1 1>&2; fi
+  echo 1>&2
+
+  echo "Usage: $(basename $0) [options]" 1>&2
+  echo "    -h    Print help message" 1>&2
+  echo 1>&2
+
+  log "Exiting"
+  exit 1;
+}
+
+while getopts "h" option; do
+  case $option in
+    h ) print-usage;;
+    * ) print-usage "Unknown option: $option";;
+  esac
+done
+
+shift $(($OPTIND - 1))
+
+if ls $APP_HOME/pid/*.pid >/dev/null 2>&1; then
+  ps -lfwwp $(cat $APP_HOME/pid/*.pid | awk '{printf("%d ", $0)} END {print ""}')
+else
+  info "No processes are running"
+fi

@@ -1,0 +1,17 @@
+package me.yabble.web.proto;
+
+option java_package = "me.yabble.web.proto";
+option java_outer_classname = "WebProtos";
+
+message Session {
+
+  message Attribute {
+    required string key   = 1;
+    optional string value = 2;
+  }
+
+  required string id            = 1;
+  required string creation_date = 2;
+  optional string user_id       = 3;
+  repeated Attribute attribute  = 4;
+}

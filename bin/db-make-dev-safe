@@ -1,0 +1,15 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+if test $YABBLY_ENV == 'prod'; then
+  fatal "Do not run this in prod!"
+fi
+
+echo "UPDATE users SET email = email || '-blackhole' WHERE email IS NOT NULL" | psql $DB_NAME
+echo "UPDATE user_invites SET email = email || '-blackhole' WHERE email IS NOT NULL" | psql $DB_NAME
+echo "UPDATE user_invite_requests SET email = email || '-blackhole' WHERE email IS NOT NULL" | psql $DB_NAME
+
+# TODO Remove this, it' should be unnecessary
+echo "DELETE FROM user_preferences WHERE attribute = 'ios_notification_token'" | psql $DB_NAME
+echo "DELETE FROM user_preferences WHERE attribute = 'ios-notification-token'" | psql $DB_NAME

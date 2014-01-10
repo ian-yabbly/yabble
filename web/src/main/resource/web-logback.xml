@@ -1,0 +1,41 @@
+<configuration>
+
+  <property file='${app.home}/etc/override.properties'/>
+
+  <appender name='STDERR' class='ch.qos.logback.core.ConsoleAppender'>
+    <encoder>
+      <pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</pattern>
+    </encoder>
+    <target>System.err</target>
+  </appender>
+
+  <appender name='CONSOLE' class='ch.qos.logback.core.ConsoleAppender'>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+    <target>System.err</target>
+  </appender>
+
+  <appender name='FILE' class='ch.qos.logback.core.rolling.RollingFileAppender'>
+    <file>${app.home}/var/log/${app.name:-yabble}.log</file>
+
+    <rollingPolicy class='ch.qos.logback.core.rolling.TimeBasedRollingPolicy'>
+      <fileNamePattern>${app.home}/var/log/${app.name:-yabble}.log.%d{yyyy-MM-dd}</fileNamePattern>
+
+      <maxHistory>30</maxHistory>
+    </rollingPolicy>
+
+    <encoder>
+      <pattern>%date %level [%thread] %logger{10} [%X{source-version-hash}] [%X{session-id}] [%X{request-id}:%X{request-uri}] [uid:%X{user-id}] [%file:%line] %msg%n</pattern>
+    </encoder>
+  </appender>
+
+  <logger name='CONSOLE' level='INFO'>
+    <appender-ref ref='CONSOLE'/>
+  </logger>
+
+  <root level='${log.root.level:-INFO}'>
+    <appender-ref ref='FILE'/>
+  </root>
+
+</configuration>
