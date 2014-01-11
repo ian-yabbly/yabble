@@ -1,0 +1,14 @@
+package me.yabble.common.proto;
+
+option java_package = "me.yabble.common.proto";
+option java_outer_classname = "CommonProtos";
+
+message WorkQueueItem {
+  required int64 id = 1;
+  optional bytes data = 2;
+  optional string creation_date = 3;
+  optional string last_in_progress_date = 4;
+  optional int64 attempt_count = 5;
+  optional string timeout_date = 6;
+  repeated string failure_message = 7;
+}
