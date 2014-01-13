@@ -29,6 +29,7 @@
       id='web.velocity-template'
       class='me.yabble.web.template.VelocityTemplate'
       c:encoding='${app.encoding}'
+      c:do-less-in-browser='${web.less.do-in-browser}'
       >
     <constructor-arg>
       <props>
