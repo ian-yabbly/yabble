@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+source $(dirname $0)/include
+
+pidFile=$APP_HOME/pid/$1.pid
+
+if test ! -e $pidFile; then
+  exit 2
+fi
+
+kill -0 $(cat $pidFile) 2>/dev/null

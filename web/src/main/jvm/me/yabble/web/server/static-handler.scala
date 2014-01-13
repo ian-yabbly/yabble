@@ -11,16 +11,22 @@ import com.sun.net.httpserver._
 
 import org.springframework.util.AntPathMatcher
 
+import java.util.regex.Pattern
+
 import scala.collection.JavaConversions._
 
-class IndexHandler(
+class StaticHandler(
     val sessionService: SessionService,
     val userService: UserService,
-    val template: VelocityTemplate)
+    val template: VelocityTemplate,
+    val staticBasePath: String,
+    var )
   extends Handler
   with Log
 {
-  private val pathPatterns = List("")
+  def VERSION_PATTERN = Pattern.compile("^/s/v-[\\p{Alnum}_-]+/(.*)$")
+
+  private val pathPatterns = List("/s/**")
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
@@ -38,6 +44,15 @@ class IndexHandler(
   }
 
   def index(exchange: HttpExchange, pathVars: Map[String, String]) {
-    htmlTemplateResponse(exchange, List("index.html", "layout/layout.html"), Map("hello" -> "world"))
+    val path = noContextPath(exchange)
+    val m = VERSION_PATTERN.matcher(path)
+
+    val resourcePath = if (m.matches()) {
+      m.group(1)
+    } else {
+      path.substring("/s".length)
+    }
+
+    staticResponse(exchange, resourcePath, "text/css; charset=utf-8")
   }
 }

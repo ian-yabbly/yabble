@@ -39,7 +39,7 @@ if test $# -ne 1; then
   print-usage "One and only one argument is required"
 fi
 
-pidFile=$YABBLY_HOME/pid/$1.pid
+pidFile=$APP_HOME/pid/$1.pid
 
 if test ! -e $pidFile; then
   fatal "PID file does not exist: $pidFile"

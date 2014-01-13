@@ -1,0 +1,11 @@
+package me.yabble.common.proto;
+
+option java_package = "me.yabble.common.proto";
+option java_outer_classname = "CommonProtos";
+
+message DelayedJob {
+  required int64 id = 1;
+  required int64 item_id = 2;
+  required string qname = 3;
+  required string datetime_to_submit = 4;
+}

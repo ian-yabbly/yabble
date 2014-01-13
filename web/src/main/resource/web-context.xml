@@ -26,6 +26,29 @@
   </bean>
 
   <bean
+      id='web.velocity-template'
+      class='me.yabble.web.template.VelocityTemplate'
+      >
+    <constructor-arg>
+      <props>
+        <prop key='resource.loader'>file</prop>
+        <prop key='file.resource.loader.class'>org.apache.velocity.runtime.resource.loader.FileResourceLoader</prop>
+        <prop key='file.resource.loader.path'>${web.template.base-path}</prop>
+        <prop key='file.resource.loader.cache'>true</prop>
+        <prop key='file.resource.loader.modificationCheckInterval'>2</prop> <!-- seconds -->
+      </props>
+    </constructor-arg>
+
+    <constructor-arg>
+      <map>
+        <!--
+        <entry key='' value-ref=''/>
+        -->
+      </map>
+    </constructor-arg>
+  </bean>
+
+  <bean
       id='web.session-service'
       class='me.yabble.web.service.SessionService'
       c:redis-client-ref='common.redis-client'
@@ -54,6 +77,8 @@
       class='me.yabble.web.server.IndexHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
+      c:template-ref='web.velocity-template'
+      c:static-base-path='${web.static.base-path}'
       />
 
 </beans>

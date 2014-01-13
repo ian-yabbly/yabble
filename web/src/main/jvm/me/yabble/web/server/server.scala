@@ -5,11 +5,17 @@ import me.yabble.common.Log
 import me.yabble.service._
 import me.yabble.service.model._
 import me.yabble.web.service._
+import me.yabble.web.template.VelocityTemplate
 
 import com.sun.net.httpserver._
 
-import org.springframework.context.Lifecycle
+import org.apache.commons.io.IOUtils
 
+import org.springframework.context.Lifecycle
+import org.springframework.context.ResourceLoaderAware
+import org.springframework.core.io.ResourceLoader
+
+import java.io.OutputStreamWriter
 import java.net.InetSocketAddress
 import java.util.{List => JList}
 
@@ -67,9 +73,19 @@ class Router(private val handlers: JList[Handler])
   }
 }
 
-trait Handler {
+trait Handler extends Log with ResourceLoaderAware {
   val sessionService: SessionService
   val userService: UserService
+  val template: VelocityTemplate
+  val staticBasePath: String
+
+  var resourceLoader: ResourceLoader
+
+  def utf8 = java.nio.charset.Charset.forName("utf-8")
+
+  override def setResourceLoader(resourceLoader: ResourceLoader) {
+    this.resourceLoader = resourceLoader
+  }
 
   def maybeHandle(exchange: HttpExchange): Boolean
 
@@ -107,6 +123,58 @@ trait Handler {
   protected def requiredMe(): User.Persisted = optionalMe match {
     case Some(user) => user
     case None => throw new UnauthenticatedException
+  }
+
+  protected def htmlTemplateResponse(
+      exchange: HttpExchange,
+      templates: List[String],
+      context: Map[String, Any],
+      status: Int = 200)
+  {
+    try {
+      exchange.getResponseHeaders.set("Content-Type", "text/html; charset=utf-8")
+      exchange.sendResponseHeaders(status, 0)
+      // TODO try/finally
+      val osw = new OutputStreamWriter(exchange.getResponseBody, utf8)
+      template.render(templates, context, osw)
+      osw.close()
+      exchange.getResponseBody.close()
+    } catch {
+      case e: Exception => {
+        log.error(e.getMessage, e)
+        try {
+          exchange.getResponseBody.close()
+        } catch {
+          case e: Exception => log.error(e.getMessage, e)
+        }
+      }
+    }
+  }
+
+  protected def staticResponse(
+      exchange: HttpExchange,
+      path: String,
+      contentType: String,
+      status: Int = 200)
+  {
+    try {
+      exchange.getResponseHeaders.set("Content-Type", contentType)
+      val resource = resourceLoader.getResource(staticBasePath + path)
+      exchange.sendResponseHeaders(status, 0)
+      // TODO try/finally
+      IOUtils.copy(resource.getInputStream, exchange.getResponseBody)
+      resource.getInputStream.close()
+      exchange.getResponseBody.close()
+    } catch {
+      case e: Exception => {
+        log.error(e.getMessage, e)
+        try {
+          exchange.getResponseBody.close()
+        } catch {
+          case e: Exception => log.error(e.getMessage, e)
+        }
+      }
+    }
   }
 }
 

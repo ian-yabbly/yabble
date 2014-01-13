@@ -18,6 +18,16 @@
     <path refid='build.classpath'/>
   </path>
 
+  <target name='gen'>
+    <delete dir='src/main/gen-java'/>
+    <mkdir dir='src/main/gen-jvm'/>                    
+    <exec executable='protoc' failonerror='true'>     
+      <arg value='--java_out=src/main/gen-jvm'/>       
+      <arg value='--proto_path=src/main/protobuf'/>
+      <arg value='src/main/protobuf/common.proto'/>
+    </exec>
+  </target>
+
   <target name='compile'>
     <taskdef resource='scala/tools/ant/antlib.xml' classpathref='compile.classpath'/>
 
@@ -28,20 +38,19 @@
     </copy>
 
     <fsc
-        srcdir='src/main/jvm'
+        srcdir='src/main/jvm:src/main/gen-jvm'
         destdir='target/classes'
         classpathref='compile.classpath'
         failonerror='true'
         />
 
     <javac
-        srcdir='src/main/jvm'
+        srcdir='src/main/jvm:src/main/gen-jvm'
         destdir='target/classes'
+        classpathref='compile.classpath'
         includeAntRuntime='false'
         debug='true'
-        >
-      <classpath refid='classpath'/>
-    </javac>
+        />
   </target>
 
   <target name='jar' depends='compile'>
