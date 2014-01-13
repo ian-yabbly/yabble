@@ -1,0 +1,3 @@
+#macro(normalizePath $path)$Utils.normalizePath($path)#end
+
+#macro(staticAppUrl $path)#normalizePath("$__contextPath/s/$__versionPathPart$path")#end

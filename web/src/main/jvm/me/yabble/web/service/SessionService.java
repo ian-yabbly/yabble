@@ -8,16 +8,18 @@ import com.google.common.base.Function;
 import com.google.common.base.Optional;
 import com.google.common.collect.Lists;
 
+import com.sun.net.httpserver.HttpExchange;
+
+import org.apache.http.impl.cookie.DateUtils;
+
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.exceptions.JedisConnectionException;
-
-//import javax.servlet.http.Cookie;
-//import javax.servlet.http.HttpServletResponse;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,10 +37,12 @@ public class SessionService {
 
     private RedisClient redisClient;
     private String sessionCookieName;
+    private String sessionCookieDomain;
 
-    public SessionService(RedisClient redisClient, String sessionCookieName) {
+    public SessionService(RedisClient redisClient, String sessionCookieName, String sessionCookieDomain) {
         this.redisClient = redisClient;
         this.sessionCookieName = sessionCookieName;
+        this.sessionCookieDomain = sessionCookieDomain;
     }
 
     public Optional<Session> optional(String id) {
@@ -362,7 +366,6 @@ public class SessionService {
         ExecutionContext ctx = ExecutionContext.getRequired();
         String sessionId = randomAlphanumeric(32).toLowerCase();
 
-        // TODO I don't think this should be Optional
         ctx.setAttribute("web-session-id", sessionId);
 
         Session session = Session.newBuilder()
@@ -371,22 +374,18 @@ public class SessionService {
                 .build();
         persist(session);
 
-        // TODO
-        /*
-        HttpServletResponse response = (HttpServletResponse) ctx.getAttribute("http-servlet-response");
-        if (response != null) {
-            Cookie c = new Cookie(sessionCookieName, session.getId());
-            c.setPath("/");
-
-            if (optMaxCookieAge.isPresent()) {
-                c.setMaxAge(optMaxCookieAge.get());
-            }
-
-            response.addCookie(c);
+        HttpExchange exchange = (HttpExchange) ctx.getAttribute("http-exchange");
+        if (null != exchange) {
+            DateTime cookieExpr = new DateTime(DateTimeZone.UTC);
+            cookieExpr = cookieExpr.plusSeconds(COOKIE_MAX_AGE_SECONDS);
+            exchange.getResponseHeaders().add("Set-Cookie", String.format("%s=%s; Path=/; Domain=%s; Expires=%s;",
+                    sessionCookieName,
+                    sessionId,
+                    sessionCookieDomain,
+                    DateUtils.formatDate(cookieExpr.toDate())));
         } else {
             log.info("Not setting HTTP session cookie because http-servlet-response is not present in execution context");
         }
-        */
 
         return session;
     }

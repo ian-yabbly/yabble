@@ -14,4 +14,20 @@ message Session {
   required string creation_date = 2;
   optional string user_id       = 3;
   repeated Attribute attribute  = 4;
+  optional ListForm list_form   = 5;
+}
+
+message Message {
+  required string code          = 1;
+  optional string display_value = 2;
+}
+
+message FormField {
+  optional string value          = 1;
+  repeated Message error_message = 2;
+}
+
+message ListForm {
+  required FormField title = 1;
+  required FormField body  = 2;
 }

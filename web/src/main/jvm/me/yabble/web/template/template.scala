@@ -1,5 +1,8 @@
 package me.yabble.web.template
 
+import me.yabble.common.Log
+
+import org.apache.commons.io.FilenameUtils
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.VelocityEngine
 import org.apache.velocity.context.Context
@@ -14,25 +17,18 @@ import java.util.Properties
 import scala.collection.JavaConversions._
 
 class VelocityTemplate(
+    private val encoding: String,
     velocityConfig: Properties,
-    appConfig: JMap[String, Any])
+    private val rootContext: JMap[String, Any])
+  extends Log
 {
-  def encoding = "utf-8"
-
   val engine = new VelocityEngine(velocityConfig)
-
-  if (null != appConfig) {
-    appConfig.foreach(e => {
-      engine.setApplicationAttribute(e._1, e._2)
-    })
-  }
-
   engine.init()
 
-  def render(templates: List[String], context: Map[String, Any]) {
+  def renderToString(templates: List[String], context: Map[String, Any] = Map()) {
     val writer = new StringWriter()
     try {
-      render(templates, context, writer)
+      render(templates, writer, context)
       writer.toString()
     } finally {
       if (null != writer) { writer.close() }
@@ -42,9 +38,11 @@ class VelocityTemplate(
   /**
    * templates should be given in order of desired evaluation.
    */
-  def render(templates: List[String], context: Map[String, Any], out: Writer) {
+  def render(templates: List[String], out: Writer, context: Map[String, Any] = Map()) {
     val m: JMap[String, Any] = Maps.newHashMap()
+    rootContext.foreach(t => m.put(t._1, t._2))
     context.foreach(t => m.put(t._1, t._2))
+    m.put("Utils", classOf[Utils])
     val vctx = new VelocityContext(m)
 
     templates match {

@@ -9,6 +9,10 @@ import me.yabble.web.template.VelocityTemplate
 
 import com.sun.net.httpserver._
 
+import org.apache.commons.io.IOUtils
+
+import org.springframework.context.ResourceLoaderAware
+import org.springframework.core.io.ResourceLoader
 import org.springframework.util.AntPathMatcher
 
 import java.util.regex.Pattern
@@ -18,20 +22,22 @@ import scala.collection.JavaConversions._
 class StaticHandler(
     val sessionService: SessionService,
     val userService: UserService,
-    val template: VelocityTemplate,
-    val staticBasePath: String,
-    var )
+    val staticBaseResourcePath: String)
   extends Handler
-  with Log
+  with ResourceLoaderAware
 {
-  def VERSION_PATTERN = Pattern.compile("^/s/v-[\\p{Alnum}_-]+/(.*)$")
+  def VERSION_PATTERN = Pattern.compile("^/s/v-[\\p{Alnum}_-]+(/.*)$")
 
   private val pathPatterns = List("/s/**")
+
+  private var resourceLoader: ResourceLoader = null
+  override def setResourceLoader(resourceLoader: ResourceLoader) {
+    this.resourceLoader = resourceLoader
+  }
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
     val path = noContextPath(exchange)
-    log.info("Maybe handling [{}]", path)
 
     pathPatterns
         .zipWithIndex
@@ -48,11 +54,28 @@ class StaticHandler(
     val m = VERSION_PATTERN.matcher(path)
 
     val resourcePath = if (m.matches()) {
-      m.group(1)
-    } else {
-      path.substring("/s".length)
-    }
+          m.group(1)
+        } else {
+          path.substring("/s".length)
+        }
 
-    staticResponse(exchange, resourcePath, "text/css; charset=utf-8")
+    try {
+      exchange.getResponseHeaders.set("Content-Type", "text/css; charset=utf-8")
+      val resource = resourceLoader.getResource(staticBaseResourcePath + resourcePath)
+      exchange.sendResponseHeaders(200, 0)
+      // TODO try/finally
+      IOUtils.copy(resource.getInputStream, exchange.getResponseBody)
+      resource.getInputStream.close()
+      exchange.getResponseBody.close()
+    } catch {
+      case e: Exception => {
+        log.error(e.getMessage, e)
+        try {
+          exchange.getResponseBody.close()
+        } catch {
+          case e: Exception => log.error(e.getMessage, e)
+        }
+      }
+    }
   }
 }

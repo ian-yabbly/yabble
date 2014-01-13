@@ -28,22 +28,29 @@
   <bean
       id='web.velocity-template'
       class='me.yabble.web.template.VelocityTemplate'
+      c:encoding='${app.encoding}'
       >
     <constructor-arg>
       <props>
+        <prop key='runtime.references.strict'>true</prop>
+        <prop key='input.encoding'>${app.encoding}</prop>
+        <prop key='output.encoding'>${app.encoding}</prop>
+
         <prop key='resource.loader'>file</prop>
         <prop key='file.resource.loader.class'>org.apache.velocity.runtime.resource.loader.FileResourceLoader</prop>
         <prop key='file.resource.loader.path'>${web.template.base-path}</prop>
         <prop key='file.resource.loader.cache'>true</prop>
         <prop key='file.resource.loader.modificationCheckInterval'>2</prop> <!-- seconds -->
+
+        <prop key='velocimacro.library'>lib/macros.vm</prop>
+        <prop key='velocimacro.arguments.strict'>true</prop>
       </props>
     </constructor-arg>
 
     <constructor-arg>
       <map>
-        <!--
-        <entry key='' value-ref=''/>
-        -->
+        <entry key='__contextPath' value='${web.context-path}'/>
+        <entry key='__versionPathPart' value='v-${app.version-hash}'/>
       </map>
     </constructor-arg>
   </bean>
@@ -53,12 +60,15 @@
       class='me.yabble.web.service.SessionService'
       c:redis-client-ref='common.redis-client'
       c:session-cookie-name='${web.session.cookie-name}'
+      c:session-cookie-domain='${web.session.cookie-domain}'
       />
 
   <bean
       class='me.yabble.web.server.Server'
       c:router-ref='web.router'
       c:port='${web.port}'
+      c:context-path='${web.context-path}'
+      c:session-cookie-name='${web.session.cookie-name}'
       />
 
   <bean
@@ -67,10 +77,20 @@
       >
     <constructor-arg>
       <list>
+        <ref bean='web.static-handler'/>
         <ref bean='web.index-handler'/>
+        <ref bean='web.new-list-handler'/>
       </list>
     </constructor-arg>
   </bean>
+
+  <bean
+      id='web.static-handler'
+      class='me.yabble.web.server.StaticHandler'
+      c:user-service-ref='service.user-service'
+      c:session-service-ref='web.session-service'
+      c:static-base-resource-path='${web.static.base-resource-path}'
+      />
 
   <bean
       id='web.index-handler'
@@ -78,7 +98,15 @@
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'
-      c:static-base-path='${web.static.base-path}'
+      />
+
+  <bean
+      id='web.new-list-handler'
+      class='me.yabble.web.server.NewListHandler'
+      c:user-service-ref='service.user-service'
+      c:session-service-ref='web.session-service'
+      c:template-ref='web.velocity-template'
+      c:encoding='${app.encoding}'
       />
 
 </beans>

@@ -17,15 +17,13 @@ class IndexHandler(
     val sessionService: SessionService,
     val userService: UserService,
     val template: VelocityTemplate)
-  extends Handler
-  with Log
+  extends TemplateHandler
 {
-  private val pathPatterns = List("")
+  private val pathPatterns = List("/")
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
     val path = noContextPath(exchange)
-    log.info("Maybe handling [{}]", path)
 
     pathPatterns
         .zipWithIndex

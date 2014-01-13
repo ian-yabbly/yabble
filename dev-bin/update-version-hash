@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+git log --pretty=format:'%h' -n 1 >$BASEDIR/.version-hash
+
+git commit -m'Update version hash' .version-hash

@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+for j in $BASEDIR/{artifact,lib}/*.jar; do
+  echo $j 1>&2
+  jar -tf $j
+done

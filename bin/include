@@ -9,6 +9,7 @@ source $BASEDIR/.env
 source $BINDIR/functions
 
 version=$(cat $BASEDIR/.version)
+version_hash=$(cat $BASEDIR/.version-hash)
 
 if test -e $BASEDIR/etc/override.properties; then
   if test -n "$APP_HOME" -a "$APP_HOME" != "$BASEDIR"; then

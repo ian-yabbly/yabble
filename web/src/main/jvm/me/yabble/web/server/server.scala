@@ -2,28 +2,48 @@ package me.yabble.web.server
 
 import me.yabble.common.Predef._
 import me.yabble.common.Log
+import me.yabble.common.ctx.ExecutionContext
 import me.yabble.service._
 import me.yabble.service.model._
+import me.yabble.web.proto.WebProtos._
 import me.yabble.web.service._
 import me.yabble.web.template.VelocityTemplate
 
 import com.sun.net.httpserver._
 
 import org.apache.commons.io.IOUtils
+import org.apache.http.NameValuePair
+import org.apache.http.client.utils.URLEncodedUtils
 
 import org.springframework.context.Lifecycle
-import org.springframework.context.ResourceLoaderAware
-import org.springframework.core.io.ResourceLoader
 
 import java.io.OutputStreamWriter
+import java.net.HttpCookie
 import java.net.InetSocketAddress
 import java.util.{List => JList}
 
 import scala.collection.JavaConversions._
 
+object Utils {
+
+  def allCookies(exchange: HttpExchange): List[HttpCookie] = if (exchange.getRequestHeaders.getFirst("Cookie") == null) {
+        return Nil
+      } else {
+        HttpCookie.parse(exchange.getRequestHeaders.getFirst("Cookie")).toList
+      }
+
+  def optionalFirstCookie(exchange: HttpExchange, name: String): Option[String] =
+      optionalFirstCookie(allCookies(exchange), name)
+
+  def optionalFirstCookie(cookies: List[HttpCookie], name: String): Option[String] =
+      cookies.find(_.getName == name).map(_.getValue)
+}
+
 class Server(
     private val router: Router,
-    private val port: Int)
+    private val port: Int,
+    private val contextPath: String,
+    private val sessionCookieName: String)
   extends Lifecycle
   with Log
 {   
@@ -33,9 +53,13 @@ class Server(
   override def start() {
     consoleLog.info("Starting HTTP server...")
 
-    val context = server.createContext("/", router)
+    val context = if ("".equals(contextPath)) {
+          server.createContext("/", router)
+        } else {
+          server.createContext(contextPath, router)
+        }
 
-    //context.getFilters.add(new YabbleFilter(sessionService, sourceVersionHash))
+    context.getFilters.add(new BaseFilter(sessionCookieName))
 
     server.setExecutor(null)
     server.start()
@@ -49,6 +73,38 @@ class Server(
     server.stop(0)
     consoleLog.info("New Rest server is stopped")
     isRunning = false
+  }
+}
+
+class BaseFilter(sessionCookieName: String)
+  extends Filter
+  with Log
+{
+  override def description() = "base-filter"
+
+  override def doFilter(exchange: HttpExchange, chain: Filter.Chain) {
+    var ctx: ExecutionContext = null
+    try {
+      ctx = ExecutionContext.getOrCreate()
+      ctx.setAttribute("http-exchange", exchange)
+      Utils.optionalFirstCookie(exchange, sessionCookieName).foreach(v => ctx.setAttribute("web-session-id", v))
+      chain.doFilter(exchange)
+    } catch {
+      case e: Exception => {
+        log.error(e.getMessage, e)
+        exchange.getResponseHeaders.set("Content-Type", "text/plain; charset=utf-8")
+        exchange.sendResponseHeaders(500, 0)
+        exchange.getResponseBody.close()
+      }
+    } finally {
+      if (null != ctx) { ExecutionContext.remove() }
+
+      try {
+        exchange.getResponseBody.close()
+      } catch {
+        case e: Exception => log.error(e.getMessage, e)
+      }
+    }
   }
 }
 
@@ -73,28 +129,20 @@ class Router(private val handlers: JList[Handler])
   }
 }
 
-trait Handler extends Log with ResourceLoaderAware {
+trait Handler extends Log {
   val sessionService: SessionService
   val userService: UserService
-  val template: VelocityTemplate
-  val staticBasePath: String
-
-  var resourceLoader: ResourceLoader
 
   def utf8 = java.nio.charset.Charset.forName("utf-8")
-
-  override def setResourceLoader(resourceLoader: ResourceLoader) {
-    this.resourceLoader = resourceLoader
-  }
 
   def maybeHandle(exchange: HttpExchange): Boolean
 
   def noContextPath(exchange: HttpExchange): String = {
     val httpContext = exchange.getHttpContext
-    if (httpContext.getPath == null) {
-      exchange.getRequestURI.getPath
-    } else {
-      exchange.getRequestURI.getPath.substring(httpContext.getPath.length)
+    httpContext.getPath match {
+      case null => exchange.getRequestURI.getPath
+      case "/" => exchange.getRequestURI.getPath
+      case _ => exchange.getRequestURI.getPath.substring(httpContext.getPath.length)
     }
   }
 
@@ -125,10 +173,19 @@ trait Handler extends Log with ResourceLoaderAware {
     case None => throw new UnauthenticatedException
   }
 
+  protected def redirect(exchange: HttpExchange, path: String) {
+    exchange.getResponseHeaders.set("Location", path)
+    exchange.sendResponseHeaders(302, 0)
+  }
+}
+
+trait TemplateHandler extends Handler {
+  val template: VelocityTemplate
+
   protected def htmlTemplateResponse(
       exchange: HttpExchange,
       templates: List[String],
-      context: Map[String, Any],
+      context: Map[String, Any] = Map(),
       status: Int = 200)
   {
     try {
@@ -136,45 +193,40 @@ trait Handler extends Log with ResourceLoaderAware {
       exchange.sendResponseHeaders(status, 0)
       // TODO try/finally
       val osw = new OutputStreamWriter(exchange.getResponseBody, utf8)
-      template.render(templates, context, osw)
+      template.render(templates, osw, context)
       osw.close()
-      exchange.getResponseBody.close()
     } catch {
       case e: Exception => {
         log.error(e.getMessage, e)
-        try {
-          exchange.getResponseBody.close()
-        } catch {
-          case e: Exception => log.error(e.getMessage, e)
-        }
       }
     }
   }
+}
 
-  protected def staticResponse(
-      exchange: HttpExchange,
-      path: String,
-      contentType: String,
-      status: Int = 200)
-  {
-    try {
-      exchange.getResponseHeaders.set("Content-Type", contentType)
-      val resource = resourceLoader.getResource(staticBasePath + path)
-      exchange.sendResponseHeaders(status, 0)
-      // TODO try/finally
-      IOUtils.copy(resource.getInputStream, exchange.getResponseBody)
-      resource.getInputStream.close()
-      exchange.getResponseBody.close()
-    } catch {
-      case e: Exception => {
-        log.error(e.getMessage, e)
-        try {
-          exchange.getResponseBody.close()
-        } catch {
-          case e: Exception => log.error(e.getMessage, e)
-        }
-      }
+trait FormHandler extends Handler {
+  val encoding: String
+
+  def queryNvps(e: HttpExchange): List[NameValuePair] = URLEncodedUtils.parse(e.getRequestURI, encoding).toList
+  def postNvps(e: HttpExchange): List[NameValuePair] = URLEncodedUtils.parse(IOUtils.toString(e.getRequestBody, encoding), java.nio.charset.Charset.forName(encoding)).toList
+  def allNvps(e: HttpExchange): List[NameValuePair] = queryNvps(e) ++ postNvps(e)
+
+  def firstNvp(nvps: List[NameValuePair], names: String*): Option[String] = names.find(name => {
+        nvps.find(_.getName == name).isDefined
+      }).map(name => {
+        nvps.find(_.getName == name).map(_.getValue).get
+      })
+
+  def requiredFirstParam(nvps: List[NameValuePair], names: String*): String = {
+    val ret = firstNvp(nvps, names: _*)
+    ret match {
+      case Some(v) => v
+      case None => throw new MissingParamException(names.mkString(", "))
     }
+  }
+
+  def formField(value: Option[String]): FormField = value match {
+    case Some(v) => FormField.newBuilder().setValue(v).build()
+    case None => FormField.newBuilder().build()
   }
 }
 
