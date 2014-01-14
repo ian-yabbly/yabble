@@ -308,6 +308,8 @@ class ImageDao(npt: NamedParameterJdbcTemplate)
     t.update(findStatement("update-preview-data"), previewData, id)
   }
 
+  def allByYListItem(id: String): List[Image.Persisted] = all("all-by-list-item", Map("list_item_id" -> id))
+
   override def getInsertParams(f: Image.Free) = {
     val ps = Map(
         "is_interjal" -> f.isInternal,
@@ -427,6 +429,34 @@ class YListDao(private val userDao: UserDao, npt: NamedParameterJdbcTemplate)
           userDao.find(rs.getString("user_id")),
           rs.getString("title"),
           Option(rs.getString("body")))
+    }
+  }
+}
+
+class YListItemDao(private val userDao: UserDao, imageDao: ImageDao, npt: NamedParameterJdbcTemplate)
+  extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", npt)
+  with Log
+{
+  override def getInsertParams(f: YList.Item.Free) = Map("list_id" -> f.listId, "user_id" -> f.userId, "title" -> f.title.orNull, "body" -> f.body.orNull)
+
+  override def getUpdateParams(u: YList.Item.Update) = Map("title" -> u.title.orNull, "body" -> u.body.orNull)
+
+  override def getQueryParams(f: YList.Item.Free) = Map("list_id" -> f.listId, "user_id" -> f.userId, "title" -> f.title.orNull, "body" -> f.body.orNull)
+
+  override def getRowMapper() = new RowMapper[YList.Item.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): YList.Item.Persisted = {
+      val id = rs.getString("id")
+
+      new YList.Item.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("list_id"),
+          userDao.find(rs.getString("user_id")),
+          Option(rs.getString("title")),
+          Option(rs.getString("body")),
+          imageDao.allByYListItem(id))
     }
   }
 }

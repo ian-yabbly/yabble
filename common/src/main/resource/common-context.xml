@@ -25,29 +25,58 @@
     </property>
   </bean>
 
+  <!-- HTTP Client -->
   <bean
-      id='common.redis-client'
-      class='me.yabble.common.redis.RedisClientImpl'
-      c:max-active-connections='${common.redis.max-active-connections}'
-      c:db='${common.redis.db}'
-      p:max-connection-pool-timeout-ms='${common.redis.max-connection-pool-timeout-ms}'
+      id="common.http-client"
+      class="me.yabble.common.http.client.HttpClientImpl"
+      init-method="init"
+      destroy-method="shutdown"
+      p:max-http-conns="${common.http-client.max-http-conns}"
+      p:max-http-conns-per-route="${common.http-client.max-http-conns-per-route}"
+      p:socket-timeout-ms="${common.http-client.socket-timeout-ms}"
+      p:conn-pool-timeout-ms="${common.http-client.conn-pool-timeout-ms}"
+      p:user-agent="${common.http-client.user-agent}"
+      />
+  <!-- END HTTP Client -->
+
+  <!-- Redis -->
+  <bean
+      id="common.redis-client"
+      class="me.yabble.common.redis.RedisClientImpl"
+      c:max-active-connections="${common.redis-client.max-active-connections}"
+      c:db="${common.redis.db}"
+      p:max-connection-pool-timeout-ms="${common.redis-client.max-connection-pool-timeout-ms}"
       >
     <constructor-arg>
       <bean
-          class='redis.clients.jedis.JedisPool'
-          destroy-method='destroy'
-          c:host='${common.redis.host}'
-          c:port='${common.redis.port}'
+          class="redis.clients.jedis.JedisPool"
+          destroy-method="destroy"
+          c:host="${common.redis.hostname}"
+          c:port="${common.redis.port}"
           >
-        <constructor-arg name='poolConfig'>
+        <constructor-arg name="poolConfig">
           <bean
-              class='redis.clients.jedis.JedisPoolConfig'
-              p:max-active='${common.redis.max-active-connections}'
-              p:max-wait='${common.redis.max-wait-ms}'
+              class="redis.clients.jedis.JedisPoolConfig"
+              p:max-active="${common.redis-client.max-active-connections}"
+              p:max-wait="${common.redis-client.max-wait-ms}"
               />
         </constructor-arg>
       </bean>
     </constructor-arg>
   </bean>
+  <!-- END Redis -->
+
+  <!-- Work queue -->
+  <bean
+      id="common.work-queue"
+      class="me.yabble.common.wq.RedisWorkQueue"
+      c:redis-client-ref="common.redis-client"
+      />
+  <!-- END Work queue -->
+
+  <bean
+      id="common.txn-sync"
+      class="me.yabble.common.txn.SpringTransactionSynchronization"
+      />
 
 </beans>

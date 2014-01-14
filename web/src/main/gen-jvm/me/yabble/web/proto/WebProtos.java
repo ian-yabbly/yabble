@@ -37,6 +37,11 @@ public final class WebProtos {
     boolean hasListForm();
     me.yabble.web.proto.WebProtos.ListForm getListForm();
     me.yabble.web.proto.WebProtos.ListFormOrBuilder getListFormOrBuilder();
+    
+    // optional .me.yabble.web.proto.ListItemForm list_item_form = 6;
+    boolean hasListItemForm();
+    me.yabble.web.proto.WebProtos.ListItemForm getListItemForm();
+    me.yabble.web.proto.WebProtos.ListItemFormOrBuilder getListItemFormOrBuilder();
   }
   public static final class Session extends
       com.google.protobuf.GeneratedMessage
@@ -674,12 +679,26 @@ public final class WebProtos {
       return listForm_;
     }
     
+    // optional .me.yabble.web.proto.ListItemForm list_item_form = 6;
+    public static final int LIST_ITEM_FORM_FIELD_NUMBER = 6;
+    private me.yabble.web.proto.WebProtos.ListItemForm listItemForm_;
+    public boolean hasListItemForm() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public me.yabble.web.proto.WebProtos.ListItemForm getListItemForm() {
+      return listItemForm_;
+    }
+    public me.yabble.web.proto.WebProtos.ListItemFormOrBuilder getListItemFormOrBuilder() {
+      return listItemForm_;
+    }
+    
     private void initFields() {
       id_ = "";
       creationDate_ = "";
       userId_ = "";
       attribute_ = java.util.Collections.emptyList();
       listForm_ = me.yabble.web.proto.WebProtos.ListForm.getDefaultInstance();
+      listItemForm_ = me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -706,6 +725,12 @@ public final class WebProtos {
           return false;
         }
       }
+      if (hasListItemForm()) {
+        if (!getListItemForm().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
@@ -727,6 +752,9 @@ public final class WebProtos {
       }
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         output.writeMessage(5, listForm_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(6, listItemForm_);
       }
       getUnknownFields().writeTo(output);
     }
@@ -756,6 +784,10 @@ public final class WebProtos {
       if (((bitField0_ & 0x00000008) == 0x00000008)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(5, listForm_);
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(6, listItemForm_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -875,6 +907,7 @@ public final class WebProtos {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getAttributeFieldBuilder();
           getListFormFieldBuilder();
+          getListItemFormFieldBuilder();
         }
       }
       private static Builder create() {
@@ -901,6 +934,12 @@ public final class WebProtos {
           listFormBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000010);
+        if (listItemFormBuilder_ == null) {
+          listItemForm_ = me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance();
+        } else {
+          listItemFormBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
       
@@ -968,6 +1007,14 @@ public final class WebProtos {
         } else {
           result.listForm_ = listFormBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (listItemFormBuilder_ == null) {
+          result.listItemForm_ = listItemForm_;
+        } else {
+          result.listItemForm_ = listItemFormBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1022,6 +1069,9 @@ public final class WebProtos {
         if (other.hasListForm()) {
           mergeListForm(other.getListForm());
         }
+        if (other.hasListItemForm()) {
+          mergeListItemForm(other.getListItemForm());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -1043,6 +1093,12 @@ public final class WebProtos {
         }
         if (hasListForm()) {
           if (!getListForm().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasListItemForm()) {
+          if (!getListItemForm().isInitialized()) {
             
             return false;
           }
@@ -1101,6 +1157,15 @@ public final class WebProtos {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setListForm(subBuilder.buildPartial());
+              break;
+            }
+            case 50: {
+              me.yabble.web.proto.WebProtos.ListItemForm.Builder subBuilder = me.yabble.web.proto.WebProtos.ListItemForm.newBuilder();
+              if (hasListItemForm()) {
+                subBuilder.mergeFrom(getListItemForm());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setListItemForm(subBuilder.buildPartial());
               break;
             }
           }
@@ -1491,6 +1556,96 @@ public final class WebProtos {
           listForm_ = null;
         }
         return listFormBuilder_;
+      }
+      
+      // optional .me.yabble.web.proto.ListItemForm list_item_form = 6;
+      private me.yabble.web.proto.WebProtos.ListItemForm listItemForm_ = me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.ListItemForm, me.yabble.web.proto.WebProtos.ListItemForm.Builder, me.yabble.web.proto.WebProtos.ListItemFormOrBuilder> listItemFormBuilder_;
+      public boolean hasListItemForm() {
+        return ((bitField0_ & 0x00000020) == 0x00000020);
+      }
+      public me.yabble.web.proto.WebProtos.ListItemForm getListItemForm() {
+        if (listItemFormBuilder_ == null) {
+          return listItemForm_;
+        } else {
+          return listItemFormBuilder_.getMessage();
+        }
+      }
+      public Builder setListItemForm(me.yabble.web.proto.WebProtos.ListItemForm value) {
+        if (listItemFormBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          listItemForm_ = value;
+          onChanged();
+        } else {
+          listItemFormBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      public Builder setListItemForm(
+          me.yabble.web.proto.WebProtos.ListItemForm.Builder builderForValue) {
+        if (listItemFormBuilder_ == null) {
+          listItemForm_ = builderForValue.build();
+          onChanged();
+        } else {
+          listItemFormBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      public Builder mergeListItemForm(me.yabble.web.proto.WebProtos.ListItemForm value) {
+        if (listItemFormBuilder_ == null) {
+          if (((bitField0_ & 0x00000020) == 0x00000020) &&
+              listItemForm_ != me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance()) {
+            listItemForm_ =
+              me.yabble.web.proto.WebProtos.ListItemForm.newBuilder(listItemForm_).mergeFrom(value).buildPartial();
+          } else {
+            listItemForm_ = value;
+          }
+          onChanged();
+        } else {
+          listItemFormBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000020;
+        return this;
+      }
+      public Builder clearListItemForm() {
+        if (listItemFormBuilder_ == null) {
+          listItemForm_ = me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance();
+          onChanged();
+        } else {
+          listItemFormBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000020);
+        return this;
+      }
+      public me.yabble.web.proto.WebProtos.ListItemForm.Builder getListItemFormBuilder() {
+        bitField0_ |= 0x00000020;
+        onChanged();
+        return getListItemFormFieldBuilder().getBuilder();
+      }
+      public me.yabble.web.proto.WebProtos.ListItemFormOrBuilder getListItemFormOrBuilder() {
+        if (listItemFormBuilder_ != null) {
+          return listItemFormBuilder_.getMessageOrBuilder();
+        } else {
+          return listItemForm_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.ListItemForm, me.yabble.web.proto.WebProtos.ListItemForm.Builder, me.yabble.web.proto.WebProtos.ListItemFormOrBuilder> 
+          getListItemFormFieldBuilder() {
+        if (listItemFormBuilder_ == null) {
+          listItemFormBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.web.proto.WebProtos.ListItemForm, me.yabble.web.proto.WebProtos.ListItemForm.Builder, me.yabble.web.proto.WebProtos.ListItemFormOrBuilder>(
+                  listItemForm_,
+                  getParentForChildren(),
+                  isClean());
+          listItemForm_ = null;
+        }
+        return listItemFormBuilder_;
       }
       
       // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.Session)
@@ -3240,6 +3395,818 @@ public final class WebProtos {
     // @@protoc_insertion_point(class_scope:me.yabble.web.proto.ListForm)
   }
   
+  public interface ListItemFormOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // required string list_id = 1;
+    boolean hasListId();
+    String getListId();
+    
+    // required .me.yabble.web.proto.FormField title = 2;
+    boolean hasTitle();
+    me.yabble.web.proto.WebProtos.FormField getTitle();
+    me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder();
+    
+    // required .me.yabble.web.proto.FormField body = 3;
+    boolean hasBody();
+    me.yabble.web.proto.WebProtos.FormField getBody();
+    me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder();
+    
+    // repeated string image_url = 4;
+    java.util.List<String> getImageUrlList();
+    int getImageUrlCount();
+    String getImageUrl(int index);
+  }
+  public static final class ListItemForm extends
+      com.google.protobuf.GeneratedMessage
+      implements ListItemFormOrBuilder {
+    // Use ListItemForm.newBuilder() to construct.
+    private ListItemForm(Builder builder) {
+      super(builder);
+    }
+    private ListItemForm(boolean noInit) {}
+    
+    private static final ListItemForm defaultInstance;
+    public static ListItemForm getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public ListItemForm getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // required string list_id = 1;
+    public static final int LIST_ID_FIELD_NUMBER = 1;
+    private java.lang.Object listId_;
+    public boolean hasListId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public String getListId() {
+      java.lang.Object ref = listId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          listId_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getListIdBytes() {
+      java.lang.Object ref = listId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        listId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // required .me.yabble.web.proto.FormField title = 2;
+    public static final int TITLE_FIELD_NUMBER = 2;
+    private me.yabble.web.proto.WebProtos.FormField title_;
+    public boolean hasTitle() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public me.yabble.web.proto.WebProtos.FormField getTitle() {
+      return title_;
+    }
+    public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder() {
+      return title_;
+    }
+    
+    // required .me.yabble.web.proto.FormField body = 3;
+    public static final int BODY_FIELD_NUMBER = 3;
+    private me.yabble.web.proto.WebProtos.FormField body_;
+    public boolean hasBody() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public me.yabble.web.proto.WebProtos.FormField getBody() {
+      return body_;
+    }
+    public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder() {
+      return body_;
+    }
+    
+    // repeated string image_url = 4;
+    public static final int IMAGE_URL_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList imageUrl_;
+    public java.util.List<String>
+        getImageUrlList() {
+      return imageUrl_;
+    }
+    public int getImageUrlCount() {
+      return imageUrl_.size();
+    }
+    public String getImageUrl(int index) {
+      return imageUrl_.get(index);
+    }
+    
+    private void initFields() {
+      listId_ = "";
+      title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      body_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      imageUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!hasListId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasTitle()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasBody()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getTitle().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getBody().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getListIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, title_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(3, body_);
+      }
+      for (int i = 0; i < imageUrl_.size(); i++) {
+        output.writeBytes(4, imageUrl_.getByteString(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getListIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, title_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, body_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < imageUrl_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(imageUrl_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getImageUrlList().size();
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(me.yabble.web.proto.WebProtos.ListItemForm prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements me.yabble.web.proto.WebProtos.ListItemFormOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable;
+      }
+      
+      // Construct using me.yabble.web.proto.WebProtos.ListItemForm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getTitleFieldBuilder();
+          getBodyFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        listId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        if (titleBuilder_ == null) {
+          title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+        } else {
+          titleBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (bodyBuilder_ == null) {
+          body_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+        } else {
+          bodyBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        imageUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return me.yabble.web.proto.WebProtos.ListItemForm.getDescriptor();
+      }
+      
+      public me.yabble.web.proto.WebProtos.ListItemForm getDefaultInstanceForType() {
+        return me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance();
+      }
+      
+      public me.yabble.web.proto.WebProtos.ListItemForm build() {
+        me.yabble.web.proto.WebProtos.ListItemForm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private me.yabble.web.proto.WebProtos.ListItemForm buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        me.yabble.web.proto.WebProtos.ListItemForm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public me.yabble.web.proto.WebProtos.ListItemForm buildPartial() {
+        me.yabble.web.proto.WebProtos.ListItemForm result = new me.yabble.web.proto.WebProtos.ListItemForm(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.listId_ = listId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (titleBuilder_ == null) {
+          result.title_ = title_;
+        } else {
+          result.title_ = titleBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (bodyBuilder_ == null) {
+          result.body_ = body_;
+        } else {
+          result.body_ = bodyBuilder_.build();
+        }
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          imageUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              imageUrl_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.imageUrl_ = imageUrl_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof me.yabble.web.proto.WebProtos.ListItemForm) {
+          return mergeFrom((me.yabble.web.proto.WebProtos.ListItemForm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(me.yabble.web.proto.WebProtos.ListItemForm other) {
+        if (other == me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance()) return this;
+        if (other.hasListId()) {
+          setListId(other.getListId());
+        }
+        if (other.hasTitle()) {
+          mergeTitle(other.getTitle());
+        }
+        if (other.hasBody()) {
+          mergeBody(other.getBody());
+        }
+        if (!other.imageUrl_.isEmpty()) {
+          if (imageUrl_.isEmpty()) {
+            imageUrl_ = other.imageUrl_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureImageUrlIsMutable();
+            imageUrl_.addAll(other.imageUrl_);
+          }
+          onChanged();
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!hasListId()) {
+          
+          return false;
+        }
+        if (!hasTitle()) {
+          
+          return false;
+        }
+        if (!hasBody()) {
+          
+          return false;
+        }
+        if (!getTitle().isInitialized()) {
+          
+          return false;
+        }
+        if (!getBody().isInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              listId_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
+              if (hasTitle()) {
+                subBuilder.mergeFrom(getTitle());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setTitle(subBuilder.buildPartial());
+              break;
+            }
+            case 26: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
+              if (hasBody()) {
+                subBuilder.mergeFrom(getBody());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setBody(subBuilder.buildPartial());
+              break;
+            }
+            case 34: {
+              ensureImageUrlIsMutable();
+              imageUrl_.add(input.readBytes());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // required string list_id = 1;
+      private java.lang.Object listId_ = "";
+      public boolean hasListId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getListId() {
+        java.lang.Object ref = listId_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          listId_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setListId(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        listId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearListId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        listId_ = getDefaultInstance().getListId();
+        onChanged();
+        return this;
+      }
+      void setListId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        listId_ = value;
+        onChanged();
+      }
+      
+      // required .me.yabble.web.proto.FormField title = 2;
+      private me.yabble.web.proto.WebProtos.FormField title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> titleBuilder_;
+      public boolean hasTitle() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public me.yabble.web.proto.WebProtos.FormField getTitle() {
+        if (titleBuilder_ == null) {
+          return title_;
+        } else {
+          return titleBuilder_.getMessage();
+        }
+      }
+      public Builder setTitle(me.yabble.web.proto.WebProtos.FormField value) {
+        if (titleBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          title_ = value;
+          onChanged();
+        } else {
+          titleBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder setTitle(
+          me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
+        if (titleBuilder_ == null) {
+          title_ = builderForValue.build();
+          onChanged();
+        } else {
+          titleBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeTitle(me.yabble.web.proto.WebProtos.FormField value) {
+        if (titleBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              title_ != me.yabble.web.proto.WebProtos.FormField.getDefaultInstance()) {
+            title_ =
+              me.yabble.web.proto.WebProtos.FormField.newBuilder(title_).mergeFrom(value).buildPartial();
+          } else {
+            title_ = value;
+          }
+          onChanged();
+        } else {
+          titleBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearTitle() {
+        if (titleBuilder_ == null) {
+          title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+          onChanged();
+        } else {
+          titleBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public me.yabble.web.proto.WebProtos.FormField.Builder getTitleBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getTitleFieldBuilder().getBuilder();
+      }
+      public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder() {
+        if (titleBuilder_ != null) {
+          return titleBuilder_.getMessageOrBuilder();
+        } else {
+          return title_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
+          getTitleFieldBuilder() {
+        if (titleBuilder_ == null) {
+          titleBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder>(
+                  title_,
+                  getParentForChildren(),
+                  isClean());
+          title_ = null;
+        }
+        return titleBuilder_;
+      }
+      
+      // required .me.yabble.web.proto.FormField body = 3;
+      private me.yabble.web.proto.WebProtos.FormField body_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> bodyBuilder_;
+      public boolean hasBody() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public me.yabble.web.proto.WebProtos.FormField getBody() {
+        if (bodyBuilder_ == null) {
+          return body_;
+        } else {
+          return bodyBuilder_.getMessage();
+        }
+      }
+      public Builder setBody(me.yabble.web.proto.WebProtos.FormField value) {
+        if (bodyBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          body_ = value;
+          onChanged();
+        } else {
+          bodyBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder setBody(
+          me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
+        if (bodyBuilder_ == null) {
+          body_ = builderForValue.build();
+          onChanged();
+        } else {
+          bodyBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder mergeBody(me.yabble.web.proto.WebProtos.FormField value) {
+        if (bodyBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              body_ != me.yabble.web.proto.WebProtos.FormField.getDefaultInstance()) {
+            body_ =
+              me.yabble.web.proto.WebProtos.FormField.newBuilder(body_).mergeFrom(value).buildPartial();
+          } else {
+            body_ = value;
+          }
+          onChanged();
+        } else {
+          bodyBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      public Builder clearBody() {
+        if (bodyBuilder_ == null) {
+          body_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+          onChanged();
+        } else {
+          bodyBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      public me.yabble.web.proto.WebProtos.FormField.Builder getBodyBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getBodyFieldBuilder().getBuilder();
+      }
+      public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder() {
+        if (bodyBuilder_ != null) {
+          return bodyBuilder_.getMessageOrBuilder();
+        } else {
+          return body_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
+          getBodyFieldBuilder() {
+        if (bodyBuilder_ == null) {
+          bodyBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder>(
+                  body_,
+                  getParentForChildren(),
+                  isClean());
+          body_ = null;
+        }
+        return bodyBuilder_;
+      }
+      
+      // repeated string image_url = 4;
+      private com.google.protobuf.LazyStringList imageUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureImageUrlIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          imageUrl_ = new com.google.protobuf.LazyStringArrayList(imageUrl_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      public java.util.List<String>
+          getImageUrlList() {
+        return java.util.Collections.unmodifiableList(imageUrl_);
+      }
+      public int getImageUrlCount() {
+        return imageUrl_.size();
+      }
+      public String getImageUrl(int index) {
+        return imageUrl_.get(index);
+      }
+      public Builder setImageUrl(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureImageUrlIsMutable();
+        imageUrl_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addImageUrl(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureImageUrlIsMutable();
+        imageUrl_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllImageUrl(
+          java.lang.Iterable<String> values) {
+        ensureImageUrlIsMutable();
+        super.addAll(values, imageUrl_);
+        onChanged();
+        return this;
+      }
+      public Builder clearImageUrl() {
+        imageUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      void addImageUrl(com.google.protobuf.ByteString value) {
+        ensureImageUrlIsMutable();
+        imageUrl_.add(value);
+        onChanged();
+      }
+      
+      // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.ListItemForm)
+    }
+    
+    static {
+      defaultInstance = new ListItemForm(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:me.yabble.web.proto.ListItemForm)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_me_yabble_web_proto_Session_descriptor;
   private static
@@ -3265,6 +4232,11 @@ public final class WebProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_me_yabble_web_proto_ListForm_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_me_yabble_web_proto_ListItemForm_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3274,19 +4246,24 @@ public final class WebProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tweb.proto\022\023me.yabble.web.proto\"\323\001\n\007Ses" +
+      "\n\tweb.proto\022\023me.yabble.web.proto\"\216\002\n\007Ses" +
       "sion\022\n\n\002id\030\001 \002(\t\022\025\n\rcreation_date\030\002 \002(\t\022" +
       "\017\n\007user_id\030\003 \001(\t\0229\n\tattribute\030\004 \003(\0132&.me" +
       ".yabble.web.proto.Session.Attribute\0220\n\tl" +
       "ist_form\030\005 \001(\0132\035.me.yabble.web.proto.Lis" +
-      "tForm\032\'\n\tAttribute\022\013\n\003key\030\001 \002(\t\022\r\n\005value" +
-      "\030\002 \001(\t\".\n\007Message\022\014\n\004code\030\001 \002(\t\022\025\n\rdispl" +
-      "ay_value\030\002 \001(\t\"O\n\tFormField\022\r\n\005value\030\001 \001" +
-      "(\t\0223\n\rerror_message\030\002 \003(\0132\034.me.yabble.we" +
-      "b.proto.Message\"g\n\010ListForm\022-\n\005title\030\001 \002",
-      "(\0132\036.me.yabble.web.proto.FormField\022,\n\004bo" +
-      "dy\030\002 \002(\0132\036.me.yabble.web.proto.FormField" +
-      "B \n\023me.yabble.web.protoB\tWebProtos"
+      "tForm\0229\n\016list_item_form\030\006 \001(\0132!.me.yabbl" +
+      "e.web.proto.ListItemForm\032\'\n\tAttribute\022\013\n" +
+      "\003key\030\001 \002(\t\022\r\n\005value\030\002 \001(\t\".\n\007Message\022\014\n\004" +
+      "code\030\001 \002(\t\022\025\n\rdisplay_value\030\002 \001(\t\"O\n\tFor" +
+      "mField\022\r\n\005value\030\001 \001(\t\0223\n\rerror_message\030\002",
+      " \003(\0132\034.me.yabble.web.proto.Message\"g\n\010Li" +
+      "stForm\022-\n\005title\030\001 \002(\0132\036.me.yabble.web.pr" +
+      "oto.FormField\022,\n\004body\030\002 \002(\0132\036.me.yabble." +
+      "web.proto.FormField\"\217\001\n\014ListItemForm\022\017\n\007" +
+      "list_id\030\001 \002(\t\022-\n\005title\030\002 \002(\0132\036.me.yabble" +
+      ".web.proto.FormField\022,\n\004body\030\003 \002(\0132\036.me." +
+      "yabble.web.proto.FormField\022\021\n\timage_url\030" +
+      "\004 \003(\tB \n\023me.yabble.web.protoB\tWebProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -3298,7 +4275,7 @@ public final class WebProtos {
           internal_static_me_yabble_web_proto_Session_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_Session_descriptor,
-              new java.lang.String[] { "Id", "CreationDate", "UserId", "Attribute", "ListForm", },
+              new java.lang.String[] { "Id", "CreationDate", "UserId", "Attribute", "ListForm", "ListItemForm", },
               me.yabble.web.proto.WebProtos.Session.class,
               me.yabble.web.proto.WebProtos.Session.Builder.class);
           internal_static_me_yabble_web_proto_Session_Attribute_descriptor =
@@ -3333,6 +4310,14 @@ public final class WebProtos {
               new java.lang.String[] { "Title", "Body", },
               me.yabble.web.proto.WebProtos.ListForm.class,
               me.yabble.web.proto.WebProtos.ListForm.Builder.class);
+          internal_static_me_yabble_web_proto_ListItemForm_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_me_yabble_web_proto_ListItemForm_descriptor,
+              new java.lang.String[] { "ListId", "Title", "Body", "ImageUrl", },
+              me.yabble.web.proto.WebProtos.ListItemForm.class,
+              me.yabble.web.proto.WebProtos.ListItemForm.Builder.class);
           return null;
         }
       };

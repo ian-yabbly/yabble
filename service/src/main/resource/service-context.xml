@@ -25,6 +25,7 @@
     </property>
   </bean>
 
+  <!-- DB -->
   <bean
       id='service.data-source'
       class='org.apache.commons.dbcp.BasicDataSource'
@@ -62,6 +63,17 @@
       class='me.yabble.service.TxnMethodInterceptor'
       c:txn-manager-ref='service.txn-manager'
       />
+  <!-- END DB -->
+
+  <!-- MISC -->
+  <bean
+      id="service.s3-store"
+      class="me.yabble.service.S3Store"
+      c:aws-access-key="${aws.access-key}"
+      c:aws-secret-key="${aws.secret-key}"
+      c:bucket-name="${service.s3-store.bucket-name}"
+      />
+  <!-- END MISC -->
 
   <!-- DAO -->
   <bean
@@ -71,9 +83,23 @@
       />
 
   <bean
+      id='service.image-dao'
+      class='me.yabble.service.dao.ImageDao'
+      c:npt-ref='service.jdbc-template'
+      />
+
+  <bean
       id='service.ylist-dao'
       class='me.yabble.service.dao.YListDao'
       c:user-dao-ref='service.user-dao'
+      c:npt-ref='service.jdbc-template'
+      />
+
+  <bean
+      id='service.ylist-item-dao'
+      class='me.yabble.service.dao.YListItemDao'
+      c:user-dao-ref='service.user-dao'
+      c:image-dao-ref='service.image-dao'
       c:npt-ref='service.jdbc-template'
       />
   <!-- END DAO -->
@@ -103,6 +129,28 @@
       <bean
           class='me.yabble.service.YListService'
           c:ylist-dao-ref='service.ylist-dao'
+          c:ylist-item-dao-ref='service.ylist-item-dao'
+          />
+    </property>
+  </bean>
+
+  <bean
+      id='service.image-service'
+      class='org.springframework.aop.framework.ProxyFactoryBean'
+      p:proxy-interfaces='me.yabble.service.ImageService'
+      p:interceptor-names='service.txn-interceptor'
+      >
+    <property name='target'>
+      <bean
+          class='me.yabble.service.ImageServiceImpl'
+          c:image-dao-ref='service.image-dao'
+          c:http-client-ref='common.http-client'
+          c:work-queue-ref='common.work-queue'
+          c:txn-sync-ref='common.txn-sync'
+          c:s3-store-ref='service.s3-store'
+          c:convert-path='${imagemagick.convert-path}'
+          c:identify-path='${imagemagick.identify-path}'
+          c:default-profile-image-url='${service.default-profile-image-url}'
           />
     </property>
   </bean>

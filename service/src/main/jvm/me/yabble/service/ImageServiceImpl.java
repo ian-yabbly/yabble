@@ -63,9 +63,10 @@ public class ImageServiceImpl implements ImageService {
     private SpringTransactionSynchronization txnSync;
 
     public ImageServiceImpl(
-            HttpClient httpClient,
             ImageDao imageDao,
-            WorkQueue workQueue, SpringTransactionSynchronization txnSync,
+            HttpClient httpClient,
+            WorkQueue workQueue,
+            SpringTransactionSynchronization txnSync,
             S3Store s3Store,
             String convertPath,
             String identifyPath,

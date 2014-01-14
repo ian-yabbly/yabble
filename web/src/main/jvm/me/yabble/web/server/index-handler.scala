@@ -16,7 +16,8 @@ import scala.collection.JavaConversions._
 class IndexHandler(
     val sessionService: SessionService,
     val userService: IUserService,
-    val template: VelocityTemplate)
+    val template: VelocityTemplate,
+    val encoding: String)
   extends TemplateHandler
 {
   private val pathPatterns = List("/")

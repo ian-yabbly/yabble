@@ -138,8 +138,9 @@ class Router(private val handlers: JList[Handler])
 trait Handler extends Log {
   val sessionService: SessionService
   val userService: IUserService
+  val encoding: String
 
-  def utf8 = java.nio.charset.Charset.forName("utf-8")
+  def utf8 = java.nio.charset.Charset.forName(encoding)
 
   def maybeHandle(exchange: HttpExchange): Boolean
 
@@ -199,6 +200,22 @@ trait Handler extends Log {
     exchange.getResponseHeaders.set("Location", path)
     exchange.sendResponseHeaders(302, 0)
   }
+
+  protected def plainTextResponse(exchange: HttpExchange, text: Option[String] = None, code: Int = 200) {
+    exchange.getResponseHeaders.set("Content-Type", "text/plain")
+    text match {
+      case Some(t) => {
+        val bytes = t.getBytes(utf8)
+        exchange.sendResponseHeaders(code, bytes.length)
+        IOUtils.write(bytes, exchange.getResponseBody)
+      }
+      case None => {
+        exchange.sendResponseHeaders(code, 0)
+      }
+    }
+  }
+
+  protected def isRequestSecure(exchange: HttpExchange): Boolean = "https".equalsIgnoreCase(exchange.getRequestURI.getScheme)
 }
 
 trait TemplateHandler extends Handler {

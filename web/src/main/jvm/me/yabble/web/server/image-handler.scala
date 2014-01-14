@@ -12,8 +12,6 @@ import com.sun.net.httpserver._
 import org.apache.commons.io.IOUtils
 import org.apache.http.impl.cookie.DateUtils
 
-import org.springframework.context.ResourceLoaderAware
-import org.springframework.core.io.ResourceLoader
 import org.springframework.util.AntPathMatcher
 
 import java.io.IOException
@@ -21,22 +19,16 @@ import java.util.regex.Pattern
 
 import scala.collection.JavaConversions._
 
-class StaticHandler(
+class ImageHandler(
     val sessionService: SessionService,
     val userService: IUserService,
-    val staticBaseResourcePath: String,
-    val encoding: String)
+    val encoding: String,
+    private val imageService: ImageService)
   extends Handler
-  with ResourceLoaderAware
 {
   def VERSION_PATTERN = Pattern.compile("^/s/v-[\\p{Alnum}_-]+(/.*)$")
 
-  private val pathPatterns = List("/s/**")
-
-  private var resourceLoader: ResourceLoader = null
-  override def setResourceLoader(resourceLoader: ResourceLoader) {
-    this.resourceLoader = resourceLoader
-  }
+  private val pathPatterns = List("/i/{id}")
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
@@ -53,6 +45,21 @@ class StaticHandler(
   }
 
   def index(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    optional2Option(imageService.optional(id)) match {
+      case Some(i) => {
+        if (isRequestSecure(exchange)) {
+          redirect(exchange, i.secureUrl)
+        } else {
+          redirect(exchange, i.url)
+        }
+      }
+      case None => {
+        plainTextResponse(exchange, Some("Image not found [%s]".format(id)), 404)
+      }
+    }
+
+/*
     val path = noContextPath(exchange)
     val m = VERSION_PATTERN.matcher(path)
 
@@ -107,5 +114,6 @@ class StaticHandler(
         }
       }
     }
+*/
   }
 }
