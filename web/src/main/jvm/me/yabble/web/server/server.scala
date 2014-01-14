@@ -2,11 +2,13 @@ package me.yabble.web.server
 
 import me.yabble.common.Predef._
 import me.yabble.common.Log
+import me.yabble.common.TextFormat
 import me.yabble.common.ctx.ExecutionContext
 import me.yabble.service._
 import me.yabble.service.model._
 import me.yabble.web.proto.WebProtos._
 import me.yabble.web.service._
+import me.yabble.web.template.{Utils => TemplateUtils}
 import me.yabble.web.template.VelocityTemplate
 
 import com.google.common.base.Function
@@ -25,6 +27,7 @@ import java.net.InetSocketAddress
 import java.util.{List => JList}
 
 import scala.collection.JavaConversions._
+import scala.collection.mutable.{Map => MutableMap}
 
 object Utils {
 
@@ -232,13 +235,20 @@ trait TemplateHandler extends Handler {
       exchange.sendResponseHeaders(status, 0)
       // TODO try/finally
       val osw = new OutputStreamWriter(exchange.getResponseBody, utf8)
-      template.render(templates, osw, context)
+      template.render(templates, osw, supplementContext(context))
       osw.close()
     } catch {
       case e: Exception => {
         log.error(e.getMessage, e)
       }
     }
+  }
+
+  private def supplementContext(c: Map[String, Any]): Map[String, Any] = {
+    val m = MutableMap(c.toSeq: _*)
+    m.put("Utils", classOf[TemplateUtils])
+    m.put("TextFormat", classOf[TextFormat])
+    return m.toMap
   }
 }
 

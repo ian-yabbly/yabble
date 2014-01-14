@@ -407,7 +407,10 @@ class UserDao(npt: NamedParameterJdbcTemplate)
   }
 }
 
-class YListDao(private val userDao: UserDao, npt: NamedParameterJdbcTemplate)
+class YListDao(
+    private val userDao: UserDao,
+    private val ylistItemDao: YListItemDao,
+    npt: NamedParameterJdbcTemplate)
   extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", npt)
   with Log
 {
@@ -428,7 +431,8 @@ class YListDao(private val userDao: UserDao, npt: NamedParameterJdbcTemplate)
           rs.getBoolean("is_active"),
           userDao.find(rs.getString("user_id")),
           rs.getString("title"),
-          Option(rs.getString("body")))
+          Option(rs.getString("body")),
+          ylistItemDao.allByYList(id))
     }
   }
 }
@@ -437,6 +441,8 @@ class YListItemDao(private val userDao: UserDao, imageDao: ImageDao, npt: NamedP
   extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", npt)
   with Log
 {
+  def allByYList(id: String) = all("all-by-list", Map("list_id" -> id))
+
   override def getInsertParams(f: YList.Item.Free) = Map("list_id" -> f.listId, "user_id" -> f.userId, "title" -> f.title.orNull, "body" -> f.body.orNull)
 
   override def getUpdateParams(u: YList.Item.Update) = Map("title" -> u.title.orNull, "body" -> u.body.orNull)

@@ -92,6 +92,7 @@
       id='service.ylist-dao'
       class='me.yabble.service.dao.YListDao'
       c:user-dao-ref='service.user-dao'
+      c:ylist-item-dao-ref='service.ylist-item-dao'
       c:npt-ref='service.jdbc-template'
       />
 

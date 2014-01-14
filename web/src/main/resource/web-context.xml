@@ -29,7 +29,6 @@
       id='web.velocity-template'
       class='me.yabble.web.template.VelocityTemplate'
       c:encoding='${app.encoding}'
-      c:do-less-in-browser='${web.less.do-in-browser}'
       >
     <constructor-arg>
       <props>
@@ -54,6 +53,7 @@
         <entry key='__version' value='${app.version-hash}'/>
         <entry key='__versionPathPart' value='v-${app.version-hash}'/>
         <entry key='__formatService' value-ref='service.format-service'/>
+        <entry key='__doLessInBrowser' value='${web.less.do-in-browser}'/>
       </map>
     </constructor-arg>
   </bean>

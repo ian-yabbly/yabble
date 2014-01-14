@@ -1,7 +1,6 @@
 package me.yabble.web.template
 
 import me.yabble.common.Log
-import me.yabble.common.TextFormat
 
 import org.apache.commons.io.FilenameUtils
 import org.apache.velocity.VelocityContext
@@ -19,7 +18,6 @@ import scala.collection.JavaConversions._
 
 class VelocityTemplate(
     private val encoding: String,
-    private val doLessInBrowser: Boolean,
     velocityConfig: Properties,
     private val rootContext: JMap[String, Any])
   extends Log
@@ -44,9 +42,6 @@ class VelocityTemplate(
     val m: JMap[String, Any] = Maps.newHashMap()
     rootContext.foreach(t => m.put(t._1, t._2))
     context.foreach(t => m.put(t._1, t._2))
-    m.put("Utils", classOf[Utils])
-    m.put("TextFormat", classOf[TextFormat])
-    m.put("__doLessInBrowser", doLessInBrowser)
     val vctx = new VelocityContext(m)
 
     templates match {

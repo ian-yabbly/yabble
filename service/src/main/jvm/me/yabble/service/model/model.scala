@@ -21,14 +21,24 @@ object User {
 }
 
 object YList {
-  class Free(val userId: String, val title: String, val body: Option[String])
+  class Free(
+      val userId: String,
+      val title: String,
+      val body: Option[String])
     extends Entity.Free
 
   class Update(id: String, val title: String, val body: Option[String])
     extends Entity.Update(id)
 
-  class Persisted(id: String, creationDate: DateTime, lastUpdatedDate: DateTime, isActive: Boolean,
-      val user: User.Persisted, val title: String, val body: Option[String])
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val user: User.Persisted,
+      val title: String,
+      val body: Option[String],
+      items: List[Item.Persisted])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
   {
     def slug(): String = SlugUtils.gen(title)
