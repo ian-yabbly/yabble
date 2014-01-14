@@ -10,11 +10,13 @@ import me.yabble.web.template.VelocityTemplate
 import com.sun.net.httpserver._
 
 import org.apache.commons.io.IOUtils
+import org.apache.http.impl.cookie.DateUtils
 
 import org.springframework.context.ResourceLoaderAware
 import org.springframework.core.io.ResourceLoader
 import org.springframework.util.AntPathMatcher
 
+import java.io.IOException
 import java.util.regex.Pattern
 
 import scala.collection.JavaConversions._
@@ -65,7 +67,7 @@ class StaticHandler(
     val contentType = if (path.toLowerCase().endsWith(".css")) {
           Some("text/css; charset=%s".format(encoding))
         } else if (path.toLowerCase().endsWith(".less")) {
-          Some("text/less; charset=%s".format(encoding))
+          Some("text/plain")
         } else if (path.toLowerCase().endsWith(".js")) {
           Some("application/javascript; charset=%s".format(encoding))
         } else if (path.toLowerCase().endsWith(".gif")) {
@@ -82,7 +84,15 @@ class StaticHandler(
       if (isVersioned) {
         exchange.getResponseHeaders.set("Cache-Control", "max-age=31536000, public")
       }
+
       val resource = resourceLoader.getResource(staticBaseResourcePath + resourcePath)
+
+      try {
+        exchange.getResponseHeaders.set("Last-Modified", DateUtils.formatDate(new java.util.Date(resource.lastModified())))
+      } catch {
+        case e: IOException => log.warn(e.getMessage, e)
+      }
+
       exchange.sendResponseHeaders(200, resource.contentLength())
       // TODO try/finally
       IOUtils.copy(resource.getInputStream, exchange.getResponseBody)
