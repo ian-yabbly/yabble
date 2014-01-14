@@ -154,6 +154,12 @@
           />
     </property>
   </bean>
+
+  <bean
+      id='service.format-service'
+      class='me.yabble.service.FormatService'
+      c:redis-client-ref="common.redis-client"
+      />
   <!-- END Service -->
 
 </beans>

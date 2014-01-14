@@ -51,7 +51,9 @@
     <constructor-arg>
       <map>
         <entry key='__contextPath' value='${web.context-path}'/>
+        <entry key='__version' value='${app.version-hash}'/>
         <entry key='__versionPathPart' value='v-${app.version-hash}'/>
+        <entry key='__formatService' value-ref='service.format-service'/>
       </map>
     </constructor-arg>
   </bean>
