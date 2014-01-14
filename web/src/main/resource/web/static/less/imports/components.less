@@ -1,0 +1,226 @@
+/*
+  reusable components
+*/
+
+/* lists */
+
+  .inline-list {
+    li {
+      display: inline-block;
+      vertical-align: top;
+      margin: @margin-small;
+    }
+  }
+
+/* loading / error states */
+
+  .is-loading {
+    .static-background('loading.gif', transparent, scroll, no-repeat, center, center);
+  }
+
+  .has-error {
+    .static-background('error.png', transparent, scroll, no-repeat, center, center);
+  }
+
+/* user image */
+
+  .user-image {
+    display: inline-block;
+    background: @light-gray;
+    border: 3px solid @gray;
+    overflow: hidden;
+
+    img {
+      display: block;
+    }
+  }
+
+/* list of items with user images */
+
+  .list-item-with-user-image {
+    position: relative;
+    padding: @padding-regular @padding-regular @padding-regular (@padding-regular + 60);
+    min-height: 60px;
+
+    .user-image {
+      position: absolute;
+      top: @padding-regular;
+      left: 0;
+      .rounded(30px);
+    }
+
+    p {
+      margin: @margin-small 0 0;
+    }
+  }
+
+  .username {
+    color: @orange;
+    font-weight: 500;
+  }
+
+
+/* comments */
+
+  a.comment-delete {
+    position: absolute;
+    top: @padding-regular;
+    right: 0;
+    width: @padding-regular;
+    text-align: center;
+    color: @gray;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      color: @dark-gray;
+    }
+  }
+
+  .comment-posted-date,
+  .small-bullet {
+    color: @gray;
+  }
+
+  .small-bullet {
+    font-size: 0.75em;
+  }
+
+  .orange-button {
+    margin-top: @margin-regular;
+  }
+
+  .add-comment-form {
+    padding-right: 0;
+
+    .form-error {
+      position: absolute;
+      margin: @margin-regular 0 0;
+      line-height: 40px;
+    }
+  }
+
+/* tabs */
+
+  .tabs {
+    border-bottom: 1px solid @gray;
+  }
+
+  a.tab {
+    display: inline-block;
+    text-align: center;
+    background: #fff;
+    margin: 0 @margin-small 0 0;
+    padding: 0 @padding-regular;
+    border: 1px solid @gray;
+    line-height: 60px;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-bottom: none;
+    text-decoration: none;
+    .border-radius(4px, 0, 0, 4px);
+  }
+
+  a.active-tab {
+    &,
+    &:hover,
+    &:active {
+      cursor: default;
+      margin-bottom: -1px;
+      line-height: 62px;
+    }
+  }
+
+  .tab-content {
+    display: none;
+    min-height: 200px;
+  }
+
+  .active-tab-content {
+    display: block;
+  }
+
+/* tooltips and menus */
+
+  .tooltip,
+  .menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    display: none;
+    padding: @padding-small;
+    .rounded(4px);
+  }
+
+  .tooltip {
+    &,
+    .pointer span {
+      color: #fff;
+      background: @light-orange;
+    }
+
+    .pointer {
+      position: absolute;
+      left: @padding-small;
+      width: 20px;
+      height: 15px;
+      overflow: hidden;
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -7.5px;
+        display: block;
+        width: 15px;
+        height: 15px;
+        .transform(rotateZ(-45deg));
+        .transform-origin(center center);
+      }
+    }
+
+    &.tooltip-above {
+      .pointer {
+        bottom: -15px;
+
+        span {
+          top: auto;
+          bottom: 50%;
+        }
+      }
+    }
+
+    &.tooltip-below {
+      .pointer {
+        top: -15px;
+      }
+    }
+
+    &.tooltip-after {
+      left: 100%;
+
+      .pointer {
+        left: -17px;
+        .transform(rotateZ(-90deg));
+      }
+    }
+
+    &.tooltip-before {
+      .pointer {
+        left: auto;
+        right: -15px;
+      }
+    }
+  }
+
+  .tooltip-trigger,
+  .menu-trigger {
+    position: relative;
+  }
+
+  .tooltip-trigger:hover .tooltip,
+  .show-menu .menu {
+    display: block;
+    left: 0;
+  }

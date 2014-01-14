@@ -1,0 +1,17 @@
+/*
+  global LESS environment variables
+*/
+
+  @context-path: '';
+
+  /*
+    Here we attempt to fetch th version hash from a meta element looking like so:
+
+      <meta name='yabbly-version-hash' content='fab123e'>
+
+    If that meta tag doesn't exist, then we default to __VERSION_HASH__, which gets replaced at
+    build time (ant -Dgen=true) with the correct version hash for the built version.
+
+    Within CSS files the version-hash is used for cache-breaking purposes
+  */
+  @version-hash: `(typeof document !== 'undefined' && (v = document.querySelectorAll('meta[name="yabbly-version-hash"]').item(0)) && v.getAttribute('content')) || '__VERSION_HASH__'`;

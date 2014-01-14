@@ -1,3 +1,90 @@
+##
+## UI Template Macros
+##
+
 #macro(normalizePath $path)$Utils.normalizePath($path)#end
 
-#macro(staticAppUrl $path)#normalizePath("$__contextPath/s/$__versionPathPart$path")#end
+#macro(appUrl $path)#normalizePath("$__contextPath$path")#end
+
+#macro(staticUrl $path)#normalizePath("$__contextPath/s/$__versionPathPart$path")#end
+
+#macro(imagePresetByUrl $url $p)
+  #set ($_optTi = $__imageService.findOrCreateImageByUrlAndTransform($url, $p))
+  #if ($_optTi.isPresent())
+    <img src="$_optTi.get().SecureUrl" width="$_optTi.get().Width.get()" height="$_optTi.get().Height.get()">
+  #end
+#end
+
+#macro(imagePreset2 $i $p)
+  #set ($_optTi = $__imageService.findImageByOriginalExternalIdAndTransform($i.ExternalId, $p, true))
+  #if ($_optTi.isPresent())
+    <img src="$_optTi.get().SecureUrl" width="$_optTi.get().Width.get()" height="$_optTi.get().Height.get()">
+  #end
+#end
+
+#macro(imagePreset $i $p)
+  #set ($optImage = $__imageService.findImageByOriginalExternalIdAndTransform($i.ExternalId, $p))
+  #if ($optImage.isPresent())
+    <img src="/image/id/$i.ExternalId/p/$p" width="$optImage.get().Width.get()" height="$optImage.get().Height.get()" />
+  #end
+#end
+
+#macro(e $s)$Format.escapeHtml($s)#end
+
+#macro(m $s $anchors)$__yabblyService.formatUserMarkup($s, $anchors)#end
+
+#macro(profileImage $u $width)
+  <span class="user-image">
+    #if ($u.Image.isPresent())
+      #set ($_optTi = $__imageService.findImageByOriginalExternalIdAndTransform($u.Image.get().ExternalId, "s-$width", false))
+      #if ($_optTi.isPresent())
+        <img
+            src="$_optTi.get().SecureUrl"
+            alt="#e($u.displayName())"
+            title="#e($u.displayName())"
+            width="$width"
+            height="$width">
+      #else
+        <img
+            src="/image/profile/$u.Id?s=$width"
+            alt="#e($u.displayName())"
+            title="#e($u.displayName())"
+            width="$width"
+            height="$width">
+      #end
+    #else
+      <img
+          src="/image/profile/$u.Id?s=$width"
+          alt="#e($u.displayName())"
+          title="#e($u.displayName())"
+          width="$width"
+          height="$width">
+    #end
+  </span>
+#end
+
+#macro(profileImageUrl $u $width)
+  #if ($u.Image.isPresent())
+    #set ($_ti = $__imageService.findImageByOriginalExternalIdAndTransform($u.Image.get().ExternalId, "s-$width", true))
+    #if ($ti.isPresent())
+      $_ti.get().getUrl($__scheme)
+    #else
+      $__canonicalBaseUrl/image/profile/$u.Id?s=$width
+    #end
+  #else
+    $__canonicalBaseUrl/image/profile/$u.Id?s=$width
+  #end
+#end
+
+#macro(transformImageUrl $i $p)
+#set ($_optTi = $__imageService.findImageByOriginalExternalIdAndTransform($i.ExternalId, $p, true))
+#if ($_optTi.isPresent())$_optTi.get().SecureUrl#end
+#end
+
+#macro(userDisplayName $u)
+  #if($u.Email.isPresent())
+    $u.Email.get()
+  #else
+    $u.displayName()
+  #end
+#end

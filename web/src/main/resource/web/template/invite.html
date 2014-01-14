@@ -1,0 +1,19 @@
+<div class="flexible-container">
+  <form id=form-invite action=#appUrl("/invite") method=post>
+    <a href=#appUrl("/new") class=back-link>&laquo; Back</a>
+    <h1>Invite Someone</h1>
+    <h3>Invite at least one person to participate.</h3>
+    <div class=form-row>
+      <ul id=invited>
+        #foreach ($e in $form.EmailList)
+          <li>$e</li>
+        #end
+      </ul>
+    </div>
+    <div id=invite-entry class=form-row>
+      <label for=email>EMAIL ADDRESS:</label>
+      <input id=email type=email name=email placeholder="yourfriend@gmail.com" class="full-width" autofocus><button class="orange-button icon">+</button>
+    </div>
+    <input type=submit value="Invite" class=centered-submit>
+  </form>
+</div>

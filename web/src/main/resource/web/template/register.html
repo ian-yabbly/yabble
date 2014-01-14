@@ -1,0 +1,48 @@
+<div class=flexible-container>
+  <form id=form-register method=post>
+    <h1>Setup your account</h1>
+    <h3>All we need is an email address and you can get started.</h3>
+    <div class=form-row>
+      <label for=email>ENTER YOUR EMAIL ADDRESS:</label>
+      <input
+          id=email
+          type=email
+          name=email
+          value="$!form.Email.Value"
+          placeholder="Enter your email"
+          class=full-width>
+      #if($form.Email.hasErrorMessage())
+        <div class="form-error">$springMacroRequestContext.getMessage($form.Email.ErrorMessage, $form.Email.ErrorMessage)</div>
+      #end
+    </div>
+    <div class=form-row>
+      <label for=username>CHOOSE A USERNAME:</label>
+      <input
+          id=username
+          type=text
+          name=name
+          value="$!form.Name.Value"
+          placeholder="Choose a username"
+          class=full-width>
+      #if ($form.Name.hasErrorMessage())
+        <div class="form-error">$springMacroRequestContext.getMessage($form.Name.ErrorMessage, $form.Name.ErrorMessage)</div>
+      #end
+    </div>
+    <div class=form-row>
+      <label for=password>ENTER A PASSWORD:</label>
+      <input
+          id=password
+          type=password
+          name=password
+          value="$!form.Password.Value"
+          placeholder="Enter a password"
+          class=full-width>
+      #if ($form.Password.hasErrorMessage())
+        <div class="form-error">$springMacroRequestContext.getMessage($form.Password.ErrorMessage, $form.Password.ErrorMessage)</div>
+      #end
+    </div>
+    <input type=hidden name=accept-privacy-policy value=1>
+    <input type=submit value="SUBMIT" class=centered-submit>
+    <p>By clicking submit you accept our <a href=http://yabbly.com/terms-of-service target=_blank>Terms of Service</a>.</p>
+  </form>
+</div>

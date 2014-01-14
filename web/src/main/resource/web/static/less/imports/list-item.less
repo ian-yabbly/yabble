@@ -1,0 +1,54 @@
+/*
+  styles specific to displaying a single list item
+*/
+
+  #list-item {
+    max-width: (512px + (@padding-regular * 2));
+    text-align: left;
+
+    .back-button {
+      margin-bottom: 0;
+    }
+
+    .list-item-with-user-image {
+      position: relative;
+      min-height: 60px;
+    }
+
+    h1 {
+      margin-top: @margin-regular;
+      font-size: 1.25em;
+    }
+
+    .tab-content {
+      padding: 0;
+    }
+  }
+
+  #list-item-meta {
+    margin: @margin-large 0 @margin-regular;
+    line-height: 50px;
+
+    .user-image,
+    .username,
+    .button-toggle-list-item-vote {
+      vertical-align: top;
+    }
+
+    .user-image {
+      margin-right: @margin-small / 2;
+      .rounded(25px);
+    }
+
+    .button-toggle-list-item-vote {
+      margin: 0;
+      width: auto;
+
+      .icon,
+      .list-item-vote-count {
+        display: inline-block;
+        width: 50px;
+        text-align: center;
+      }
+    }
+  }

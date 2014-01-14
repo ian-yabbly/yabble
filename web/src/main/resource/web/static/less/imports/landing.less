@@ -1,0 +1,34 @@
+/*
+  landing page styles
+*/
+
+  #landing-steps {
+    li {
+      width: 260px;
+
+      @icon-dimension: 200px;
+
+      .icon {
+        font-size: 4em;
+        width: @icon-dimension;
+        height: @icon-dimension;
+        line-height: @icon-dimension;
+        background: @blue;
+        color: #fff;
+        text-align: center;
+        .rounded(100px);
+        .centered;
+      }
+    }
+  }
+
+  #button-landing-create {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    height: 60px;
+    line-height: 60px;
+    margin-bottom: @margin-large;
+    .centered;
+    .rounded(30px);
+  }
