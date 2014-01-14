@@ -11,6 +11,9 @@
 #macro(formatUserMarkup $s $includeAnchors)$__formatService.formatUserMarkup($s, $includeAnchors)#end
 #macro(m $s $includeAnchors)#formatUserMarkup($s, $includeAnchors)#end
 
+#macro(escapeHtml $s)$TextFormat.escapeHtml($s)#end
+#macro(e $s)#escapeHtml($s)#end
+
 #macro(imagePresetByUrl $url $p)
   #set ($_optTi = $__imageService.findOrCreateImageByUrlAndTransform($url, $p))
   #if ($_optTi.isPresent())
@@ -31,8 +34,6 @@
     <img src="/image/id/$i.ExternalId/p/$p" width="$optImage.get().Width.get()" height="$optImage.get().Height.get()" />
   #end
 #end
-
-#macro(e $s)$Format.escapeHtml($s)#end
 
 #macro(profileImage $u $width)
   <span class="user-image">
