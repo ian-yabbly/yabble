@@ -16,6 +16,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import java.sql.ResultSet
 import java.sql.Timestamp
 import java.util.Properties
+import java.util.{Map => JMap}
 
 import scala.collection.JavaConversions._
 
@@ -34,6 +35,12 @@ object Predef {
 class DuplicateKeyException(e: Exception) extends RuntimeException("Duplicate key", e)
 
 class UnexpectedNumberOfRowsUpdatedException(message: String)
+  extends RuntimeException(message)
+{
+  def this(v: Int) = this(v.toString)
+}
+
+class UnexpectedNumberOfRowsSelected(message: String)
   extends RuntimeException(message)
 {
   def this(v: Int) = this(v.toString)
@@ -78,7 +85,7 @@ class ORM(
     t().update("insert into ids (value) values (?)", id)
   }
 
-  protected def genId(): String = {
+  def genId(): String = {
     (1 to 8).foreach(i => {
       val id = SecurityUtils.randomAlphanumeric(8).toLowerCase()
       if (maybeCreateId(id)) {
@@ -96,8 +103,14 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
   private val EMPTY_PARAMS = mapAsJavaMap(Map[String, Any]())
 
   def create(f: F): String = {
-    val id = genId()
-    val params = getInsertParams(f) + ("id" -> id)
+    val ps = getInsertParams(f)
+
+    val params = ps.get("id") match {
+      case Some(id) => ps
+      case None => ps + ("id" -> genId())
+    }
+
+    val id = params("id").asInstanceOf[String]
 
     val stmt = optionalStatement("insert") match {
       case Some(v) => v
@@ -184,6 +197,22 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
         }
   }
 
+  def findForUpdate(id: String): P = {
+    val stmt = optionalStatement("find-by-id-for-update") match {
+      case Some(v) => v
+      case None => s"select * from $tableName where id = ? for update"
+    }
+    t.queryForObject(stmt, getRowMapper, id)
+  }
+
+  def optional(id: String): Option[P] = {
+    val stmt = optionalStatement("find-by-id") match {
+      case Some(v) => v
+      case None => s"select * from $tableName where id = ?"
+    }
+    optional(t.query(stmt, getRowMapper, id).toList)
+  }
+
   def find(id: String): P = {
     val stmt = optionalStatement("find-by-id") match {
       case Some(v) => v
@@ -192,21 +221,164 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     t.queryForObject(stmt, getRowMapper, id)
   }
 
-  def find(): List[P] = {
+  def all(): List[P] = {
     t.query(s"select * from $tableName where is_active = true order by creation_date desc", getRowMapper).toList
   }
 
-  def find(offset: Long, limit: Long): List[P] = {
+  def all(offset: Long, limit: Long): List[P] = {
     npt.query(
         s"select * from $tableName where is_active = true order by creation_date desc limit :limit offset :offset",
         mapAsJavaMap(Map("limit" -> limit, "offset" -> offset)),
         getRowMapper).toList
   }
 
+  def all(stmtName: String, params: Map[String, Any]): List[P] = npt.query(
+      findStatement(stmtName), mapAsJavaMap(params), getRowMapper).toList
+
+  def optional(stmtName: String, params: Map[String, Any]): Option[P] = optional(all(stmtName, params))
+
+  def optional(vs: List[P]): Option[P] = vs match {
+        case Nil => None
+        case head :: Nil => Some(head)
+        case _ => throw new UnexpectedNumberOfRowsSelected(vs.size)
+      }
+
   protected def getInsertParams(f: F): Map[String, Any]
   protected def getUpdateParams(u: U): Map[String, Any]
   protected def getQueryParams(f: F): Map[String, Any]
   protected def getRowMapper(): RowMapper[P]
+
+  protected final def optionalLong(rs: ResultSet, name: String): Option[Long] = {
+    val v = rs.getLong(name)
+    if (rs.wasNull()) {
+      None
+    } else {
+      Some(v)
+    }
+  }
+}
+
+class ImageDao(npt: NamedParameterJdbcTemplate)
+  extends EntityDao[Image.Free, Image.Persisted, Image.Update]("images", npt)
+  with Log
+{
+  def allOriginals(offset: Long, limit: Long): List[Image.Persisted] = all(
+      "find-where-original-url-is-null",
+      Map("offset" -> offset, "limit" -> limit))
+
+  def allByOriginalUrl(originalUrl: String): List[Image.Persisted] = all(
+      "find-by-original-url",
+      Map("original_url" -> originalUrl))
+
+  def optionalByUrl(url: String): Option[Image.Persisted] = optional(
+      "find-by-url",
+      Map("url" -> url))
+
+  def optionalBySecureUrl(url: String): Option[Image.Persisted] = optional(
+      "find-by-secure-url",
+      Map("url" -> url))
+
+  def optionalByOriginalImageAndTransform(originalId: String, transform: ImageTransform) = {
+    val buf = new StringBuffer()
+    buf.append("select * from ").append(tableName).append(" where original_image_id = ? and transform_type = ? and transform_width ")
+    if (transform.getWidth.isPresent) {
+      buf.append("= ?")
+    } else {
+      buf.append("is null")
+    }
+    buf.append(" and transform_height")
+    if (transform.getHeight.isPresent) {
+      buf.append("= ?")
+    } else {
+      buf.append("is null")
+    }
+
+    if (transform.getWidth.isPresent && transform.getHeight.isPresent) {
+      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getWidth.get, transform.getHeight.get).toList)
+    } else if (transform.getWidth.isPresent) {
+      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getWidth.get).toList)
+    } else if (transform.getHeight.isPresent) {
+      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getHeight.get).toList)
+    } else {
+      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType)).toList)
+    }
+  }
+
+  def updatePreviewData(id: String, previewData: Array[Byte]) {
+    t.update(findStatement("update-preview-data"), previewData, id)
+  }
+
+  override def getInsertParams(f: Image.Free) = {
+    val ps = Map(
+        "is_interjal" -> f.isInternal,
+        "url" -> f.url,
+        "secure_url" -> f.secureUrl,
+        "mime_type" -> f.mimeType,
+        "original_filename" -> f.originalFilename.orNull,
+        "original_image_id" -> f.originalImageId.orNull,
+        "size" -> f.size.map(v => new java.lang.Long(v)).orNull,
+        "width" -> f.width.map(v => new java.lang.Long(v)).orNull,
+        "height" -> f.height.map(v => new java.lang.Long(v)).orNull,
+        "transform_type" -> f.transform.map(t => enumToCode(t.getType)).orNull,
+        "transform_width" -> f.transform.map(t => t.getWidth.orNull).orNull,
+        "transform_height" -> f.transform.map(t => t.getHeight.orNull).orNull,
+        "original_url" -> f.originalUrl.orNull)
+
+    f.id match {
+      case Some(id) => ps + ("id" -> id)
+      case None => ps
+    }
+  }
+
+  override def getUpdateParams(u: Image.Update) = Map(
+      "url" -> u.url,
+      "secure_url" -> u.secureUrl)
+
+  override def getQueryParams(f: Image.Free) = Map(
+      "is_interjal" -> f.isInternal,
+      "url" -> f.url,
+      "secure_url" -> f.secureUrl,
+      "mime_type" -> f.mimeType,
+      "original_filename" -> f.originalFilename.orNull,
+      "original_image_id" -> f.originalImageId.orNull,
+      "size" -> f.size.orNull,
+      "width" -> f.width.orNull,
+      "height" -> f.height.orNull,
+      "transform_type" -> f.transform.map(t => enumToCode(t.getType)).orNull,
+      "transform_width" -> f.transform.map(t => t.getWidth.orNull).orNull,
+      "transform_height" -> f.transform.map(t => t.getHeight.orNull).orNull,
+      "original_url" -> f.originalUrl.orNull)
+
+  override def getRowMapper() = new RowMapper[Image.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): Image.Persisted = {
+      val transform = rs.getString("transform_type") match {
+            case null => None
+            case kind: String => {
+              Some(new ImageTransform(
+                  codeToEnum(kind, classOf[ImageTransform.Type]),
+                  optionalLong(rs, "transform_width").map(new java.lang.Long(_)),
+                  optionalLong(rs, "transform_height").map(new java.lang.Long(_))))
+            }
+          }
+
+      new Image.Persisted(
+          rs.getString("id"),
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_internal"),
+          rs.getString("url"),
+          rs.getString("secure_url"),
+          rs.getString("mime_type"),
+          Option(rs.getString("original_filename")),
+          Option(rs.getString("original_image_id")),
+          optionalLong(rs, "size"),
+          optionalLong(rs, "width"),
+          optionalLong(rs, "height"),
+          transform,
+          Option(rs.getString("original_url")),
+          Option(rs.getBytes("preview_data")))
+    }
+  }
 }
 
 class UserDao(npt: NamedParameterJdbcTemplate)

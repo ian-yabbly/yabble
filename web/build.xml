@@ -28,7 +28,7 @@
     <exec executable='protoc' failonerror='true'>     
       <arg value='--java_out=src/main/gen-jvm'/>       
       <arg value='--proto_path=src/main/protobuf'/>
-      <arg value='src/main/protobuf/web.proto'/>
+      <arg value='src/main/protobuf/${ant.project.name}.proto'/>
     </exec>
   </target>
   
