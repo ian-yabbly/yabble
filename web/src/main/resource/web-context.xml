@@ -134,6 +134,7 @@
       c:template-ref='web.velocity-template'
       c:encoding='${app.encoding}'
       c:ylist-service-ref='service.ylist-service'
+      c:image-service-ref='service.image-service'
       />
       
   <bean

@@ -263,6 +263,10 @@ trait FormHandler extends Handler {
     }
   }
 
+  def params(nvps: List[NameValuePair], name: String): List[String] = nvps.filter(_.getName == name)
+      .flatMap(_.getValue.split(","))
+      .filterNot(_ == "")
+
   def formField(value: Option[String]): FormField = value match {
     case Some(v) => FormField.newBuilder().setValue(v).build()
     case None => FormField.newBuilder().build()
