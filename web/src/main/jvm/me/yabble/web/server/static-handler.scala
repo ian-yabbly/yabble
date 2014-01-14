@@ -22,7 +22,8 @@ import scala.collection.JavaConversions._
 class StaticHandler(
     val sessionService: SessionService,
     val userService: UserService,
-    val staticBaseResourcePath: String)
+    val staticBaseResourcePath: String,
+    private val encoding: String)
   extends Handler
   with ResourceLoaderAware
 {
@@ -53,20 +54,39 @@ class StaticHandler(
     val path = noContextPath(exchange)
     val m = VERSION_PATTERN.matcher(path)
 
+    var isVersioned = false
     val resourcePath = if (m.matches()) {
+          isVersioned = true
           m.group(1)
         } else {
           path.substring("/s".length)
         }
 
+    val contentType = if (path.toLowerCase().endsWith(".css")) {
+          Some("text/css; charset=%s".format(encoding))
+        } else if (path.toLowerCase().endsWith(".less")) {
+          Some("text/less; charset=%s".format(encoding))
+        } else if (path.toLowerCase().endsWith(".js")) {
+          Some("application/javascript; charset=%s".format(encoding))
+        } else if (path.toLowerCase().endsWith(".gif")) {
+          Some("image/gif")
+        } else if (path.toLowerCase().endsWith(".jgp")) {
+          Some("image/jpeg")
+        } else {
+          None
+        }
+
     try {
-      exchange.getResponseHeaders.set("Content-Type", "text/css; charset=utf-8")
+      val startMs = System.currentTimeMillis()
+      contentType.foreach(t => exchange.getResponseHeaders.set("Content-Type", t))
+      if (isVersioned) {
+        exchange.getResponseHeaders.set("Cache-Control", "max-age=31536000, public")
+      }
       val resource = resourceLoader.getResource(staticBaseResourcePath + resourcePath)
-      exchange.sendResponseHeaders(200, 0)
+      exchange.sendResponseHeaders(200, resource.contentLength())
       // TODO try/finally
       IOUtils.copy(resource.getInputStream, exchange.getResponseBody)
       resource.getInputStream.close()
-      exchange.getResponseBody.close()
     } catch {
       case e: Exception => {
         log.error(e.getMessage, e)

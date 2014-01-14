@@ -91,6 +91,7 @@
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:static-base-resource-path='${web.static.base-resource-path}'
+      c:encoding='${app.encoding}'
       />
 
   <bean

@@ -116,6 +116,7 @@ class Router(private val handlers: JList[Handler])
     val uri = exchange.getRequestURI
     val httpContext = exchange.getHttpContext
 
+    val startMs = System.currentTimeMillis()
     handlers.find(h => h.maybeHandle(exchange)) match {
       case Some(h) => // Do nothing
       case None => {
@@ -126,6 +127,9 @@ class Router(private val handlers: JList[Handler])
         os.close()
       }
     }
+
+    val t = System.currentTimeMillis() - startMs
+    log.info("Timing [{}] [{}ms]", exchange.getRequestURI.getPath, t)
   }
 }
 
@@ -137,6 +141,9 @@ trait Handler extends Log {
 
   def maybeHandle(exchange: HttpExchange): Boolean
 
+  /**
+   * @return path without context and without query string
+   */
   def noContextPath(exchange: HttpExchange): String = {
     val httpContext = exchange.getHttpContext
     httpContext.getPath match {
