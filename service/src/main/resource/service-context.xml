@@ -63,6 +63,13 @@
       class='me.yabble.service.dao.UserDao'
       c:npt-ref='service.jdbc-template'
       />
+
+  <bean
+      id='service.ylist-dao'
+      class='me.yabble.service.dao.YListDao'
+      c:user-dao-ref='service.user-dao'
+      c:npt-ref='service.jdbc-template'
+      />
   <!-- END DAO -->
 
   <!-- Service -->
@@ -70,6 +77,12 @@
       id='service.user-service'
       class='me.yabble.service.UserService'
       c:user-dao-ref='service.user-dao'
+      />
+
+  <bean
+      id='service.ylist-service'
+      class='me.yabble.service.YListService'
+      c:ylist-dao-ref='service.ylist-dao'
       />
   <!-- END Service -->
 

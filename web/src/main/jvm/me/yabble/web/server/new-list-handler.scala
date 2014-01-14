@@ -16,11 +16,12 @@ import org.springframework.util.AntPathMatcher
 
 import scala.collection.JavaConversions._
 
-class NewListHandler(
+class NewYListHandler(
     val sessionService: SessionService,
     val userService: UserService,
     val template: VelocityTemplate,
-    val encoding: String)
+    val encoding: String,
+    private val ylistService: YListService)
   extends TemplateHandler
   with FormHandler
 {
@@ -52,8 +53,11 @@ class NewListHandler(
         val formBuilder = getOrCreateForm().toBuilder()
         formBuilder.setTitle(formField(firstNvp(nvps, "title")))
         formBuilder.setBody(formField(firstNvp(nvps, "body")))
-        persistForm(formBuilder.build())
-        redirect(exchange, "/new")
+        val form = formBuilder.build()
+        persistForm(form)
+
+        // TODO Validation
+        ylistService.create(new YList.Free("abc-123", form.getTitle.getValue, Option(form.getBody.getValue)))
       }
 
       case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)

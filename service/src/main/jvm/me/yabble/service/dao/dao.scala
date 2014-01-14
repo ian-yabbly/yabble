@@ -232,3 +232,29 @@ class UserDao(npt: NamedParameterJdbcTemplate)
     }
   }
 }
+
+class YListDao(private val userDao: UserDao, npt: NamedParameterJdbcTemplate)
+  extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", npt)
+  with Log
+{
+  override def getInsertParams(f: YList.Free) = Map("user_id" -> f.userId, "title" -> f.title, "body" -> f.body.orNull)
+
+  override def getUpdateParams(u: YList.Update) = Map("title" -> u.title, "body" -> u.body.orNull)
+
+  override def getQueryParams(f: YList.Free) = Map("title" -> f.title, "body" -> f.body.orNull)
+
+  override def getRowMapper() = new RowMapper[YList.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): YList.Persisted = {
+      val id = rs.getString("id")
+
+      new YList.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          userDao.find(rs.getString("user_id")),
+          rs.getString("title"),
+          Option(rs.getString("body")))
+    }
+  }
+}
