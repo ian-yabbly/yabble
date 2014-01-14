@@ -1,23 +1,12 @@
-#formatUserMarkup($list.title(), false)
-#*
 <div id="list-header">
-  <h1 class="flexible-container">#e($list.title())</h1><br>
-  <div id="list-body">
-    <h2 class="flexible-container">
-      #if($list.body().isDefined())
-        #set($body = $list.body().get())
-      #else
-        #set($body = "@$un&rsquo;s Yabble")
-      #end
-      #m($!body, true)
-    </h2>
-  </div>
+  <h1 class="flexible-container">#formatUserMarkup($list.title(), true)</h1>
 </div>
 <div id="list-content">
+  #**
   <div id="list-contributors">
     <div class="flexible-container">
       <div id="list-contributors-menu" class="menu-trigger">
-        #set($contribCount = $list.users().size() + 1)
+        #set($contribCount = $().size() + 1)
         <span class="contributors-count">$contribCount</span> contributors <span class="arrow" data-menu-close-trigger=true></span>
         <ul class="menu">
           <li>
@@ -26,40 +15,42 @@
           #foreach($contributor in $list.users())
             <li>
              #userDisplayName($contributor)
-              &nbsp;&nbsp;<a href=#appUrl("/list/$list.externalId()/unvite?user-id=$contributor.Id") class="icon remove-contributor">x</a>
+              &nbsp;&nbsp;<a href=#appUrl("/list/$list.id()/unvite?user-id=$contributor.Id") class="icon remove-contributor">x</a>
             </li>
           #end
         </ul>
       </div>
-      <form id=form-invite-to-list method=post action=#appUrl("/list/$list.externalId()/invite")>
+      <form id=form-invite-to-list method=post action=#appUrl("/list/$list.id()/invite")>
         <input type=email name=email id=email placeholder="yourfriend@gmail.com">
         <input type=submit class="icon" value="+">
       </form>
     </div>
+    *#
   </div>
   <div class="tabs flexible-container">
-    <a href=#appUrl("/list/$list.externalId()")
+    <a href=#appUrl("/list/$list.id()")
        data-tab-content-id=list-items
        class="tab#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab#end">
-      Choices ($list.items().size())
+      Choices (#*$list.items().size()*#)
     </a>
-    <a href=#appUrl("/list/$list.externalId()/$list.slug()/tab/list-comments")
+    <a href=#appUrl("/list/$list.id()/$list.slug()/tab/list-comments")
        data-tab-content-id=list-comments
        class="tab#if($tabId == "list-comments") active-tab#end">
-      Comments (<span class="comment-count">$list.comments().size()</span>)
+      Comments (<span class="comment-count">#*$list.comments().size()*#</span>)
     </a>
-    <a href=#appUrl("/list/$list.externalId()/$list.slug()/tab/list-activity")
+    <a href=#appUrl("/list/$list.id()/$list.slug()/tab/list-activity")
        data-tab-content-id=list-activity
        class="tab#if($tabId == "list-activity") active-tab#end">
-      Activity ($history.size())
+      Activity (#*$history.size()*#)
     </a>
   </div>
   <div id="list-items" class="tab-content#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab-content#end">
     <div class="flexible-container">
-      <div class="clearfix"><a id=button-add-item data-list-external-id=$list.externalId() class="orange-button button float-right">Add Choice</a></div>
+      <div class="clearfix"><a id=button-add-item data-list-external-id=$list.id() class="orange-button button float-right">Add Choice</a></div>
+      #**
       <ul>
         #foreach($item in $list.items())
-          <li class="list-item" data-item-id="$item.externalId()">
+          <li class="list-item" data-item-id="$item.id()">
             <span class="list-item-controls">
               #if($__optUser.isPresent())
                 #set($isHelpful = $item.optionalVoteByUser($__user.Id).isDefined())
@@ -67,7 +58,7 @@
                 #set($isHelpful = false)
               #end
               #set($hasVotes = $item.votes().size() > 0)
-              <a href=#appUrl("/list/$list.externalId()/item/$item.externalId()/vote")
+              <a href=#appUrl("/list/$list.id()/item/$item.id()/vote")
                  class="button-toggle-list-item-vote #if($hasVotes) tooltip-trigger#end#if($isHelpful) has-voted#end">
                 <span class="icon">U</span>
                 <span class="list-item-vote-count">$item.votes().size()</span>
@@ -88,7 +79,7 @@
             <span class="list-item-content">
               #if(!$item.images().isEmpty())
                 #set($i = $item.images().get(0))
-                 <a href='#appUrl("/list/$list.externalId()/item/$item.externalId()")'
+                 <a href='#appUrl("/list/$list.id()/item/$item.id()")'
                     class="list-item-image">
                    <img src="#transformImageUrl($i, 'w-325')"
                         width="325"
@@ -96,34 +87,36 @@
                  </a>
               #elseif(!$item.externalImages.isEmpty())
                 #set($i = $item.externalImages().get(0))
-                 <a href='#appUrl("/list/$list.externalId()/item/$item.externalId()")'
+                 <a href='#appUrl("/list/$list.id()/item/$item.id()")'
                     class="list-item-image">
                    <img src="$i.url()" width="325">
                  </a>
               #end
               <span class="list-item-body">
-                #m($item.body(), true)
+                #formatUserMarkup($item.body(), true)
               </span>
             </span>
           </li>
         #end
       </ul>
+      *#
     </div>
   </div>
   <div id=list-comments class="tab-content#if($tabId == "list-comments") active-tab-content#end">
     <div class="comments-list flexible-container">
+      #**
       <ul>
         #foreach($comment in $list.comments())
           <li class="comment list-item-with-user-image">
             #if($__optUser.isPresent() && $__user.Id == $comment.user().Id)
-              <a href=#appUrl("/list/$list.externalId()/comment/$comment.externalId()/delete")
+              <a href=#appUrl("/list/$list.id()/comment/$comment.id()/delete")
                  class="icon comment-delete">x</a>
             #end
             #profileImage($comment.user(), 54)
             <span class=username>#userDisplayName($comment.user())</span>
             &nbsp;<span class=small-bullet>&bull;</span>&nbsp;
             <span class=comment-posted-date>$Format.timeAgo($comment.creationDate(), $__user.Tz)</span>
-            <p>#m($comment.body(), true)</p>
+            <p>#formatUserMarkup($comment.body(), true)</p>
           </li>
         #end
       </ul>
@@ -131,8 +124,8 @@
           id=frm-add-list-comment
           class="list-item-with-user-image add-comment-form"
           method=post
-          action=#appUrl("/list/$list.externalId()/comment")>
-        #if($__optUser.isPresent())
+          action=#appUrl("/list/$list.id()/comment")>
+        #if($.isPresent())
           #profileImage($__user, 54)
           <input type="hidden" name="username" value="#userDisplayName($__user)">
           <input type="hidden" name="user-image-url" value="#profileImageUrl($__user, 54)">
@@ -140,32 +133,34 @@
         <textarea name=body class=full-width placeholder="Say something awesome&hellip;"></textarea>
         <div class=clearfix><input type=submit class="orange-button float-right" value="COMMENT"></div>
       </form>
+      **#
     </div>
   </div>
   <div id="list-activity" class="tab-content#if($tabId == "list-activity") active-tab-content#end">
+    #**
     <ul class="flexible-container">
       #foreach($h in $history)
         #if("list" == $h.kind())
           #set($action = "created this list")
           #set($body = $Format.escapeHtml($TextUtils.firstNChars($list.title(), 200)))
         #elseif("list.comment" == $h.kind())
-          #set($action = "commented on the <a href=/list/$list.externalId()/$list.slug()/tab/list-comments>list</a>")
-          #set($body = "<a href=/list/$list.externalId()/$list.slug()/tab/list-comments>$Format.escapeHtml($TextUtils.firstNChars($h.item().body(), 200))</a>")
+          #set($action = "commented on the <a href=/list/$list.id()/$list.slug()/tab/list-comments>list</a>")
+          #set($body = "<a href=/list/$list.id()/$list.slug()/tab/list-comments>$Format.escapeHtml($TextUtils.firstNChars($h.item().body(), 200))</a>")
         #elseif("list.item" == $h.kind())
-          #set($action = "added an <a href=/list/$list.externalId()/item/$h.item().externalId()>item</a>")
-          #set($body = "<a href=/list/$list.externalId()/item/$h.item().externalId()>$Format.escapeHtml($TextUtils.firstNChars($h.item().body(), 200))</a>")
+          #set($action = "added an <a href=/list/$list.id()/item/$h.item().id()>item</a>")
+          #set($body = "<a href=/list/$list.id()/item/$h.item().id()>$Format.escapeHtml($TextUtils.firstNChars($h.item().body(), 200))</a>")
         #elseif("list.item.comment" == $h.kind())
           #if($h.refItem().isDefined())
-            #set($action = "commented on <a href=/list/$list.externalId()/item/$h.refItem().get().externalId()>an item</a>")
-            #set($body = "<a href=/list/$list.externalId()/item/$h.refItem().get().externalId()>$Format.escapeHtml($TextUtils.firstNChars($h.item().body(), 200))</a>")
+            #set($action = "commented on <a href=/list/$list.id()/item/$h.refItem().get().id()>an item</a>")
+            #set($body = "<a href=/list/$list.id()/item/$h.refItem().get().id()>$Format.escapeHtml($TextUtils.firstNChars($h.item().body(), 200))</a>")
           #else
             #set($action = "commented on an item")
             #set($body = $Format.escapeHtml($TextUtils.firstNChars($h.item().body(), 200)))
           #end
         #elseif("list.item.vote" == $h.kind())
           #if($h.refItem().isDefined())
-            #set($action = "marked an <a href=/list/$list.externalId()/item/$h.refItem().get().externalId()>item</a> helpful")
-            #set($body = "<a href=/list/$list.externalId()/item/$h.refItem().get().externalId()>$Format.escapeHtml($TextUtils.firstNChars($h.refItem().get().body(), 200))</a>")
+            #set($action = "marked an <a href=/list/$list.id()/item/$h.refItem().get().id()>item</a> helpful")
+            #set($body = "<a href=/list/$list.id()/item/$h.refItem().get().id()>$Format.escapeHtml($TextUtils.firstNChars($h.refItem().get().body(), 200))</a>")
           #else
             #set($action = "marked an item helpful")
             #set($body = "")
@@ -182,7 +177,6 @@
       </li>
       #end
     </ul>
+    *#
   </div>
 </div>
-
-*#

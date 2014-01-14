@@ -3,7 +3,11 @@
 */
 
   #landing-steps {
-    li {
+    a {
+      display: inline-block;
+      text-decoration: none;
+      vertical-align: top;
+      color: #000;
       width: 260px;
 
       @icon-dimension: 200px;
@@ -18,6 +22,12 @@
         text-align: center;
         .rounded(100px);
         .centered;
+      }
+      
+      &:hover {
+        .icon {
+          background: @light-blue;
+        }
       }
     }
   }

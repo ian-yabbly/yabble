@@ -150,24 +150,14 @@
 
   #list-header {
     background-color: @dark-blue-black;
-    padding: @padding-regular 0 0;
+    padding: @padding-regular 0;
 
-    &,
     h1 {
       color: #fff;
-    }
-
-    h1,
-    h2 {
+      margin-top: 0;
+      margin-bottom: 0;
+      text-align: center;
       font-weight: 100;
-    }
-
-    h1 {
-      margin-bottom: @margin-regular;
-    }
-
-    h2 {
-      font-size: @header-size * 0.5625;
     }
 
     .user-image {
@@ -181,10 +171,7 @@
 
 /* list body */
 
-  #list-body {
-    background: rgba(0, 0, 0, 0.25);
-    padding: @padding-regular;
-  }
+
 
   #list-contributors {
     padding: @padding-small 0;
