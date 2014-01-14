@@ -25,7 +25,11 @@ class YListHandler(
   extends TemplateHandler
   with FormHandler
 {
-  private val pathPatterns = List("/list/{id}/{slug}", "/list/{id}")
+  private val pathPatterns = List(
+    "/list/{id}/{slug}", 
+    "/list/{id}/{slug}/tab/{tab}", 
+    "/list/{id}"
+  )
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
@@ -36,7 +40,8 @@ class YListHandler(
         .find(t => pathMatcher.`match`(t._1, path))
         .map(t => t._2 match {
           case 0 => view(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
-          case 1 => redirectToList(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 1 => view(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 2 => redirectToList(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case _ => error(s"Unexpected match [${t._1}]")
         })
         .isDefined
@@ -46,7 +51,11 @@ class YListHandler(
     exchange.getRequestMethod.toLowerCase match {
       case "get" => {
         val list = ylistService.find(pathVars("id"))        
-        val context = Map("list" -> list)
+        val tab = pathVars.get("tab").getOrElse("list-items")
+        val context = Map(
+          "list" -> list, 
+          "tabId" -> tab
+        )
         htmlTemplateResponse(exchange, List("list.html", "layout/layout.html"), context)        
       }
 
