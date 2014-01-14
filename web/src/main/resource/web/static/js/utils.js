@@ -4,7 +4,7 @@
 (function(window, document, require, define, undefined) {
     'use strict';
 
-    var name, transEndEventName, userSessionId, version,
+    var name, transEndEventName, userSessionId,
         enableLogs          = document.body.getAttribute('data-yabbly-enable-logs') === 'true',
         transEndEventNames  = {
             'WebkitTransition' : 'webkitTransitionEnd',
@@ -13,11 +13,6 @@
             'msTransition'     : 'MSTransitionEnd',
             'transition'       : 'transitionend'
         };
-
-    var version = (function() {
-        var m = document.getElementsByName('yabbly-version-hash');
-        return m && m[0] && m[0].getAttribute('content');
-    }());
 
     for(name in transEndEventNames) {
         if(transEndEventNames.hasOwnProperty(name)) {
@@ -33,14 +28,14 @@
             var args = Array.prototype.slice.apply(arguments);
             if(enableLogs && console) {
                 if(args.length > 0 && typeof args[0] === 'string') {
-                    args[0] = '[yabbly] ' + args[0];
+                    args[0] = '[yabble] ' + args[0];
                 }
                 console.log.apply(console, args);
             }
             return this;
         },
         staticPath : function() {
-            return '/s/v-' + document.YABBLY_UI_VERSION;
+            return '/s/v-' + document.YABBLE_UI_VERSION;
         },
         requestAnimationFrame : function() {
             var reqFrame = (

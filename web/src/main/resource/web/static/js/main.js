@@ -14,13 +14,13 @@
 (function(window, document, require, define, undefined) {
     'use strict';
 
-    document.YABBLY_UI_VERSION = (function() {
-        var m = document.getElementsByName('yabbly-version-hash');
+    document.YABBLE_UI_VERSION = (function() {
+        var m = document.getElementsByName('yabble-version-hash');
         return m && m[0] && m[0].getAttribute('content');
     }());
 
     require.config({
-        baseUrl : '/s/v-' + document.YABBLY_UI_VERSION + '/js',
+        baseUrl : '/s/v-' + document.YABBLE_UI_VERSION + '/js',
         paths   : {
             template    : '../template',
             text        : 'vendor/require-text',
