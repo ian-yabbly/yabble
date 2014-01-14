@@ -150,7 +150,7 @@ public class ImageServiceImpl implements ImageService {
         } else {
             Optional<Image.Persisted> optImage = optionalByOriginalUrl(url);
             if (optImage.isPresent()) {
-                return Optional.of(optImage.get().getId());
+                return Optional.of(optImage.get().id());
             }
         }
 
@@ -261,12 +261,13 @@ public class ImageServiceImpl implements ImageService {
 
             int imageCount = imageCount(oriented);
 
-            int[] vals = sizeWidthHeight(oriented, imageCount);
-            int size = vals[0];
-            int width = vals[1];
-            int height = vals[2];
+            long[] vals = sizeWidthHeight(oriented, imageCount);
+            long size = vals[0];
+            long width = vals[1];
+            long height = vals[2];
 
-            String imageName = String.format("%s.%dx%d.%s", externalId, width, height, suffix);
+            final String id = imageDao.genId();
+            String imageName = String.format("%s.%dx%d.%s", id, width, height, suffix);
 
             InputStream is = null;
             try {
@@ -277,19 +278,23 @@ public class ImageServiceImpl implements ImageService {
             }
 
             Image.Free f = new Image.Free(
+                    Option.apply(id),
                     true,
                     s3Store.getUrl(imageName),
                     s3Store.getSecureUrl(imageName),
                     mimeType,
                     optional2Option(originalFilename),
-                    Option.apply(null),
-                    Option.apply(size),
-                    Option.apply(width),
-                    Option.apply(height),
-                    Option.apply(null),
+                    Option.<String>apply(null),
+                    Option.apply((Object) size),
+                    Option.apply((Object) width),
+                    Option.apply((Object) height),
+                    Option.<ImageTransform>apply(null),
                     optional2Option(originalUrl));
 
-            final String id = imageDao.create(f);
+            String createdId = imageDao.create(f);
+            if (id.equals(createdId)) {
+                throw new RuntimeException(String.format("IDs are not equal [%s] [%s]", id, createdId));
+            }
 
             txnSync.add(new Function<Void, Void>() {
                 public Void apply(Void ingored) {
@@ -298,8 +303,8 @@ public class ImageServiceImpl implements ImageService {
                             EntityEvent.newBuilder()
                                     .setEntityType(EntityEvent.EntityType.IMAGE)
                                     .setEventType(EntityEvent.EventType.CREATE)
-                                    .setEntityId(String.valueOf(id))
-                                    .setEventTime(DateTime.now().getMillis())
+                                    .setEntityId(id)
+                                    .setEventTime(DateTime.now().toString())
                                     .build()
                                     .toByteArray());
 
@@ -320,14 +325,18 @@ public class ImageServiceImpl implements ImageService {
     public boolean maybeSetImagePreviewData(String id) {
         File in = null;
         try {
-            Image image = imageUpdate.findByIdForUpdate(id);
-            String suffix = mimeTypeToFileExtension(image.getMimeType(), image.getOriginalFilename(), image.getOriginalUrl());
+            Image.Persisted image = imageDao.findForUpdate(id);
+            String suffix = mimeTypeToFileExtension(
+                    image.mimeType(),
+                    option2Optional(image.originalFilename()),
+                    option2Optional(image.originalUrl()));
+
             in = File.createTempFile("image-in.", "."+suffix);
-            byte[] bytes = httpClient.executeToBytes(new GetRequest(image.getUrl()));
+            byte[] bytes = httpClient.executeToBytes(new GetRequest(image.url()));
             writeByteArrayToFile(in, bytes);
             byte[] previewData = previewData(in);
             if (previewData.length < 200) {
-                imageUpdate.updatePreviewData(id, previewData);
+                imageDao.updatePreviewData(id, previewData);
                 return true;
             } else {
                 log.warn("Preview data is too big [{}bytes] for image [{}]", previewData.length, id);
@@ -343,14 +352,16 @@ public class ImageServiceImpl implements ImageService {
     }
 
     private String transformImage(String originalImageId, ImageTransform transform) {
-        Image original = imageUpdate.findByIdForUpdate(originalImageId);
+        Image.Persisted original = imageDao.findForUpdate(originalImageId);
 
         // We've got a lock now, check if the images has been created in the time it took to get the lock
-        Optional<Image.Persisted> optImage = imageQuery.findByOriginalImageAndTransform(originalImageId, transform);
-        if (optImage.isPresent()) { return optImage.get().getId(); }
+        Optional<Image.Persisted> optImage = option2Optional(imageDao.optionalByOriginalImageAndTransform(originalImageId, transform));
+        if (optImage.isPresent()) { return optImage.get().id(); }
 
-        String externalId = imageUpdate.generateExternalId();
-        String suffix = "." + mimeTypeToFileExtension(original.getMimeType(), original.getOriginalFilename(), original.getOriginalUrl());
+        String suffix = "." + mimeTypeToFileExtension(
+                original.mimeType(),
+                option2Optional(original.originalFilename()),
+                option2Optional(original.originalUrl()));
 
         File in = null;
         File out = null;
@@ -358,7 +369,7 @@ public class ImageServiceImpl implements ImageService {
             in = File.createTempFile("image-in.", suffix);
             out = File.createTempFile("image-out.", suffix);
 
-            byte[] originalImageData = httpClient.executeToBytes(new GetRequest(original.getUrl()));
+            byte[] originalImageData = httpClient.executeToBytes(new GetRequest(original.url()));
             writeByteArrayToFile(in, originalImageData);
 
             int imageCount = imageCount(in);
@@ -392,7 +403,7 @@ public class ImageServiceImpl implements ImageService {
                                 out.getAbsolutePath());
                         break;
                     case RESIZE_SQUARE:
-                        int w = transform.getWidth().get();
+                        long w = transform.getWidth().get();
                         cmd = String.format(
                                 "%s %s -coalesce -resize %dx%d^ -gravity center -extent %dx%d %s",
                                 convertPath,
@@ -403,7 +414,7 @@ public class ImageServiceImpl implements ImageService {
                         break;
                     case RESIZE_COVER:
                         w = transform.getWidth().get();
-                        int h = transform.getHeight().get();
+                        long h = transform.getHeight().get();
                         cmd = String.format(
                                 "%s %s -coalesce -resize %dx%d^ -gravity center -extent %dx%d %s",
                                 convertPath,
@@ -444,7 +455,7 @@ public class ImageServiceImpl implements ImageService {
                                 out.getAbsolutePath());
                         break;
                     case RESIZE_SQUARE:
-                        int w = transform.getWidth().get();
+                        long w = transform.getWidth().get();
                         cmd = String.format(
                                 "%s %s -resize %dx%d^ -gravity center -extent %dx%d %s",
                                 convertPath,
@@ -455,7 +466,7 @@ public class ImageServiceImpl implements ImageService {
                         break;
                     case RESIZE_COVER:
                         w = transform.getWidth().get();
-                        int h = transform.getHeight().get();
+                        long h = transform.getHeight().get();
                         cmd = String.format(
                                 "%s %s -resize %dx%d^ -gravity center -extent %dx%d %s",
                                 convertPath,
@@ -474,41 +485,45 @@ public class ImageServiceImpl implements ImageService {
 
             run(cmd);
 
-            int[] vals = sizeWidthHeight(out, imageCount);
-            int size = vals[0];
-            int width = vals[1];
-            int height = vals[2];
+            long[] vals = sizeWidthHeight(out, imageCount);
+            long size = vals[0];
+            long width = vals[1];
+            long height = vals[2];
 
             String imageName = null;
-            if (original.getOriginalFilename().isPresent()) {
-                imageName = String.format("%s.%s.%dx%d%s", original.getOriginalFilename().get(), externalId, width, height, suffix);
+            final String id = imageDao.genId();
+            if (original.originalFilename().isDefined()) {
+                imageName = String.format("%s.%s.%dx%d%s", original.originalFilename().get(), id, width, height, suffix);
             } else {
-                imageName = String.format("%s.%dx%d%s", externalId, width, height, suffix);
+                imageName = String.format("%s.%dx%d%s", id, width, height, suffix);
             }
 
             InputStream is = null;
             try {
                 is = new FileInputStream(out);
-                s3Store.put(imageName, is, Optional.of(original.getMimeType()), DEFAULT_CACHE_METADATA);
+                s3Store.put(imageName, is, Optional.of(original.mimeType()), DEFAULT_CACHE_METADATA);
             } finally {
                 if (is != null) { is.close(); }
             }
 
-            Image i = new Image(
-                    externalId,
-                    original.getMimeType(),
+            Image.Free f = new Image.Free(
+                    Option.apply(id),
+                    true,
                     s3Store.getUrl(imageName),
                     s3Store.getSecureUrl(imageName),
-                    original.getOriginalFilename(),
-                    Optional.<String>absent(),
-                    Optional.of(originalImageId),
-                    Optional.of(size),
-                    Optional.of(width),
-                    Optional.of(height),
-                    Optional.of(transform),
-                    null);
+                    original.mimeType(),
+                    original.originalFilename(),
+                    Option.apply(original.id()),
+                    Option.apply((Object) size),
+                    Option.apply((Object) width),
+                    Option.apply((Object) height),
+                    Option.apply(transform),
+                    Option.<String>apply(null));
 
-            final String id = imageUpdate.create(i);
+            String createdId = imageDao.create(f);
+            if (id.equals(createdId)) {
+                throw new RuntimeException(String.format("IDs are not equal [%s] [%s]", id, createdId));
+            }
 
             txnSync.add(new Function<Void, Void>() {
                 public Void apply(Void ingored) {
@@ -518,7 +533,7 @@ public class ImageServiceImpl implements ImageService {
                                     .setEntityType(EntityEvent.EntityType.IMAGE)
                                     .setEventType(EntityEvent.EventType.CREATE)
                                     .setEntityId(String.valueOf(id))
-                                    .setEventTime(DateTime.now().getMillis())
+                                    .setEventTime(DateTime.now().toString())
                                     .build()
                                     .toByteArray());
 
@@ -604,51 +619,50 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Optional<Image.Persisted> optionalByOriginalExternalIdAndTransform(
-            String externalId, String transform)
+    public Optional<Image.Persisted> optionalByOriginalIdAndTransform(
+            String id, String transform)
     {
-        return optionalByOriginalExternalIdAndTransform(
-                externalId, new ImageTransform(transform));
+        return optionalByOriginalIdAndTransform(id, new ImageTransform(transform));
     }
 
     @Override
-    public Optional<Image.Persisted> optionalByOriginalExternalIdAndTransform(
-            String externalId, String transform, boolean doTransform)
+    public Optional<Image.Persisted> optionalByOriginalIdAndTransform(
+            String id, String transform, boolean doTransform)
     {
-        return optionalByOriginalExternalIdAndTransform(
-                externalId, new ImageTransform(transform), doTransform);
+        return optionalByOriginalIdAndTransform(
+                id, new ImageTransform(transform), doTransform);
     }
 
-    @Override
-    public Optional<Image.Persisted> optionalByOriginalExternalIdAndTransform(
-            String externalId, ImageTransform transform)
+    //@Override
+    public Optional<Image.Persisted> optionalByOriginalIdAndTransform(
+            String id, ImageTransform transform)
     {
-        return optionalByOriginalExternalIdAndTransform(externalId, transform, true);
+        return optionalByOriginalIdAndTransform(id, transform, true);
     }
 
-    @Override
-    public Optional<Image.Persisted> optionalByOriginalExternalIdAndTransform(
-            String externalId, ImageTransform transform, boolean doTransform)
+    //@Override
+    public Optional<Image.Persisted> optionalByOriginalIdAndTransform(
+            String id, ImageTransform transform, boolean doTransform)
     {
-        Optional<Image.Persisted> optOriginal = optionalByExternalId(externalId);
+        Optional<Image.Persisted> optOriginal = optional(id);
         if (optOriginal.isPresent()) {
-            Image original = optOriginal.get();
-            Optional<Image.Persisted> optImage = imageQuery.findByOriginalImageAndTransform(
-                    original.getId(), transform);
+            Image.Persisted original = optOriginal.get();
+            Optional<Image.Persisted> optImage = option2Optional(imageDao.optionalByOriginalImageAndTransform(
+                    original.id(), transform));
             if (optImage.isPresent()) {
                 return optImage;
             } else {
                 if (doTransform) {
                     try {
-                        String iid = transformImage(original.getId(), transform);
-                        return Optional.of(imageQuery.findById(iid));
+                        String iid = transformImage(original.id(), transform);
+                        return option2Optional(imageDao.optional(iid));
                     } catch (Exception e) {
                         // TODO Why catch here? should throw
-                        log.error("Error transforming image [{}]: {}", new Object[] {externalId, e.getMessage(), e});
-                        return Optional.<Image>absent();
+                        log.error("Error transforming image [{}]: {}", new Object[] {id, e.getMessage(), e});
+                        return Optional.<Image.Persisted>absent();
                     }
                 } else {
-                    return Optional.<Image>absent();
+                    return Optional.<Image.Persisted>absent();
                 }
             }
         } else {
@@ -662,46 +676,46 @@ public class ImageServiceImpl implements ImageService {
         return findOrCreateImageByOriginalAndTransform(id, new ImageTransform(transform));
     }
 
-    @Override
+    //@Override
     public Image.Persisted findOrCreateImageByOriginalAndTransform(String id, ImageTransform transform) {
-        Optional<Image.Persisted> optImage = imageQuery.findByOriginalImageAndTransform(id, transform);
+        Optional<Image.Persisted> optImage = option2Optional(imageDao.optionalByOriginalImageAndTransform(id, transform));
         if (optImage.isPresent()) {
             return optImage.get();
         } else {
-            return imageQuery.findById(transformImage(id, transform));
+            return imageDao.find(transformImage(id, transform));
         }
     }
 
     @Override
-    public Optional<Image.Persisted> findOrCreateImageByUrlAndTransform(String url, String preset) {
+    public Optional<Image.Persisted> optionalOrCreateImageByUrlAndTransform(String url, String preset) {
         return findOrCreateImageByUrlAndTransform(url, ImageTransform.parse(preset));
     }
 
-    @Override
+    //@Override
     public Optional<Image.Persisted> findOrCreateImageByUrlAndTransform(String url, ImageTransform transform) {
         Optional<String> optOriginalId = findExistingImageIdByUrl(url);
         if (optOriginalId.isPresent()) {
             String originalId = optOriginalId.get();
-            Optional<Image.Persisted> optImage = imageQuery.findByOriginalImageAndTransform(originalId, transform);
+            Optional<Image.Persisted> optImage = option2Optional(imageDao.optionalByOriginalImageAndTransform(originalId, transform));
             if (optImage.isPresent()) {
                 return optImage;
             } else {
                 try {
                     String iid = transformImage(originalId, transform);
-                    return Optional.of(imageQuery.findById(iid));
+                    return option2Optional(imageDao.optional(iid));
                 } catch (Exception e) {
                     // TODO Why catch here? should throw
                     log.error("Error transforming image [{}]: {}", new Object[] {originalId, e.getMessage(), e});
-                    return Optional.<Image>absent();
+                    return Optional.<Image.Persisted>absent();
                 }
             }
         } else {
             Optional<String> optId = maybeCreateImageFromUrl(url);
             if (optId.isPresent()) {
                 String iid = transformImage(optId.get(), transform);
-                return Optional.of(imageQuery.findById(iid));
+                return option2Optional(imageDao.optional(iid));
             } else {
-                return Optional.<Image>absent();
+                return Optional.<Image.Persisted>absent();
             }
         }
     }
@@ -739,7 +753,7 @@ public class ImageServiceImpl implements ImageService {
         return Integer.parseInt(out);
     }
 
-    private int[] sizeWidthHeight(File in, int imageCount) throws IOException {
+    private long[] sizeWidthHeight(File in, int imageCount) throws IOException {
         String out = null;
         if (imageCount > 1) {
             out = run(String.format("%s -format %%b,%%w,%%h %s[0]", identifyPath, in.getAbsolutePath())).trim();
@@ -749,16 +763,16 @@ public class ImageServiceImpl implements ImageService {
 
         String[] vals = Iterables.toArray(Splitter.on(',').split(out), String.class);
 
-        int size = Integer.parseInt(vals[0].replaceAll("\\D", ""));
-        int width = Integer.parseInt(vals[1]);
-        int height = Integer.parseInt(vals[2]);
+        long size = Long.parseLong(vals[0].replaceAll("\\D", ""));
+        long width = Long.parseLong(vals[1]);
+        long height = Long.parseLong(vals[2]);
 
-        return new int[] {size, width, height};
+        return new long[] {size, width, height};
     }
 
-    private void maybeDeleteFromS3(Image i) {
+    private void maybeDeleteFromS3(Image.Persisted i) {
         try {
-            URL url = new URL(i.getUrl());
+            URL url = new URL(i.url());
             if (url.getHost().indexOf("s3.amazonaws.com") >= 0) {
                 String name = url.getFile();
                 if (name.startsWith("/")) {

@@ -4,6 +4,7 @@ import org.joda.time.DateTime
 
 object Image {
   class Free(
+      val id: Option[String],
       val isInternal: Boolean,
       val url: String,
       val secureUrl: String,

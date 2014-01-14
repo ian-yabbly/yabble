@@ -85,7 +85,7 @@ class ORM(
     t().update("insert into ids (value) values (?)", id)
   }
 
-  protected def genId(): String = {
+  def genId(): String = {
     (1 to 8).foreach(i => {
       val id = SecurityUtils.randomAlphanumeric(8).toLowerCase()
       if (maybeCreateId(id)) {
@@ -103,8 +103,14 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
   private val EMPTY_PARAMS = mapAsJavaMap(Map[String, Any]())
 
   def create(f: F): String = {
-    val id = genId()
-    val params = getInsertParams(f) + ("id" -> id)
+    val ps = getInsertParams(f)
+
+    val params = ps.get("id") match {
+      case Some(id) => ps
+      case None => ps + ("id" -> genId())
+    }
+
+    val id = params("id").asInstanceOf[String]
 
     val stmt = optionalStatement("insert") match {
       case Some(v) => v
@@ -191,6 +197,22 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
         }
   }
 
+  def findForUpdate(id: String): P = {
+    val stmt = optionalStatement("find-by-id-for-update") match {
+      case Some(v) => v
+      case None => s"select * from $tableName where id = ? for update"
+    }
+    t.queryForObject(stmt, getRowMapper, id)
+  }
+
+  def optional(id: String): Option[P] = {
+    val stmt = optionalStatement("find-by-id") match {
+      case Some(v) => v
+      case None => s"select * from $tableName where id = ?"
+    }
+    optional(t.query(stmt, getRowMapper, id).toList)
+  }
+
   def find(id: String): P = {
     val stmt = optionalStatement("find-by-id") match {
       case Some(v) => v
@@ -213,10 +235,12 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
   def all(stmtName: String, params: Map[String, Any]): List[P] = npt.query(
       findStatement(stmtName), mapAsJavaMap(params), getRowMapper).toList
 
-  def optional(stmtName: String, params: Map[String, Any]): Option[P] = all(stmtName, params) match {
+  def optional(stmtName: String, params: Map[String, Any]): Option[P] = optional(all(stmtName, params))
+
+  def optional(vs: List[P]): Option[P] = vs match {
         case Nil => None
         case head :: Nil => Some(head)
-        case vs => throw new UnexpectedNumberOfRowsSelected(vs.size)
+        case _ => throw new UnexpectedNumberOfRowsSelected(vs.size)
       }
 
   protected def getInsertParams(f: F): Map[String, Any]
@@ -254,20 +278,57 @@ class ImageDao(npt: NamedParameterJdbcTemplate)
       "find-by-secure-url",
       Map("url" -> url))
 
-  override def getInsertParams(f: Image.Free) = Map(
-      "is_interjal" -> f.isInternal,
-      "url" -> f.url,
-      "secure_url" -> f.secureUrl,
-      "mime_type" -> f.mimeType,
-      "original_filename" -> f.originalFilename.orNull,
-      "original_image_id" -> f.originalImageId.orNull,
-      "size" -> f.size.orNull,
-      "width" -> f.width.orNull,
-      "height" -> f.height.orNull,
-      "transform_type" -> f.transform.map(t => enumToCode(t.getType)).orNull,
-      "transform_width" -> f.transform.map(t => t.getWidth.orNull).orNull,
-      "transform_height" -> f.transform.map(t => t.getHeight.orNull).orNull,
-      "original_url" -> f.originalUrl.orNull)
+  def optionalByOriginalImageAndTransform(originalId: String, transform: ImageTransform) = {
+    val buf = new StringBuffer()
+    buf.append("select * from ").append(tableName).append(" where original_image_id = ? and transform_type = ? and transform_width ")
+    if (transform.getWidth.isPresent) {
+      buf.append("= ?")
+    } else {
+      buf.append("is null")
+    }
+    buf.append(" and transform_height")
+    if (transform.getHeight.isPresent) {
+      buf.append("= ?")
+    } else {
+      buf.append("is null")
+    }
+
+    if (transform.getWidth.isPresent && transform.getHeight.isPresent) {
+      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getWidth.get, transform.getHeight.get).toList)
+    } else if (transform.getWidth.isPresent) {
+      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getWidth.get).toList)
+    } else if (transform.getHeight.isPresent) {
+      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getHeight.get).toList)
+    } else {
+      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType)).toList)
+    }
+  }
+
+  def updatePreviewData(id: String, previewData: Array[Byte]) {
+    t.update(findStatement("update-preview-data"), previewData, id)
+  }
+
+  override def getInsertParams(f: Image.Free) = {
+    val ps = Map(
+        "is_interjal" -> f.isInternal,
+        "url" -> f.url,
+        "secure_url" -> f.secureUrl,
+        "mime_type" -> f.mimeType,
+        "original_filename" -> f.originalFilename.orNull,
+        "original_image_id" -> f.originalImageId.orNull,
+        "size" -> f.size.map(v => new java.lang.Long(v)).orNull,
+        "width" -> f.width.map(v => new java.lang.Long(v)).orNull,
+        "height" -> f.height.map(v => new java.lang.Long(v)).orNull,
+        "transform_type" -> f.transform.map(t => enumToCode(t.getType)).orNull,
+        "transform_width" -> f.transform.map(t => t.getWidth.orNull).orNull,
+        "transform_height" -> f.transform.map(t => t.getHeight.orNull).orNull,
+        "original_url" -> f.originalUrl.orNull)
+
+    f.id match {
+      case Some(id) => ps + ("id" -> id)
+      case None => ps
+    }
+  }
 
   override def getUpdateParams(u: Image.Update) = Map(
       "url" -> u.url,

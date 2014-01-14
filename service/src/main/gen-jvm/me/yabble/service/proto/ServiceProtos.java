@@ -10,150 +10,1256 @@ public final class ServiceProtos {
   }
   public interface EntityEventOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-
+    
     // required string entity_id = 1;
-    /**
-     * <code>required string entity_id = 1;</code>
-     */
     boolean hasEntityId();
-    /**
-     * <code>required string entity_id = 1;</code>
-     */
-    java.lang.String getEntityId();
-    /**
-     * <code>required string entity_id = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getEntityIdBytes();
-
+    String getEntityId();
+    
     // required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;
-    /**
-     * <code>required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;</code>
-     */
     boolean hasEntityType();
-    /**
-     * <code>required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;</code>
-     */
     me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType getEntityType();
-
+    
     // required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;
-    /**
-     * <code>required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;</code>
-     */
     boolean hasEventType();
-    /**
-     * <code>required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;</code>
-     */
     me.yabble.service.proto.ServiceProtos.EntityEvent.EventType getEventType();
-
+    
     // required string event_time = 4;
-    /**
-     * <code>required string event_time = 4;</code>
-     */
     boolean hasEventTime();
-    /**
-     * <code>required string event_time = 4;</code>
-     */
-    java.lang.String getEventTime();
-    /**
-     * <code>required string event_time = 4;</code>
-     */
-    com.google.protobuf.ByteString
-        getEventTimeBytes();
-
+    String getEventTime();
+    
     // optional int64 delay_ms = 5;
-    /**
-     * <code>optional int64 delay_ms = 5;</code>
-     */
     boolean hasDelayMs();
-    /**
-     * <code>optional int64 delay_ms = 5;</code>
-     */
     long getDelayMs();
-
+    
     // optional int64 user_id = 6;
-    /**
-     * <code>optional int64 user_id = 6;</code>
-     */
     boolean hasUserId();
-    /**
-     * <code>optional int64 user_id = 6;</code>
-     */
     long getUserId();
-
+    
     // repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
     java.util.List<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute> 
         getAttributeList();
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
     me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute getAttribute(int index);
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
     int getAttributeCount();
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
     java.util.List<? extends me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder> 
         getAttributeOrBuilderList();
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
     me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder getAttributeOrBuilder(
         int index);
   }
-  /**
-   * Protobuf type {@code me.yabble.service.proto.EntityEvent}
-   */
   public static final class EntityEvent extends
       com.google.protobuf.GeneratedMessage
       implements EntityEventOrBuilder {
     // Use EntityEvent.newBuilder() to construct.
-    private EntityEvent(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    private EntityEvent(Builder builder) {
       super(builder);
-      this.unknownFields = builder.getUnknownFields();
     }
-    private EntityEvent(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
+    private EntityEvent(boolean noInit) {}
+    
     private static final EntityEvent defaultInstance;
     public static EntityEvent getDefaultInstance() {
       return defaultInstance;
     }
-
+    
     public EntityEvent getDefaultInstanceForType() {
       return defaultInstance;
     }
-
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-        getUnknownFields() {
-      return this.unknownFields;
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_descriptor;
     }
-    private EntityEvent(
-        com.google.protobuf.CodedInputStream input,
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_fieldAccessorTable;
+    }
+    
+    public enum EntityType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      USER(0, 1),
+      LIST(1, 2),
+      LIST_COMMENT(2, 3),
+      LIST_ITEM(3, 4),
+      LIST_ITEM_COMMENT(4, 5),
+      IMAGE(5, 6),
+      ;
+      
+      public static final int USER_VALUE = 1;
+      public static final int LIST_VALUE = 2;
+      public static final int LIST_COMMENT_VALUE = 3;
+      public static final int LIST_ITEM_VALUE = 4;
+      public static final int LIST_ITEM_COMMENT_VALUE = 5;
+      public static final int IMAGE_VALUE = 6;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static EntityType valueOf(int value) {
+        switch (value) {
+          case 1: return USER;
+          case 2: return LIST;
+          case 3: return LIST_COMMENT;
+          case 4: return LIST_ITEM;
+          case 5: return LIST_ITEM_COMMENT;
+          case 6: return IMAGE;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<EntityType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<EntityType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<EntityType>() {
+              public EntityType findValueByNumber(int number) {
+                return EntityType.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.EntityEvent.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final EntityType[] VALUES = {
+        USER, LIST, LIST_COMMENT, LIST_ITEM, LIST_ITEM_COMMENT, IMAGE, 
+      };
+      
+      public static EntityType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private EntityType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:me.yabble.service.proto.EntityEvent.EntityType)
+    }
+    
+    public enum EventType
+        implements com.google.protobuf.ProtocolMessageEnum {
+      CREATE(0, 1),
+      READ(1, 2),
+      UPDATE(2, 3),
+      DELETE(3, 4),
+      TOUCH(4, 5),
+      ;
+      
+      public static final int CREATE_VALUE = 1;
+      public static final int READ_VALUE = 2;
+      public static final int UPDATE_VALUE = 3;
+      public static final int DELETE_VALUE = 4;
+      public static final int TOUCH_VALUE = 5;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static EventType valueOf(int value) {
+        switch (value) {
+          case 1: return CREATE;
+          case 2: return READ;
+          case 3: return UPDATE;
+          case 4: return DELETE;
+          case 5: return TOUCH;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<EventType>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<EventType>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<EventType>() {
+              public EventType findValueByNumber(int number) {
+                return EventType.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.EntityEvent.getDescriptor().getEnumTypes().get(1);
+      }
+      
+      private static final EventType[] VALUES = {
+        CREATE, READ, UPDATE, DELETE, TOUCH, 
+      };
+      
+      public static EventType valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private EventType(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:me.yabble.service.proto.EntityEvent.EventType)
+    }
+    
+    public interface AttributeOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+      
+      // required string key = 1;
+      boolean hasKey();
+      String getKey();
+      
+      // optional string value = 2;
+      boolean hasValue();
+      String getValue();
+    }
+    public static final class Attribute extends
+        com.google.protobuf.GeneratedMessage
+        implements AttributeOrBuilder {
+      // Use Attribute.newBuilder() to construct.
+      private Attribute(Builder builder) {
+        super(builder);
+      }
+      private Attribute(boolean noInit) {}
+      
+      private static final Attribute defaultInstance;
+      public static Attribute getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      public Attribute getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_fieldAccessorTable;
+      }
+      
+      private int bitField0_;
+      // required string key = 1;
+      public static final int KEY_FIELD_NUMBER = 1;
+      private java.lang.Object key_;
+      public boolean hasKey() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getKey() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          return (String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+            key_ = s;
+          }
+          return s;
+        }
+      }
+      private com.google.protobuf.ByteString getKeyBytes() {
+        java.lang.Object ref = key_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          key_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      
+      // optional string value = 2;
+      public static final int VALUE_FIELD_NUMBER = 2;
+      private java.lang.Object value_;
+      public boolean hasValue() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public String getValue() {
+        java.lang.Object ref = value_;
+        if (ref instanceof String) {
+          return (String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+            value_ = s;
+          }
+          return s;
+        }
+      }
+      private com.google.protobuf.ByteString getValueBytes() {
+        java.lang.Object ref = value_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          value_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      
+      private void initFields() {
+        key_ = "";
+        value_ = "";
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+        
+        if (!hasKey()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getKeyBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, getValueBytes());
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getKeyBytes());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, getValueBytes());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+      
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+      
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_fieldAccessorTable;
+        }
+        
+        // Construct using me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+        
+        private Builder(BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+        
+        public Builder clear() {
+          super.clear();
+          key_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          value_ = "";
+          bitField0_ = (bitField0_ & ~0x00000002);
+          return this;
+        }
+        
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+        
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.getDescriptor();
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute getDefaultInstanceForType() {
+          return me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.getDefaultInstance();
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute build() {
+          me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+        
+        private me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return result;
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute buildPartial() {
+          me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute result = new me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.key_ = key_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.value_ = value_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute) {
+            return mergeFrom((me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute other) {
+          if (other == me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.getDefaultInstance()) return this;
+          if (other.hasKey()) {
+            setKey(other.getKey());
+          }
+          if (other.hasValue()) {
+            setValue(other.getValue());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public final boolean isInitialized() {
+          if (!hasKey()) {
+            
+            return false;
+          }
+          return true;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                key_ = input.readBytes();
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000002;
+                value_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        }
+        
+        private int bitField0_;
+        
+        // required string key = 1;
+        private java.lang.Object key_ = "";
+        public boolean hasKey() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public String getKey() {
+          java.lang.Object ref = key_;
+          if (!(ref instanceof String)) {
+            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            key_ = s;
+            return s;
+          } else {
+            return (String) ref;
+          }
+        }
+        public Builder setKey(String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          key_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearKey() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          key_ = getDefaultInstance().getKey();
+          onChanged();
+          return this;
+        }
+        void setKey(com.google.protobuf.ByteString value) {
+          bitField0_ |= 0x00000001;
+          key_ = value;
+          onChanged();
+        }
+        
+        // optional string value = 2;
+        private java.lang.Object value_ = "";
+        public boolean hasValue() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        public String getValue() {
+          java.lang.Object ref = value_;
+          if (!(ref instanceof String)) {
+            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            value_ = s;
+            return s;
+          } else {
+            return (String) ref;
+          }
+        }
+        public Builder setValue(String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          value_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearValue() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          value_ = getDefaultInstance().getValue();
+          onChanged();
+          return this;
+        }
+        void setValue(com.google.protobuf.ByteString value) {
+          bitField0_ |= 0x00000002;
+          value_ = value;
+          onChanged();
+        }
+        
+        // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.EntityEvent.Attribute)
+      }
+      
+      static {
+        defaultInstance = new Attribute(true);
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:me.yabble.service.proto.EntityEvent.Attribute)
+    }
+    
+    private int bitField0_;
+    // required string entity_id = 1;
+    public static final int ENTITY_ID_FIELD_NUMBER = 1;
+    private java.lang.Object entityId_;
+    public boolean hasEntityId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public String getEntityId() {
+      java.lang.Object ref = entityId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          entityId_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getEntityIdBytes() {
+      java.lang.Object ref = entityId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        entityId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;
+    public static final int ENTITY_TYPE_FIELD_NUMBER = 2;
+    private me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType entityType_;
+    public boolean hasEntityType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType getEntityType() {
+      return entityType_;
+    }
+    
+    // required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;
+    public static final int EVENT_TYPE_FIELD_NUMBER = 3;
+    private me.yabble.service.proto.ServiceProtos.EntityEvent.EventType eventType_;
+    public boolean hasEventType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public me.yabble.service.proto.ServiceProtos.EntityEvent.EventType getEventType() {
+      return eventType_;
+    }
+    
+    // required string event_time = 4;
+    public static final int EVENT_TIME_FIELD_NUMBER = 4;
+    private java.lang.Object eventTime_;
+    public boolean hasEventTime() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getEventTime() {
+      java.lang.Object ref = eventTime_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          eventTime_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getEventTimeBytes() {
+      java.lang.Object ref = eventTime_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        eventTime_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional int64 delay_ms = 5;
+    public static final int DELAY_MS_FIELD_NUMBER = 5;
+    private long delayMs_;
+    public boolean hasDelayMs() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public long getDelayMs() {
+      return delayMs_;
+    }
+    
+    // optional int64 user_id = 6;
+    public static final int USER_ID_FIELD_NUMBER = 6;
+    private long userId_;
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public long getUserId() {
+      return userId_;
+    }
+    
+    // repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;
+    public static final int ATTRIBUTE_FIELD_NUMBER = 7;
+    private java.util.List<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute> attribute_;
+    public java.util.List<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute> getAttributeList() {
+      return attribute_;
+    }
+    public java.util.List<? extends me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder> 
+        getAttributeOrBuilderList() {
+      return attribute_;
+    }
+    public int getAttributeCount() {
+      return attribute_.size();
+    }
+    public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute getAttribute(int index) {
+      return attribute_.get(index);
+    }
+    public me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder getAttributeOrBuilder(
+        int index) {
+      return attribute_.get(index);
+    }
+    
+    private void initFields() {
+      entityId_ = "";
+      entityType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType.USER;
+      eventType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EventType.CREATE;
+      eventTime_ = "";
+      delayMs_ = 0L;
+      userId_ = 0L;
+      attribute_ = java.util.Collections.emptyList();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!hasEntityId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasEntityType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasEventType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasEventTime()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getAttributeCount(); i++) {
+        if (!getAttribute(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getEntityIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, entityType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, eventType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getEventTimeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeInt64(5, delayMs_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeInt64(6, userId_);
+      }
+      for (int i = 0; i < attribute_.size(); i++) {
+        output.writeMessage(7, attribute_.get(i));
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getEntityIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, entityType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, eventType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getEventTimeBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(5, delayMs_);
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(6, userId_);
+      }
+      for (int i = 0; i < attribute_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(7, attribute_.get(i));
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
+        com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      initFields();
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.EntityEvent prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements me.yabble.service.proto.ServiceProtos.EntityEventOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_fieldAccessorTable;
+      }
+      
+      // Construct using me.yabble.service.proto.ServiceProtos.EntityEvent.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getAttributeFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        entityId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        entityType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType.USER;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        eventType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EventType.CREATE;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        eventTime_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        delayMs_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        userId_ = 0L;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        if (attributeBuilder_ == null) {
+          attribute_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000040);
+        } else {
+          attributeBuilder_.clear();
+        }
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return me.yabble.service.proto.ServiceProtos.EntityEvent.getDescriptor();
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.EntityEvent getDefaultInstanceForType() {
+        return me.yabble.service.proto.ServiceProtos.EntityEvent.getDefaultInstance();
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.EntityEvent build() {
+        me.yabble.service.proto.ServiceProtos.EntityEvent result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private me.yabble.service.proto.ServiceProtos.EntityEvent buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        me.yabble.service.proto.ServiceProtos.EntityEvent result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.EntityEvent buildPartial() {
+        me.yabble.service.proto.ServiceProtos.EntityEvent result = new me.yabble.service.proto.ServiceProtos.EntityEvent(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.entityId_ = entityId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.entityType_ = entityType_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.eventType_ = eventType_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.eventTime_ = eventTime_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.delayMs_ = delayMs_;
+        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.userId_ = userId_;
+        if (attributeBuilder_ == null) {
+          if (((bitField0_ & 0x00000040) == 0x00000040)) {
+            attribute_ = java.util.Collections.unmodifiableList(attribute_);
+            bitField0_ = (bitField0_ & ~0x00000040);
+          }
+          result.attribute_ = attribute_;
+        } else {
+          result.attribute_ = attributeBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof me.yabble.service.proto.ServiceProtos.EntityEvent) {
+          return mergeFrom((me.yabble.service.proto.ServiceProtos.EntityEvent)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.EntityEvent other) {
+        if (other == me.yabble.service.proto.ServiceProtos.EntityEvent.getDefaultInstance()) return this;
+        if (other.hasEntityId()) {
+          setEntityId(other.getEntityId());
+        }
+        if (other.hasEntityType()) {
+          setEntityType(other.getEntityType());
+        }
+        if (other.hasEventType()) {
+          setEventType(other.getEventType());
+        }
+        if (other.hasEventTime()) {
+          setEventTime(other.getEventTime());
+        }
+        if (other.hasDelayMs()) {
+          setDelayMs(other.getDelayMs());
+        }
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (attributeBuilder_ == null) {
+          if (!other.attribute_.isEmpty()) {
+            if (attribute_.isEmpty()) {
+              attribute_ = other.attribute_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+            } else {
+              ensureAttributeIsMutable();
+              attribute_.addAll(other.attribute_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.attribute_.isEmpty()) {
+            if (attributeBuilder_.isEmpty()) {
+              attributeBuilder_.dispose();
+              attributeBuilder_ = null;
+              attribute_ = other.attribute_;
+              bitField0_ = (bitField0_ & ~0x00000040);
+              attributeBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getAttributeFieldBuilder() : null;
+            } else {
+              attributeBuilder_.addAllMessages(other.attribute_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!hasEntityId()) {
+          
+          return false;
+        }
+        if (!hasEntityType()) {
+          
+          return false;
+        }
+        if (!hasEventType()) {
+          
+          return false;
+        }
+        if (!hasEventTime()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getAttributeCount(); i++) {
+          if (!getAttribute(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
           int tag = input.readTag();
           switch (tag) {
             case 0:
-              done = true;
-              break;
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
             default: {
               if (!parseUnknownField(input, unknownFields,
                                      extensionRegistry, tag)) {
-                done = true;
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
               }
               break;
             }
@@ -200,1557 +1306,33 @@ public final class ServiceProtos {
               break;
             }
             case 58: {
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                attribute_ = new java.util.ArrayList<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute>();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              attribute_.add(input.readMessage(me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.PARSER, extensionRegistry));
+              me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder subBuilder = me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.newBuilder();
+              input.readMessage(subBuilder, extensionRegistry);
+              addAttribute(subBuilder.buildPartial());
               break;
             }
           }
         }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e.getMessage()).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          attribute_ = java.util.Collections.unmodifiableList(attribute_);
-        }
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
       }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              me.yabble.service.proto.ServiceProtos.EntityEvent.class, me.yabble.service.proto.ServiceProtos.EntityEvent.Builder.class);
-    }
-
-    public static com.google.protobuf.Parser<EntityEvent> PARSER =
-        new com.google.protobuf.AbstractParser<EntityEvent>() {
-      public EntityEvent parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new EntityEvent(input, extensionRegistry);
-      }
-    };
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<EntityEvent> getParserForType() {
-      return PARSER;
-    }
-
-    /**
-     * Protobuf enum {@code me.yabble.service.proto.EntityEvent.EntityType}
-     */
-    public enum EntityType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>USER = 1;</code>
-       */
-      USER(0, 1),
-      /**
-       * <code>LIST = 2;</code>
-       */
-      LIST(1, 2),
-      /**
-       * <code>LIST_COMMENT = 3;</code>
-       */
-      LIST_COMMENT(2, 3),
-      /**
-       * <code>LIST_ITEM = 4;</code>
-       */
-      LIST_ITEM(3, 4),
-      /**
-       * <code>LIST_ITEM_COMMENT = 5;</code>
-       */
-      LIST_ITEM_COMMENT(4, 5),
-      /**
-       * <code>IMAGE = 6;</code>
-       */
-      IMAGE(5, 6),
-      ;
-
-      /**
-       * <code>USER = 1;</code>
-       */
-      public static final int USER_VALUE = 1;
-      /**
-       * <code>LIST = 2;</code>
-       */
-      public static final int LIST_VALUE = 2;
-      /**
-       * <code>LIST_COMMENT = 3;</code>
-       */
-      public static final int LIST_COMMENT_VALUE = 3;
-      /**
-       * <code>LIST_ITEM = 4;</code>
-       */
-      public static final int LIST_ITEM_VALUE = 4;
-      /**
-       * <code>LIST_ITEM_COMMENT = 5;</code>
-       */
-      public static final int LIST_ITEM_COMMENT_VALUE = 5;
-      /**
-       * <code>IMAGE = 6;</code>
-       */
-      public static final int IMAGE_VALUE = 6;
-
-
-      public final int getNumber() { return value; }
-
-      public static EntityType valueOf(int value) {
-        switch (value) {
-          case 1: return USER;
-          case 2: return LIST;
-          case 3: return LIST_COMMENT;
-          case 4: return LIST_ITEM;
-          case 5: return LIST_ITEM_COMMENT;
-          case 6: return IMAGE;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EntityType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EntityType>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EntityType>() {
-              public EntityType findValueByNumber(int number) {
-                return EntityType.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return me.yabble.service.proto.ServiceProtos.EntityEvent.getDescriptor().getEnumTypes().get(0);
-      }
-
-      private static final EntityType[] VALUES = values();
-
-      public static EntityType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EntityType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:me.yabble.service.proto.EntityEvent.EntityType)
-    }
-
-    /**
-     * Protobuf enum {@code me.yabble.service.proto.EntityEvent.EventType}
-     */
-    public enum EventType
-        implements com.google.protobuf.ProtocolMessageEnum {
-      /**
-       * <code>CREATE = 1;</code>
-       */
-      CREATE(0, 1),
-      /**
-       * <code>READ = 2;</code>
-       */
-      READ(1, 2),
-      /**
-       * <code>UPDATE = 3;</code>
-       */
-      UPDATE(2, 3),
-      /**
-       * <code>DELETE = 4;</code>
-       */
-      DELETE(3, 4),
-      /**
-       * <code>TOUCH = 5;</code>
-       */
-      TOUCH(4, 5),
-      ;
-
-      /**
-       * <code>CREATE = 1;</code>
-       */
-      public static final int CREATE_VALUE = 1;
-      /**
-       * <code>READ = 2;</code>
-       */
-      public static final int READ_VALUE = 2;
-      /**
-       * <code>UPDATE = 3;</code>
-       */
-      public static final int UPDATE_VALUE = 3;
-      /**
-       * <code>DELETE = 4;</code>
-       */
-      public static final int DELETE_VALUE = 4;
-      /**
-       * <code>TOUCH = 5;</code>
-       */
-      public static final int TOUCH_VALUE = 5;
-
-
-      public final int getNumber() { return value; }
-
-      public static EventType valueOf(int value) {
-        switch (value) {
-          case 1: return CREATE;
-          case 2: return READ;
-          case 3: return UPDATE;
-          case 4: return DELETE;
-          case 5: return TOUCH;
-          default: return null;
-        }
-      }
-
-      public static com.google.protobuf.Internal.EnumLiteMap<EventType>
-          internalGetValueMap() {
-        return internalValueMap;
-      }
-      private static com.google.protobuf.Internal.EnumLiteMap<EventType>
-          internalValueMap =
-            new com.google.protobuf.Internal.EnumLiteMap<EventType>() {
-              public EventType findValueByNumber(int number) {
-                return EventType.valueOf(number);
-              }
-            };
-
-      public final com.google.protobuf.Descriptors.EnumValueDescriptor
-          getValueDescriptor() {
-        return getDescriptor().getValues().get(index);
-      }
-      public final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptorForType() {
-        return getDescriptor();
-      }
-      public static final com.google.protobuf.Descriptors.EnumDescriptor
-          getDescriptor() {
-        return me.yabble.service.proto.ServiceProtos.EntityEvent.getDescriptor().getEnumTypes().get(1);
-      }
-
-      private static final EventType[] VALUES = values();
-
-      public static EventType valueOf(
-          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-        if (desc.getType() != getDescriptor()) {
-          throw new java.lang.IllegalArgumentException(
-            "EnumValueDescriptor is not for this type.");
-        }
-        return VALUES[desc.getIndex()];
-      }
-
-      private final int index;
-      private final int value;
-
-      private EventType(int index, int value) {
-        this.index = index;
-        this.value = value;
-      }
-
-      // @@protoc_insertion_point(enum_scope:me.yabble.service.proto.EntityEvent.EventType)
-    }
-
-    public interface AttributeOrBuilder
-        extends com.google.protobuf.MessageOrBuilder {
-
-      // required string key = 1;
-      /**
-       * <code>required string key = 1;</code>
-       */
-      boolean hasKey();
-      /**
-       * <code>required string key = 1;</code>
-       */
-      java.lang.String getKey();
-      /**
-       * <code>required string key = 1;</code>
-       */
-      com.google.protobuf.ByteString
-          getKeyBytes();
-
-      // optional string value = 2;
-      /**
-       * <code>optional string value = 2;</code>
-       */
-      boolean hasValue();
-      /**
-       * <code>optional string value = 2;</code>
-       */
-      java.lang.String getValue();
-      /**
-       * <code>optional string value = 2;</code>
-       */
-      com.google.protobuf.ByteString
-          getValueBytes();
-    }
-    /**
-     * Protobuf type {@code me.yabble.service.proto.EntityEvent.Attribute}
-     */
-    public static final class Attribute extends
-        com.google.protobuf.GeneratedMessage
-        implements AttributeOrBuilder {
-      // Use Attribute.newBuilder() to construct.
-      private Attribute(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
-        super(builder);
-        this.unknownFields = builder.getUnknownFields();
-      }
-      private Attribute(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
-
-      private static final Attribute defaultInstance;
-      public static Attribute getDefaultInstance() {
-        return defaultInstance;
-      }
-
-      public Attribute getDefaultInstanceForType() {
-        return defaultInstance;
-      }
-
-      private final com.google.protobuf.UnknownFieldSet unknownFields;
-      @java.lang.Override
-      public final com.google.protobuf.UnknownFieldSet
-          getUnknownFields() {
-        return this.unknownFields;
-      }
-      private Attribute(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        initFields();
-        int mutable_bitField0_ = 0;
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder();
-        try {
-          boolean done = false;
-          while (!done) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                done = true;
-                break;
-              default: {
-                if (!parseUnknownField(input, unknownFields,
-                                       extensionRegistry, tag)) {
-                  done = true;
-                }
-                break;
-              }
-              case 10: {
-                bitField0_ |= 0x00000001;
-                key_ = input.readBytes();
-                break;
-              }
-              case 18: {
-                bitField0_ |= 0x00000002;
-                value_ = input.readBytes();
-                break;
-              }
-            }
-          }
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          throw e.setUnfinishedMessage(this);
-        } catch (java.io.IOException e) {
-          throw new com.google.protobuf.InvalidProtocolBufferException(
-              e.getMessage()).setUnfinishedMessage(this);
-        } finally {
-          this.unknownFields = unknownFields.build();
-          makeExtensionsImmutable();
-        }
-      }
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.class, me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder.class);
-      }
-
-      public static com.google.protobuf.Parser<Attribute> PARSER =
-          new com.google.protobuf.AbstractParser<Attribute>() {
-        public Attribute parsePartialFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Attribute(input, extensionRegistry);
-        }
-      };
-
-      @java.lang.Override
-      public com.google.protobuf.Parser<Attribute> getParserForType() {
-        return PARSER;
-      }
-
+      
       private int bitField0_;
-      // required string key = 1;
-      public static final int KEY_FIELD_NUMBER = 1;
-      private java.lang.Object key_;
-      /**
-       * <code>required string key = 1;</code>
-       */
-      public boolean hasKey() {
-        return ((bitField0_ & 0x00000001) == 0x00000001);
-      }
-      /**
-       * <code>required string key = 1;</code>
-       */
-      public java.lang.String getKey() {
-        java.lang.Object ref = key_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            key_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>required string key = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getKeyBytes() {
-        java.lang.Object ref = key_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          key_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-
-      // optional string value = 2;
-      public static final int VALUE_FIELD_NUMBER = 2;
-      private java.lang.Object value_;
-      /**
-       * <code>optional string value = 2;</code>
-       */
-      public boolean hasValue() {
-        return ((bitField0_ & 0x00000002) == 0x00000002);
-      }
-      /**
-       * <code>optional string value = 2;</code>
-       */
-      public java.lang.String getValue() {
-        java.lang.Object ref = value_;
-        if (ref instanceof java.lang.String) {
-          return (java.lang.String) ref;
-        } else {
-          com.google.protobuf.ByteString bs = 
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          if (bs.isValidUtf8()) {
-            value_ = s;
-          }
-          return s;
-        }
-      }
-      /**
-       * <code>optional string value = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getValueBytes() {
-        java.lang.Object ref = value_;
-        if (ref instanceof java.lang.String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          value_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-
-      private void initFields() {
-        key_ = "";
-        value_ = "";
-      }
-      private byte memoizedIsInitialized = -1;
-      public final boolean isInitialized() {
-        byte isInitialized = memoizedIsInitialized;
-        if (isInitialized != -1) return isInitialized == 1;
-
-        if (!hasKey()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-        memoizedIsInitialized = 1;
-        return true;
-      }
-
-      public void writeTo(com.google.protobuf.CodedOutputStream output)
-                          throws java.io.IOException {
-        getSerializedSize();
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          output.writeBytes(1, getKeyBytes());
-        }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          output.writeBytes(2, getValueBytes());
-        }
-        getUnknownFields().writeTo(output);
-      }
-
-      private int memoizedSerializedSize = -1;
-      public int getSerializedSize() {
-        int size = memoizedSerializedSize;
-        if (size != -1) return size;
-
-        size = 0;
-        if (((bitField0_ & 0x00000001) == 0x00000001)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(1, getKeyBytes());
-        }
-        if (((bitField0_ & 0x00000002) == 0x00000002)) {
-          size += com.google.protobuf.CodedOutputStream
-            .computeBytesSize(2, getValueBytes());
-        }
-        size += getUnknownFields().getSerializedSize();
-        memoizedSerializedSize = size;
-        return size;
-      }
-
-      private static final long serialVersionUID = 0L;
-      @java.lang.Override
-      protected java.lang.Object writeReplace()
-          throws java.io.ObjectStreamException {
-        return super.writeReplace();
-      }
-
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
-          com.google.protobuf.ByteString data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
-          com.google.protobuf.ByteString data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(byte[] data)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
-          byte[] data,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return PARSER.parseFrom(data, extensionRegistry);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseDelimitedFrom(java.io.InputStream input)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseDelimitedFrom(
-          java.io.InputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseDelimitedFrom(input, extensionRegistry);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
-          com.google.protobuf.CodedInputStream input)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input);
-      }
-      public static me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parseFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        return PARSER.parseFrom(input, extensionRegistry);
-      }
-
-      public static Builder newBuilder() { return Builder.create(); }
-      public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute prototype) {
-        return newBuilder().mergeFrom(prototype);
-      }
-      public Builder toBuilder() { return newBuilder(this); }
-
-      @java.lang.Override
-      protected Builder newBuilderForType(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        Builder builder = new Builder(parent);
-        return builder;
-      }
-      /**
-       * Protobuf type {@code me.yabble.service.proto.EntityEvent.Attribute}
-       */
-      public static final class Builder extends
-          com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder {
-        public static final com.google.protobuf.Descriptors.Descriptor
-            getDescriptor() {
-          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_descriptor;
-        }
-
-        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-            internalGetFieldAccessorTable() {
-          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_fieldAccessorTable
-              .ensureFieldAccessorsInitialized(
-                  me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.class, me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder.class);
-        }
-
-        // Construct using me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.newBuilder()
-        private Builder() {
-          maybeForceBuilderInitialization();
-        }
-
-        private Builder(
-            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-          super(parent);
-          maybeForceBuilderInitialization();
-        }
-        private void maybeForceBuilderInitialization() {
-          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          }
-        }
-        private static Builder create() {
-          return new Builder();
-        }
-
-        public Builder clear() {
-          super.clear();
-          key_ = "";
-          bitField0_ = (bitField0_ & ~0x00000001);
-          value_ = "";
-          bitField0_ = (bitField0_ & ~0x00000002);
-          return this;
-        }
-
-        public Builder clone() {
-          return create().mergeFrom(buildPartial());
-        }
-
-        public com.google.protobuf.Descriptors.Descriptor
-            getDescriptorForType() {
-          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_Attribute_descriptor;
-        }
-
-        public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute getDefaultInstanceForType() {
-          return me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.getDefaultInstance();
-        }
-
-        public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute build() {
-          me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute result = buildPartial();
-          if (!result.isInitialized()) {
-            throw newUninitializedMessageException(result);
-          }
-          return result;
-        }
-
-        public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute buildPartial() {
-          me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute result = new me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute(this);
-          int from_bitField0_ = bitField0_;
-          int to_bitField0_ = 0;
-          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-            to_bitField0_ |= 0x00000001;
-          }
-          result.key_ = key_;
-          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-            to_bitField0_ |= 0x00000002;
-          }
-          result.value_ = value_;
-          result.bitField0_ = to_bitField0_;
-          onBuilt();
-          return result;
-        }
-
-        public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute) {
-            return mergeFrom((me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute)other);
-          } else {
-            super.mergeFrom(other);
-            return this;
-          }
-        }
-
-        public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute other) {
-          if (other == me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.getDefaultInstance()) return this;
-          if (other.hasKey()) {
-            bitField0_ |= 0x00000001;
-            key_ = other.key_;
-            onChanged();
-          }
-          if (other.hasValue()) {
-            bitField0_ |= 0x00000002;
-            value_ = other.value_;
-            onChanged();
-          }
-          this.mergeUnknownFields(other.getUnknownFields());
-          return this;
-        }
-
-        public final boolean isInitialized() {
-          if (!hasKey()) {
-            
-            return false;
-          }
-          return true;
-        }
-
-        public Builder mergeFrom(
-            com.google.protobuf.CodedInputStream input,
-            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-            throws java.io.IOException {
-          me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute parsedMessage = null;
-          try {
-            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-            parsedMessage = (me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute) e.getUnfinishedMessage();
-            throw e;
-          } finally {
-            if (parsedMessage != null) {
-              mergeFrom(parsedMessage);
-            }
-          }
-          return this;
-        }
-        private int bitField0_;
-
-        // required string key = 1;
-        private java.lang.Object key_ = "";
-        /**
-         * <code>required string key = 1;</code>
-         */
-        public boolean hasKey() {
-          return ((bitField0_ & 0x00000001) == 0x00000001);
-        }
-        /**
-         * <code>required string key = 1;</code>
-         */
-        public java.lang.String getKey() {
-          java.lang.Object ref = key_;
-          if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            key_ = s;
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
-        }
-        /**
-         * <code>required string key = 1;</code>
-         */
-        public com.google.protobuf.ByteString
-            getKeyBytes() {
-          java.lang.Object ref = key_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            key_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>required string key = 1;</code>
-         */
-        public Builder setKey(
-            java.lang.String value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          key_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>required string key = 1;</code>
-         */
-        public Builder clearKey() {
-          bitField0_ = (bitField0_ & ~0x00000001);
-          key_ = getDefaultInstance().getKey();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>required string key = 1;</code>
-         */
-        public Builder setKeyBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
-          key_ = value;
-          onChanged();
-          return this;
-        }
-
-        // optional string value = 2;
-        private java.lang.Object value_ = "";
-        /**
-         * <code>optional string value = 2;</code>
-         */
-        public boolean hasValue() {
-          return ((bitField0_ & 0x00000002) == 0x00000002);
-        }
-        /**
-         * <code>optional string value = 2;</code>
-         */
-        public java.lang.String getValue() {
-          java.lang.Object ref = value_;
-          if (!(ref instanceof java.lang.String)) {
-            java.lang.String s = ((com.google.protobuf.ByteString) ref)
-                .toStringUtf8();
-            value_ = s;
-            return s;
-          } else {
-            return (java.lang.String) ref;
-          }
-        }
-        /**
-         * <code>optional string value = 2;</code>
-         */
-        public com.google.protobuf.ByteString
-            getValueBytes() {
-          java.lang.Object ref = value_;
-          if (ref instanceof String) {
-            com.google.protobuf.ByteString b = 
-                com.google.protobuf.ByteString.copyFromUtf8(
-                    (java.lang.String) ref);
-            value_ = b;
-            return b;
-          } else {
-            return (com.google.protobuf.ByteString) ref;
-          }
-        }
-        /**
-         * <code>optional string value = 2;</code>
-         */
-        public Builder setValue(
-            java.lang.String value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-          value_ = value;
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string value = 2;</code>
-         */
-        public Builder clearValue() {
-          bitField0_ = (bitField0_ & ~0x00000002);
-          value_ = getDefaultInstance().getValue();
-          onChanged();
-          return this;
-        }
-        /**
-         * <code>optional string value = 2;</code>
-         */
-        public Builder setValueBytes(
-            com.google.protobuf.ByteString value) {
-          if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000002;
-          value_ = value;
-          onChanged();
-          return this;
-        }
-
-        // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.EntityEvent.Attribute)
-      }
-
-      static {
-        defaultInstance = new Attribute(true);
-        defaultInstance.initFields();
-      }
-
-      // @@protoc_insertion_point(class_scope:me.yabble.service.proto.EntityEvent.Attribute)
-    }
-
-    private int bitField0_;
-    // required string entity_id = 1;
-    public static final int ENTITY_ID_FIELD_NUMBER = 1;
-    private java.lang.Object entityId_;
-    /**
-     * <code>required string entity_id = 1;</code>
-     */
-    public boolean hasEntityId() {
-      return ((bitField0_ & 0x00000001) == 0x00000001);
-    }
-    /**
-     * <code>required string entity_id = 1;</code>
-     */
-    public java.lang.String getEntityId() {
-      java.lang.Object ref = entityId_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          entityId_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string entity_id = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getEntityIdBytes() {
-      java.lang.Object ref = entityId_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        entityId_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;
-    public static final int ENTITY_TYPE_FIELD_NUMBER = 2;
-    private me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType entityType_;
-    /**
-     * <code>required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;</code>
-     */
-    public boolean hasEntityType() {
-      return ((bitField0_ & 0x00000002) == 0x00000002);
-    }
-    /**
-     * <code>required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;</code>
-     */
-    public me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType getEntityType() {
-      return entityType_;
-    }
-
-    // required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;
-    public static final int EVENT_TYPE_FIELD_NUMBER = 3;
-    private me.yabble.service.proto.ServiceProtos.EntityEvent.EventType eventType_;
-    /**
-     * <code>required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;</code>
-     */
-    public boolean hasEventType() {
-      return ((bitField0_ & 0x00000004) == 0x00000004);
-    }
-    /**
-     * <code>required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;</code>
-     */
-    public me.yabble.service.proto.ServiceProtos.EntityEvent.EventType getEventType() {
-      return eventType_;
-    }
-
-    // required string event_time = 4;
-    public static final int EVENT_TIME_FIELD_NUMBER = 4;
-    private java.lang.Object eventTime_;
-    /**
-     * <code>required string event_time = 4;</code>
-     */
-    public boolean hasEventTime() {
-      return ((bitField0_ & 0x00000008) == 0x00000008);
-    }
-    /**
-     * <code>required string event_time = 4;</code>
-     */
-    public java.lang.String getEventTime() {
-      java.lang.Object ref = eventTime_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        if (bs.isValidUtf8()) {
-          eventTime_ = s;
-        }
-        return s;
-      }
-    }
-    /**
-     * <code>required string event_time = 4;</code>
-     */
-    public com.google.protobuf.ByteString
-        getEventTimeBytes() {
-      java.lang.Object ref = eventTime_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        eventTime_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    // optional int64 delay_ms = 5;
-    public static final int DELAY_MS_FIELD_NUMBER = 5;
-    private long delayMs_;
-    /**
-     * <code>optional int64 delay_ms = 5;</code>
-     */
-    public boolean hasDelayMs() {
-      return ((bitField0_ & 0x00000010) == 0x00000010);
-    }
-    /**
-     * <code>optional int64 delay_ms = 5;</code>
-     */
-    public long getDelayMs() {
-      return delayMs_;
-    }
-
-    // optional int64 user_id = 6;
-    public static final int USER_ID_FIELD_NUMBER = 6;
-    private long userId_;
-    /**
-     * <code>optional int64 user_id = 6;</code>
-     */
-    public boolean hasUserId() {
-      return ((bitField0_ & 0x00000020) == 0x00000020);
-    }
-    /**
-     * <code>optional int64 user_id = 6;</code>
-     */
-    public long getUserId() {
-      return userId_;
-    }
-
-    // repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;
-    public static final int ATTRIBUTE_FIELD_NUMBER = 7;
-    private java.util.List<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute> attribute_;
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
-    public java.util.List<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute> getAttributeList() {
-      return attribute_;
-    }
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
-    public java.util.List<? extends me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder> 
-        getAttributeOrBuilderList() {
-      return attribute_;
-    }
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
-    public int getAttributeCount() {
-      return attribute_.size();
-    }
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
-    public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute getAttribute(int index) {
-      return attribute_.get(index);
-    }
-    /**
-     * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-     */
-    public me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder getAttributeOrBuilder(
-        int index) {
-      return attribute_.get(index);
-    }
-
-    private void initFields() {
-      entityId_ = "";
-      entityType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType.USER;
-      eventType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EventType.CREATE;
-      eventTime_ = "";
-      delayMs_ = 0L;
-      userId_ = 0L;
-      attribute_ = java.util.Collections.emptyList();
-    }
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized != -1) return isInitialized == 1;
-
-      if (!hasEntityId()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasEntityType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasEventType()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      if (!hasEventTime()) {
-        memoizedIsInitialized = 0;
-        return false;
-      }
-      for (int i = 0; i < getAttributeCount(); i++) {
-        if (!getAttribute(i).isInitialized()) {
-          memoizedIsInitialized = 0;
-          return false;
-        }
-      }
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      getSerializedSize();
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        output.writeBytes(1, getEntityIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeEnum(2, entityType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        output.writeEnum(3, eventType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        output.writeBytes(4, getEventTimeBytes());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        output.writeInt64(5, delayMs_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        output.writeInt64(6, userId_);
-      }
-      for (int i = 0; i < attribute_.size(); i++) {
-        output.writeMessage(7, attribute_.get(i));
-      }
-      getUnknownFields().writeTo(output);
-    }
-
-    private int memoizedSerializedSize = -1;
-    public int getSerializedSize() {
-      int size = memoizedSerializedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (((bitField0_ & 0x00000001) == 0x00000001)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(1, getEntityIdBytes());
-      }
-      if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(2, entityType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000004) == 0x00000004)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, eventType_.getNumber());
-      }
-      if (((bitField0_ & 0x00000008) == 0x00000008)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, getEventTimeBytes());
-      }
-      if (((bitField0_ & 0x00000010) == 0x00000010)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(5, delayMs_);
-      }
-      if (((bitField0_ & 0x00000020) == 0x00000020)) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(6, userId_);
-      }
-      for (int i = 0; i < attribute_.size(); i++) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, attribute_.get(i));
-      }
-      size += getUnknownFields().getSerializedSize();
-      memoizedSerializedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    protected java.lang.Object writeReplace()
-        throws java.io.ObjectStreamException {
-      return super.writeReplace();
-    }
-
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseDelimitedFrom(input, extensionRegistry);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input);
-    }
-    public static me.yabble.service.proto.ServiceProtos.EntityEvent parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return PARSER.parseFrom(input, extensionRegistry);
-    }
-
-    public static Builder newBuilder() { return Builder.create(); }
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.EntityEvent prototype) {
-      return newBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() { return newBuilder(this); }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code me.yabble.service.proto.EntityEvent}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessage.Builder<Builder>
-       implements me.yabble.service.proto.ServiceProtos.EntityEventOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                me.yabble.service.proto.ServiceProtos.EntityEvent.class, me.yabble.service.proto.ServiceProtos.EntityEvent.Builder.class);
-      }
-
-      // Construct using me.yabble.service.proto.ServiceProtos.EntityEvent.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
-          getAttributeFieldBuilder();
-        }
-      }
-      private static Builder create() {
-        return new Builder();
-      }
-
-      public Builder clear() {
-        super.clear();
-        entityId_ = "";
-        bitField0_ = (bitField0_ & ~0x00000001);
-        entityType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType.USER;
-        bitField0_ = (bitField0_ & ~0x00000002);
-        eventType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EventType.CREATE;
-        bitField0_ = (bitField0_ & ~0x00000004);
-        eventTime_ = "";
-        bitField0_ = (bitField0_ & ~0x00000008);
-        delayMs_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000010);
-        userId_ = 0L;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        if (attributeBuilder_ == null) {
-          attribute_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000040);
-        } else {
-          attributeBuilder_.clear();
-        }
-        return this;
-      }
-
-      public Builder clone() {
-        return create().mergeFrom(buildPartial());
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_EntityEvent_descriptor;
-      }
-
-      public me.yabble.service.proto.ServiceProtos.EntityEvent getDefaultInstanceForType() {
-        return me.yabble.service.proto.ServiceProtos.EntityEvent.getDefaultInstance();
-      }
-
-      public me.yabble.service.proto.ServiceProtos.EntityEvent build() {
-        me.yabble.service.proto.ServiceProtos.EntityEvent result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public me.yabble.service.proto.ServiceProtos.EntityEvent buildPartial() {
-        me.yabble.service.proto.ServiceProtos.EntityEvent result = new me.yabble.service.proto.ServiceProtos.EntityEvent(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
-          to_bitField0_ |= 0x00000001;
-        }
-        result.entityId_ = entityId_;
-        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
-          to_bitField0_ |= 0x00000002;
-        }
-        result.entityType_ = entityType_;
-        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
-          to_bitField0_ |= 0x00000004;
-        }
-        result.eventType_ = eventType_;
-        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
-          to_bitField0_ |= 0x00000008;
-        }
-        result.eventTime_ = eventTime_;
-        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
-          to_bitField0_ |= 0x00000010;
-        }
-        result.delayMs_ = delayMs_;
-        if (((from_bitField0_ & 0x00000020) == 0x00000020)) {
-          to_bitField0_ |= 0x00000020;
-        }
-        result.userId_ = userId_;
-        if (attributeBuilder_ == null) {
-          if (((bitField0_ & 0x00000040) == 0x00000040)) {
-            attribute_ = java.util.Collections.unmodifiableList(attribute_);
-            bitField0_ = (bitField0_ & ~0x00000040);
-          }
-          result.attribute_ = attribute_;
-        } else {
-          result.attribute_ = attributeBuilder_.build();
-        }
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof me.yabble.service.proto.ServiceProtos.EntityEvent) {
-          return mergeFrom((me.yabble.service.proto.ServiceProtos.EntityEvent)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.EntityEvent other) {
-        if (other == me.yabble.service.proto.ServiceProtos.EntityEvent.getDefaultInstance()) return this;
-        if (other.hasEntityId()) {
-          bitField0_ |= 0x00000001;
-          entityId_ = other.entityId_;
-          onChanged();
-        }
-        if (other.hasEntityType()) {
-          setEntityType(other.getEntityType());
-        }
-        if (other.hasEventType()) {
-          setEventType(other.getEventType());
-        }
-        if (other.hasEventTime()) {
-          bitField0_ |= 0x00000008;
-          eventTime_ = other.eventTime_;
-          onChanged();
-        }
-        if (other.hasDelayMs()) {
-          setDelayMs(other.getDelayMs());
-        }
-        if (other.hasUserId()) {
-          setUserId(other.getUserId());
-        }
-        if (attributeBuilder_ == null) {
-          if (!other.attribute_.isEmpty()) {
-            if (attribute_.isEmpty()) {
-              attribute_ = other.attribute_;
-              bitField0_ = (bitField0_ & ~0x00000040);
-            } else {
-              ensureAttributeIsMutable();
-              attribute_.addAll(other.attribute_);
-            }
-            onChanged();
-          }
-        } else {
-          if (!other.attribute_.isEmpty()) {
-            if (attributeBuilder_.isEmpty()) {
-              attributeBuilder_.dispose();
-              attributeBuilder_ = null;
-              attribute_ = other.attribute_;
-              bitField0_ = (bitField0_ & ~0x00000040);
-              attributeBuilder_ = 
-                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
-                   getAttributeFieldBuilder() : null;
-            } else {
-              attributeBuilder_.addAllMessages(other.attribute_);
-            }
-          }
-        }
-        this.mergeUnknownFields(other.getUnknownFields());
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        if (!hasEntityId()) {
-          
-          return false;
-        }
-        if (!hasEntityType()) {
-          
-          return false;
-        }
-        if (!hasEventType()) {
-          
-          return false;
-        }
-        if (!hasEventTime()) {
-          
-          return false;
-        }
-        for (int i = 0; i < getAttributeCount(); i++) {
-          if (!getAttribute(i).isInitialized()) {
-            
-            return false;
-          }
-        }
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        me.yabble.service.proto.ServiceProtos.EntityEvent parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (me.yabble.service.proto.ServiceProtos.EntityEvent) e.getUnfinishedMessage();
-          throw e;
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
+      
       // required string entity_id = 1;
       private java.lang.Object entityId_ = "";
-      /**
-       * <code>required string entity_id = 1;</code>
-       */
       public boolean hasEntityId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      /**
-       * <code>required string entity_id = 1;</code>
-       */
-      public java.lang.String getEntityId() {
+      public String getEntityId() {
         java.lang.Object ref = entityId_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
           entityId_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
-      /**
-       * <code>required string entity_id = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getEntityIdBytes() {
-        java.lang.Object ref = entityId_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          entityId_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string entity_id = 1;</code>
-       */
-      public Builder setEntityId(
-          java.lang.String value) {
+      public Builder setEntityId(String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1759,46 +1341,26 @@ public final class ServiceProtos {
         onChanged();
         return this;
       }
-      /**
-       * <code>required string entity_id = 1;</code>
-       */
       public Builder clearEntityId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         entityId_ = getDefaultInstance().getEntityId();
         onChanged();
         return this;
       }
-      /**
-       * <code>required string entity_id = 1;</code>
-       */
-      public Builder setEntityIdBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000001;
+      void setEntityId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
         entityId_ = value;
         onChanged();
-        return this;
       }
-
+      
       // required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;
       private me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType entityType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType.USER;
-      /**
-       * <code>required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;</code>
-       */
       public boolean hasEntityType() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      /**
-       * <code>required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;</code>
-       */
       public me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType getEntityType() {
         return entityType_;
       }
-      /**
-       * <code>required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;</code>
-       */
       public Builder setEntityType(me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType value) {
         if (value == null) {
           throw new NullPointerException();
@@ -1808,33 +1370,21 @@ public final class ServiceProtos {
         onChanged();
         return this;
       }
-      /**
-       * <code>required .me.yabble.service.proto.EntityEvent.EntityType entity_type = 2;</code>
-       */
       public Builder clearEntityType() {
         bitField0_ = (bitField0_ & ~0x00000002);
         entityType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EntityType.USER;
         onChanged();
         return this;
       }
-
+      
       // required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;
       private me.yabble.service.proto.ServiceProtos.EntityEvent.EventType eventType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EventType.CREATE;
-      /**
-       * <code>required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;</code>
-       */
       public boolean hasEventType() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      /**
-       * <code>required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;</code>
-       */
       public me.yabble.service.proto.ServiceProtos.EntityEvent.EventType getEventType() {
         return eventType_;
       }
-      /**
-       * <code>required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;</code>
-       */
       public Builder setEventType(me.yabble.service.proto.ServiceProtos.EntityEvent.EventType value) {
         if (value == null) {
           throw new NullPointerException();
@@ -1844,59 +1394,29 @@ public final class ServiceProtos {
         onChanged();
         return this;
       }
-      /**
-       * <code>required .me.yabble.service.proto.EntityEvent.EventType event_type = 3;</code>
-       */
       public Builder clearEventType() {
         bitField0_ = (bitField0_ & ~0x00000004);
         eventType_ = me.yabble.service.proto.ServiceProtos.EntityEvent.EventType.CREATE;
         onChanged();
         return this;
       }
-
+      
       // required string event_time = 4;
       private java.lang.Object eventTime_ = "";
-      /**
-       * <code>required string event_time = 4;</code>
-       */
       public boolean hasEventTime() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
-      /**
-       * <code>required string event_time = 4;</code>
-       */
-      public java.lang.String getEventTime() {
+      public String getEventTime() {
         java.lang.Object ref = eventTime_;
-        if (!(ref instanceof java.lang.String)) {
-          java.lang.String s = ((com.google.protobuf.ByteString) ref)
-              .toStringUtf8();
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
           eventTime_ = s;
           return s;
         } else {
-          return (java.lang.String) ref;
+          return (String) ref;
         }
       }
-      /**
-       * <code>required string event_time = 4;</code>
-       */
-      public com.google.protobuf.ByteString
-          getEventTimeBytes() {
-        java.lang.Object ref = eventTime_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          eventTime_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>required string event_time = 4;</code>
-       */
-      public Builder setEventTime(
-          java.lang.String value) {
+      public Builder setEventTime(String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1905,95 +1425,60 @@ public final class ServiceProtos {
         onChanged();
         return this;
       }
-      /**
-       * <code>required string event_time = 4;</code>
-       */
       public Builder clearEventTime() {
         bitField0_ = (bitField0_ & ~0x00000008);
         eventTime_ = getDefaultInstance().getEventTime();
         onChanged();
         return this;
       }
-      /**
-       * <code>required string event_time = 4;</code>
-       */
-      public Builder setEventTimeBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  bitField0_ |= 0x00000008;
+      void setEventTime(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000008;
         eventTime_ = value;
         onChanged();
-        return this;
       }
-
+      
       // optional int64 delay_ms = 5;
       private long delayMs_ ;
-      /**
-       * <code>optional int64 delay_ms = 5;</code>
-       */
       public boolean hasDelayMs() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
-      /**
-       * <code>optional int64 delay_ms = 5;</code>
-       */
       public long getDelayMs() {
         return delayMs_;
       }
-      /**
-       * <code>optional int64 delay_ms = 5;</code>
-       */
       public Builder setDelayMs(long value) {
         bitField0_ |= 0x00000010;
         delayMs_ = value;
         onChanged();
         return this;
       }
-      /**
-       * <code>optional int64 delay_ms = 5;</code>
-       */
       public Builder clearDelayMs() {
         bitField0_ = (bitField0_ & ~0x00000010);
         delayMs_ = 0L;
         onChanged();
         return this;
       }
-
+      
       // optional int64 user_id = 6;
       private long userId_ ;
-      /**
-       * <code>optional int64 user_id = 6;</code>
-       */
       public boolean hasUserId() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
-      /**
-       * <code>optional int64 user_id = 6;</code>
-       */
       public long getUserId() {
         return userId_;
       }
-      /**
-       * <code>optional int64 user_id = 6;</code>
-       */
       public Builder setUserId(long value) {
         bitField0_ |= 0x00000020;
         userId_ = value;
         onChanged();
         return this;
       }
-      /**
-       * <code>optional int64 user_id = 6;</code>
-       */
       public Builder clearUserId() {
         bitField0_ = (bitField0_ & ~0x00000020);
         userId_ = 0L;
         onChanged();
         return this;
       }
-
+      
       // repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;
       private java.util.List<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute> attribute_ =
         java.util.Collections.emptyList();
@@ -2003,13 +1488,10 @@ public final class ServiceProtos {
           bitField0_ |= 0x00000040;
          }
       }
-
+      
       private com.google.protobuf.RepeatedFieldBuilder<
           me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute, me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder, me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder> attributeBuilder_;
-
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
+      
       public java.util.List<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute> getAttributeList() {
         if (attributeBuilder_ == null) {
           return java.util.Collections.unmodifiableList(attribute_);
@@ -2017,9 +1499,6 @@ public final class ServiceProtos {
           return attributeBuilder_.getMessageList();
         }
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public int getAttributeCount() {
         if (attributeBuilder_ == null) {
           return attribute_.size();
@@ -2027,9 +1506,6 @@ public final class ServiceProtos {
           return attributeBuilder_.getCount();
         }
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute getAttribute(int index) {
         if (attributeBuilder_ == null) {
           return attribute_.get(index);
@@ -2037,9 +1513,6 @@ public final class ServiceProtos {
           return attributeBuilder_.getMessage(index);
         }
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder setAttribute(
           int index, me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute value) {
         if (attributeBuilder_ == null) {
@@ -2054,9 +1527,6 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder setAttribute(
           int index, me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder builderForValue) {
         if (attributeBuilder_ == null) {
@@ -2068,9 +1538,6 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder addAttribute(me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute value) {
         if (attributeBuilder_ == null) {
           if (value == null) {
@@ -2084,9 +1551,6 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder addAttribute(
           int index, me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute value) {
         if (attributeBuilder_ == null) {
@@ -2101,9 +1565,6 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder addAttribute(
           me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder builderForValue) {
         if (attributeBuilder_ == null) {
@@ -2115,9 +1576,6 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder addAttribute(
           int index, me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder builderForValue) {
         if (attributeBuilder_ == null) {
@@ -2129,9 +1587,6 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder addAllAttribute(
           java.lang.Iterable<? extends me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute> values) {
         if (attributeBuilder_ == null) {
@@ -2143,9 +1598,6 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder clearAttribute() {
         if (attributeBuilder_ == null) {
           attribute_ = java.util.Collections.emptyList();
@@ -2156,9 +1608,6 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public Builder removeAttribute(int index) {
         if (attributeBuilder_ == null) {
           ensureAttributeIsMutable();
@@ -2169,16 +1618,10 @@ public final class ServiceProtos {
         }
         return this;
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder getAttributeBuilder(
           int index) {
         return getAttributeFieldBuilder().getBuilder(index);
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder getAttributeOrBuilder(
           int index) {
         if (attributeBuilder_ == null) {
@@ -2186,9 +1629,6 @@ public final class ServiceProtos {
           return attributeBuilder_.getMessageOrBuilder(index);
         }
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public java.util.List<? extends me.yabble.service.proto.ServiceProtos.EntityEvent.AttributeOrBuilder> 
            getAttributeOrBuilderList() {
         if (attributeBuilder_ != null) {
@@ -2197,24 +1637,15 @@ public final class ServiceProtos {
           return java.util.Collections.unmodifiableList(attribute_);
         }
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder addAttributeBuilder() {
         return getAttributeFieldBuilder().addBuilder(
             me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.getDefaultInstance());
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder addAttributeBuilder(
           int index) {
         return getAttributeFieldBuilder().addBuilder(
             index, me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.getDefaultInstance());
       }
-      /**
-       * <code>repeated .me.yabble.service.proto.EntityEvent.Attribute attribute = 7;</code>
-       */
       public java.util.List<me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder> 
            getAttributeBuilderList() {
         return getAttributeFieldBuilder().getBuilderList();
@@ -2233,18 +1664,18 @@ public final class ServiceProtos {
         }
         return attributeBuilder_;
       }
-
+      
       // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.EntityEvent)
     }
-
+    
     static {
       defaultInstance = new EntityEvent(true);
       defaultInstance.initFields();
     }
-
+    
     // @@protoc_insertion_point(class_scope:me.yabble.service.proto.EntityEvent)
   }
-
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_me_yabble_service_proto_EntityEvent_descriptor;
   private static
@@ -2255,7 +1686,7 @@ public final class ServiceProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_me_yabble_service_proto_EntityEvent_Attribute_fieldAccessorTable;
-
+  
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -2290,13 +1721,17 @@ public final class ServiceProtos {
           internal_static_me_yabble_service_proto_EntityEvent_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_service_proto_EntityEvent_descriptor,
-              new java.lang.String[] { "EntityId", "EntityType", "EventType", "EventTime", "DelayMs", "UserId", "Attribute", });
+              new java.lang.String[] { "EntityId", "EntityType", "EventType", "EventTime", "DelayMs", "UserId", "Attribute", },
+              me.yabble.service.proto.ServiceProtos.EntityEvent.class,
+              me.yabble.service.proto.ServiceProtos.EntityEvent.Builder.class);
           internal_static_me_yabble_service_proto_EntityEvent_Attribute_descriptor =
             internal_static_me_yabble_service_proto_EntityEvent_descriptor.getNestedTypes().get(0);
           internal_static_me_yabble_service_proto_EntityEvent_Attribute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_service_proto_EntityEvent_Attribute_descriptor,
-              new java.lang.String[] { "Key", "Value", });
+              new java.lang.String[] { "Key", "Value", },
+              me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.class,
+              me.yabble.service.proto.ServiceProtos.EntityEvent.Attribute.Builder.class);
           return null;
         }
       };
@@ -2305,6 +1740,6 @@ public final class ServiceProtos {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
   }
-
+  
   // @@protoc_insertion_point(outer_class_scope)
 }
