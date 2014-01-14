@@ -9,8 +9,8 @@ function add-version() {
 
 v=$(psql -tc "select version from schema_versions where is_active = true" $DB_NAME)
 
-for f in $(ls -1 $BASEDIR/db-schema/*.sql | sort --version-sort); do
-#for f in $(ls -1 $BASEDIR/db-schema/*.sql | sort); do
+#for f in $(ls -1 $BASEDIR/db-schema/*.sql | sort --version-sort); do
+for f in $(ls -1 $BASEDIR/db-schema/*.sql | sort); do
   version=$(basename $f .sql)
   v=$(psql -tc "select count(*) from schema_versions where version = '$version'" $DB_NAME)
   if test $v -eq 0; then

@@ -57,6 +57,12 @@
       p:transaction-manager-ref='service.txn-manager'
       />
 
+  <bean
+      id='service.txn-interceptor'
+      class='me.yabble.service.TxnMethodInterceptor'
+      c:txn-manager-ref='service.txn-manager'
+      />
+
   <!-- DAO -->
   <bean
       id='service.user-dao'
@@ -75,15 +81,31 @@
   <!-- Service -->
   <bean
       id='service.user-service'
-      class='me.yabble.service.UserService'
-      c:user-dao-ref='service.user-dao'
-      />
+      class='org.springframework.aop.framework.ProxyFactoryBean'
+      p:proxy-interfaces='me.yabble.service.IUserService'
+      p:interceptor-names='service.txn-interceptor'
+      >
+    <property name='target'>
+      <bean
+          class='me.yabble.service.UserService'
+          c:user-dao-ref='service.user-dao'
+          />
+    </property>
+  </bean>
 
   <bean
       id='service.ylist-service'
-      class='me.yabble.service.YListService'
-      c:ylist-dao-ref='service.ylist-dao'
-      />
+      class='org.springframework.aop.framework.ProxyFactoryBean'
+      p:proxy-interfaces='me.yabble.service.IYListService'
+      p:interceptor-names='service.txn-interceptor'
+      >
+    <property name='target'>
+      <bean
+          class='me.yabble.service.YListService'
+          c:ylist-dao-ref='service.ylist-dao'
+          />
+    </property>
+  </bean>
   <!-- END Service -->
 
 </beans>

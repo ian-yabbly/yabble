@@ -18,10 +18,10 @@ import scala.collection.JavaConversions._
 
 class NewYListHandler(
     val sessionService: SessionService,
-    val userService: UserService,
+    val userService: IUserService,
     val template: VelocityTemplate,
     val encoding: String,
-    private val ylistService: YListService)
+    private val ylistService: IYListService)
   extends TemplateHandler
   with FormHandler
 {
@@ -57,7 +57,22 @@ class NewYListHandler(
         persistForm(form)
 
         // TODO Validation
-        ylistService.create(new YList.Free("abc-123", form.getTitle.getValue, Option(form.getBody.getValue)))
+
+        val me = meOrCreate()
+        val lid = ylistService.create(new YList.Free(
+            me.id,
+            form.getTitle.getValue,
+            Option(form.getBody.getValue)))
+
+        sessionService.withSession(true, new Function[Session, Session]() {
+          override def apply(session: Session): Session = {
+            session.toBuilder().clearListForm().build()
+          }
+        })
+
+        val list = ylistService.find(lid)
+
+        redirect(exchange, "/list/%s/%s".format(lid, list.slug()))
       }
 
       case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)

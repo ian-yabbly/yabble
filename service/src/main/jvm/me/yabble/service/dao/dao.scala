@@ -89,7 +89,7 @@ class ORM(
   }
 }
 
-abstract class EntityDao[F <: FreeEntity, P <: PersistedEntity, U <: UpdateEntity](tableName: String, npt: NamedParameterJdbcTemplate)
+abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update](tableName: String, npt: NamedParameterJdbcTemplate)
   extends ORM(tableName, npt)
   with Log
 {

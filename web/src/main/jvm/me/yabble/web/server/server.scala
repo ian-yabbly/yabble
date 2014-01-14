@@ -9,6 +9,8 @@ import me.yabble.web.proto.WebProtos._
 import me.yabble.web.service._
 import me.yabble.web.template.VelocityTemplate
 
+import com.google.common.base.Function
+
 import com.sun.net.httpserver._
 
 import org.apache.commons.io.IOUtils
@@ -135,7 +137,7 @@ class Router(private val handlers: JList[Handler])
 
 trait Handler extends Log {
   val sessionService: SessionService
-  val userService: UserService
+  val userService: IUserService
 
   def utf8 = java.nio.charset.Charset.forName("utf-8")
 
@@ -178,6 +180,19 @@ trait Handler extends Log {
   protected def requiredMe(): User.Persisted = optionalMe match {
     case Some(user) => user
     case None => throw new UnauthenticatedException
+  }
+
+  protected def meOrCreate(): User.Persisted = optionalMe match {
+    case Some(user) => user
+    case None => {
+      val uid = userService.create(new User.Free(None, None))
+      sessionService.withSession(true, new Function[Session, Session]() {
+        override def apply(session: Session): Session = {
+          session.toBuilder().setUserId(uid).build()
+        }
+      })
+      userService.find(uid)
+    }
   }
 
   protected def redirect(exchange: HttpExchange, path: String) {

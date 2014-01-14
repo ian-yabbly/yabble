@@ -154,7 +154,7 @@ public class SessionService {
                 if (optSession.isPresent()) {
                     Session session = optSession.get();
                     if (session.hasUserId()) {
-                        jedis.srem(String.format("session-uid-%d-ids", session.getUserId()), id);
+                        jedis.srem(String.format("session-uid-%s-ids", session.getUserId()), id);
                     }
                 }
                 return null;
@@ -348,7 +348,7 @@ public class SessionService {
                     jedis.hset("sessions", session.getId(), v);
                     jedis.zadd("session-ids", session.getId().hashCode(), session.getId());
                     if (session.hasUserId()) {
-                        jedis.sadd(String.format("session-uid-%d-ids", session.getUserId()), session.getId());
+                        jedis.sadd(String.format("session-uid-%s-ids", session.getUserId()), session.getId());
                     }
                     return null;
                 } catch (Exception e) {

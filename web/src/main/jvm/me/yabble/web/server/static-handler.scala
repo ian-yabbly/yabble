@@ -23,7 +23,7 @@ import scala.collection.JavaConversions._
 
 class StaticHandler(
     val sessionService: SessionService,
-    val userService: UserService,
+    val userService: IUserService,
     val staticBaseResourcePath: String,
     private val encoding: String)
   extends Handler
