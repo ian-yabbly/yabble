@@ -10,9 +10,13 @@
       ],
       function($) {
         $(function() {
+          var txtTitle = $('#title');
           $('#landing-steps').click(function() {
-            $('#title').focus();
+            txtTitle.focus();
           })
+          if(document.location && document.location.hash == '#create-yabble') {
+            txtTitle.focus();
+          }
         })
       }
   );
