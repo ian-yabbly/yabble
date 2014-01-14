@@ -1,11 +1,21 @@
-<html>
+<!DOCTYPE html><html>
   <head>
-    <title>yabble.me</title>
+    <title>yabble.me#if($__pageTitle && "$!__pageTitle" != "")&#8212 $__pageTitle#end</title>
+    <meta charset=utf-8>
+    <meta name=yabbly-version-hash" content=$__versionPathPart>
+    <meta name=viewport content=width=device-width,initial-scale=1>
+    #if("$__doLessInBrowser" == "true")
+      <link rel=stylesheet/less type=text/css href=#staticUrl("/less/main.less")>
+      <script src=#staticUrl("/js/vendor/less-1.4.1.js") type=text/javascript></script>
+    #else
+      <link rel=stylesheet type=text/css href=#staticUrl("/css/main.css")>
+    #end
   </head>
-
-  <link rel=stylesheet type=text/css href=#staticAppUrl('/css/app.css')>
-
-  <body>
-    $__content
+  <body data-yabbly-enable-logs=true>
+    #parse("toolbar.html")
+    #if($__content)
+      $__content
+    #end
+    <script data-main=#staticUrl("js/main.js") src=#staticUrl("js/vendor/require-2.1.8.js")></script>
   </body>
 </html>

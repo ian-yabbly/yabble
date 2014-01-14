@@ -1,0 +1,32 @@
+/*
+  top toolbar styles
+*/
+
+  #toolbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    line-height: @toolbar-height;
+    height: @toolbar-height;
+    overflow: hidden;
+    text-align: left;
+    background: #fff;
+    z-index: 100;
+    .box-shadow(0 0 8px rgba(0, 0, 0, 0.55));
+
+    .button {
+      margin: 10px 0;
+    }
+  }
+
+  #logo {
+    display: inline-block;
+    line-height: @toolbar-height;
+    text-decoration: none;
+    padding-left: 50px;
+    font-weight: 500;
+    .static-background('logo40x40.png', transparent, no-repeat, scroll, left, center);
+  }
+
+

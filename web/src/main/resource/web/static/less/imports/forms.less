@@ -1,0 +1,183 @@
+/*
+  form styles
+*/
+
+  label {
+    display: block;
+    color: @dark-gray;
+    margin: 0 0 @margin-small;
+    font-size: 0.8;
+    font-weight: 500;
+  }
+
+  input[type="text"],
+  input[type="search"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  input[type="submit"],
+  button,
+  .button {
+    font-size: 1em;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  #form-invite-to-list,
+  input[type="text"],
+  input[type="search"],
+  input[type="password"],
+  input[type="email"],
+  textarea {
+    margin: 0;
+    border: 1px solid @light-gray;
+    padding: @padding-small;
+    .box-shadow(inset 0 1px 2px rgba(0,0,0,0.075));
+
+    &:focus {
+      border-color: @gray;
+    }
+  }
+
+  textarea {
+    min-height: 200px;
+    resize: vertical;
+  }
+
+  .form-row {
+    max-width: @max-site-width / 2;
+    margin: @margin-large auto;
+    text-align: left;
+  }
+
+  .form-error {
+    color: @red;
+    font-weight: 500;
+    margin: @margin-small 0 @margin-regular;
+  }
+
+  .full-width {
+    display: block;
+    width: 100%;
+    .box-sizing;
+  }
+
+  input[type="submit"].centered-submit {
+    min-width: 250px;
+    line-height: 60px;
+    height: 60px;
+    .rounded(30px);
+    .centered;
+  }
+
+  .back-link,
+  .back-button {
+    display: block;
+    margin: @margin-regular 0;
+  }
+
+  .back-link {
+    text-align: left;
+  }
+
+/* buttons */
+
+  input[type="submit"],
+  button,
+  a[href].button,
+  .button {
+    display: inline-block;
+    background: @blue;
+    padding: 0 @padding-regular;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #fff;
+    background: @blue;
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    font-size: 0.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-appearance: none;
+    .rounded(20px);
+    .box-sizing;
+
+    &:hover:not(:disabled),
+    &:focus {
+      background: @light-blue;
+    }
+
+    &:active:not(:disabled) {
+      background: @dark-blue;
+    }
+
+    &:disabled {
+      .opacity(0.6);
+    }
+  }
+
+  .orange-button {
+    background: @orange;
+
+    &:hover:not(:disabled),
+    &:focus {
+      background: @light-orange;
+    }
+
+    &:active:not(:disabled) {
+      background: @dark-orange;
+    }
+  }
+
+  .gray-button {
+    background: @gray;
+
+    &:hover:not(:disabled),
+    &:focus {
+      background: @light-gray;
+    }
+
+    &:active:not(:disabled) {
+      background: @dark-gray;
+    }
+  }
+
+/* invite form */
+
+  #invited li,
+  #invite-entry {
+    position: relative;
+    padding-right: 70px;
+    line-height: 60px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    .box-sizing;
+
+    button {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 60px;
+      height: 60px;
+      .rounded(30px);
+      padding: 0;
+      font-weight: 500;
+
+      &.gray-button {
+        font-size: 1.5em;
+      }
+    }
+  }
+
+  #invited li {
+    margin: @margin-small 0;
+  }

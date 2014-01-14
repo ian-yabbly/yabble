@@ -1,0 +1,179 @@
+/*
+  utilities
+
+  ** all methods defined herein should be functions **
+*/
+
+  .box-sizing(@sizing: border-box) {
+    -ms-box-sizing: @sizing;
+    -moz-box-sizing: @sizing;
+    -webkit-box-sizing: @sizing;
+    box-sizing: @sizing;
+  }
+
+  .box-shadow(@props) {
+    -webkit-box-shadow: @props;
+    -moz-box-shadow: @props;
+    box-shadow: @props;
+  }
+
+  .gradient(@color: #F5F5F5, @start: #EEE, @stop: #FFF, @startLoc:0, @stopLoc:1) {
+    @startPerc: 100 * @startLoc;
+    @stopPerc: 100 * @stopLoc;
+    background: @color;
+    background: -webkit-gradient(linear,
+                                 left bottom,
+                                 left top,
+                                 color-stop(@startLoc, @start),
+                                 color-stop(@stopLoc, @stop));
+    background: -ms-linear-gradient(bottom,
+                                    @start unit(@startPerc, ~'%'),
+                                    @stop unit(@stopPerc, ~'%'));
+    background: -moz-linear-gradient(center bottom,
+                                     @start unit(@startPerc, ~'%'),
+                                     @stop unit(@stopPerc, ~'%'));
+    background: -o-linear-gradient(@stop unit(@stopPerc, ~'%'),
+                                   @start unit(@startPerc, ~'%'));
+    filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",@stop,@start));
+  }
+
+  .transition-property(@property:all, @duration:0.2s, @ease:ease-out) {
+    -webkit-transition: @property @duration @ease;
+    -moz-transition: @property @duration @ease;
+    -o-transition: @property @duration @ease;
+    -ms-transition: @property @duration @ease;
+    transition: @property @duration @ease;
+  }
+
+  .transition-properties(...) {
+    @props: ~`"@{arguments}".replace('[', '').replace(']', '')`;
+    -webkit-transition: @props;
+    -moz-transition: @props;
+    -o-transition: @props;
+    -ms-transition: @props;
+    transition: @props;
+  }
+
+  .transform(...) {
+    -webkit-transform: @arguments;
+    -moz-transform: @arguments;
+    -o-transform: @arguments;
+    -ms-transform: @arguments;
+    transform: @arguments;
+  }
+
+  .transform-origin(...) {
+    -webkit-transform-origin: @arguments;
+    -moz-transform-origin: @arguments;
+    -ms-transform-origin: @arguments;
+    transform-origin: @arguments;
+  }
+
+  .opacity(@opacity: 0.5) {
+    -moz-opacity: @opacity;
+    -khtml-opacity: @opacity;
+    -webkit-opacity: @opacity;
+    opacity: @opacity;
+    @opperc: @opacity * 100;
+    -ms-filter: ~"progid:DXImageTransform.Microsoft.Alpha(opacity=@{opperc})";
+    filter: ~"alpha(opacity=@{opperc})";
+  }
+
+  .rounded(@radius: 2px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
+  }
+
+  .border-radius(@topright: 0, @bottomright: 0, @bottomleft: 0, @topleft: 0) {
+    -webkit-border-top-right-radius: @topright;
+    -webkit-border-bottom-right-radius: @bottomright;
+    -webkit-border-bottom-left-radius: @bottomleft;
+    -webkit-border-top-left-radius: @topleft;
+    -moz-border-radius-topright: @topright;
+    -moz-border-radius-bottomright: @bottomright;
+    -moz-border-radius-bottomleft: @bottomleft;
+    -moz-border-radius-topleft: @topleft;
+    border-top-right-radius: @topright;
+    border-bottom-right-radius: @bottomright;
+    border-bottom-left-radius: @bottomleft;
+    border-top-left-radius: @topleft;
+  }
+
+/* arrows */
+
+  .arrow-up(@size:10px, @color:#fff) {
+    height: 0;
+    width: 0;
+    border-left: @size solid transparent;
+    border-right: @size solid transparent;
+    border-bottom: @size solid @color;
+  }
+
+  .arrow-down(@size:10px, @color:#fff) {
+    height: 0;
+    width: 0;
+    border-left: @size solid transparent;
+    border-right: @size solid transparent;
+    border-top: @size solid @color;
+  }
+
+  .arrow-left(@size:10px, @color:#fff) {
+    height: 0;
+    width: 0;
+    border-top: @size solid transparent;
+    border-bottom: @size solid transparent;
+    border-right: @size solid @color;
+  }
+
+  .arrow-right(@size:10px, @color:#fff) {
+    height: 0;
+    width: 0;
+    border-top: @size solid transparent;
+    border-bottom: @size solid transparent;
+    border-left: @size solid @color;
+  }
+
+/* static resources */
+
+  .static-background-image(@url) {
+    background-image: url('@{context-path}/s/v-@{version-hash}/images/@{url}');
+  }
+
+  .static-background(@url, @color:transparent, @repeat:no-repeat, @scroll:scroll, @x:0, @y:0) {
+    background: @color url('@{context-path}/s/v-@{version-hash}/images/@{url}') @repeat @scroll @x @y;
+  }
+
+/* arrows */
+
+  .arrow-up(@size:10px, @color:#fff) {
+    height: 0;
+    width: 0;
+    border-left: @size solid transparent;
+    border-right: @size solid transparent;
+    border-bottom: @size solid @color;
+  }
+
+  .arrow-down(@size:10px, @color:#fff) {
+    height: 0;
+    width: 0;
+    border-left: @size solid transparent;
+    border-right: @size solid transparent;
+    border-top: @size solid @color;
+  }
+
+  .arrow-left(@size:10px, @color:#fff) {
+    height: 0;
+    width: 0;
+    border-top: @size solid transparent;
+    border-bottom: @size solid transparent;
+    border-right: @size solid @color;
+  }
+
+  .arrow-right(@size:10px, @color:#fff) {
+    height: 0;
+    width: 0;
+    border-top: @size solid transparent;
+    border-bottom: @size solid transparent;
+    border-left: @size solid @color;
+  }

@@ -1,0 +1,12 @@
+<form method=post action="/list/{{listId}}/item">
+  <div class=form-row>
+    <label for=image-url>ENTER AN IMAGE URL:</label>
+    <input type=text id=image-url name=image-url class=full-width placeholder="http://images.google.com/some/awesome/image.jpg">
+  </div>
+  <div id=image-preview class=form-row></div>
+  <div class=form-row>
+    <label for=image-desc>DESCRIBE THE ITEM:</label>
+    <textarea id=image-desc name=body class=full-width placeholder="Describe the item in detail."></textarea>
+  </div>
+  <input type="submit" value="Add Item" class=centered-submit>
+</form>
