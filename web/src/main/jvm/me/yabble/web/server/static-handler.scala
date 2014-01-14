@@ -25,7 +25,7 @@ class StaticHandler(
     val sessionService: SessionService,
     val userService: IUserService,
     val staticBaseResourcePath: String,
-    private val encoding: String)
+    val encoding: String)
   extends Handler
   with ResourceLoaderAware
 {
