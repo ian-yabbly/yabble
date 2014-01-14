@@ -1,0 +1,25 @@
+<div class=flexible-container>
+  <form id=form-new-yabble action=#appUrl("/new/list/$list.id()/item") method=post>
+    <h1>Create your Item</h1>
+    <div class=form-row>
+      <label for=title>TITLE:</label>
+      <textarea
+          id=title
+          name=title
+          placeholder="Where should we go for our girl&rsquo;s night out?"
+          class="full-width"
+          style="min-height: 100px;"
+          >$!form.Title.Value</textarea>
+    </div>
+    <div class=form-row>
+      <label for=body>DESCRIPTION:</label>
+      <textarea
+          id=body
+          name=body
+          placeholder="We all know it&rsquo;s Sara&rsquo;s last night of freedom.  Let&rsquo;s make it count&hellip;"
+          class="full-width"
+          >$!form.Body.Value</textarea>
+    </div>
+    <input type=submit value="Submit" class="centered-submit">
+  </form>
+</div>

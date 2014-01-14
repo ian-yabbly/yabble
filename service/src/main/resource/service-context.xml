@@ -94,6 +94,14 @@
       c:user-dao-ref='service.user-dao'
       c:npt-ref='service.jdbc-template'
       />
+
+  <bean
+      id='service.ylist-item-dao'
+      class='me.yabble.service.dao.YListItemDao'
+      c:user-dao-ref='service.user-dao'
+      c:image-dao-ref='service.image-dao'
+      c:npt-ref='service.jdbc-template'
+      />
   <!-- END DAO -->
 
   <!-- Service -->
@@ -121,6 +129,7 @@
       <bean
           class='me.yabble.service.YListService'
           c:ylist-dao-ref='service.ylist-dao'
+          c:ylist-item-dao-ref='service.ylist-item-dao'
           />
     </property>
   </bean>

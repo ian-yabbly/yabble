@@ -10,11 +10,12 @@ message Session {
     optional string value = 2;
   }
 
-  required string id            = 1;
-  required string creation_date = 2;
-  optional string user_id       = 3;
-  repeated Attribute attribute  = 4;
-  optional ListForm list_form   = 5;
+  required string id                   = 1;
+  required string creation_date        = 2;
+  optional string user_id              = 3;
+  repeated Attribute attribute         = 4;
+  optional ListForm list_form          = 5;
+  optional ListItemForm list_item_form = 6;
 }
 
 message Message {
@@ -30,4 +31,11 @@ message FormField {
 message ListForm {
   required FormField title = 1;
   required FormField body  = 2;
+}
+
+message ListItemForm {
+  required string list_id   = 1;
+  required FormField title  = 2;
+  required FormField body   = 3;
+  repeated string image_url = 4;
 }

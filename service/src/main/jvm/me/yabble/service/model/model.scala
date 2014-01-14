@@ -33,4 +33,32 @@ object YList {
   {
     def slug(): String = SlugUtils.gen(title)
   }
+
+  object Item {
+    class Free(
+        val listId: String,
+        val userId: String,
+        val title: Option[String],
+        val body: Option[String],
+        val imageIds: List[String])
+      extends Entity.Free
+
+    class Update(
+        id: String,
+        val title: Option[String],
+        val body: Option[String])
+      extends Entity.Update(id)
+
+    class Persisted(
+        id: String,
+        creationDate: DateTime,
+        lastUpdatedDate: DateTime,
+        isActive: Boolean,
+        val listId: String,
+        val user: User.Persisted,
+        val title: Option[String],
+        val body: Option[String],
+        val images: List[Image.Persisted])
+      extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+  }
 }

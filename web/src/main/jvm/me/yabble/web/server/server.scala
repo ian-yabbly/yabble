@@ -214,6 +214,8 @@ trait Handler extends Log {
       }
     }
   }
+
+  protected def isRequestSecure(exchange: HttpExchange): Boolean = "https".equalsIgnoreCase(exchange.getRequestURI.getScheme)
 }
 
 trait TemplateHandler extends Handler {

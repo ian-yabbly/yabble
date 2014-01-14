@@ -48,6 +48,11 @@ class ImageHandler(
     val id = pathVars("id")
     optional2Option(imageService.optional(id)) match {
       case Some(i) => {
+        if (isRequestSecure(exchange)) {
+          redirect(exchange, i.secureUrl)
+        } else {
+          redirect(exchange, i.url)
+        }
       }
       case None => {
         plainTextResponse(exchange, Some("Image not found [%s]".format(id)), 404)
