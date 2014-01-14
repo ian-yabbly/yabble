@@ -15,6 +15,10 @@
     </filterchain>
   </loadfile>
 
+  <target name='common'>
+    <ant antfile='common/build.xml' target='share' inheritAll='false'/>
+  </target>
+
   <target name='service'>
     <ant antfile='service/build.xml' target='share' inheritAll='false'/>
   </target>

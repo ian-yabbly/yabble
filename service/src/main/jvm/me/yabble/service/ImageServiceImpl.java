@@ -293,7 +293,7 @@ public class ImageServiceImpl implements ImageService {
                     optional2Option(originalUrl));
 
             String createdId = imageDao.create(f);
-            if (id.equals(createdId)) {
+            if (!id.equals(createdId)) {
                 throw new RuntimeException(String.format("IDs are not equal [%s] [%s]", id, createdId));
             }
 
@@ -522,7 +522,7 @@ public class ImageServiceImpl implements ImageService {
                     Option.<String>apply(null));
 
             String createdId = imageDao.create(f);
-            if (id.equals(createdId)) {
+            if (!id.equals(createdId)) {
                 throw new RuntimeException(String.format("IDs are not equal [%s] [%s]", id, createdId));
             }
 

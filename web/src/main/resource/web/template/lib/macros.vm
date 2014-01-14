@@ -8,6 +8,9 @@
 
 #macro(staticUrl $path)#normalizePath("$__contextPath/s/$__versionPathPart$path")#end
 
+#macro(formatUserMarkup $s $includeAnchors)$__formatService.formatUserMarkup($s, $includeAnchors)#end
+#macro(m $s $includeAnchors)#formatUserMarkup($s, $includeAnchors)#end
+
 #macro(imagePresetByUrl $url $p)
   #set ($_optTi = $__imageService.findOrCreateImageByUrlAndTransform($url, $p))
   #if ($_optTi.isPresent())
@@ -30,8 +33,6 @@
 #end
 
 #macro(e $s)$Format.escapeHtml($s)#end
-
-#macro(m $s $anchors)$__yabblyService.formatUserMarkup($s, $anchors)#end
 
 #macro(profileImage $u $width)
   <span class="user-image">

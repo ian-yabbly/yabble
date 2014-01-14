@@ -51,7 +51,9 @@
     <constructor-arg>
       <map>
         <entry key='__contextPath' value='${web.context-path}'/>
+        <entry key='__version' value='${app.version-hash}'/>
         <entry key='__versionPathPart' value='v-${app.version-hash}'/>
+        <entry key='__formatService' value-ref='service.format-service'/>
       </map>
     </constructor-arg>
   </bean>
@@ -134,6 +136,7 @@
       c:template-ref='web.velocity-template'
       c:encoding='${app.encoding}'
       c:ylist-service-ref='service.ylist-service'
+      c:image-service-ref='service.image-service'
       />
       
   <bean

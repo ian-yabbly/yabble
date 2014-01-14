@@ -312,7 +312,7 @@ class ImageDao(npt: NamedParameterJdbcTemplate)
 
   override def getInsertParams(f: Image.Free) = {
     val ps = Map(
-        "is_interjal" -> f.isInternal,
+        "is_internal" -> f.isInternal,
         "url" -> f.url,
         "secure_url" -> f.secureUrl,
         "mime_type" -> f.mimeType,
@@ -337,7 +337,7 @@ class ImageDao(npt: NamedParameterJdbcTemplate)
       "secure_url" -> u.secureUrl)
 
   override def getQueryParams(f: Image.Free) = Map(
-      "is_interjal" -> f.isInternal,
+      "is_internal" -> f.isInternal,
       "url" -> f.url,
       "secure_url" -> f.secureUrl,
       "mime_type" -> f.mimeType,

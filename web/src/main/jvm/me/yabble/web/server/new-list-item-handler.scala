@@ -21,7 +21,8 @@ class NewYListItemHandler(
     val userService: IUserService,
     val template: VelocityTemplate,
     val encoding: String,
-    private val ylistService: IYListService)
+    private val ylistService: IYListService,
+    private val imageService: ImageService)
   extends TemplateHandler
   with FormHandler
 {
@@ -58,6 +59,10 @@ class NewYListItemHandler(
         val formBuilder = getOrCreateForm(listId).toBuilder()
         formBuilder.setTitle(formField(firstNvp(nvps, "title")))
         formBuilder.setBody(formField(firstNvp(nvps, "body")))
+
+        formBuilder.clearImageUrl();
+        params(nvps, "image-url").foreach(u => formBuilder.addImageUrl(u))
+
         val form = formBuilder.build()
         persistForm(form)
 
@@ -66,12 +71,21 @@ class NewYListItemHandler(
         log.info("List ID [{}]", form.getListId)
 
         val me = meOrCreate()
+
+        val imageIds = if (null == form.getImageUrlList) {
+              Nil
+            } else {
+              form.getImageUrlList.map(url => {
+                optional2Option(imageService.maybeCreateImageFromUrl(url))
+              }).flatten.toList
+            }
+
         ylistService.create(new YList.Item.Free(
             form.getListId,
             me.id,
             Option(form.getTitle.getValue),
             Option(form.getBody.getValue),
-            Nil))
+            imageIds))
 
         sessionService.withSession(true, new Function[Session, Session]() {
           override def apply(session: Session): Session = {
