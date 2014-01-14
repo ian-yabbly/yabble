@@ -96,6 +96,15 @@
       />
 
   <bean
+      id='web.image-handler'
+      class='me.yabble.web.server.ImageHandler'
+      c:user-service-ref='service.user-service'
+      c:session-service-ref='web.session-service'
+      c:encoding='${app.encoding}'
+      c:image-service-ref='service.image-service'
+      />
+
+  <bean
       id='web.index-handler'
       class='me.yabble.web.server.IndexHandler'
       c:user-service-ref='service.user-service'
