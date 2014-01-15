@@ -1,12 +1,12 @@
 package me.yabble.web.template
 
 import me.yabble.common.Log
-import me.yabble.common.TextFormat
 
 import org.apache.commons.io.FilenameUtils
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.VelocityEngine
 import org.apache.velocity.context.Context
+import org.apache.velocity.util.introspection._
 
 import com.google.common.collect.Maps
 
@@ -19,7 +19,6 @@ import scala.collection.JavaConversions._
 
 class VelocityTemplate(
     private val encoding: String,
-    private val doLessInBrowser: Boolean,
     velocityConfig: Properties,
     private val rootContext: JMap[String, Any])
   extends Log
@@ -44,9 +43,6 @@ class VelocityTemplate(
     val m: JMap[String, Any] = Maps.newHashMap()
     rootContext.foreach(t => m.put(t._1, t._2))
     context.foreach(t => m.put(t._1, t._2))
-    m.put("Utils", classOf[Utils])
-    m.put("TextFormat", classOf[TextFormat])
-    m.put("__doLessInBrowser", doLessInBrowser)
     val vctx = new VelocityContext(m)
 
     templates match {
@@ -93,5 +89,12 @@ class VelocityTemplate(
 
   private def renderToWriter(t: String, context: Context, writer: Writer) {
     engine.mergeTemplate("/%s".format(t), encoding, context, writer)
+  }
+}
+
+class ScalaUberspect extends UberspectImpl {
+  override def getIterator(obj: Object, info: Info): java.util.Iterator[_] = obj match {
+    case l: List[_] => asJavaIterator(l.iterator)
+    case _ => super.getIterator(obj, info)
   }
 }

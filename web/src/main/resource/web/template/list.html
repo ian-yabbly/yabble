@@ -31,7 +31,7 @@
     <a href=#appUrl("/list/$list.id()")
        data-tab-content-id=list-items
        class="tab#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab#end">
-      Choices (#*$list.items().size()*#)
+      Choices ($list.items().size())
     </a>
     <a href=#appUrl("/list/$list.id()/$list.slug()/tab/list-comments")
        data-tab-content-id=list-comments
@@ -47,13 +47,12 @@
   <div id="list-items" class="tab-content#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab-content#end">
     <div class="flexible-container">
       <a id=button-add-item data-list-external-id=$list.id() class="orange-button button">Add an Option</a>
-      #**
       <ul>
         #foreach($item in $list.items())
           <li class="list-item" data-item-id="$item.id()">
             <span class="list-item-controls">
-              #if($__optUser.isPresent())
-                #set($isHelpful = $item.optionalVoteByUser($__user.Id).isDefined())
+              #if($__optUser.isDefined())
+                #set($isHelpful = $item.optionalVoteByUser($__user.id()).isDefined())
               #else
                 #set($isHelpful = false)
               #end
@@ -77,19 +76,13 @@
               <span class="list-item-comment-count">$item.comments().size()</span>
             </span>
             <span class="list-item-content">
-              #if(!$item.images().isEmpty())
+              #if($item.images().nonEmpty())
                 #set($i = $item.images().get(0))
                  <a href='#appUrl("/list/$list.id()/item/$item.id()")'
                     class="list-item-image">
                    <img src="#transformImageUrl($i, 'w-325')"
                         width="325"
                         height="$__imageService.getDimensionsByImageAndTransform($i.getId(), 'w-325').getHeight()">
-                 </a>
-              #elseif(!$item.externalImages.isEmpty())
-                #set($i = $item.externalImages().get(0))
-                 <a href='#appUrl("/list/$list.id()/item/$item.id()")'
-                    class="list-item-image">
-                   <img src="$i.url()" width="325">
                  </a>
               #end
               <span class="list-item-body">
@@ -99,7 +92,6 @@
           </li>
         #end
       </ul>
-      *#
     </div>
   </div>
   <div id=list-comments class="tab-content#if($tabId == "list-comments") active-tab-content#end">
@@ -108,14 +100,14 @@
       <ul>
         #foreach($comment in $list.comments())
           <li class="comment list-item-with-user-image">
-            #if($__optUser.isPresent() && $__user.Id == $comment.user().Id)
+            #if($__optUser.isDefined() && $__user.id() == $comment.user().Id)
               <a href=#appUrl("/list/$list.id()/comment/$comment.id()/delete")
                  class="icon comment-delete">x</a>
             #end
             #profileImage($comment.user(), 54)
             <span class=username>#userDisplayName($comment.user())</span>
             &nbsp;<span class=small-bullet>&bull;</span>&nbsp;
-            <span class=comment-posted-date>$Format.timeAgo($comment.creationDate(), $__user.Tz)</span>
+            <span class=comment-posted-date>$Format.timeAgo($comment.creationDate(), $__user.tz())</span>
             <p>#formatUserMarkup($comment.body(), true)</p>
           </li>
         #end
@@ -170,7 +162,7 @@
         #profileImage($h.user(), 49)
         <span class="username">#userDisplayName($h.user())</span>
         <span class="history-action">$action</span>
-        <span class="history-timestamp">$Format.timeAgo($h.eventDate(), $__user.Tz)</span>
+        <span class="history-timestamp">$Format.timeAgo($h.eventDate(), $__user.tz())</span>
         #if($body != "")
           <p>&ldquo;$body&rdquo;</p>
         #end

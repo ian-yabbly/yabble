@@ -2,20 +2,27 @@ package me.yabble.web.server
 
 import me.yabble.common.Predef._
 import me.yabble.common.Log
+import me.yabble.common.TextFormat
 import me.yabble.common.ctx.ExecutionContext
 import me.yabble.service._
 import me.yabble.service.model._
 import me.yabble.web.proto.WebProtos._
 import me.yabble.web.service._
+import me.yabble.web.template.{Utils => TemplateUtils}
+import me.yabble.web.template.{Format => TemplateFormat}
 import me.yabble.web.template.VelocityTemplate
 
 import com.google.common.base.Function
+import com.google.gson._
 
 import com.sun.net.httpserver._
 
 import org.apache.commons.io.IOUtils
 import org.apache.http.NameValuePair
 import org.apache.http.client.utils.URLEncodedUtils
+
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import org.springframework.context.Lifecycle
 
@@ -25,8 +32,12 @@ import java.net.InetSocketAddress
 import java.util.{List => JList}
 
 import scala.collection.JavaConversions._
+import scala.collection.mutable.{Map => MutableMap}
 
 object Utils {
+  private val gson = new Gson()
+  def log = LoggerFactory.getLogger("me.yabble.web.server.Utils")
+  def utf8 = java.nio.charset.Charset.forName("utf-8")
 
   def allCookies(exchange: HttpExchange): List[HttpCookie] = if (exchange.getRequestHeaders.getFirst("Cookie") == null) {
         return Nil
@@ -39,6 +50,28 @@ object Utils {
 
   def optionalFirstCookie(cookies: List[HttpCookie], name: String): Option[String] =
       cookies.find(_.getName == name).map(_.getValue)
+
+  def jsonResponse(exchange: HttpExchange, j: JsonElement, status: Int) {
+    try {
+      val responseBytes = gson.toJson(j).getBytes(utf8)
+      exchange.getResponseHeaders.set("Content-Type", "application/json; charset=utf-8")
+      exchange.sendResponseHeaders(status, responseBytes.length)
+      val os = exchange.getResponseBody
+      os.write(responseBytes)
+      os.close()
+    } catch {
+      case e: Exception => {
+        try {
+          exchange.getResponseBody.close()
+        } catch {
+          case e2: Exception => {
+            log.error(e2.getMessage, e2)
+            throw e
+          }
+        }
+      }
+    }
+  }
 }
 
 class Server(
@@ -186,7 +219,7 @@ trait Handler extends Log {
   protected def meOrCreate(): User.Persisted = optionalMe match {
     case Some(user) => user
     case None => {
-      val uid = userService.create(new User.Free(None, None))
+      val uid = userService.create(new User.Free(None, None, None))
       sessionService.withSession(true, new Function[Session, Session]() {
         override def apply(session: Session): Session = {
           session.toBuilder().setUserId(uid).build()
@@ -232,13 +265,32 @@ trait TemplateHandler extends Handler {
       exchange.sendResponseHeaders(status, 0)
       // TODO try/finally
       val osw = new OutputStreamWriter(exchange.getResponseBody, utf8)
-      template.render(templates, osw, context)
+      template.render(templates, osw, supplementContext(context))
       osw.close()
     } catch {
       case e: Exception => {
         log.error(e.getMessage, e)
       }
     }
+  }
+
+  private def supplementContext(c: Map[String, Any]): Map[String, Any] = {
+    val m = MutableMap(c.toSeq: _*)
+    m.put("Utils", classOf[TemplateUtils])
+    m.put("Format", classOf[TemplateFormat])
+    m.put("TextFormat", classOf[TextFormat])
+
+    optionalMe() match {
+      case Some(user) => {
+        m.put("__optUser", Some(user))
+        m.put("__user", user)
+      }
+      case None => {
+        m.put("__optUser", None)
+      }
+    }
+
+    return m.toMap
   }
 }
 

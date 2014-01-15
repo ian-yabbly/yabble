@@ -29,7 +29,6 @@
       id='web.velocity-template'
       class='me.yabble.web.template.VelocityTemplate'
       c:encoding='${app.encoding}'
-      c:do-less-in-browser='${web.less.do-in-browser}'
       >
     <constructor-arg>
       <props>
@@ -45,6 +44,8 @@
 
         <prop key='velocimacro.library'>lib/macros.vm</prop>
         <prop key='velocimacro.arguments.strict'>true</prop>
+
+        <prop key='runtime.introspector.uberspect'>me.yabble.web.template.ScalaUberspect</prop>
       </props>
     </constructor-arg>
 
@@ -54,6 +55,7 @@
         <entry key='__version' value='${app.version-hash}'/>
         <entry key='__versionPathPart' value='v-${app.version-hash}'/>
         <entry key='__formatService' value-ref='service.format-service'/>
+        <entry key='__doLessInBrowser' value='${web.less.do-in-browser}'/>
       </map>
     </constructor-arg>
   </bean>
@@ -87,6 +89,7 @@
         <ref bean='web.new-ylist-handler'/>
         <ref bean='web.new-ylist-item-handler'/>
         <ref bean='web.user-handler'/>
+        <ref bean='web.bing-image-search-handler'/>
       </list>
     </constructor-arg>
   </bean>
@@ -158,6 +161,17 @@
       c:encoding='${app.encoding}'
       c:session-cookie-name='${web.session.cookie-name}'
       c:session-cookie-domain='${web.session.cookie-domain}'
+      />
+ 
+  <bean
+      id='web.bing-image-search-handler'
+      class='me.yabble.web.server.BingImageSearchHandler'
+      c:user-service-ref='service.user-service'
+      c:session-service-ref='web.session-service'
+      c:template-ref='web.velocity-template'
+      c:encoding='${app.encoding}'
+      c:http-client-ref='common.http-client'
+      c:bing-api-key='${bing.api-key}'
       />
 
 </beans>

@@ -32,6 +32,7 @@ create table users (
   is_active boolean not null default true,
   name varchar(32) null,
   email varchar(512) null,
+  tz varchar(64) null,
   primary key (id)
 );
 
