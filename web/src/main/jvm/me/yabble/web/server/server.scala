@@ -229,9 +229,10 @@ trait Handler extends Log {
     }
   }
 
-  protected def redirect(exchange: HttpExchange, path: String) {
+  protected def redirect(exchange: HttpExchange, path: String, isPermanent: Boolean = false) {
+    val status = if (isPermanent) 301 else 302
     exchange.getResponseHeaders.set("Location", path)
-    exchange.sendResponseHeaders(302, 0)
+    exchange.sendResponseHeaders(status, 0)
   }
 
   protected def plainTextResponse(exchange: HttpExchange, text: Option[String] = None, code: Int = 200) {
@@ -249,6 +250,28 @@ trait Handler extends Log {
   }
 
   protected def isRequestSecure(exchange: HttpExchange): Boolean = "https".equalsIgnoreCase(exchange.getRequestURI.getScheme)
+
+  def queryNvps(e: HttpExchange): List[NameValuePair] = URLEncodedUtils.parse(e.getRequestURI, encoding).toList
+  def postNvps(e: HttpExchange): List[NameValuePair] = URLEncodedUtils.parse(IOUtils.toString(e.getRequestBody, encoding), java.nio.charset.Charset.forName(encoding)).toList
+  def allNvps(e: HttpExchange): List[NameValuePair] = queryNvps(e) ++ postNvps(e)
+
+  def firstNvp(nvps: List[NameValuePair], names: String*): Option[String] = names.find(name => {
+        nvps.find(_.getName == name).isDefined
+      }).map(name => {
+        nvps.find(_.getName == name).map(_.getValue).get
+      })
+
+  def requiredFirstParam(nvps: List[NameValuePair], names: String*): String = {
+    val ret = firstNvp(nvps, names: _*)
+    ret match {
+      case Some(v) => v
+      case None => throw new MissingParamException(names.mkString(", "))
+    }
+  }
+
+  def params(nvps: List[NameValuePair], name: String): List[String] = nvps.filter(_.getName == name)
+      .flatMap(_.getValue.split(","))
+      .filterNot(_ == "")
 }
 
 trait TemplateHandler extends Handler {
@@ -295,29 +318,6 @@ trait TemplateHandler extends Handler {
 }
 
 trait FormHandler extends Handler {
-  val encoding: String
-
-  def queryNvps(e: HttpExchange): List[NameValuePair] = URLEncodedUtils.parse(e.getRequestURI, encoding).toList
-  def postNvps(e: HttpExchange): List[NameValuePair] = URLEncodedUtils.parse(IOUtils.toString(e.getRequestBody, encoding), java.nio.charset.Charset.forName(encoding)).toList
-  def allNvps(e: HttpExchange): List[NameValuePair] = queryNvps(e) ++ postNvps(e)
-
-  def firstNvp(nvps: List[NameValuePair], names: String*): Option[String] = names.find(name => {
-        nvps.find(_.getName == name).isDefined
-      }).map(name => {
-        nvps.find(_.getName == name).map(_.getValue).get
-      })
-
-  def requiredFirstParam(nvps: List[NameValuePair], names: String*): String = {
-    val ret = firstNvp(nvps, names: _*)
-    ret match {
-      case Some(v) => v
-      case None => throw new MissingParamException(names.mkString(", "))
-    }
-  }
-
-  def params(nvps: List[NameValuePair], name: String): List[String] = nvps.filter(_.getName == name)
-      .flatMap(_.getValue.split(","))
-      .filterNot(_ == "")
 
   def formField(value: Option[String]): FormField = value match {
     case Some(v) => FormField.newBuilder().setValue(v).build()

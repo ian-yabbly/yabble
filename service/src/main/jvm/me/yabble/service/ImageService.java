@@ -1,5 +1,6 @@
 package me.yabble.service;
 
+import me.yabble.service.model.Dimensions;
 import me.yabble.service.model.Image;
 
 import com.google.common.base.Optional;
@@ -53,6 +54,8 @@ public interface ImageService {
     Optional<String> optionalMimeTypeToFileExtension(String mimeType);
 
     boolean maybeSetImagePreviewData(String id);
+
+    Dimensions getDimensionsByImageAndTransform(String id, String transform);
 
     public static class ImageException extends RuntimeException {
         public ImageException(String message) {

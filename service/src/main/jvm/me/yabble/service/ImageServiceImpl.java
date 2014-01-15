@@ -7,6 +7,7 @@ import me.yabble.common.http.client.ResponseHandler;
 import me.yabble.common.wq.WorkQueue;
 import me.yabble.common.txn.SpringTransactionSynchronization;
 import me.yabble.service.dao.ImageDao;
+import me.yabble.service.model.Dimensions;
 import me.yabble.service.model.Image;
 import me.yabble.service.model.ImageTransform;
 import me.yabble.service.proto.ServiceProtos.EntityEvent;
@@ -32,6 +33,8 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
@@ -620,9 +623,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Optional<Image.Persisted> optionalByOriginalIdAndTransform(
-            String id, String transform)
-    {
+    public Optional<Image.Persisted> optionalByOriginalIdAndTransform(String id, String transform) {
         return optionalByOriginalIdAndTransform(id, new ImageTransform(transform));
     }
 
@@ -724,6 +725,65 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public boolean isInternalUrl(String url) {
         return s3Store.isS3Url(url);
+    }
+
+    @Override
+    public Dimensions getDimensionsByImageAndTransform(String id, String transform) {
+        long height = 0l;
+        long width = 0l;
+
+        Image.Persisted i = imageDao.find(id);
+        ImageTransform t = new ImageTransform(transform);
+
+        switch (t.getType()) {
+            case RESIZE_BOX:
+                height = t.getHeight().get();
+                width = t.getWidth().get();
+                break;
+            case RESIZE_WIDTH:
+                long th = BigDecimal.valueOf(t.getWidth().get())
+                    .divide(
+                        BigDecimal.valueOf((long) i.width().get()),
+                        3,
+                        RoundingMode.HALF_EVEN
+                    ).multiply(
+                        BigDecimal.valueOf((long) i.height().get())
+                    )
+                    .setScale(0, RoundingMode.HALF_EVEN)
+                    .longValueExact();
+
+                height = th;
+                width = t.getWidth().get();
+                break;
+            case RESIZE_HEIGHT:
+                long tw = BigDecimal.valueOf(t.getHeight().get())
+                    .divide(
+                        BigDecimal.valueOf((long) i.height().get()),
+                        3,
+                        RoundingMode.HALF_EVEN
+                    ).multiply(
+                        BigDecimal.valueOf((long) i.width().get())
+                    )
+                    .setScale(0, RoundingMode.HALF_EVEN)
+                    .longValueExact();
+
+                height = t.getHeight().get();
+                width = tw;
+                break;
+            case RESIZE_SQUARE:
+                height = t.getHeight().get();
+                width = t.getWidth().get();
+                break;
+            case RESIZE_COVER:
+                height = t.getHeight().get();
+                width = t.getWidth().get();
+                break;
+            default:
+                throw new RuntimeException(
+                        String.format("Unexpected transform type [%s]", t.getType()));
+        }
+
+        return new Dimensions(width, height);
     }
 
     private String run(String cmd) throws IOException {

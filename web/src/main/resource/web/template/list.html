@@ -77,12 +77,13 @@
             </span>
             <span class="list-item-content">
               #if($item.images().nonEmpty())
-                #set($i = $item.images().get(0))
+                <div style='font-size: 100px;'>HERE</div>
+                #set($i = $item.images().head())
                  <a href='#appUrl("/list/$list.id()/item/$item.id()")'
                     class="list-item-image">
                    <img src="#transformImageUrl($i, 'w-325')"
                         width="325"
-                        height="$__imageService.getDimensionsByImageAndTransform($i.getId(), 'w-325').getHeight()">
+                        height="$__imageService.getDimensionsByImageAndTransform($i.id(), 'w-325').height()">
                  </a>
               #end
               <span class="list-item-body">
@@ -172,3 +173,9 @@
     *#
   </div>
 </div>
+
+<form method=post action=#appUrl("/new/list/$list.id()/item")>
+  <input type=text name=title placeholder='body'><br>
+  <input type=text name=image-url placeholder='image-url'><br>
+  <input type=submit value='Submit'>
+</form>
