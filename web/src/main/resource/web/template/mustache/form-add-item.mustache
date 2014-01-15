@@ -16,10 +16,11 @@
         id=image-query 
         name=image-url 
         class=full-width 
-        placeholder="Pterodactyles">
+        placeholder="Enter something to look for&hellip;">
     </div>
     <input type="submit" value="Search" class=centered-submit>
   </form>
+  <ul id=add-item-image-search-results class=inline-list></ul>
 </div>
 <div id=add-item-image-url>
   <form id=form-image-url>
@@ -32,13 +33,13 @@
         class=full-width 
         placeholder="http://images.google.com/some/awesome/image.jpg">
     </div>    
-    <div id=image-url-preview class="form-row image-preview"></div>
+    <div id=image-url-preview class=form-row></div>
     <input type="submit" value="Next" class=centered-submit>
   </form>
 </div>
 <div id=add-item-details>
   <form id=form-item-details method=post action="/new/list/{{listId}}/item">
-    <div id=image-preview class="form-row image-preview"></div>
+    <div id=image-preview class="form-row list-item-image"></div>
     <div class=form-row>
       <label for=image-desc>Description:</label>
       <textarea id=add-item-body name=body class=full-width placeholder="Describe the option in detail."></textarea>

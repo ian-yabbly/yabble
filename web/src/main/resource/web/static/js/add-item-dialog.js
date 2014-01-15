@@ -10,12 +10,15 @@
         'form-utils',
         'strings',
         'utils',
-        'text!template/mustache/form-add-item.mustache'
+        'text!template/mustache/form-add-item.mustache',
+        'text!template/mustache/image-search-result.mustache'
       ],
-      function($, Dialog, mustache, stringUtils, formUtils, strings, utils, textFormAddItem) {
-        var AddItemDialog, dlg, tmplFormAddItem;
+      function($, Dialog, mustache, stringUtils, formUtils, strings, utils, 
+        textFormAddItem, textImageSearchResult) {
+        var AddItemDialog, dlg, tmplFormAddItem, tmplImageSearchResultItem;
 
         tmplFormAddItem = mustache.compile(textFormAddItem);
+        tmplImageSearchResultItem = mustache.compile(textImageSearchResult)
 
         AddItemDialog = function(props) {
           var self = this;
@@ -35,34 +38,30 @@
           );
           
           this.subscribe(Dialog.Event.HIDDEN, function() {
-            this.setSearchType(AddItemDialog.SearchType.IMAGE_SEARCH);
+            self.reset();
           });
-          
-          // Preload the loading image
-          $('<img>').attr('src', utils.staticPath('/images/loading.gif'));
         };
 
         AddItemDialog.prototype = $.extend({}, Dialog.prototype);
         
         AddItemDialog.prototype.setupForms = function() {
           this.setupImageUrlForm()
+              .setupSearchForm()
               .setupDetailsForm();
         };
         
         AddItemDialog.prototype.setupImageUrlForm = function() {
-          var elPreview, previewImage, tmrPreview, txtImageUrl, currentImageUrl,
-              isImageUrlValid = false,
+          var elPreview, previewImage, tmrPreview, txtImageUrl, currentImage,
               self = this;
           
           elPreview = this.find('#image-url-preview');
           txtImageUrl = this.find('#image-url');
 
           previewImage = function() {
-            var elImage, tmrShowLoading, error,
+            var tmrShowLoading, error,
                 url = $.trim(txtImageUrl.val());
 
-            if(url && currentImageUrl !== url) {
-              currentImageUrl = url;
+            if(url && (!currentImage || currentImage.attr('src') !== url)) {
               elPreview.empty();
               
               if(tmrShowLoading) { 
@@ -72,14 +71,14 @@
                   elPreview.addClass('is-loading');                
               }, 500);
 
-              elImage = $(
+              currentImage = $(
                 stringUtils.format(
-                  '<img src="{}" width="512" class="list-item-image">', 
+                  '<img src={} width=512 class=list-item-image>', 
                   url
                 )
               );
               
-              elImage.one('load error', function(e) {
+              currentImage.one('load error', function(e) {
                 if(tmrShowLoading) { 
                   clearTimeout(tmrShowLoading);              
                 }
@@ -88,17 +87,12 @@
                   if(error = txtImageUrl.next('.form-error')) {
                     error.remove();
                   }
-                  isImageUrlValid = true;
-                  elPreview.append(elImage);
+                  elPreview.append(currentImage);
                 } else {
-                  isImageUrlValid = false;
                   formUtils.showError(txtImageUrl, strings.get('item.url.invalid'));
+                  currentImage = undefined;
                 }
               });
-            } else {
-              if(!url) {
-                isImageUrlValid = false;
-              }
             }
           };
 
@@ -119,17 +113,102 @@
               txtImageUrl,
               strings.get('item.url.empty')
             );
-            if(isValid && !isImageUrlValid) {
-              formUtils.showError(txtImageUrl, strings.get('item.url.invalid'));
-            }
-            if(isValid && isImageUrlValid) {
-              self.showDetailsForm($.trim(txtImageUrl.val()));
+            if(isValid) {
+              if(!currentImage) {
+                formUtils.showError(txtImageUrl, strings.get('item.url.invalid'));
+              } else {
+                self.showDetailsForm(
+                  currentImage.attr('src'),
+                  currentImage.width(),
+                  currentImage.height()
+                );
+              }
             }
             return false;
           });          
           
           return this;
         }
+        
+        AddItemDialog.prototype.clearSearchResults = function() {
+          this.elResults.empty();
+          return this;
+        };
+        
+        AddItemDialog.prototype.setupSearchForm = function() {
+          var self = this, error,
+              btnSubmit = this.find('#form-image-search input[type="submit"]'),
+              txtSearchQuery = this.find('#image-query');  
+              
+          this.elResults = this.find('#add-item-image-search-results'),          
+              
+          this.find('#form-image-search').submit(function() {
+            if(error) { 
+              error.remove(); 
+            }
+            if(
+              formUtils.validateAsNotEmpty(
+                txtSearchQuery, 
+                strings.get('item.image.search.empty')
+              )
+            ) {
+              self.clearSearchResults();
+              btnSubmit.val('Searching...').attr('disabled', true);
+              $.get(
+                '/bing/image?query=' + 
+                encodeURIComponent($.trim(txtSearchQuery.val()))
+              ).done(function(response) {
+                var i, ii, elItem,
+                    results = response && response.d && response.d.results;
+                if(!results || results.length === 0) {
+                  error = formUtils.showError(
+                    txtSearchQuery,
+                    strings.get('item.image.search.no-results')
+                  )
+                } else {
+                  for(i = 0, ii = results.length; i < ii; i++) {
+                    var image = results[i];
+                    elItem = $(
+                      tmplImageSearchResultItem({
+                        fullUrl     : image.MediaUrl,
+                        fullWidth   : image.Width,
+                        fullHeight  : image.Height,
+                        url         : image.Thumbnail.MediaUrl,
+                        width       : 150,
+                        height      : (150 / parseFloat(image.Thumbnail.Width)) * 
+                          parseFloat(image.Thumbnail.Height)
+                      })
+                    ).click(function() {
+                      var i = $(this).find('img');
+                      self.showDetailsForm(
+                        i.data('full-url'),
+                        i.data('full-width'),
+                        i.data('full-height')
+                      );
+                    })                    
+                    elItem.find('img').one('load error', function(e) {
+                      if(e.type === 'load') {
+                        $(this).parent().removeClass('is-loading');
+                      } else {
+                        $(this).parent().addClass('has-error');
+                      }
+                    });
+                    self.elResults.append(elItem);
+                  }
+                }
+              }).fail(function() {
+                error = formUtils.showError(
+                  txtSearchQuery,
+                  strings.get('item.image.search.failed')
+                );
+              }).always(function() {
+                btnSubmit.val('Search').removeAttr('disabled');
+              });
+            } 
+            return false;
+          });
+          return this;
+        };
         
         AddItemDialog.prototype.setupDetailsForm = function() {
           var self = this,
@@ -138,10 +217,14 @@
             self.hideDetailsForm().setSearchType(self.mode);
           })
           this.find('#form-item-details').submit(function() {
-            return formUtils.validateAsNotEmpty(
+            var isValid = formUtils.validateAsNotEmpty(
               txtDescription,
               strings.get('item.body.empty')
             );
+            if(isValid) {
+              self.showLoading();
+            }
+            return isValid;
           })
           return this;
         };
@@ -160,26 +243,45 @@
           return this;          
         };
         
-        AddItemDialog.prototype.showDetailsForm = function(imageUrl) {
-          var elImagePreview = this.find('#image-preview');
-          this.element.removeClass(this.mode);
-          elImagePreview.append(
+        AddItemDialog.prototype.showDetailsForm = function(imageUrl, imageWidth, imageHeight) {
+          var elImageAndHidden, elImage,
+              elImageAndHiddenPreview = this.find('#image-preview');
+          elImageAndHiddenPreview.empty().css(
+            'height',  
+            (512 / parseFloat(imageWidth)) * parseFloat(imageHeight) + 'px'
+          ).addClass('is-loading');          
+          elImageAndHidden = $(
             stringUtils.format(
-              '<img src="{}" width="512" class="list-item-image">', 
+              '<input type=hidden name=image-url value={}><img width=512>', 
+              imageUrl,
               imageUrl
             )
           );
-          this.element.addClass('item-details');
+          elImage = elImageAndHidden.filter('img');
+          elImage.one('load error', function(e) {
+            if(e.type === 'load') {
+              elImageAndHiddenPreview.removeClass('is-loading')
+              elImageAndHiddenPreview.removeClass('is-loading').append(elImageAndHidden);
+            } else {
+              elImageAndHiddenPreview.removeClass('is-loading').addClass('has-error');
+            }
+          }).attr('src', imageUrl);
+          this.element.removeClass(this.mode).addClass('item-details');
           return this;
         };
         
         AddItemDialog.prototype.reset = function() {
-          this.hideDetailsForm()
+          this.find('.form-error').remove();
+          this.hideLoading();
+          return this.clearSearchResults()
+              .hideDetailsForm()
               .setSearchType(AddItemDialog.SearchType.IMAGE_SEARCH);
-          return this;
         };
 
         AddItemDialog.get = function(listExternalId) {
+          // TODO: if this dialog ever needs to be used in the context of 
+          // multiple lists, we'll need to write an API for setting
+          // the list external id.
           if(!dlg) {
             dlg = new AddItemDialog({
               element : Dialog.createHtml({
