@@ -73,23 +73,55 @@
             }
             return isValid;
           });
+          
+          this.searchTypes = this.find('input[name="type"]'); 
+          this.searchTypes.change(function() {
+            self.setSearchType($(this).val());
+          });
+          this.setSearchType(
+            this.searchTypes.filter('[checked]').val() || 
+            AddItemDialog.SearchType.IMAGE_SEARCH
+          );
+          
+          this.subscribe(Dialog.Event.HIDDEN, function() {
+            this.setSearchType(AddItemDialog.SearchType.IMAGE_SEARCH);
+          });
         };
 
         AddItemDialog.prototype = $.extend({}, Dialog.prototype);
+        
+        AddItemDialog.prototype.setSearchType = function(mode) {
+          this.element.removeClass(this.mode);
+          this.searchTypes.prop('checked', false);
+          this.mode = mode;
+          this.searchTypes.filter('[value="' + mode + '"]').prop('checked', true);
+          this.element.addClass(mode);
+          return this;
+        };
+        
+        AddItemDialog.prototype.reset = function() {
+          this.setSearchType(AddItemDialog.SearchType.IMAGE_SEARCH);
+          return this;
+        };
 
         AddItemDialog.get = function(listExternalId) {
           if(!dlg) {
             dlg = new AddItemDialog({
-              element: Dialog.createHtml({
-                id: 'add-item',
-                content: tmplFormAddItem({ listId: listExternalId })
+              element : Dialog.createHtml({
+                id      : 'add-item',
+                content : tmplFormAddItem({ listId: listExternalId })
               }),
-              fixed: true
+              fixed   : true
             });
           }
           return dlg;
         };
-
+        
+        AddItemDialog.SearchType = {
+          IMAGE_SEARCH  : 'image-search',
+          IMAGE_URL     : 'image-url'
+        };
+        
         return AddItemDialog;
       }
   );

@@ -168,10 +168,23 @@
       .rounded(50px);
     }
   }
+  
 
-/* list body */
+/* list content */
 
+  #list-content {
+    .flexible-container {
+      text-align: left;
+    }
+  }  
+  
+/* add option button */  
+  
+  #button-add-item {
+    min-width: 300px;
+  }
 
+/* list contributors */
 
   #list-contributors {
     padding: @padding-small 0;
@@ -260,6 +273,8 @@
     }
   }
 
+/* invite contributors form */
+
   #form-invite-to-list {
     position: absolute;
     top: 0;
@@ -298,14 +313,6 @@
     }
   }
 
-/* list content */
-
-  #list-content {
-    .flexible-container {
-      text-align: left;
-    }
-  }
-
 /* list activity */
 
   #list-activity {
@@ -324,6 +331,30 @@
     position: static;
     margin: @margin-large auto;
     width: 800px;
+  }
+  
+  #add-item-image-search,
+  #add-item-image-url,
+  #add-item-details {
+    display: none;
+  }
+  
+  .image-search {
+    #add-item-image-search {
+      display: block;
+    }
+  }
+  
+  .image-url {
+    #add-item-image-url {
+      display: block;
+    }
+  }
+  
+  .image-details {
+    #add-item-details {
+      display: block;
+    }
   }
 
   #image-preview {

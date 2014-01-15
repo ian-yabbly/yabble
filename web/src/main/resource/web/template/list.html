@@ -46,7 +46,7 @@
   </div>
   <div id="list-items" class="tab-content#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab-content#end">
     <div class="flexible-container">
-      <div class="clearfix"><a id=button-add-item data-list-external-id=$list.id() class="orange-button button float-right">Add Choice</a></div>
+      <a id=button-add-item data-list-external-id=$list.id() class="orange-button button">Add an Option</a>
       #**
       <ul>
         #foreach($item in $list.items())

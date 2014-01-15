@@ -8,6 +8,17 @@
     margin: 0 0 @margin-small;
     font-size: 0.8;
     font-weight: 500;
+    
+    &.radio-label {
+      display: inline-block;
+      margin: 0 @margin-regular 0 (@margin-small / 2);
+    }
+  }
+  
+  .radio-label,
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
   }
 
   input[type="text"],
@@ -19,6 +30,13 @@
   button,
   .button {
     font-size: 1em;
+  }
+  
+  input[type="radio"],
+  input[type="checkbox"] {
+    margin: 0;
+    position: relative;
+    top: -2px;
   }
 
   #form-invite-to-list,
@@ -100,9 +118,9 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    -webkit-appearance: none;
     .rounded(20px);
     .box-sizing;
+    -webkit-appearance: none;
 
     &:hover:not(:disabled),
     &:focus {

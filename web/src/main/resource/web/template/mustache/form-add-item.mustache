@@ -1,12 +1,44 @@
-<form method=post action="/list/{{listId}}/item">
-  <div class=form-row>
-    <label for=image-url>ENTER AN IMAGE URL:</label>
-    <input type=text id=image-url name=image-url class=full-width placeholder="http://images.google.com/some/awesome/image.jpg">
-  </div>
-  <div id=image-preview class=form-row></div>
-  <div class=form-row>
-    <label for=image-desc>DESCRIBE THE ITEM:</label>
-    <textarea id=image-desc name=body class=full-width placeholder="Describe the item in detail."></textarea>
-  </div>
-  <input type="submit" value="Add Item" class=centered-submit>
-</form>
+<div class=form-row>
+  <input type=radio value=image-search id=type-search name=type checked>
+  <label for=type-search class=radio-label>Search for Images</label>
+  <input type=radio value=image-url id=type-url name=type>
+  <label for=type-url class=radio-label>Enter an Image Url</label>
+</div>  
+<div id=add-item-image-search>
+  <form>
+    <div class=form-row>
+      <label for=image-query>Search for an Image:</label>
+      <input 
+        type=text 
+        id=image-query 
+        name=image-url 
+        class=full-width 
+        placeholder="Pterodactyles">
+    </div>
+    <input type="submit" value="Search" class=centered-submit>
+  </form>
+</div>
+<div id=add-item-image-url>
+  <form>
+    <div class=form-row>
+      <label for=image-url>Enter an Image Url:</label>
+      <input 
+        type=text 
+        id=image-url 
+        name=image-url 
+        class=full-width 
+        placeholder="http://images.google.com/some/awesome/image.jpg">
+    </div>    
+    <div id=image-preview class=form-row></div>
+    <input type="submit" value="Go" class=centered-submit>
+  </f>
+</div>
+<div id="add-item-details">
+  <form method=post action="/list/{{listId}}/item">
+    <div class=form-row>
+      <label for=image-desc>DESCRIBE THE ITEM:</label>
+      <textarea id=image-desc name=body class=full-width placeholder="Describe the item in detail."></textarea>
+    </div>
+    <input type="submit" value="Add Item" class=centered-submit>
+  </form>
+</div>
