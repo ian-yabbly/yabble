@@ -6,8 +6,9 @@
 
   var STRINGS = {
     'create.title.empty': 'What are you trying to decide?',
-    'item.desc.empty': 'Describe the item in detail.',
+    'item.body.empty': 'Describe the item in detail.',
     'item.url.empty': 'Specify an image url.',
+    'item.url.invalid' : 'Doh! Something&rsquo;s wrong with that url.  Can you try a different image?',
     'comment.new.empty': 'Say something awesome.'
   };
 

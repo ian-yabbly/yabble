@@ -5,14 +5,14 @@
   'use strict';
 
   var name, transEndEventName, userSessionId,
-      enableLogs = document.body.getAttribute('data-yabbly-enable-logs') === 'true',
-      transEndEventNames = {
-        'WebkitTransition': 'webkitTransitionEnd',
-        'MozTransition': 'transitionend',
-        'OTransition': 'oTransitionEnd',
-        'msTransition': 'MSTransitionEnd',
-        'transition': 'transitionend'
-      };
+    enableLogs      = document.body.getAttribute('data-yabbly-enable-logs') === 'true',
+    transEndEventNames  = {
+      'WebkitTransition' : 'webkitTransitionEnd',
+      'MozTransition'  : 'transitionend',
+      'OTransition'    : 'oTransitionEnd',
+      'msTransition'   : 'MSTransitionEnd',
+      'transition'     : 'transitionend'
+    };
 
   for(name in transEndEventNames) {
     if(transEndEventNames.hasOwnProperty(name)) {
@@ -24,7 +24,7 @@
   }
 
   define({
-    log: function() {
+    log : function() {
       var args = Array.prototype.slice.apply(arguments);
       if(enableLogs && console) {
         if(args.length > 0 && typeof args[0] === 'string') {
@@ -34,23 +34,23 @@
       }
       return this;
     },
-    staticPath: function() {
-      return '/s/v-' + document.YABBLE_UI_VERSION;
+    staticPath : function(path) {
+      return [ '/s/v-' + document.YABBLE_UI_VERSION, path ].join('');
     },
-    requestAnimationFrame: function() {
+    requestAnimationFrame : function() {
       var reqFrame = (
-          requestAnimationFrame ||
-              webkitRequestAnimationFrame ||
-              mozRequestAnimationFrame ||
-              msRequestAnimationFrame ||
-              oRequestAnimationFrame ||
-              function(callback) {
-                window.setTimeout(callback, 1000 / 60);
-              }
-          );
+        requestAnimationFrame ||
+        webkitRequestAnimationFrame ||
+        mozRequestAnimationFrame ||
+        msRequestAnimationFrame ||
+        oRequestAnimationFrame ||
+        function( callback ) {
+          window.setTimeout(callback, 1000 / 60);
+        }
+      );
       return reqFrame.apply(window, arguments);
     },
-    onTransitionEnd: function(target, fnc) {
+    onTransitionEnd : function(target, fnc) {
       if(transEndEventName) {
         target.one(transEndEventName, fnc);
       } else {
@@ -58,17 +58,17 @@
       }
       return target;
     },
-    isArray: function(o) {
+    isArray : function (o) {
       return Object.prototype.toString.call(o) === '[object Array]';
     },
-    parseQueryString: function(str) {
+    parseQueryString : function(str) {
       var parts, part, ii,
-          i = str.indexOf('?'),
-          query = i !== -1 ? str.substr(str.indexOf('?') + 1) : '',
-          params;
+        i     = str.indexOf('?'),
+        query   = i !== -1 ? str.substr(str.indexOf('?') + 1) : '',
+        params;
       if(query) {
-        params = {};
-        parts = query.split('&');
+        params  = {};
+        parts   = query.split('&');
         for(i = 0, ii = parts.length; i < ii; i++) {
           part = parts[i].split('=');
           params[part.shift()] = part.shift();
@@ -76,7 +76,7 @@
       }
       return params;
     },
-    getUserSessionId: function() {
+    getUserSessionId : function() {
       var sessionCookie;
       if(!userSessionId) {
         sessionCookie = document.cookie.match(/yabbly=([A-Z|a-z|0-9]*);?/);
@@ -89,12 +89,12 @@
       }
       return userSessionId;
     },
-    exists: function(elements, fn) {
+    exists : function(elements, fn) {
       if(elements && elements.size() > 0) {
         fn(elements);
       }
     },
-    escapeHtml: function(html) {
+    escapeHtml : function(html) {
       var d = document.createElement('div');
       d.appendChild(document.createTextNode(html));
       return d.innerHTML;

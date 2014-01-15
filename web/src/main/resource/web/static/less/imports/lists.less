@@ -335,7 +335,8 @@
   
   #add-item-image-search,
   #add-item-image-url,
-  #add-item-details {
+  #add-item-details,
+  #add-item-back {
     display: none;
   }
   
@@ -351,13 +352,19 @@
     }
   }
   
-  .image-details {
+  .item-details {
     #add-item-details {
       display: block;
     }
+    #add-item-back {
+      display: block;
+    }
+    #add-item-search-options {
+      display: none;
+    }
   }
 
-  #image-preview {
+  .image-preview {
     &.is-loading,
     &.has-error {
       min-height: 150px;
