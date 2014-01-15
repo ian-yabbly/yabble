@@ -13,12 +13,16 @@ import me.yabble.web.template.{Format => TemplateFormat}
 import me.yabble.web.template.VelocityTemplate
 
 import com.google.common.base.Function
+import com.google.gson._
 
 import com.sun.net.httpserver._
 
 import org.apache.commons.io.IOUtils
 import org.apache.http.NameValuePair
 import org.apache.http.client.utils.URLEncodedUtils
+
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 
 import org.springframework.context.Lifecycle
 
@@ -31,6 +35,9 @@ import scala.collection.JavaConversions._
 import scala.collection.mutable.{Map => MutableMap}
 
 object Utils {
+  private val gson = new Gson()
+  def log = LoggerFactory.getLogger("me.yabble.web.server.Utils")
+  def utf8 = java.nio.charset.Charset.forName("utf-8")
 
   def allCookies(exchange: HttpExchange): List[HttpCookie] = if (exchange.getRequestHeaders.getFirst("Cookie") == null) {
         return Nil
@@ -43,6 +50,28 @@ object Utils {
 
   def optionalFirstCookie(cookies: List[HttpCookie], name: String): Option[String] =
       cookies.find(_.getName == name).map(_.getValue)
+
+  def jsonResponse(exchange: HttpExchange, j: JsonElement, status: Int) {
+    try {
+      val responseBytes = gson.toJson(j).getBytes(utf8)
+      exchange.getResponseHeaders.set("Content-Type", "application/json; charset=utf-8")
+      exchange.sendResponseHeaders(status, responseBytes.length)
+      val os = exchange.getResponseBody
+      os.write(responseBytes)
+      os.close()
+    } catch {
+      case e: Exception => {
+        try {
+          exchange.getResponseBody.close()
+        } catch {
+          case e2: Exception => {
+            log.error(e2.getMessage, e2)
+            throw e
+          }
+        }
+      }
+    }
+  }
 }
 
 class Server(
