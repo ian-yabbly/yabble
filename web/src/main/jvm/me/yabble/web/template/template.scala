@@ -26,7 +26,7 @@ class VelocityTemplate(
   val engine = new VelocityEngine(velocityConfig)
   engine.init()
 
-  def renderToString(templates: List[String], context: Map[String, Any] = Map()) {
+  def renderToString(templates: List[String], context: Map[String, Any] = Map()): String = {
     val writer = new StringWriter()
     try {
       render(templates, writer, context)
@@ -94,7 +94,7 @@ class VelocityTemplate(
 
 class ScalaUberspect extends UberspectImpl {
   override def getIterator(obj: Object, info: Info): java.util.Iterator[_] = obj match {
-    case l: List[_] => asJavaIterator(l.iterator)
+    case l: scala.collection.Iterable[_] => asJavaIterable(l).iterator()
     case _ => super.getIterator(obj, info)
   }
 }

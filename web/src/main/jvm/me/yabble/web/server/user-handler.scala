@@ -61,6 +61,6 @@ class UserHandler(
     exchange.getResponseHeaders.set("Pragma", "no-cache")
     exchange.getResponseHeaders.set("Cache-Control", "no-cache")
 
-    redirect(exchange, "/")
+    redirectResponse(exchange, "/")
   }
 }

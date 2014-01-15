@@ -52,9 +52,9 @@ class ImageHandler(
       case Some(transform) => {
         optional2Option(imageService.optionalByOriginalIdAndTransform(id, transform)) match {
           case Some(i) => if (isRequestSecure(exchange)) {
-                redirect(exchange, i.secureUrl, true)
+                redirectResponse(exchange, i.secureUrl, true)
               } else {
-                redirect(exchange, i.url, true)
+                redirectResponse(exchange, i.url, true)
               }
           case None => plainTextResponse(exchange, Some("Image not found [%s] [%s]".format(id, transform)), 404)
         }
@@ -63,9 +63,9 @@ class ImageHandler(
       case None => optional2Option(imageService.optional(id)) match {
         case Some(i) => {
           if (isRequestSecure(exchange)) {
-            redirect(exchange, i.secureUrl, true)
+            redirectResponse(exchange, i.secureUrl, true)
           } else {
-            redirect(exchange, i.url, true)
+            redirectResponse(exchange, i.url, true)
           }
         }
         case None => plainTextResponse(exchange, Some("Image not found [%s]".format(id)), 404)

@@ -33,6 +33,7 @@ create table users (
   name varchar(32) null,
   email varchar(512) null,
   tz varchar(64) null,
+  image_id varchar(8) null references images (id),
   primary key (id)
 );
 
@@ -56,6 +57,12 @@ create table list_comments (
   user_id varchar(8) references users (id),
   body text null,
   primary key (id)
+);
+
+create table list_users (
+  list_id varchar(8) not null references lists (id),
+  user_id varchar(8) not null references users (id),
+  unique (list_id, user_id)
 );
 
 create table list_items (

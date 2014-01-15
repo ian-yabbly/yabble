@@ -72,7 +72,7 @@ class NewYListHandler(
 
         val list = ylistService.find(lid)
 
-        redirect(exchange, "/list/%s/%s".format(lid, list.slug()))
+        redirectResponse(exchange, "/list/%s/%s".format(lid, list.slug()))
       }
 
       case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)

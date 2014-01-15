@@ -6,6 +6,8 @@ import com.google.common.collect.Lists;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
+import scala.Option;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
@@ -68,6 +70,13 @@ public class TextUtils {
         }
 
         return buf.toString();
+    }
+
+    public static String firstNChars(Option<String> o, int c) {
+        if (o.isDefined()) {
+            return firstNChars(o.get(), c);
+        }
+        return "";
     }
 
     public static String firstNChars(String s, int c) {

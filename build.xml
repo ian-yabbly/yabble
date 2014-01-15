@@ -15,25 +15,25 @@
     </filterchain>
   </loadfile>
 
-  <target name='common'>
+  <target name="common">
     <ant antfile='common/build.xml' target='share' inheritAll='false'/>
   </target>
 
-  <target name='service'>
+  <target name="service">
     <ant antfile='service/build.xml' target='share' inheritAll='false'/>
   </target>
 
-  <target name='web'>
+  <target name="web">
     <ant antfile='web/build.xml' target='share' inheritAll='false'/>
   </target>
 
-  <target name='compile'>
+  <target name="compile">
     <ant antfile='common/build.xml' target='share' inheritAll='false'/>
     <ant antfile='service/build.xml' target='share' inheritAll='false'/>
     <ant antfile='web/build.xml' target='share' inheritAll='false'/>
   </target>
 
-  <target name='clean'>
+  <target name="clean">
     <taskdef resource='scala/tools/ant/antlib.xml' classpathref='classpath'/>
     <mkdir dir='.____src'/>
     <fsc srcdir='.____src' reset='true'/>
@@ -46,7 +46,7 @@
     <ant antfile='common/build.xml' target='clean' inheritAll='false'/>
   </target>
 
-  <target name='dist' depends='compile'>
+  <target name="dist" depends='compile'>
     <mkdir dir='target/yabble-${version}/bin'/>
     <mkdir dir='target/yabble-${version}/lib'/>
     <mkdir dir='target/yabble-${version}/artifact'/>
@@ -81,7 +81,7 @@
     <chmod perm='755' dir='target/yabble-${version}/bin' includes='*'/>
   </target>
 
-  <target name='dist-archive' depends='dist'>
+  <target name="dist-archive" depends='dist'>
     <tar destfile='target/yabble-${version}.tar.gz' basedir='target/yabble-${version}' compression='gzip'/>
   </target>
 

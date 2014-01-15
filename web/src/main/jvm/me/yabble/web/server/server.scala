@@ -3,6 +3,7 @@ package me.yabble.web.server
 import me.yabble.common.Predef._
 import me.yabble.common.Log
 import me.yabble.common.TextFormat
+import me.yabble.common.TextUtils
 import me.yabble.common.ctx.ExecutionContext
 import me.yabble.service._
 import me.yabble.service.model._
@@ -72,13 +73,34 @@ object Utils {
       }
     }
   }
+
+  def redirectResponse(exchange: HttpExchange, path: String, isPermanent: Boolean = false) {
+    val status = if (isPermanent) 301 else 302
+    exchange.getResponseHeaders.set("Location", path)
+    exchange.sendResponseHeaders(status, 0)
+  }
+
+  def plainTextResponse(exchange: HttpExchange, text: Option[String] = None, code: Int = 200) {
+    exchange.getResponseHeaders.set("Content-Type", "text/plain")
+    text match {
+      case Some(t) => {
+        val bytes = t.getBytes(utf8)
+        exchange.sendResponseHeaders(code, bytes.length)
+        IOUtils.write(bytes, exchange.getResponseBody)
+      }
+      case None => {
+        exchange.sendResponseHeaders(code, 0)
+      }
+    }
+  }
 }
 
 class Server(
     private val router: Router,
     private val port: Int,
     private val contextPath: String,
-    private val sessionCookieName: String)
+    private val sessionCookieName: String,
+    sessionService: SessionService)
   extends Lifecycle
   with Log
 {   
@@ -94,7 +116,7 @@ class Server(
           server.createContext(contextPath, router)
         }
 
-    context.getFilters.add(new BaseFilter(sessionCookieName))
+    context.getFilters.add(new BaseFilter(sessionService, sessionCookieName))
 
     server.setExecutor(null)
     server.start()
@@ -111,7 +133,7 @@ class Server(
   }
 }
 
-class BaseFilter(sessionCookieName: String)
+class BaseFilter(sessionService: SessionService, sessionCookieName: String)
   extends Filter
   with Log
 {
@@ -125,6 +147,23 @@ class BaseFilter(sessionCookieName: String)
       Utils.optionalFirstCookie(exchange, sessionCookieName).foreach(v => ctx.setAttribute("web-session-id", v))
       chain.doFilter(exchange)
     } catch {
+      case e: EntityNotFoundException => e.kind match {
+        case "user" => {
+          optional2Option(sessionService.optional()) match {
+            case Some(session) => {
+              if (session.hasUserId() && session.getUserId == e.id) {
+                log.info("Logging user out [{}]", e.id)
+                Utils.redirectResponse(exchange, "/logout")
+              } else {
+                Utils.redirectResponse(exchange, "/error/not-found")
+              }
+            }
+            case None => Utils.redirectResponse(exchange, "/error/not-found")
+          }
+        }
+        case _ => Utils.redirectResponse(exchange, "/error/not-found")
+      }
+
       case e: Exception => {
         log.error(e.getMessage, e)
         exchange.getResponseHeaders.set("Content-Type", "text/plain; charset=utf-8")
@@ -219,7 +258,7 @@ trait Handler extends Log {
   protected def meOrCreate(): User.Persisted = optionalMe match {
     case Some(user) => user
     case None => {
-      val uid = userService.create(new User.Free(None, None, None))
+      val uid = userService.create(new User.Free(None, None, None, None))
       sessionService.withSession(true, new Function[Session, Session]() {
         override def apply(session: Session): Session = {
           session.toBuilder().setUserId(uid).build()
@@ -229,24 +268,12 @@ trait Handler extends Log {
     }
   }
 
-  protected def redirect(exchange: HttpExchange, path: String, isPermanent: Boolean = false) {
-    val status = if (isPermanent) 301 else 302
-    exchange.getResponseHeaders.set("Location", path)
-    exchange.sendResponseHeaders(status, 0)
+  protected def redirectResponse(exchange: HttpExchange, path: String, isPermanent: Boolean = false) {
+    Utils.redirectResponse(exchange, path, isPermanent)
   }
 
   protected def plainTextResponse(exchange: HttpExchange, text: Option[String] = None, code: Int = 200) {
-    exchange.getResponseHeaders.set("Content-Type", "text/plain")
-    text match {
-      case Some(t) => {
-        val bytes = t.getBytes(utf8)
-        exchange.sendResponseHeaders(code, bytes.length)
-        IOUtils.write(bytes, exchange.getResponseBody)
-      }
-      case None => {
-        exchange.sendResponseHeaders(code, 0)
-      }
-    }
+    Utils.plainTextResponse(exchange, text, code)
   }
 
   protected def isRequestSecure(exchange: HttpExchange): Boolean = "https".equalsIgnoreCase(exchange.getRequestURI.getScheme)
@@ -284,18 +311,16 @@ trait TemplateHandler extends Handler {
       context: Map[String, Any] = Map(),
       status: Int = 200)
   {
-    try {
-      exchange.getResponseHeaders.set("Content-Type", "text/html; charset=utf-8")
-      exchange.sendResponseHeaders(status, 0)
-      // TODO try/finally
-      val osw = new OutputStreamWriter(exchange.getResponseBody, utf8)
-      template.render(templates, osw, supplementContext(context))
-      osw.close()
-    } catch {
-      case e: Exception => {
-        log.error(e.getMessage, e)
-      }
-    }
+    //try {
+      val response = template.renderToString(templates, supplementContext(context)).getBytes(encoding)
+      exchange.getResponseHeaders.set("Content-Type", "text/html; charset="+encoding)
+      exchange.sendResponseHeaders(status, response.length)
+      IOUtils.write(response, exchange.getResponseBody)
+    //} catch {
+      //case e: Exception => {
+        //log.error(e.getMessage, e)
+      //}
+    //}
   }
 
   private def supplementContext(c: Map[String, Any]): Map[String, Any] = {
@@ -303,6 +328,7 @@ trait TemplateHandler extends Handler {
     m.put("Utils", classOf[TemplateUtils])
     m.put("Format", classOf[TemplateFormat])
     m.put("TextFormat", classOf[TextFormat])
+    m.put("TextUtils", classOf[TextUtils])
 
     optionalMe() match {
       case Some(user) => {

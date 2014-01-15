@@ -16,6 +16,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import org.joda.time.DateTimeZone;
 
+import scala.Option;
+
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -24,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static me.yabble.common.Predef.option2Optional;
 import static org.apache.commons.lang.WordUtils.capitalizeFully;
 import static java.util.concurrent.TimeUnit.*;
 
@@ -61,6 +64,14 @@ public class Format {
     public static String localDate(LocalDate t) {
         if (t == null) { return ""; }
         return ymdDF.print(t);
+    }
+
+    public static String timeAgo(DateTime t, Option<DateTimeZone> optTz) {
+        if (null == optTz) {
+            return timeAgo(t, (Optional<DateTimeZone>) null);
+        } else {
+            return timeAgo(t, option2Optional(optTz));
+        }
     }
 
     public static String timeAgo(DateTime t, Optional<DateTimeZone> optTz) {

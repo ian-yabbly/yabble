@@ -14,14 +14,72 @@ object Entity {
 }
 
 object User {
-  class Free(val name: Option[String], val email: Option[String], val tz: Option[DateTimeZone])
+  class Free(
+      val name: Option[String],
+      val email: Option[String],
+      val tz: Option[DateTimeZone],
+      val imageId: Option[String])
     extends Entity.Free
 
-  class Update(id: String, val name: Option[String], val email: Option[String], val tz: Option[DateTimeZone])
+  class Update(
+      id: String,
+      val name: Option[String],
+      val email: Option[String],
+      val tz: Option[DateTimeZone],
+      val imageId: Option[String])
     extends Entity.Update(id)
 
-  class Persisted(id: String, creationDate: DateTime, lastUpdatedDate: DateTime, isActive: Boolean,
-      val name: Option[String], val email: Option[String], val tz: Option[DateTimeZone])
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val name: Option[String],
+      val email: Option[String],
+      val tz: Option[DateTimeZone],
+      val image: Option[Image.Persisted])
+    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+  {
+    def displayName(): String = name.orElse(email).getOrElse("Guest")
+  }
+}
+
+object Comment {
+  class Free(
+      val parentId: String,
+      val userId: String,
+      val body: String)
+    extends Entity.Free
+
+  class Update(
+      id: String,
+      val body: String)
+    extends Entity.Update(id)
+
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val parentId: String,
+      val user: User.Persisted,
+      val body: String)
+    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+}
+
+object Vote {
+  class Free(
+      val parentId: String,
+      val userId: String)
+    extends Entity.Free
+
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val user: User.Persisted,
+      val parentId: String)
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
 }
 
@@ -44,7 +102,8 @@ object YList {
       val title: String,
       val body: Option[String],
       val items: List[Item.Persisted],
-      val comments: List[Comment.Persisted])
+      val comments: List[Comment.Persisted],
+      val users: List[User.Persisted])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
   {
     def slug(): String = SlugUtils.gen(title)
@@ -66,12 +125,12 @@ object YList {
       case None => throw new NotFoundException("List item [%s]".format(itemId))
     }
 
-    def itemComment(commentId: String): YList.Item.Comment.Persisted = items.flatMap(_.comments).find(commentId == _.id) match {
+    def itemComment(commentId: String): Comment.Persisted = items.flatMap(_.comments).find(commentId == _.id) match {
       case Some(comment) => comment
       case None => throw new NotFoundException("List item comment [%s]".format(commentId))
     }
 
-    def itemVote(voteId: String): YList.Item.Vote.Persisted = items.flatMap(_.votes).find(voteId == _.id) match {
+    def itemVote(voteId: String): Vote.Persisted = items.flatMap(_.votes).find(voteId == _.id) match {
       case Some(vote) => vote
       case None => throw new NotFoundException("List item vote [%s]".format(voteId))
     }
@@ -86,24 +145,6 @@ object YList {
       case None => throw new NotFoundException("List item by vote [%s]".format(id))
     }
 
-  }
-
-  object Comment {
-    class Free(
-        val listId: String,
-        val userId: String,
-        val body: String)
-      extends Entity.Free
-
-    class Persisted(
-        id: String,
-        creationDate: DateTime,
-        lastUpdatedDate: DateTime,
-        isActive: Boolean,
-        val user: User.Persisted,
-        val listId: Long,
-        val body: String)
-      extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
   }
 
   object Item {
@@ -150,40 +191,6 @@ object YList {
         case Some(v) => v
         case None => throw new NotFoundException("List item vote [%s]".format(id))
       }
-    }
-
-    object Vote {
-      class Free(
-          val itemId: String,
-          val userId: String)
-        extends Entity.Free
-
-      class Persisted(
-          id: String,
-          creationDate: DateTime,
-          lastUpdatedDate: DateTime,
-          isActive: Boolean,
-          val user: User.Persisted,
-          val itemId: String)
-        extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
-    }
-
-    object Comment {
-      class Free(
-          val itemId: String,
-          val userId: String,
-          val body: String)
-        extends Entity.Free
-
-      class Persisted(
-          id: String,
-          creationDate: DateTime,
-          lastUpdatedDate: DateTime,
-          isActive: Boolean,
-          val user: User.Persisted,
-          val itemId: Long,
-          val body: String)
-        extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
     }
   }
 }

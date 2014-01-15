@@ -95,7 +95,7 @@ class NewYListItemHandler(
 
         val list = ylistService.find(listId)
 
-        redirect(exchange, "/list/%s/%s".format(listId, list.slug()))
+        redirectResponse(exchange, "/list/%s/%s".format(listId, list.slug()))
       }
 
       case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)

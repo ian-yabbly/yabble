@@ -39,11 +39,14 @@
         <prop key='resource.loader'>file</prop>
         <prop key='file.resource.loader.class'>org.apache.velocity.runtime.resource.loader.FileResourceLoader</prop>
         <prop key='file.resource.loader.path'>${web.template.base-path}</prop>
-        <prop key='file.resource.loader.cache'>true</prop>
+        <!-- TODO Set to `true` in prod -->
+        <prop key='file.resource.loader.cache'>${velocity.file.resource.loader.cache}</prop>
         <prop key='file.resource.loader.modificationCheckInterval'>2</prop> <!-- seconds -->
 
         <prop key='velocimacro.library'>lib/macros.vm</prop>
         <prop key='velocimacro.arguments.strict'>true</prop>
+        <!-- TODO Set to `false` in prod -->
+        <prop key='velocimacro.library.autoreload'>${velocity.velocimacro.library.autoreload}</prop>
 
         <prop key='runtime.introspector.uberspect'>me.yabble.web.template.ScalaUberspect</prop>
       </props>
@@ -75,6 +78,7 @@
       c:port='${web.port}'
       c:context-path='${web.context-path}'
       c:session-cookie-name='${web.session.cookie-name}'
+      c:session-service-ref='web.session-service'
       />
 
   <bean

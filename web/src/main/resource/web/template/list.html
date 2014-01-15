@@ -2,11 +2,10 @@
   <h1 class="flexible-container">#formatUserMarkup($list.title(), true)</h1>
 </div>
 <div id="list-content">
-  #**
   <div id="list-contributors">
     <div class="flexible-container">
       <div id="list-contributors-menu" class="menu-trigger">
-        #set($contribCount = $().size() + 1)
+        #set($contribCount = $list.users().size() + 1)
         <span class="contributors-count">$contribCount</span> contributors <span class="arrow" data-menu-close-trigger=true></span>
         <ul class="menu">
           <li>
@@ -15,7 +14,7 @@
           #foreach($contributor in $list.users())
             <li>
              #userDisplayName($contributor)
-              &nbsp;&nbsp;<a href=#appUrl("/list/$list.id()/unvite?user-id=$contributor.Id") class="icon remove-contributor">x</a>
+              &nbsp;&nbsp;<a href=#appUrl("/list/$list.id()/unvite?user-id=$contributor.id()") class="icon remove-contributor">x</a>
             </li>
           #end
         </ul>
@@ -25,7 +24,6 @@
         <input type=submit class="icon" value="+">
       </form>
     </div>
-    *#
   </div>
   <div class="tabs flexible-container">
     <a href=#appUrl("/list/$list.id()")
@@ -110,7 +108,7 @@
               <a href=#appUrl("/list/$list.id()/comment/$comment.id()/delete")
                  class="icon comment-delete">x</a>
             #end
-            #profileImage($comment.user(), 54)
+            #squareUserImage($comment.user(), 54)
             <span class=username>#userDisplayName($comment.user())</span>
             &nbsp;<span class=small-bullet>&bull;</span>&nbsp;
             <span class=comment-posted-date>$Format.timeAgo($comment.creationDate(), $__user.tz())</span>
@@ -124,7 +122,7 @@
           method=post
           action=#appUrl("/list/$list.id()/comment")>
         #if($.isPresent())
-          #profileImage($__user, 54)
+          #squareUserImage($__user, 54)
           <input type="hidden" name="username" value="#userDisplayName($__user)">
           <input type="hidden" name="user-image-url" value="#profileImageUrl($__user, 54)">
         #end
@@ -135,7 +133,6 @@
     </div>
   </div>
   <div id="list-activity" class="tab-content#if($tabId == "list-activity") active-tab-content#end">
-    #**
     <ul class="flexible-container">
       #foreach($h in $history)
         #if("list" == $h.kind())
@@ -165,7 +162,7 @@
           #end
         #end
       <li class="list-item-with-user-image">
-        #profileImage($h.user(), 49)
+        #squareUserImage($h.user(), 49)
         <span class="username">#userDisplayName($h.user())</span>
         <span class="history-action">$action</span>
         <span class="history-timestamp">$Format.timeAgo($h.eventDate(), $__user.tz())</span>
@@ -175,7 +172,6 @@
       </li>
       #end
     </ul>
-    *#
   </div>
 </div>
 

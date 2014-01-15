@@ -99,7 +99,7 @@ class ORM(
   }
 }
 
-abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update](tableName: String, npt: NamedParameterJdbcTemplate)
+abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update](tableName: String, private val kind: String, npt: NamedParameterJdbcTemplate)
   extends ORM(tableName, npt)
   with Log
 {
@@ -182,7 +182,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
 
   def deactivate(id: String): Boolean = {
     npt.update(
-        s"update $tableName set is_active = false, last_updated_date = now() where id = :id",
+        s"update $tableName set is_active = false, last_updated_date = now() where id = :id and is_active = true",
         mapAsJavaMap(Map("id" -> id))) match {
           case 0 => false
           case 1 => true
@@ -192,7 +192,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
 
   def activate(id: String): Boolean = {
     npt.update(
-        s"update $tableName set is_active = true, last_updated_date = now() where id = :id",
+        s"update $tableName set is_active = true, last_updated_date = now() where id = :id and is_active = false",
         mapAsJavaMap(Map("id" -> id))) match {
           case 0 => false
           case 1 => true
@@ -225,7 +225,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     try {
       t.queryForObject(stmt, getRowMapper, id)
     } catch {
-      case e: EmptyResultDataAccessException => throw new EntityNotFoundException(id)
+      case e: EmptyResultDataAccessException => throw new EntityNotFoundException(kind, id)
     }
   }
 
@@ -241,7 +241,9 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
   }
 
   def all(stmtName: String, params: Map[String, Any]): List[P] = npt.query(
-      findStatement(stmtName), mapAsJavaMap(params), getRowMapper).toList
+      optionalStatement(stmtName).getOrElse(stmtName),
+      mapAsJavaMap(params),
+      getRowMapper).toList
 
   def optional(stmtName: String, params: Map[String, Any]): Option[P] = optional(all(stmtName, params))
 
@@ -267,7 +269,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
 }
 
 class ImageDao(npt: NamedParameterJdbcTemplate)
-  extends EntityDao[Image.Free, Image.Persisted, Image.Update]("images", npt)
+  extends EntityDao[Image.Free, Image.Persisted, Image.Update]("images", "image", npt)
   with Log
 {
   def allOriginals(offset: Long, limit: Long): List[Image.Persisted] = all(
@@ -391,10 +393,14 @@ class ImageDao(npt: NamedParameterJdbcTemplate)
   }
 }
 
-class UserDao(npt: NamedParameterJdbcTemplate)
-  extends EntityDao[User.Free, User.Persisted, User.Update]("users", npt)
+class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate)
+  extends EntityDao[User.Free, User.Persisted, User.Update]("users", "user", npt)
   with Log
 {
+  def allByYList(id: String): List[User.Persisted] = all(
+      "select u.* from users u inner join list_users lu on u.id = lu.user_id where lu.list_id = :list_id",
+      Map("list_id" -> id))
+
   override def getInsertParams(f: User.Free) = Map("name" -> f.name.orNull, "email" -> f.email.orNull, "tz" -> f.tz.orNull)
 
   override def getUpdateParams(u: User.Update) = Map("name" -> u.name.orNull, "email" -> u.email.orNull, "tz" -> u.tz.orNull)
@@ -411,7 +417,8 @@ class UserDao(npt: NamedParameterJdbcTemplate)
           rs.getBoolean("is_active"),
           Option(rs.getString("name")),
           Option(rs.getString("email")),
-          Option(rs.getString("tz")).map(tz => DateTimeZone.forID(tz)))
+          Option(rs.getString("tz")).map(tz => DateTimeZone.forID(tz)),
+          Option(rs.getString("image_id")).map(iid => imageDao.find(iid)))
     }
   }
 }
@@ -420,7 +427,7 @@ class YListDao(
     private val userDao: UserDao,
     private val ylistItemDao: YListItemDao,
     npt: NamedParameterJdbcTemplate)
-  extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", npt)
+  extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", "list", npt)
   with Log
 {
   override def getInsertParams(f: YList.Free) = Map("user_id" -> f.userId, "title" -> f.title, "body" -> f.body.orNull)
@@ -442,13 +449,14 @@ class YListDao(
           rs.getString("title"),
           Option(rs.getString("body")),
           ylistItemDao.allByYList(id),
-          Nil)
+          Nil,
+          userDao.allByYList(id))
     }
   }
 }
 
 class YListItemDao(private val userDao: UserDao, imageDao: ImageDao, npt: NamedParameterJdbcTemplate)
-  extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", npt)
+  extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", "list-item", npt)
   with Log
 {
   def allByYList(id: String) = all("all-by-list", Map("list_id" -> id))
@@ -482,3 +490,37 @@ class YListItemDao(private val userDao: UserDao, imageDao: ImageDao, npt: NamedP
     }
   }
 }
+
+abstract class CommentDao(tableName: String, kind: String, private val userDao: UserDao, npt: NamedParameterJdbcTemplate)
+  extends EntityDao[Comment.Free, Comment.Persisted, Comment.Update](tableName, kind, npt)
+  with Log
+{
+  def allByParent(id: String) = all("all-by-parent", Map("parent_id" -> id))
+
+  override def getInsertParams(f: Comment.Free) = Map("parent_id" -> f.parentId, "user_id" -> f.userId, "body" -> f.body)
+
+  override def getUpdateParams(u: Comment.Update) = Map("body" -> u.body)
+
+  override def getQueryParams(f: Comment.Free) = Map("parent_id" -> f.parentId, "user_id" -> f.userId, "body" -> f.body)
+
+  override def getRowMapper() = new RowMapper[Comment.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): Comment.Persisted = {
+      val id = rs.getString("id")
+
+      new Comment.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("parent_id"),
+          userDao.find(rs.getString("user_id")),
+          rs.getString("body"))
+    }
+  }
+}
+
+class YListCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate)
+    extends CommentDao("list_comments", "list-comment", userDao, npt)
+
+class YListItemCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate)
+    extends CommentDao("list_item_comments", "list-item-comment", userDao, npt)

@@ -54,6 +54,43 @@
 #if ($_optTi.isPresent())$_optTi.get().secureUrl()#end
 #end
 
+#macro(userDisplayName $u)
+  #if($u.email().isDefined())
+    $u.email().get()
+  #else
+    $u.displayName()
+  #end
+#end
+
+#macro(squareUserImage $u $width)
+  <span class="user-image">
+    #if ($u.image().isDefined())
+      #set ($_optTi = $__imageService.optionalByOriginalIdAndTransform($u.image().get().id(), "s-$width", false))
+      #if ($_optTi.isPresent())
+        <img
+            src="$_optTi.get().secureUrl()"
+            alt="#e($u.displayName())"
+            title="#e($u.displayName())"
+            width="$width"
+            height="$width">
+      #else
+        <img
+            src="/i/user/$u.id()?t=s-$width"
+            alt="#e($u.displayName())"
+            title="#e($u.displayName())"
+            width="$width"
+            height="$width">
+      #end
+    #else
+      <img
+          src="/i/user/$u.id()?t=s-$width"
+          alt="#e($u.displayName())"
+          title="#e($u.displayName())"
+          width="$width"
+          height="$width">
+    #end
+  </span>
+#end
 
 
 
@@ -108,13 +145,5 @@
     #end
   #else
     $__canonicalBaseUrl/image/profile/$u.Id?s=$width
-  #end
-#end
-
-#macro(userDisplayName $u)
-  #if($u.Email.isPresent())
-    $u.Email.get()
-  #else
-    $u.displayName()
   #end
 #end
