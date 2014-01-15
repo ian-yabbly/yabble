@@ -397,6 +397,8 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate)
   extends EntityDao[User.Free, User.Persisted, User.Update]("users", "user", npt)
   with Log
 {
+  def optionalByEmailForUpdate(email: String): Option[User.Persisted] = optional("select * from users where email = :email for update", Map("email" -> email))
+
   def allByYList(id: String): List[User.Persisted] = all(
       "select u.* from users u inner join list_users lu on u.id = lu.user_id where lu.list_id = :list_id",
       Map("list_id" -> id))
@@ -425,11 +427,32 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate)
 
 class YListDao(
     private val userDao: UserDao,
+    private val ylistCommentDao: YListCommentDao,
     private val ylistItemDao: YListItemDao,
     npt: NamedParameterJdbcTemplate)
   extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", "list", npt)
   with Log
 {
+  def addUser(lid: String, uid: String): Boolean = {
+    val params = Map("list_id" -> lid, "user_id" -> uid)
+    npt.queryForList("select * from list_users where list_id = :list_id and user_id = :user_id for update", params).toList match {
+      case Nil => {
+        npt.update("insert into list_users (list_id, user_id) values (:list_id, :user_id)", params)
+        true
+      }
+      case head :: Nil => false
+      case vs => throw new UnexpectedNumberOfRowsSelected(vs.size)
+    }
+  }
+
+  def removeUser(lid: String, uid: String): Boolean = npt.update(
+      "delete from list_users where list_id = :list_id and user_id = :user_id",
+      Map("list_id" -> lid, "user_id" -> uid)) match {
+        case 0 => false
+        case 1 => true
+        case n: Int => throw new UnexpectedNumberOfRowsUpdatedException(n)
+      }
+
   override def getInsertParams(f: YList.Free) = Map("user_id" -> f.userId, "title" -> f.title, "body" -> f.body.orNull)
 
   override def getUpdateParams(u: YList.Update) = Map("title" -> u.title, "body" -> u.body.orNull)
@@ -449,7 +472,7 @@ class YListDao(
           rs.getString("title"),
           Option(rs.getString("body")),
           ylistItemDao.allByYList(id),
-          Nil,
+          ylistCommentDao.allByParent(id),
           userDao.allByYList(id))
     }
   }
@@ -495,7 +518,9 @@ abstract class CommentDao(tableName: String, kind: String, private val userDao: 
   extends EntityDao[Comment.Free, Comment.Persisted, Comment.Update](tableName, kind, npt)
   with Log
 {
-  def allByParent(id: String) = all("all-by-parent", Map("parent_id" -> id))
+  def allByParent(id: String) = all(
+      "select * from %s where parent_id = :parent_id and is_active = true order by creation_date asc".format(tableName),
+      Map("parent_id" -> id))
 
   override def getInsertParams(f: Comment.Free) = Map("parent_id" -> f.parentId, "user_id" -> f.userId, "body" -> f.body)
 

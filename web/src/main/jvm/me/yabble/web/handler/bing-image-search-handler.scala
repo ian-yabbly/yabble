@@ -1,4 +1,4 @@
-package me.yabble.web.server
+package me.yabble.web.handler
 
 import me.yabble.common.Log
 import me.yabble.common.SecurityUtils.base64Encode
@@ -55,7 +55,7 @@ class BingImageSearchHandler(
 
   def imageSearch(exchange: HttpExchange, pathVars: Map[String, String]) {
     val nvps = queryNvps(exchange)
-    val query = requiredFirstParam(nvps, "query")
+    val query = requiredFirstParamValue(nvps, "query")
 
     val params = Map(
         ("Query" -> "'%s'".format(query)),
@@ -77,7 +77,7 @@ class BingImageSearchHandler(
 
   def newsSearch(exchange: HttpExchange, pathVars: Map[String, String]) {
     val nvps = queryNvps(exchange)
-    val query = requiredFirstParam(nvps, "query")
+    val query = requiredFirstParamValue(nvps, "query")
 
     val params = Map(
         ("Query" -> "'%s'".format(query)),

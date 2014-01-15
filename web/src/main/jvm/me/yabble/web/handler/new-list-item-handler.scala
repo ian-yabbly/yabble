@@ -1,4 +1,4 @@
-package me.yabble.web.server
+package me.yabble.web.handler
 
 import me.yabble.common.Predef._
 import me.yabble.common.Log
@@ -19,11 +19,11 @@ import scala.collection.JavaConversions._
 class NewYListItemHandler(
     val sessionService: SessionService,
     val userService: IUserService,
-    val template: VelocityTemplate,
     val encoding: String,
     private val ylistService: IYListService,
-    private val imageService: ImageService)
-  extends TemplateHandler
+    private val imageService: ImageService,
+    val template: VelocityTemplate)
+  extends TemplateHandler(template)
   with FormHandler
 {
   private val pathPatterns = List("/new/list/{list-id}/item")
@@ -57,8 +57,8 @@ class NewYListItemHandler(
       case "post" => {
         val nvps = allNvps(exchange)
         val formBuilder = getOrCreateForm(listId).toBuilder()
-        formBuilder.setTitle(formField(firstNvp(nvps, "title")))
-        formBuilder.setBody(formField(firstNvp(nvps, "body")))
+        formBuilder.setTitle(formField(firstParamValue(nvps, "title")))
+        formBuilder.setBody(formField(firstParamValue(nvps, "body")))
 
         formBuilder.clearImageUrl();
         params(nvps, "image-url").foreach(u => formBuilder.addImageUrl(u))

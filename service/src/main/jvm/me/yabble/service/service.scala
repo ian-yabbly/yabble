@@ -10,6 +10,7 @@ class EntityNotFoundException(val kind: String, val id: String) extends RuntimeE
 trait IService[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update] {
   def create(f: F): String
   def find(id: String): P
+  def optional(id: String): Option[P]
 }
 
 class Service[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update](
@@ -19,4 +20,5 @@ class Service[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update](
 {
   override def create(f: F): String = dao.create(f)
   override def find(id: String): P = dao.find(id)
+  override def optional(id: String): Option[P] = dao.optional(id)
 }

@@ -6,11 +6,14 @@ import me.yabble.service.dao._
 
 trait IYListService extends IService[YList.Free, YList.Persisted, YList.Update] {
   def create(f: YList.Item.Free): String
-  def createYListComment(f: Comment.Free): String
-  def createYListItemComment(f: Comment.Free): String
+  def createComment(f: Comment.Free): String
+  def createItemComment(f: Comment.Free): String
 
-  def deactivateYListComment(commentId: String): Boolean
-  def deactivateYListItemComment(commentId: String): Boolean
+  def deactivateComment(commentId: String): Boolean
+  def deactivateItemComment(commentId: String): Boolean
+
+  def addUser(lid: String, uid: String): Boolean
+  def removeUser(lid: String, uid: String): Boolean
 }
 
 class YListService(
@@ -28,9 +31,12 @@ class YListService(
     id
   }
 
-  override def createYListComment(f: Comment.Free) = ylistCommentDao.create(f)
-  override def createYListItemComment(f: Comment.Free) = ylistItemCommentDao.create(f)
+  override def createComment(f: Comment.Free) = ylistCommentDao.create(f)
+  override def createItemComment(f: Comment.Free) = ylistItemCommentDao.create(f)
 
-  override def deactivateYListComment(commentId: String) = ylistCommentDao.deactivate(commentId)
-  override def deactivateYListItemComment(commentId: String) = ylistItemCommentDao.deactivate(commentId)
+  override def deactivateComment(commentId: String) = ylistCommentDao.deactivate(commentId)
+  override def deactivateItemComment(commentId: String) = ylistItemCommentDao.deactivate(commentId)
+
+  override def addUser(lid: String, uid: String) = ylistDao.addUser(lid, uid)
+  override def removeUser(lid: String, uid: String) = ylistDao.removeUser(lid, uid)
 }

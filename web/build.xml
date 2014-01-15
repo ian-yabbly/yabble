@@ -22,7 +22,7 @@
     <path refid='build.classpath'/>
   </path>
 
-  <target name='gen'>
+  <target name="gen">
     <delete dir='src/main/gen-java'/>
     <mkdir dir='src/main/gen-jvm'/>                    
     <exec executable='protoc' failonerror='true'>     
@@ -32,7 +32,7 @@
     </exec>
   </target>
   
-  <target name='compile'>
+  <target name="compile">
     <taskdef resource='scala/tools/ant/antlib.xml' classpathref='compile.classpath'/>
 
     <mkdir dir='target/classes'/>
@@ -58,16 +58,16 @@
     </javac>
   </target>
 
-  <target name='jar' depends='compile'>
+  <target name="jar" depends='compile'>
     <jar jarfile='target/${ant.project.name}.jar' basedir='target/classes'/>
   </target>
 
-  <target name='share' depends='jar'>
+  <target name="share" depends='jar'>
     <mkdir dir='../artifact'/>
     <copy file='target/${ant.project.name}.jar' todir='../artifact'/>
   </target>
 
-  <target name='clean'>
+  <target name="clean">
     <delete dir='target'/>
   </target>
 

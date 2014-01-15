@@ -53,7 +53,7 @@ create table list_comments (
   creation_date timestamptz not null default now(),
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
-  list_id varchar(8) references lists (id),
+  parent_id varchar(8) references lists (id),
   user_id varchar(8) references users (id),
   body text null,
   primary key (id)
@@ -88,7 +88,7 @@ create table list_item_comments (
   creation_date timestamptz not null default now(),
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
-  list_item_id varchar(8) references list_items (id),
+  parent_id varchar(8) references list_items (id),
   user_id varchar(8) references users (id),
   body text null,
   primary key (id)

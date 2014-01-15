@@ -1,4 +1,4 @@
-package me.yabble.web.server
+package me.yabble.web.handler
 
 import me.yabble.common.Predef._
 import me.yabble.common.Log
@@ -21,19 +21,20 @@ import scala.collection.JavaConversions._
 class YListHandler(
     val sessionService: SessionService,
     val userService: IUserService,
-    val template: VelocityTemplate,
     val encoding: String,
-    private val ylistService: IYListService)
-  extends TemplateHandler
+    private val ylistService: IYListService,
+    template: VelocityTemplate)
+  extends TemplateHandler(template)
   with FormHandler
 {
   private val pathPatterns = List(
       "/list/{id}",
       "/list/{id}/{slug}",
       "/list/{id}/{slug}/tab/{tab}",
-      "/list/{id}/comment",
-      "/list/{id}/comment/{comment-id}/delete"
-      )
+      "/x/list/{id}/comment",
+      "/x/list/{id}/comment/{comment-id}/delete",
+      "/x/list/{id}/invite",
+      "/x/list/{id}/unvite")
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
@@ -48,6 +49,8 @@ class YListHandler(
           case 2 => view(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case 3 => commentIndex(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case 4 => commentDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 5 => invite(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 6 => unvite(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case _ => error(s"Unexpected match [${t._1}]")
         })
         .isDefined
@@ -105,8 +108,8 @@ class YListHandler(
       case "post" => {
         val me = requiredMe()
         val nvps = allNvps(exchange)
-        val body = requiredFirstParam(nvps, "body")
-        val commentId = ylistService.createYListComment(new Comment.Free(id, me.id, body))
+        val body = requiredFirstParamValue(nvps, "body")
+        val commentId = ylistService.createComment(new Comment.Free(id, me.id, body))
         val list = ylistService.find(id)
         redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
       }
@@ -119,7 +122,30 @@ class YListHandler(
     val id = pathVars("id")
     val commentId = pathVars("comment-id")
 
-    ylistService.deactivateYListComment(commentId)
+    ylistService.deactivateComment(commentId)
+    val list = ylistService.find(id)
+    redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
+  }
+
+  def invite(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val nvps = allNvps(exchange)
+    val email = requiredFirstParamValue(nvps, "email")
+
+    val user = userService.findOrCreateByEmail(email)
+    ylistService.addUser(id, user.id)
+
+    val list = ylistService.find(id)
+    redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
+  }
+
+  def unvite(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val nvps = allNvps(exchange)
+    val uid = requiredFirstParamValue(nvps, "user")
+
+    ylistService.removeUser(id, uid)
+
     val list = ylistService.find(id)
     redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
   }

@@ -1,4 +1,4 @@
-package me.yabble.web.server
+package me.yabble.web.handler
 
 import me.yabble.common.Predef._
 import me.yabble.common.Log
@@ -23,11 +23,11 @@ import scala.collection.JavaConversions._
 class UserHandler(
     val sessionService: SessionService,
     val userService: IUserService,
-    val template: VelocityTemplate,
     val encoding: String,
     private val sessionCookieName: String,
-    private val sessionCookieDomain: String)
-  extends TemplateHandler
+    private val sessionCookieDomain: String,
+    val template: VelocityTemplate)
+  extends TemplateHandler(template)
   with FormHandler
 {
   private val pathPatterns = List("/logout")

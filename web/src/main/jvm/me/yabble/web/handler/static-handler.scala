@@ -1,4 +1,4 @@
-package me.yabble.web.server
+package me.yabble.web.handler
 
 import me.yabble.common.Predef._
 import me.yabble.common.Log

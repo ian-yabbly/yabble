@@ -60,6 +60,7 @@
         <entry key='__formatService' value-ref='service.format-service'/>
         <entry key='__imageService' value-ref='service.image-service'/>
         <entry key='__doLessInBrowser' value='${web.less.do-in-browser}'/>
+        <entry key='__canonicalBaseUrl' value='${web.canonical-base-url}'/>
       </map>
     </constructor-arg>
   </bean>
@@ -101,7 +102,7 @@
 
   <bean
       id='web.static-handler'
-      class='me.yabble.web.server.StaticHandler'
+      class='me.yabble.web.handler.StaticHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:static-base-resource-path='${web.static.base-resource-path}'
@@ -110,7 +111,7 @@
 
   <bean
       id='web.image-handler'
-      class='me.yabble.web.server.ImageHandler'
+      class='me.yabble.web.handler.ImageHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:encoding='${app.encoding}'
@@ -119,7 +120,7 @@
 
   <bean
       id='web.index-handler'
-      class='me.yabble.web.server.IndexHandler'
+      class='me.yabble.web.handler.IndexHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'
@@ -128,7 +129,7 @@
 
   <bean
       id='web.new-ylist-handler'
-      class='me.yabble.web.server.NewYListHandler'
+      class='me.yabble.web.handler.NewYListHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'
@@ -138,7 +139,7 @@
  
   <bean
       id='web.new-ylist-item-handler'
-      class='me.yabble.web.server.NewYListItemHandler'
+      class='me.yabble.web.handler.NewYListItemHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'
@@ -149,7 +150,7 @@
       
   <bean
       id='web.ylist-handler'
-      class='me.yabble.web.server.YListHandler'
+      class='me.yabble.web.handler.YListHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'
@@ -159,7 +160,7 @@
 
   <bean
       id='web.user-handler'
-      class='me.yabble.web.server.UserHandler'
+      class='me.yabble.web.handler.UserHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'
@@ -170,7 +171,7 @@
  
   <bean
       id='web.bing-image-search-handler'
-      class='me.yabble.web.server.BingImageSearchHandler'
+      class='me.yabble.web.handler.BingImageSearchHandler'
       c:user-service-ref='service.user-service'
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'

@@ -14,12 +14,12 @@
           #foreach($contributor in $list.users())
             <li>
              #userDisplayName($contributor)
-              &nbsp;&nbsp;<a href=#appUrl("/list/$list.id()/unvite?user-id=$contributor.id()") class="icon remove-contributor">x</a>
+              &nbsp;&nbsp;<a href=#appUrl("/x/list/$list.id()/unvite?user=$contributor.id()") class="icon remove-contributor">x</a>
             </li>
           #end
         </ul>
       </div>
-      <form id=form-invite-to-list method=post action=#appUrl("/list/$list.id()/invite")>
+      <form id=form-invite-to-list method=post action=#appUrl("/x/list/$list.id()/invite")>
         <input type=email name=email id=email placeholder="yourfriend@gmail.com">
         <input type=submit class="icon" value="+">
       </form>
@@ -34,12 +34,12 @@
     <a href=#appUrl("/list/$list.id()/$list.slug()/tab/list-comments")
        data-tab-content-id=list-comments
        class="tab#if($tabId == "list-comments") active-tab#end">
-      Comments (<span class="comment-count">#*$list.comments().size()*#</span>)
+      Comments (<span class="comment-count">$list.comments().size()</span>)
     </a>
     <a href=#appUrl("/list/$list.id()/$list.slug()/tab/list-activity")
        data-tab-content-id=list-activity
        class="tab#if($tabId == "list-activity") active-tab#end">
-      Activity (#*$history.size()*#)
+      Activity ($history.size())
     </a>
   </div>
   <div id="list-items" class="tab-content#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab-content#end">
@@ -100,12 +100,11 @@
   </div>
   <div id=list-comments class="tab-content#if($tabId == "list-comments") active-tab-content#end">
     <div class="comments-list flexible-container">
-      #**
       <ul>
         #foreach($comment in $list.comments())
           <li class="comment list-item-with-user-image">
-            #if($__optUser.isDefined() && $__user.id() == $comment.user().Id)
-              <a href=#appUrl("/list/$list.id()/comment/$comment.id()/delete")
+            #if($__optUser.isDefined() && $__user.id() == $comment.user().id())
+              <a href=#appUrl("/x/list/$list.id()/comment/$comment.id()/delete")
                  class="icon comment-delete">x</a>
             #end
             #squareUserImage($comment.user(), 54)
@@ -120,16 +119,15 @@
           id=frm-add-list-comment
           class="list-item-with-user-image add-comment-form"
           method=post
-          action=#appUrl("/list/$list.id()/comment")>
-        #if($.isPresent())
+          action=#appUrl("/x/list/$list.id()/comment")>
+        #if($__optUser.isDefined())
           #squareUserImage($__user, 54)
           <input type="hidden" name="username" value="#userDisplayName($__user)">
-          <input type="hidden" name="user-image-url" value="#profileImageUrl($__user, 54)">
+          <input type="hidden" name="user-image-url" value="#squareUserImageUrl($__user, 54)">
         #end
         <textarea name=body class=full-width placeholder="Say something awesome&hellip;"></textarea>
         <div class=clearfix><input type=submit class="orange-button float-right" value="COMMENT"></div>
       </form>
-      **#
     </div>
   </div>
   <div id="list-activity" class="tab-content#if($tabId == "list-activity") active-tab-content#end">

@@ -92,6 +92,19 @@
   </span>
 #end
 
+#macro(squareUserImageUrl $u $width)
+  #if ($u.image().isDefined())
+    #set ($_ti = $__imageService.optionalByOriginalIdAndTransform($u.image().get().id(), "s-$width", true))
+    #if ($ti.isPresent())
+      $_ti.get().urlForScheme($__scheme)
+    #else
+      $__canonicalBaseUrl/i/user/$u.id()?t=s-$width
+    #end
+  #else
+    $__canonicalBaseUrl/i/user/$u.id()?t=s-$width
+  #end
+#end
+
 
 
 
@@ -133,17 +146,4 @@
           height="$width">
     #end
   </span>
-#end
-
-#macro(profileImageUrl $u $width)
-  #if ($u.Image.isPresent())
-    #set ($_ti = $__imageService.findImageByOriginalExternalIdAndTransform($u.Image.get().ExternalId, "s-$width", true))
-    #if ($ti.isPresent())
-      $_ti.get().getUrl($__scheme)
-    #else
-      $__canonicalBaseUrl/image/profile/$u.Id?s=$width
-    #end
-  #else
-    $__canonicalBaseUrl/image/profile/$u.Id?s=$width
-  #end
 #end

@@ -1,4 +1,4 @@
-package me.yabble.web.server
+package me.yabble.web.handler
 
 import me.yabble.common.Predef._
 import me.yabble.common.Log
@@ -16,9 +16,9 @@ import scala.collection.JavaConversions._
 class IndexHandler(
     val sessionService: SessionService,
     val userService: IUserService,
-    val template: VelocityTemplate,
-    val encoding: String)
-  extends TemplateHandler
+    val encoding: String,
+    template: VelocityTemplate)
+  extends TemplateHandler(template)
 {
   private val pathPatterns = List("/")
 

@@ -38,4 +38,10 @@ object Image {
       val originalUrl: Option[String],
       val previewData: Option[Array[Byte]])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, true)
+  {
+    def urlForScheme(scheme: String): String = scheme.toLowerCase() match {
+      case "https" => secureUrl
+      case _ => url
+    }
+  }
 }
