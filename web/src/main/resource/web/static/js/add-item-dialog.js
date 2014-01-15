@@ -10,12 +10,15 @@
         'form-utils',
         'strings',
         'utils',
-        'text!template/mustache/form-add-item.mustache'
+        'text!template/mustache/form-add-item.mustache',
+        'text!template/mustache/image-search-result.mustache'
       ],
-      function($, Dialog, mustache, stringUtils, formUtils, strings, utils, textFormAddItem) {
-        var AddItemDialog, dlg, tmplFormAddItem;
+      function($, Dialog, mustache, stringUtils, formUtils, strings, utils, 
+        textFormAddItem, textImageSearchResult) {
+        var AddItemDialog, dlg, tmplFormAddItem, tmplImageSearchResultItem;
 
         tmplFormAddItem = mustache.compile(textFormAddItem);
+        tmplImageSearchResultItem = mustache.compile(textImageSearchResult)
 
         AddItemDialog = function(props) {
           var self = this;
@@ -35,7 +38,7 @@
           );
           
           this.subscribe(Dialog.Event.HIDDEN, function() {
-            this.setSearchType(AddItemDialog.SearchType.IMAGE_SEARCH);
+            self.reset();
           });
           
           // Preload the loading image
@@ -46,6 +49,7 @@
         
         AddItemDialog.prototype.setupForms = function() {
           this.setupImageUrlForm()
+              .setupSearchForm()
               .setupDetailsForm();
         };
         
@@ -131,6 +135,72 @@
           return this;
         }
         
+        AddItemDialog.prototype.clearSearchResults = function() {
+          this.elResults.empty();
+          return this;
+        };
+        
+        AddItemDialog.prototype.setupSearchForm = function() {
+          var self = this, error,
+              btnSubmit = this.find('#form-image-search input[type="submit"]'),
+              txtSearchQuery = this.find('#image-query');  
+              
+          this.elResults = this.find('#add-item-image-search-results'),          
+              
+          this.find('#form-image-search').submit(function() {
+            if(error) { 
+              error.remove(); 
+            }
+            if(
+              formUtils.validateAsNotEmpty(
+                txtSearchQuery, 
+                strings.get('item.image.search.empty')
+              )
+            ) {
+              self.clearSearchResults();
+              btnSubmit.val('Searching...').attr('disabled', true);
+              $.get(
+                '/bing/image?query=' + 
+                encodeURIComponent($.trim(txtSearchQuery.val()))
+              ).done(function(response) {
+                var i, ii,
+                    results = response && response.d && response.d.results;
+                if(!results || results.length === 0) {
+                  error = formUtils.showError(
+                    txtSearchQuery,
+                    strings.get('item.image.search.no-results')
+                  )
+                } else {
+                  for(i = 0, ii = results.length; i < ii; i++) {
+                    var image = results[i];
+                    self.elResults.append(
+                      $(
+                        tmplImageSearchResultItem({
+                          url   : image.MediaUrl,
+                          width : 512,
+                          height: (512 / parseFloat(image.Width)) * 
+                            parseFloat(image.Height)
+                        })
+                      ).click(function() {
+                        self.showDetailsForm($(this).find('img').attr('src'));
+                      })
+                    );
+                  }
+                }
+              }).fail(function() {
+                error = formUtils.showError(
+                  txtSearchQuery,
+                  strings.get('item.image.search.failed')
+                );
+              }).always(function() {
+                btnSubmit.val('Search').removeAttr('disabled');
+              });
+            } 
+            return false;
+          });
+          return this;
+        };
+        
         AddItemDialog.prototype.setupDetailsForm = function() {
           var self = this,
               txtDescription = this.find('#add-item-body');
@@ -174,12 +244,16 @@
         };
         
         AddItemDialog.prototype.reset = function() {
-          this.hideDetailsForm()
+          this.find('.form-error').remove();
+          return this.clearSearchResults()
+              .hideDetailsForm()
               .setSearchType(AddItemDialog.SearchType.IMAGE_SEARCH);
-          return this;
         };
 
         AddItemDialog.get = function(listExternalId) {
+          // TODO: if this dialog ever needs to be used in the context of 
+          // multiple lists, we'll need to write an API for setting
+          // the list external id.
           if(!dlg) {
             dlg = new AddItemDialog({
               element : Dialog.createHtml({
