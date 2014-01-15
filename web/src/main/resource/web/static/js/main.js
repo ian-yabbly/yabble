@@ -1,15 +1,5 @@
 /**
- * 'main' entry point for the product site
- *
- * TODO:
- *
- *  - Use r.js optimizer to build to a single file for inclusion in production.  Ultimately it'll look like:
- *
- *      node build-lib/r.js -o baseUrl=yabble-web/src/main/resources/yabble-web/s/js/ \
- *        paths.requireLib=yabble-web/src/main/resources/yabble-web/s/js/vendor/require-2.1.8.js \
- *        name=main \
- *        include=requireLib out=yabble-web/target/main/resources/yabble-web/s/js/main-built.js
- *
+ * main entry point for the product site
  */
 (function(window, document, require, define, undefined) {
   'use strict';
@@ -22,10 +12,10 @@
   require.config({
     baseUrl: '/s/v-' + document.YABBLE_UI_VERSION + '/js',
     paths: {
-      template: '../template',
-      text: 'vendor/require-text',
-      mustache: 'vendor/mustache',
-      moment: 'vendor/moment-2.0.0'
+      template  : '../template',
+      text      : 'vendor/require-text',
+      mustache  : 'vendor/mustache',
+      moment    : 'vendor/moment-2.0.0'
     }
   });
 

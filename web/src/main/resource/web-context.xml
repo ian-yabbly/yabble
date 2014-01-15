@@ -57,6 +57,7 @@
         <entry key='__formatService' value-ref='service.format-service'/>
         <entry key='__imageService' value-ref='service.image-service'/>
         <entry key='__doLessInBrowser' value='${web.less.do-in-browser}'/>
+        <entry key='__minifyJs' value='${web.minifyJs}'/>
       </map>
     </constructor-arg>
   </bean>
