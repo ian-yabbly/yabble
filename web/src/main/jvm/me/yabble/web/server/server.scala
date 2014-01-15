@@ -9,6 +9,7 @@ import me.yabble.service.model._
 import me.yabble.web.proto.WebProtos._
 import me.yabble.web.service._
 import me.yabble.web.template.{Utils => TemplateUtils}
+import me.yabble.web.template.{Format => TemplateFormat}
 import me.yabble.web.template.VelocityTemplate
 
 import com.google.common.base.Function
@@ -189,7 +190,7 @@ trait Handler extends Log {
   protected def meOrCreate(): User.Persisted = optionalMe match {
     case Some(user) => user
     case None => {
-      val uid = userService.create(new User.Free(None, None))
+      val uid = userService.create(new User.Free(None, None, None))
       sessionService.withSession(true, new Function[Session, Session]() {
         override def apply(session: Session): Session = {
           session.toBuilder().setUserId(uid).build()
@@ -247,7 +248,19 @@ trait TemplateHandler extends Handler {
   private def supplementContext(c: Map[String, Any]): Map[String, Any] = {
     val m = MutableMap(c.toSeq: _*)
     m.put("Utils", classOf[TemplateUtils])
+    m.put("Format", classOf[TemplateFormat])
     m.put("TextFormat", classOf[TextFormat])
+
+    optionalMe() match {
+      case Some(user) => {
+        m.put("__optUser", Some(user))
+        m.put("__user", user)
+      }
+      case None => {
+        m.put("__optUser", None)
+      }
+    }
+
     return m.toMap
   }
 }

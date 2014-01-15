@@ -6,6 +6,7 @@ import org.apache.commons.io.FilenameUtils
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.VelocityEngine
 import org.apache.velocity.context.Context
+import org.apache.velocity.util.introspection._
 
 import com.google.common.collect.Maps
 
@@ -88,5 +89,12 @@ class VelocityTemplate(
 
   private def renderToWriter(t: String, context: Context, writer: Writer) {
     engine.mergeTemplate("/%s".format(t), encoding, context, writer)
+  }
+}
+
+class ScalaUberspect extends UberspectImpl {
+  override def getIterator(obj: Object, info: Info): java.util.Iterator[_] = obj match {
+    case l: List[_] => asJavaIterator(l.iterator)
+    case _ => super.getIterator(obj, info)
   }
 }

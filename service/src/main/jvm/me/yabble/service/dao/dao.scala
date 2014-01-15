@@ -4,12 +4,15 @@ import me.yabble.common.Predef._
 import me.yabble.common.SecurityUtils
 import me.yabble.common.TextUtils._
 import me.yabble.common.Log
+import me.yabble.service._
 import me.yabble.service.dao.Predef._
 import me.yabble.service.model._
 
 import org.joda.time.DateTime
+import org.joda.time.DateTimeZone
 
 import org.springframework.dao.IncorrectResultSizeDataAccessException
+import org.springframework.dao.EmptyResultDataAccessException
 import org.springframework.jdbc.core.RowMapper
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 
@@ -218,7 +221,12 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
       case Some(v) => v
       case None => s"select * from $tableName where id = ?"
     }
-    t.queryForObject(stmt, getRowMapper, id)
+
+    try {
+      t.queryForObject(stmt, getRowMapper, id)
+    } catch {
+      case e: EmptyResultDataAccessException => throw new EntityNotFoundException(id)
+    }
   }
 
   def all(): List[P] = {
@@ -387,11 +395,11 @@ class UserDao(npt: NamedParameterJdbcTemplate)
   extends EntityDao[User.Free, User.Persisted, User.Update]("users", npt)
   with Log
 {
-  override def getInsertParams(f: User.Free) = Map("name" -> f.name.orNull, "email" -> f.email.orNull)
+  override def getInsertParams(f: User.Free) = Map("name" -> f.name.orNull, "email" -> f.email.orNull, "tz" -> f.tz.orNull)
 
-  override def getUpdateParams(u: User.Update) = Map("name" -> u.name.orNull, "email" -> u.email.orNull)
+  override def getUpdateParams(u: User.Update) = Map("name" -> u.name.orNull, "email" -> u.email.orNull, "tz" -> u.tz.orNull)
 
-  override def getQueryParams(f: User.Free) = Map("name" -> f.name.orNull, "email" -> f.email.orNull)
+  override def getQueryParams(f: User.Free) = Map("name" -> f.name.orNull, "email" -> f.email.orNull, "tz" -> f.tz.orNull)
 
   override def getRowMapper() = new RowMapper[User.Persisted]() {
     override def mapRow(rs: ResultSet, rowNum: Int): User.Persisted = {
@@ -402,7 +410,8 @@ class UserDao(npt: NamedParameterJdbcTemplate)
           rs.getTimestamp("last_updated_date"),
           rs.getBoolean("is_active"),
           Option(rs.getString("name")),
-          Option(rs.getString("email")))
+          Option(rs.getString("email")),
+          Option(rs.getString("tz")).map(tz => DateTimeZone.forID(tz)))
     }
   }
 }
@@ -432,7 +441,8 @@ class YListDao(
           userDao.find(rs.getString("user_id")),
           rs.getString("title"),
           Option(rs.getString("body")),
-          ylistItemDao.allByYList(id))
+          ylistItemDao.allByYList(id),
+          Nil)
     }
   }
 }
@@ -462,7 +472,9 @@ class YListItemDao(private val userDao: UserDao, imageDao: ImageDao, npt: NamedP
           userDao.find(rs.getString("user_id")),
           Option(rs.getString("title")),
           Option(rs.getString("body")),
-          imageDao.allByYListItem(id))
+          imageDao.allByYListItem(id),
+          Nil,
+          Nil)
     }
   }
 }

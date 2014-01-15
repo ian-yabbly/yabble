@@ -44,6 +44,8 @@
 
         <prop key='velocimacro.library'>lib/macros.vm</prop>
         <prop key='velocimacro.arguments.strict'>true</prop>
+
+        <prop key='runtime.introspector.uberspect'>me.yabble.web.template.ScalaUberspect</prop>
       </props>
     </constructor-arg>
 

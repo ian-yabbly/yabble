@@ -12,6 +12,8 @@ import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
 
+import scala.Option;
+
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
@@ -28,6 +30,16 @@ public class FormatService {
 
     public FormatService(RedisClient redisClient) {
         this.redisClient = redisClient;
+    }
+
+    public String formatUserMarkup(Optional<String> optIn, boolean includeAnchors) {
+        if (optIn == null || !optIn.isPresent()) { return ""; }
+        return formatUserMarkup(optIn.get(), includeAnchors);
+    }
+
+    public String formatUserMarkup(Option<String> optIn, boolean includeAnchors) {
+        if (optIn == null || optIn.isEmpty()) { return ""; }
+        return formatUserMarkup(optIn.get(), includeAnchors);
     }
 
     public String formatUserMarkup(String in, final boolean includeAnchors) {
