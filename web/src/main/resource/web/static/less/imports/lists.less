@@ -6,7 +6,6 @@
     margin: 60px 0;
     padding-bottom: 60px;
     border-bottom: 1px solid @gray;
-    text-align: left;
 
     &:last-child {
       padding-bottom: 0;
@@ -187,8 +186,8 @@
 /* list contributors */
 
   #list-contributors {
-    padding: @padding-small 0;
-    margin-bottom: @margin-regular;
+    padding: @padding-regular 0;
+    margin-bottom: @margin-large;
     .box-shadow(0 0 8px rgba(0, 0, 0, 0.55));
 
     .flexible-container {
@@ -208,7 +207,7 @@
       position: absolute;
       top: 50%;
       margin-top: -2.5px;
-      right: 17.5px;
+      right: ((@padding-regular * 2) / 2px);
       .arrow-down(5px);
     }
 
@@ -244,7 +243,7 @@
     &,
     li {
       line-height: 40px;
-      padding: 0 @padding-regular 0 @padding-small;
+      padding: 0 (@padding-regular * 2) 0 @padding-regular;
       color: #fff;
       width: 250px;
       .box-sizing;
@@ -259,7 +258,7 @@
       a {
         position: absolute;
         right: 0;
-        width: @padding-regular;
+        width: (@padding-regular * 2) + 15;
         text-align: center;
         font-size: 0.7em;
         color: @light-gray;
@@ -288,7 +287,7 @@
       display: block;
       width: 100%;
       background: transparent;
-      padding: (  @padding-small / 2) 45px (@padding-small / 2) @padding-small;
+      padding: @padding-small (@padding-small / 2 + 40px) @padding-small @padding-small;
       .box-shadow(none);
       .box-sizing;
     }

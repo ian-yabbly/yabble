@@ -160,10 +160,16 @@
           #end
         #end
       <li class="list-item-with-user-image">
-        #squareUserImage($h.user(), 49)
+        #squareUserImage($h.user(), 54)
         <span class="username">#userDisplayName($h.user())</span>
         <span class="history-action">$action</span>
-        <span class="history-timestamp">$Format.timeAgo($h.eventDate(), $__user.tz())</span>
+        <span class="history-timestamp">
+          #if($__optUser.isDefined())
+            $Format.timeAgo($h.eventDate(), $__user.tz())
+          #else
+            $Format.timeAgo($h.eventDate())
+          #end
+        </span>
         #if($body != "")
           <p>&ldquo;$body&rdquo;</p>
         #end

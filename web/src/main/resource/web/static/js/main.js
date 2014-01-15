@@ -10,7 +10,7 @@
   }());
 
   require.config({
-    baseUrl: '/s/v-' + document.YABBLE_UI_VERSION + '/js',
+    baseUrl: '/s/' + document.YABBLE_UI_VERSION + '/js',
     paths: {
       template  : '../template',
       text      : 'vendor/require-text',
