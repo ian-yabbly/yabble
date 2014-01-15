@@ -117,11 +117,7 @@
               if(!currentImage) {
                 formUtils.showError(txtImageUrl, strings.get('item.url.invalid'));
               } else {
-                self.showDetailsForm(
-                  currentImage.attr('src'),
-                  currentImage.width(),
-                  currentImage.height()
-                );
+                self.showDetailsForm(currentImage.attr('src'));
               }
             }
             return false;
@@ -171,8 +167,6 @@
                     elItem = $(
                       tmplImageSearchResultItem({
                         fullUrl     : image.MediaUrl,
-                        fullWidth   : image.Width,
-                        fullHeight  : image.Height,
                         url         : image.Thumbnail.MediaUrl,
                         width       : 150,
                         height      : (150 / parseFloat(image.Thumbnail.Width)) * 
@@ -180,11 +174,7 @@
                       })
                     ).click(function() {
                       var i = $(this).find('img');
-                      self.showDetailsForm(
-                        i.data('full-url'),
-                        i.data('full-width'),
-                        i.data('full-height')
-                      );
+                      self.showDetailsForm(i.data('full-url'));
                     })                    
                     elItem.find('img').one('load error', function(e) {
                       if(e.type === 'load') {
@@ -243,27 +233,23 @@
           return this;          
         };
         
-        AddItemDialog.prototype.showDetailsForm = function(imageUrl, imageWidth, imageHeight) {
+        AddItemDialog.prototype.showDetailsForm = function(imageUrl) {
           var elImageAndHidden, elImage,
-              elImageAndHiddenPreview = this.find('#image-preview');
-          elImageAndHiddenPreview.empty().css(
-            'height',  
-            (512 / parseFloat(imageWidth)) * parseFloat(imageHeight) + 'px'
-          ).addClass('is-loading');          
+              elImagePreview = this.find('#image-preview');
+          elImagePreview.empty().addClass('is-loading');
           elImageAndHidden = $(
             stringUtils.format(
-              '<input type=hidden name=image-url value={}><img width=512>', 
-              imageUrl,
+              '<input type=hidden name=image-url value={}>',
               imageUrl
             )
           );
-          elImage = elImageAndHidden.filter('img');
+          elImage = $('<img width=100%>');
+          elImageAndHidden = elImageAndHidden.add(elImage);
           elImage.one('load error', function(e) {
             if(e.type === 'load') {
-              elImageAndHiddenPreview.removeClass('is-loading')
-              elImageAndHiddenPreview.removeClass('is-loading').append(elImageAndHidden);
+              elImagePreview.removeClass('is-loading').append(elImageAndHidden);
             } else {
-              elImageAndHiddenPreview.removeClass('is-loading').addClass('has-error');
+              elImagePreview.removeClass('is-loading').addClass('has-error');
             }
           }).attr('src', imageUrl);
           this.element.removeClass(this.mode).addClass('item-details');
