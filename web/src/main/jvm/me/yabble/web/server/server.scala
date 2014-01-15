@@ -270,7 +270,8 @@ trait Handler extends Log {
   }
 
   def params(nvps: List[NameValuePair], name: String): List[String] = nvps.filter(_.getName == name)
-      .flatMap(_.getValue.split(","))
+      //.flatMap(_.getValue.split(","))
+      .map(_.getValue)
       .filterNot(_ == "")
 }
 
