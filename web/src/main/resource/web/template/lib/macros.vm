@@ -14,26 +14,59 @@
 #macro(escapeHtml $s)$TextFormat.escapeHtml($s)#end
 #macro(e $s)#escapeHtml($s)#end
 
-#macro(imagePresetByUrl $url $p)
-  #set ($_optTi = $__imageService.findOrCreateImageByUrlAndTransform($url, $p))
+#macro(imageByUrlAndTransform $url $t)
+  #set ($_optTi = $__imageService.optionalOrCreateImageByUrlAndTransform($url, $t))
   #if ($_optTi.isPresent())
-    <img src="$_optTi.get().SecureUrl" width="$_optTi.get().Width.get()" height="$_optTi.get().Height.get()">
+    #if ($_optTi.get().isInternal())
+      <img
+          src="$_optTi.get().secureUrl()"
+          width="$_optTi.get().width().get()"
+          height="$_optTi.get().height().get()"
+          >
+    #else
+      <img
+          #if ($_optTi.get().secureUrl().isDefined())
+            src="$_optTi.get().secureUrl()"
+          #else
+            src="$_optTi.get().url()"
+          #end
+          >
+    #end
   #end
 #end
 
-#macro(imagePreset2 $i $p)
-  #set ($_optTi = $__imageService.findImageByOriginalExternalIdAndTransform($i.ExternalId, $p, true))
+#macro(imagePreset2 $i $t)
+  #set ($_optTi = $__imageService.optionalByOriginalIdAndTransform($i.id(), $t, true))
   #if ($_optTi.isPresent())
-    <img src="$_optTi.get().SecureUrl" width="$_optTi.get().Width.get()" height="$_optTi.get().Height.get()">
+    <img src="$_optTi.get().secureUrl()" width="$_optTi.get().width().get()" height="$_optTi.get().height().get()">
   #end
 #end
 
-#macro(imagePreset $i $p)
-  #set ($optImage = $__imageService.findImageByOriginalExternalIdAndTransform($i.ExternalId, $p))
+#macro(imagePreset $i $t)
+  #set ($optImage = $__imageService.optionalByOriginalIdAndTransform($i.id(), $t))
   #if ($optImage.isPresent())
-    <img src="/image/id/$i.ExternalId/p/$p" width="$optImage.get().Width.get()" height="$optImage.get().Height.get()" />
+    <img src="/i/$i.id()?t=$t" width="$optImage.get().width().get()" height="$optImage.get().height().get()" />
   #end
 #end
+
+#macro(transformImageUrl $i $t)
+#set ($_optTi = $__imageService.optionalByOriginalIdAndTransform($i.id(), $t, true))
+#if ($_optTi.isPresent())$_optTi.get().secureUrl()#end
+#end
+
+
+
+
+
+
+
+
+
+
+#* EVERYTHING BELOW HERE IS SUSPECT *#
+
+
+
 
 #macro(profileImage $u $width)
   <span class="user-image">
@@ -76,11 +109,6 @@
   #else
     $__canonicalBaseUrl/image/profile/$u.Id?s=$width
   #end
-#end
-
-#macro(transformImageUrl $i $p)
-#set ($_optTi = $__imageService.findImageByOriginalExternalIdAndTransform($i.ExternalId, $p, true))
-#if ($_optTi.isPresent())$_optTi.get().SecureUrl#end
 #end
 
 #macro(userDisplayName $u)

@@ -294,7 +294,7 @@ class ImageDao(npt: NamedParameterJdbcTemplate)
     } else {
       buf.append("is null")
     }
-    buf.append(" and transform_height")
+    buf.append(" and transform_height ")
     if (transform.getHeight.isPresent) {
       buf.append("= ?")
     } else {
@@ -302,13 +302,13 @@ class ImageDao(npt: NamedParameterJdbcTemplate)
     }
 
     if (transform.getWidth.isPresent && transform.getHeight.isPresent) {
-      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getWidth.get, transform.getHeight.get).toList)
+      optional(t.query(buf.toString, getRowMapper, originalId, enumToCode(transform.getType), transform.getWidth.get, transform.getHeight.get).toList)
     } else if (transform.getWidth.isPresent) {
-      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getWidth.get).toList)
+      optional(t.query(buf.toString, getRowMapper, originalId, enumToCode(transform.getType), transform.getWidth.get).toList)
     } else if (transform.getHeight.isPresent) {
-      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType), transform.getHeight.get).toList)
+      optional(t.query(buf.toString, getRowMapper, originalId, enumToCode(transform.getType), transform.getHeight.get).toList)
     } else {
-      optional(t.query(buf.toString, getRowMapper, enumToCode(transform.getType)).toList)
+      optional(t.query(buf.toString, getRowMapper, originalId, enumToCode(transform.getType)).toList)
     }
   }
 
@@ -452,6 +452,10 @@ class YListItemDao(private val userDao: UserDao, imageDao: ImageDao, npt: NamedP
   with Log
 {
   def allByYList(id: String) = all("all-by-list", Map("list_id" -> id))
+
+  def addImage(listItemId: String, imageId: String) {
+    npt.update("insert into list_item_images (list_item_id, image_id) values (:list_item_id, :image_id)", Map("list_item_id" -> listItemId, "image_id" -> imageId))
+  }
 
   override def getInsertParams(f: YList.Item.Free) = Map("list_id" -> f.listId, "user_id" -> f.userId, "title" -> f.title.orNull, "body" -> f.body.orNull)
 

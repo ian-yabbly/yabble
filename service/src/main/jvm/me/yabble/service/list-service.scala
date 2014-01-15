@@ -15,5 +15,9 @@ class YListService(
   with IYListService
   with Log
 {
-  override def create(f: YList.Item.Free) = ylistItemDao.create(f)
+  override def create(f: YList.Item.Free) = {
+    val id = ylistItemDao.create(f)
+    f.imageIds.foreach(iid => ylistItemDao.addImage(id, iid))
+    id
+  }
 }

@@ -5,6 +5,8 @@ import me.yabble.service.NotFoundException
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
 
+case class Dimensions(width: Long, height: Long)
+
 object Entity {
   case class Free()
   case class Persisted(id: String, creationDate: DateTime, lastUpdatedDate: DateTime, isActive: Boolean)

@@ -7,6 +7,7 @@ import me.yabble.common.http.client.ResponseHandler;
 import me.yabble.common.wq.WorkQueue;
 import me.yabble.common.txn.SpringTransactionSynchronization;
 import me.yabble.service.dao.ImageDao;
+import me.yabble.service.model.Dimensions;
 import me.yabble.service.model.Image;
 import me.yabble.service.model.ImageTransform;
 import me.yabble.service.proto.ServiceProtos.EntityEvent;
@@ -32,17 +33,24 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import static me.yabble.common.SecurityUtils.*;
 import static org.apache.commons.io.FileUtils.*;
 import static scala.collection.JavaConversions.*;
 import static me.yabble.common.Predef.*;
 
 public class ImageServiceImpl implements ImageService {
     private static final Logger log = LoggerFactory.getLogger(ImageServiceImpl.class);
+
+    private static final Pattern IMAGE_DATA_URI_PATTERN = Pattern.compile("^data:(.*);base64,(.*)$");
 
     private static final Map<String, String> MIME_TYPE_TO_FILE_EXTENSION_MAP = ImmutableMap.of(
             "image/jpeg", "jpg",
@@ -137,7 +145,7 @@ public class ImageServiceImpl implements ImageService {
         return seqAsJavaList(imageDao.allOriginals(offset, limit));
     }
 
-    private Optional<String> findExistingImageIdByUrl(String url) {
+    private Optional<String> optionalExistingImageIdByUrl(String url) {
         if (isInternalUrl(url)) {
             Optional<Image.Persisted> optImage = optionalByUrlOrSecureUrl(url);
 
@@ -160,45 +168,58 @@ public class ImageServiceImpl implements ImageService {
 
     @Override
     public Optional<String> maybeCreateImageFromUrl(final String url) {
-        Optional<String> optExistingId = findExistingImageIdByUrl(url);
-        if (optExistingId.isPresent()) {
-            return optExistingId;
-        }
-
-        String mtv = null;
-        byte[] bytes = null;
-        try {
-            GetRequest get = new GetRequest(url);
-            //get.setDoLog(true);
-            Map<String, Serializable> m = httpClient.execute(
-                    get,
-                    new ResponseHandler<Map<String, Serializable>>()
-            {
-                @Override
-                public Map<String, Serializable> handle(Response response) throws Exception {
-                    if (response.getStatusCode() >= 400) {
-                        throw new RuntimeException(String.format("Unexpected response code [%d] for URL [%s]", response.getStatusCode(), url));
-                    }
-
-                    return ImmutableMap.of(
-                            "image-data", response.getContentAsBytes(),
-                            "mime-type", response.getContentType());
+        if (url.startsWith("data:")) {
+            Matcher m = IMAGE_DATA_URI_PATTERN.matcher(url);
+            if (m.matches()) {
+                String mtv = m.group(1);
+                byte[] bytes = base64Encode(m.group(2));
+                try {
+                    return Optional.of(createImage(mtv, Optional.<String>absent(), Optional.<String>absent(), bytes));
+                } catch (Exception e) {
+                    log.warn("Could not retrieve image from URL [{}] [{}]", url, e.getMessage());
                 }
-            });
-            mtv = contentTypeToMimeType((String) m.get("mime-type"));
-            bytes = (byte[]) m.get("image-data");
-        } catch (Exception e) {
-            log.warn("Could not retrieve image from URL [{}] [{}]", url, e.getMessage());
-            return Optional.<String>absent();
+            } else {
+               log.warn("Malformed image data URI [{}]", url);
+            }
+        } else {
+            Optional<String> optExistingId = optionalExistingImageIdByUrl(url);
+            if (optExistingId.isPresent()) {
+                return optExistingId;
+            }
+
+            try {
+                GetRequest get = new GetRequest(url);
+                //get.setDoLog(true);
+                Map<String, Serializable> m = httpClient.execute(
+                        get,
+                        new ResponseHandler<Map<String, Serializable>>()
+                {
+                    @Override
+                    public Map<String, Serializable> handle(Response response) throws Exception {
+                        if (response.getStatusCode() >= 400) {
+                            throw new RuntimeException(String.format("Unexpected response code [%d] for URL [%s]", response.getStatusCode(), url));
+                        }
+
+                        return ImmutableMap.of(
+                                "image-data", response.getContentAsBytes(),
+                                "mime-type", response.getContentType());
+                     }
+                });
+                String mtv = contentTypeToMimeType((String) m.get("mime-type"));
+                byte[] bytes = (byte[]) m.get("image-data");
+                return Optional.of(createImageFromUrl(url, mtv, bytes));
+            } catch (Exception e) {
+                log.warn("Could not retrieve image from URL [{}] [{}]", url, e.getMessage());
+            }
+ 
         }
-
-
-        return Optional.of(createImageFromUrl(url, mtv, bytes));
+ 
+        return Optional.<String>absent();
     }
 
     @Override
     public String createImageFromUrl(String url) {
-        Optional<String> optExistingId = findExistingImageIdByUrl(url);
+        Optional<String> optExistingId = optionalExistingImageIdByUrl(url);
         if (optExistingId.isPresent()) {
             return optExistingId.get();
         }
@@ -620,9 +641,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Optional<Image.Persisted> optionalByOriginalIdAndTransform(
-            String id, String transform)
-    {
+    public Optional<Image.Persisted> optionalByOriginalIdAndTransform(String id, String transform) {
         return optionalByOriginalIdAndTransform(id, new ImageTransform(transform));
     }
 
@@ -694,7 +713,7 @@ public class ImageServiceImpl implements ImageService {
 
     //@Override
     public Optional<Image.Persisted> findOrCreateImageByUrlAndTransform(String url, ImageTransform transform) {
-        Optional<String> optOriginalId = findExistingImageIdByUrl(url);
+        Optional<String> optOriginalId = optionalExistingImageIdByUrl(url);
         if (optOriginalId.isPresent()) {
             String originalId = optOriginalId.get();
             Optional<Image.Persisted> optImage = option2Optional(imageDao.optionalByOriginalImageAndTransform(originalId, transform));
@@ -724,6 +743,65 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public boolean isInternalUrl(String url) {
         return s3Store.isS3Url(url);
+    }
+
+    @Override
+    public Dimensions getDimensionsByImageAndTransform(String id, String transform) {
+        long height = 0l;
+        long width = 0l;
+
+        Image.Persisted i = imageDao.find(id);
+        ImageTransform t = new ImageTransform(transform);
+
+        switch (t.getType()) {
+            case RESIZE_BOX:
+                height = t.getHeight().get();
+                width = t.getWidth().get();
+                break;
+            case RESIZE_WIDTH:
+                long th = BigDecimal.valueOf(t.getWidth().get())
+                    .divide(
+                        BigDecimal.valueOf((long) i.width().get()),
+                        3,
+                        RoundingMode.HALF_EVEN
+                    ).multiply(
+                        BigDecimal.valueOf((long) i.height().get())
+                    )
+                    .setScale(0, RoundingMode.HALF_EVEN)
+                    .longValueExact();
+
+                height = th;
+                width = t.getWidth().get();
+                break;
+            case RESIZE_HEIGHT:
+                long tw = BigDecimal.valueOf(t.getHeight().get())
+                    .divide(
+                        BigDecimal.valueOf((long) i.height().get()),
+                        3,
+                        RoundingMode.HALF_EVEN
+                    ).multiply(
+                        BigDecimal.valueOf((long) i.width().get())
+                    )
+                    .setScale(0, RoundingMode.HALF_EVEN)
+                    .longValueExact();
+
+                height = t.getHeight().get();
+                width = tw;
+                break;
+            case RESIZE_SQUARE:
+                height = t.getHeight().get();
+                width = t.getWidth().get();
+                break;
+            case RESIZE_COVER:
+                height = t.getHeight().get();
+                width = t.getWidth().get();
+                break;
+            default:
+                throw new RuntimeException(
+                        String.format("Unexpected transform type [%s]", t.getType()));
+        }
+
+        return new Dimensions(width, height);
     }
 
     private String run(String cmd) throws IOException {

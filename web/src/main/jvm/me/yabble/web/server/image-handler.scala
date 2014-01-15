@@ -46,74 +46,30 @@ class ImageHandler(
 
   def index(exchange: HttpExchange, pathVars: Map[String, String]) {
     val id = pathVars("id")
-    optional2Option(imageService.optional(id)) match {
-      case Some(i) => {
-        if (isRequestSecure(exchange)) {
-          redirect(exchange, i.secureUrl)
-        } else {
-          redirect(exchange, i.url)
+    val nvps = queryNvps(exchange)
+
+    firstNvp(nvps, "t") match {
+      case Some(transform) => {
+        optional2Option(imageService.optionalByOriginalIdAndTransform(id, transform)) match {
+          case Some(i) => if (isRequestSecure(exchange)) {
+                redirect(exchange, i.secureUrl, true)
+              } else {
+                redirect(exchange, i.url, true)
+              }
+          case None => plainTextResponse(exchange, Some("Image not found [%s] [%s]".format(id, transform)), 404)
         }
       }
-      case None => {
-        plainTextResponse(exchange, Some("Image not found [%s]".format(id)), 404)
+
+      case None => optional2Option(imageService.optional(id)) match {
+        case Some(i) => {
+          if (isRequestSecure(exchange)) {
+            redirect(exchange, i.secureUrl, true)
+          } else {
+            redirect(exchange, i.url, true)
+          }
+        }
+        case None => plainTextResponse(exchange, Some("Image not found [%s]".format(id)), 404)
       }
     }
-
-/*
-    val path = noContextPath(exchange)
-    val m = VERSION_PATTERN.matcher(path)
-
-    var isVersioned = false
-    val resourcePath = if (m.matches()) {
-          isVersioned = true
-          m.group(1)
-        } else {
-          path.substring("/s".length)
-        }
-
-    val contentType = if (path.toLowerCase().endsWith(".css")) {
-          Some("text/css; charset=%s".format(encoding))
-        } else if (path.toLowerCase().endsWith(".less")) {
-          Some("text/plain")
-        } else if (path.toLowerCase().endsWith(".js")) {
-          Some("application/javascript; charset=%s".format(encoding))
-        } else if (path.toLowerCase().endsWith(".gif")) {
-          Some("image/gif")
-        } else if (path.toLowerCase().endsWith(".jgp")) {
-          Some("image/jpeg")
-        } else {
-          None
-        }
-
-    try {
-      val startMs = System.currentTimeMillis()
-      contentType.foreach(t => exchange.getResponseHeaders.set("Content-Type", t))
-      if (isVersioned) {
-        exchange.getResponseHeaders.set("Cache-Control", "max-age=31536000, public")
-      }
-
-      val resource = resourceLoader.getResource(staticBaseResourcePath + resourcePath)
-
-      try {
-        exchange.getResponseHeaders.set("Last-Modified", DateUtils.formatDate(new java.util.Date(resource.lastModified())))
-      } catch {
-        case e: IOException => log.warn(e.getMessage, e)
-      }
-
-      exchange.sendResponseHeaders(200, resource.contentLength())
-      // TODO try/finally
-      IOUtils.copy(resource.getInputStream, exchange.getResponseBody)
-      resource.getInputStream.close()
-    } catch {
-      case e: Exception => {
-        log.error(e.getMessage, e)
-        try {
-          exchange.getResponseBody.close()
-        } catch {
-          case e: Exception => log.error(e.getMessage, e)
-        }
-      }
-    }
-*/
   }
 }
