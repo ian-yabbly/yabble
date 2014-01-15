@@ -77,7 +77,6 @@
             </span>
             <span class="list-item-content">
               #if($item.images().nonEmpty())
-                <div style='font-size: 100px;'>HERE</div>
                 #set($i = $item.images().head())
                  <a href='#appUrl("/list/$list.id()/item/$item.id()")'
                     class="list-item-image">
@@ -87,7 +86,13 @@
                  </a>
               #end
               <span class="list-item-body">
-                #formatUserMarkup($item.body(), true)
+                #if ($item.title().isDefined())
+                  #formatUserMarkup($item.title().get(), true)
+                #end
+
+                #if ($item.body().isDefined())
+                  #formatUserMarkup($item.body().get(), true)
+                #end
               </span>
             </span>
           </li>
