@@ -19,11 +19,6 @@
            width="506"
            height="$__imageService.getDimensionsByImageAndTransform($i.id(), 'w-506').height()">
     </a>
-  #elseif(!$item.externalImages.isEmpty())
-    #set($i = $item.externalImages().get(0))
-    <a href=$i.url() target=_blank class="list-item-image">
-      <img src=$i.url() width="506">
-    </a>
   #end
   #set($hideCommentsCount = true)
   #parse('list-item-controls.html')

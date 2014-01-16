@@ -44,15 +44,15 @@
       <ul>
         #foreach($item in $list.items())
           <li class="list-item" data-item-id="$item.id()">
+           <a href=#appUrl("/list/$list.id()/item/$item.id()") class=list-item-link>
             <span class="list-item-content">
               #if($item.images().nonEmpty())
                 #set($i = $item.images().head())
-                 <a href=#appUrl("/list/$list.id()/item/$item.id()")
-                    class="list-item-image is-loading">
+                <span class="list-item-image is-loading">
                    <img src="#transformImageUrl($i, 'w-325')"
                         width="325"
                         height="$__imageService.getDimensionsByImageAndTransform($i.id(), 'w-325').height()">
-                 </a>
+                 </span>
               #end
               <span class="list-item-body">
                 #if ($item.title().isDefined())
@@ -63,7 +63,7 @@
                   #formatUserMarkup($item.body().get(), true)
                 #end
               </span>
-            </span>
+            </a>
             #parse('list-item-controls.html')
           </li>
         #end

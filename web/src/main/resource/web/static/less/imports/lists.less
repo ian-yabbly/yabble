@@ -29,9 +29,20 @@
 
   .list-item .list-item-image {
     margin: 0 @margin-regular 0 0;
-
+  }
+  
+  a[href].list-item-link {
+    min-height: 100px;
+    display: block;
+    color: #000;
+    text-decoration: none;
+    
     &:hover {
-      border-color: @blue;
+      color: @light-blue;
+      
+      .list-item-image {
+        border-color: @blue;
+      }
     }
   }
 
@@ -117,16 +128,26 @@
           color: @medium-gray;
         }
       }
-    }
-    
-    a[href].button-toggle-list-item-vote.has-voted {
-      .orange-button;
-      margin-top: 0;
       
-      .icon {
-        color: @orange;
+      &.has-voted {
+        .orange-button;
+        margin-top: 0;
+      
+        .icon {
+          color: @orange;
+        }
       }
-    }
+           
+      &,
+      &.has-voted {
+        &.loading .icon {
+          color: transparent;
+          .is-loading;
+          background-color: #fff;
+          background-size: 25px 25px;
+        }
+      }
+    }    
   }
 
   #list-items .flexible-container {

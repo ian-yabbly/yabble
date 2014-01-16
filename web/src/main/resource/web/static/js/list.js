@@ -96,7 +96,11 @@
                 elCountText = elCount.find('.list-item-vote-count-text');
 
             if(user) {
-              $.get(href);
+              button.addClass('loading');
+              
+              $.get(href).done(function() {
+                button.removeClass('loading');                
+              });
             
               newVoteCount = voteCount + (isVote ? 1 : -1);
               button.data('vote-count', newVoteCount)
