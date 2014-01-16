@@ -41,7 +41,7 @@
     </span>
   </span>     
   #if(!$hideCommentsCount)         
-    <a href=#appUrl("/list/$list.id()/item/$item.id()") class="list-item-comment-count">
+    <a href=#appUrl("/list/$list.id()/item/$item.id()#comments") class="list-item-comment-count">
       <span class="icon">%</span>
       $item.comments().size() comments</span>
     </a>
