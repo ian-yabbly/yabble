@@ -35,7 +35,7 @@
       return this;
     },
     staticPath : function(path) {
-      return [ '/s/v-' + document.YABBLE_UI_VERSION, path ].join('');
+      return [ '/s/' + document.YABBLE_UI_VERSION, path ].join('');
     },
     requestAnimationFrame : function() {
       var reqFrame = (
@@ -79,7 +79,7 @@
     getUserSessionId : function() {
       var sessionCookie;
       if(!userSessionId) {
-        sessionCookie = document.cookie.match(/yabbly=([A-Z|a-z|0-9]*);?/);
+        sessionCookie = document.cookie.match(/yabble=([A-Z|a-z|0-9]*);?/);
         if(sessionCookie && sessionCookie.length > 1) {
           sessionCookie = sessionCookie.pop();
         } else {

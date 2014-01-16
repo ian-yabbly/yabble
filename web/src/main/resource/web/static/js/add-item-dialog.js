@@ -40,6 +40,9 @@
           this.subscribe(Dialog.Event.HIDDEN, function() {
             self.reset();
           });
+          this.subscribe(Dialog.Event.SHOWN, function() {
+            self.find('input[type="text"]:visible').focus();
+          });
         };
 
         AddItemDialog.prototype = $.extend({}, Dialog.prototype);
@@ -225,6 +228,7 @@
           this.mode = mode;
           this.searchTypes.filter('[value="' + mode + '"]').prop('checked', true);
           this.element.addClass(mode);
+          this.find('input[type="text"]:visible').focus();
           return this;
         };
         

@@ -66,6 +66,10 @@ public class Format {
         return ymdDF.print(t);
     }
 
+    public static String timeAgo(DateTime t) {
+        return timeAgo(t, (Optional<DateTimeZone>) null);
+    }
+
     public static String timeAgo(DateTime t, Option<DateTimeZone> optTz) {
         if (null == optTz) {
             return timeAgo(t, (Optional<DateTimeZone>) null);
