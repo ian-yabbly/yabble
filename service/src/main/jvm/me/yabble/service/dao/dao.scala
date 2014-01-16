@@ -154,7 +154,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
         case v => b.append(" = :").append(t._1).append(" and ")
       }
     })
-    b = b.dropRight(5)
+    b.append("is_active = true")
     val stmt = b.toString()
     log.info("optionalQuery stmt [{}]", stmt)
     optional(all(stmt, params))

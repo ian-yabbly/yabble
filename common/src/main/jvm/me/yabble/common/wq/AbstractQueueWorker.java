@@ -31,11 +31,11 @@ public abstract class AbstractQueueWorker implements Lifecycle, Runnable {
     private ExecutorService executorService;
     private boolean isRunning = false;
 
-    public AbstractQueueWorker(TransactionTemplate txnTemplate, WorkQueue workQueue, String qname, String threadName, int maxRetries) {
+    public AbstractQueueWorker(TransactionTemplate txnTemplate, WorkQueue workQueue, String qname, int maxRetries) {
         this.txnTemplate = txnTemplate;
         this.workQueue = workQueue;
         this.qname = qname;
-        this.threadName = threadName;
+        this.threadName = qname + "-worker";
         this.maxRetries = maxRetries;
     }
 
@@ -146,6 +146,9 @@ public abstract class AbstractQueueWorker implements Lifecycle, Runnable {
     protected abstract void handleWorkItem(WorkQueue.Item item, TransactionStatus status)
         throws Exception;
 
-    protected abstract void handleFailure(WorkQueue.Item item, String errorMessage)
-        throws Exception;
+    protected void handleFailure(WorkQueue.Item item, String errorMessage)
+        throws Exception
+    {
+        log.info("Failure [{}]", errorMessage);
+    }
 }

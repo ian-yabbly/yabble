@@ -31,14 +31,16 @@ public class S3Store {
     public void put(
             String name,
             InputStream data,
+            long size,
             Optional<String> optContentType)
     {
-        put(name, data, optContentType, null);
+        put(name, data, size, optContentType, null);
     }
 
     public void put(
             String name,
             InputStream data,
+            long size,
             Optional<String> optContentType,
             Map<String, String> metadata)
     {
@@ -59,6 +61,7 @@ public class S3Store {
             if (optContentType.isPresent()) {
                 obj.setContentType(optContentType.get());
             }
+            obj.setContentLength(size);
             s3.putObject(bucket, obj);
         } catch (Exception e) {
             throw new RuntimeException(e);

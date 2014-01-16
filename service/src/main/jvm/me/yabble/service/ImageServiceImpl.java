@@ -294,7 +294,7 @@ public class ImageServiceImpl implements ImageService {
             InputStream is = null;
             try {
                 is = new FileInputStream(oriented);
-                s3Store.put(imageName, is, Optional.of(mimeType), DEFAULT_CACHE_METADATA);
+                s3Store.put(imageName, is, size, Optional.of(mimeType), DEFAULT_CACHE_METADATA);
             } finally {
                 if (is != null) { is.close(); }
             }
@@ -523,7 +523,7 @@ public class ImageServiceImpl implements ImageService {
             InputStream is = null;
             try {
                 is = new FileInputStream(out);
-                s3Store.put(imageName, is, Optional.of(original.mimeType()), DEFAULT_CACHE_METADATA);
+                s3Store.put(imageName, is, size, Optional.of(original.mimeType()), DEFAULT_CACHE_METADATA);
             } finally {
                 if (is != null) { is.close(); }
             }
