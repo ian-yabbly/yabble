@@ -13,15 +13,19 @@
       'mustache',
       'strings',
       'tabset',
+      'user',
       'text!template/mustache/contributor.mustache',
+      'text!template/mustache/voter.mustache',      
       'menu'
     ],
-    function($, utils, AddItemDialog, formUtils, mustache, strings, TabSet, textContribTmpl) {
-      var tmplContributor = mustache.compile(textContribTmpl);
+    function($, utils, AddItemDialog, formUtils, mustache, strings, 
+      TabSet, User, textContribTmpl, textVoterTmpl) {
+      var tmplContributor = mustache.compile(textContribTmpl),
+          tmplVoter       = mustache.compile(textVoterTmpl);
 
       $(function() {
         var changeContribCount,
-            elContribCount  = $('.contributors-count');
+            elContribCount = $('.contributors-count');
 
         changeContribCount = function(change) {
           if(elContribCount && elContribCount.size() > 0) {
@@ -78,16 +82,66 @@
           });
         });
 
-        // utils.exists($('.button-toggle-list-item-vote'), function(btnToggleVote) {
-        //   btnToggleVote.click(function() {
-        //     var t = $(this),
-        //         c = t.children('.list-item-vote-count');
-        //     $.get(t.attr('href'));
-        //     c.text(parseInt(c.text(), 10) + (t.hasClass('has-voted') ? -1 : 1));
-        //     t.toggleClass('has-voted');
-        //     return false;
-        //   });
-        // });
+        utils.exists($('.button-toggle-list-item-vote'), function(btnToggleVote) {
+          btnToggleVote.click(function() {
+            var newVoteCount, countText, 
+                user        = User.getLoggedInUser(),
+                button      = $(this),
+                voteCount   = button.data('vote-count'),
+                buttonTxt   = button.find('.button-toggle-list-item-vote-text'),
+                href        = button.attr('href'),
+                isVote      = !button.hasClass('has-voted'),
+                elCount     = button.next('.list-item-vote-count'),
+                listVoters  = elCount.find('.tooltip ul'),
+                elCountText = elCount.find('.list-item-vote-count-text');
+
+            if(user) {
+              $.get(href);
+            
+              newVoteCount = voteCount + (isVote ? 1 : -1);
+              button.data('vote-count', newVoteCount)
+                    .toggleClass('has-voted')
+                    .attr(
+                      'href',
+                      isVote ? href + '/delete' : href.replace('/delete', '')
+                    );
+                  
+              buttonTxt.text(
+                isVote 
+                  ? strings.get('item.vote.delete') 
+                  : strings.get('item.vote')
+              );
+            
+              if(newVoteCount > 0) {
+                countText = strings.get(
+                  'item.voteCount', 
+                  newVoteCount, 
+                  newVoteCount === 1 ? 'person' : 'people'
+                );
+              } else {
+                countText = strings.get('item.voteCount.zero');
+              }
+              elCountText.text(countText);
+
+              if(isVote) {
+                listVoters.append(
+                  tmplVoter({
+                    id : user.id,
+                    name : user.getDisplayName()
+                  })
+                )
+              } else {
+                listVoters.find('li[data-voter-id="' + user.id + '"]').remove();
+              }
+              if(newVoteCount === 0) {
+                elCount.removeClass('tooltip-trigger');
+              } else {
+                elCount.addClass('tooltip-trigger');
+              }
+            }
+            return false;
+          });
+        });
 
         new TabSet({
           tabs : $('.tab')

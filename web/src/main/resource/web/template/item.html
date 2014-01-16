@@ -8,26 +8,9 @@
   <a href=#appUrl("/list/$list.id()/$list.slug()") class="button back-button full-width">
     Back to List: &ldquo;$list.title()&rdquo;
   </a>
-  <div id="list-item-meta" class="clearfix">
-    <div class="float-left">
-      #squareUserImage($item.user(), 44)
-      <span class="username">#userDisplayName($item.user())</span>
-    </div>
-    <a href=#appUrl("/x/list/$list.id()/item/$item.id()/vote")
-       class="float-right button-toggle-list-item-vote#if($hasVotes) tooltip-trigger#end#if($isHelpful) has-voted#end">
-      <span class="list-item-vote-count">$item.votes().size()</span>
-      <span class="icon">U</span>
-      #if($hasVotes)
-        <span class="tooltip tooltip-below">
-          <span class="pointer"><span></span></span>
-          <ul>
-            #foreach($vote in $item.votes())
-              <li>#userDisplayName($vote.user())</li>
-            #end
-          </ul
-        </span>
-      #end
-    </a>
+  <div id="list-item-meta">
+    #squareUserImage($item.user(), 44)
+    <span class="username">#userDisplayName($item.user())</span>
   </div>
   #if($item.images().nonEmpty())
     #set($i = $item.images().head())
@@ -42,7 +25,11 @@
       <img src=$i.url() width="506">
     </a>
   #end
-  <h1>$item.body()</h1>
+  #set($hideCommentsCount = true)
+  #parse('list-item-controls.html')
+  #if($item.body().isDefined())
+    <h1>#formatUserMarkup($item.body().get(), true)</h1>
+  #end
   <div class="tabs">
     <a class="tab active-tab">
       Comments (<span class="comment-count">$item.comments().size()</span>)

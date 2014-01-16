@@ -64,51 +64,7 @@
                 #end
               </span>
             </span>
-            <span class="list-item-controls">
-              #if($__optUser.isDefined())
-                #set($isHelpful = $item.optionalVoteByUser($__user.id()).isDefined())
-              #else
-                #set($isHelpful = false)
-              #end
-              #set($hasVotes = $item.votes().size() > 0)
-              #set($voteUrl = "/x/list/$list.id()/item/$item.id()/vote")
-              #if($isHelpful)
-                #set($voteUrl = "$voteUrl/delete")              
-              #end
-              <a href=#appUrl("$voteUrl")
-                 class="button-toggle-list-item-vote button gray-button #if($isHelpful) has-voted#end">
-                <span class="icon">U</span>
-                #if($isHelpful) 
-                  Remove your vote
-                #else
-                  Vote for this option
-                #end
-              </a>
-              <span class="list-item-vote-count">
-                <span class="icon">U</span>
-                #set($itemVoteCount = $item.votes().size())
-                #if($itemVoteCount == 0)
-                  no one has voted for this option
-                #elseif($itemVoteCount < 3) 
-                  #foreach($vote in $item.votes())
-                    #if($foreach.index > 0)
-                      ,
-                    #end
-                    #if($foreach.index == 2)     
-                      and             
-                    #end
-                    #userDisplayName($vote.user())
-                  #end
-                  voted for this option
-                #else
-                  $itemVoteCount people voted for this option
-                #end
-              </span>              
-              <a href=#appUrl("/list/$list.id()/item/$item.id()") class="list-item-comment-count">
-                <span class="icon">%</span>
-                $item.comments().size() comments</span>
-              </a>
-            </span>            
+            #parse('list-item-controls.html')
           </li>
         #end
       </ul>

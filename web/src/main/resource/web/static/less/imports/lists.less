@@ -46,16 +46,16 @@
     line-height: 40px;
     margin: @margin-regular 0 0;
     
-    a[href].button {
-      padding-left: 5px;
-    }
-    
-    .button, 
+    a[href].button-toggle-list-item-vote,
     .list-item-vote-count,
     a {
       display: inline-block;
       vertical-align: top;
       margin: 0 @margin-regular 0 0;
+      
+      &:last-child {
+        margin-right: 0;
+      }
     }
     
     .icon {
@@ -75,6 +75,21 @@
         background: @orange;
         color: #fff;
       }
+      
+      .tooltip {
+        margin-left: -@margin-small / 2;
+        margin-top: 40px + @margin-small;
+        min-width: 200px;
+        max-width: 300px;
+        
+        li {
+          padding: @padding-small;
+          line-height: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
     }
     
     .list-item-comment-count {
@@ -85,18 +100,32 @@
       }
     }
     
-    .button {
+    a[href].button-toggle-list-item-vote {
+      padding-left: 5px;
+      text-align: left;
+      min-width: 220px;
+      
       .icon {
         background: #fff;
         margin-top: 5px;
-        color: @orange;
+        color: @dark-gray;
         font-size: 1.25em;
+      }
+      
+      &:hover {
+        .icon {
+          color: @medium-gray;
+        }
       }
     }
     
-    a[href].button-toggle-list-item-vote {
+    a[href].button-toggle-list-item-vote.has-voted {
       .orange-button;
       margin-top: 0;
+      
+      .icon {
+        color: @orange;
+      }
     }
   }
 
