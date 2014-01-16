@@ -43,7 +43,7 @@ class UnexpectedNumberOfRowsUpdatedException(message: String)
   def this(v: Int) = this(v.toString)
 }
 
-class UnexpectedNumberOfRowsSelected(message: String)
+class UnexpectedNumberOfRowsSelectedException(message: String)
   extends RuntimeException(message)
 {
   def this(v: Int) = this(v.toString)
@@ -141,8 +141,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     id
   }
 
-  def createOrUpdate(f: F): String = {
-    // First, see if we can find the entity
+  private def optional(f: F): Option[P] = {
     val params = getQueryParams(f)
     var b = new StringBuilder()
     b.append("select id from ").append(tableName).append(" where ")
@@ -157,8 +156,30 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     val stmt = b.toString()
 
     npt.query(stmt, params, getRowMapper).toList match {
-      case head :: tail => head.id
-      case Nil => create(f)
+      case Nil => None
+      case head :: Nil => Some(head)
+      case vs => throw new UnexpectedNumberOfRowsSelectedException(vs.size)
+    }
+  }
+
+  def createOrUpdate(f: F): String = {
+    optional(f) match {
+      case Some(v) => v.id
+      case None => create(f)
+    }
+  }
+
+  def maybeActivateOrCreate(f: F) {
+    optional(f) match {
+      case Some(v) => activate(v.id)
+      case None => create(f)
+    }
+  }
+
+  def maybeDeactivate(f: F) {
+    optional(f) match {
+      case Some(v) => deactivate(v.id)
+      case None => // Do nothing
     }
   }
 
@@ -250,7 +271,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
   def optional(vs: List[P]): Option[P] = vs match {
         case Nil => None
         case head :: Nil => Some(head)
-        case _ => throw new UnexpectedNumberOfRowsSelected(vs.size)
+        case _ => throw new UnexpectedNumberOfRowsSelectedException(vs.size)
       }
 
   protected def getInsertParams(f: F): Map[String, Any]
@@ -441,7 +462,7 @@ class YListDao(
         true
       }
       case head :: Nil => false
-      case vs => throw new UnexpectedNumberOfRowsSelected(vs.size)
+      case vs => throw new UnexpectedNumberOfRowsSelectedException(vs.size)
     }
   }
 
@@ -478,7 +499,12 @@ class YListDao(
   }
 }
 
-class YListItemDao(private val userDao: UserDao, imageDao: ImageDao, npt: NamedParameterJdbcTemplate)
+class YListItemDao(
+    private val userDao: UserDao,
+    private val imageDao: ImageDao,
+    private val ylistItemVoteDao: YListItemVoteDao,
+    private val ylistItemCommentDao: YListItemCommentDao,
+    npt: NamedParameterJdbcTemplate)
   extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", "list-item", npt)
   with Log
 {
@@ -508,8 +534,8 @@ class YListItemDao(private val userDao: UserDao, imageDao: ImageDao, npt: NamedP
           Option(rs.getString("title")),
           Option(rs.getString("body")),
           imageDao.allByYListItem(id),
-          Nil,
-          Nil)
+          ylistItemVoteDao.allByParent(id),
+          ylistItemCommentDao.allByParent(id))
     }
   }
 }
@@ -549,3 +575,38 @@ class YListCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate)
 
 class YListItemCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate)
     extends CommentDao("list_item_comments", "list-item-comment", userDao, npt)
+
+abstract class VoteDao(tableName: String, kind: String, private val userDao: UserDao, npt: NamedParameterJdbcTemplate)
+  extends EntityDao[Vote.Free, Vote.Persisted, Vote.Update](tableName, kind, npt)
+  with Log
+{
+  def allByParent(id: String) = all(
+      "select * from %s where parent_id = :parent_id and is_active = true order by creation_date asc".format(tableName),
+      Map("parent_id" -> id))
+
+  override def getInsertParams(f: Vote.Free) = Map("parent_id" -> f.parentId, "user_id" -> f.userId)
+
+  override def getUpdateParams(u: Vote.Update) = Map()
+
+  override def getQueryParams(f: Vote.Free) = Map("parent_id" -> f.parentId, "user_id" -> f.userId)
+
+  override def getRowMapper() = new RowMapper[Vote.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): Vote.Persisted = {
+      val id = rs.getString("id")
+
+      new Vote.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("parent_id"),
+          userDao.find(rs.getString("user_id")))
+    }
+  }
+}
+
+class YListVoteDao(userDao: UserDao, npt: NamedParameterJdbcTemplate)
+    extends VoteDao("list_votes", "list-vote", userDao, npt)
+
+class YListItemVoteDao(userDao: UserDao, npt: NamedParameterJdbcTemplate)
+    extends VoteDao("list_item_votes", "list-item-vote", userDao, npt)

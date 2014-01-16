@@ -14,13 +14,17 @@ trait IYListService extends IService[YList.Free, YList.Persisted, YList.Update] 
 
   def addUser(lid: String, uid: String): Boolean
   def removeUser(lid: String, uid: String): Boolean
+
+  def createItemVote(iid: String, uid: String)
+  def deleteItemVote(iid: String, uid: String)
 }
 
 class YListService(
     private val ylistDao: YListDao,
     private val ylistCommentDao: YListCommentDao,
     private val ylistItemDao: YListItemDao,
-    private val ylistItemCommentDao: YListItemCommentDao)
+    private val ylistItemCommentDao: YListItemCommentDao,
+    private val ylistItemVoteDao: YListItemVoteDao)
   extends Service(ylistDao)
   with IYListService
   with Log
@@ -39,4 +43,7 @@ class YListService(
 
   override def addUser(lid: String, uid: String) = ylistDao.addUser(lid, uid)
   override def removeUser(lid: String, uid: String) = ylistDao.removeUser(lid, uid)
+
+  override def createItemVote(iid: String, uid: String) = ylistItemVoteDao.maybeActivateOrCreate(new Vote.Free(iid, uid))
+  override def deleteItemVote(iid: String, uid: String) = ylistItemVoteDao.maybeDeactivate(new Vote.Free(iid, uid))
 }

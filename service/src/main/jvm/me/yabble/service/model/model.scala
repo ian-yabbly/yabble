@@ -73,13 +73,19 @@ object Vote {
       val userId: String)
     extends Entity.Free
 
+  class Update(
+      id: String,
+      val parentId: String,
+      val userId: String)
+    extends Entity.Update(id)
+
   class Persisted(
       id: String,
       creationDate: DateTime,
       lastUpdatedDate: DateTime,
       isActive: Boolean,
-      val user: User.Persisted,
-      val parentId: String)
+      val parentId: String,
+      val user: User.Persisted)
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
 }
 

@@ -92,13 +92,13 @@ class BaseFilter(sessionService: SessionService, sessionCookieName: String)
                 log.info("Logging user out [{}]", e.id)
                 HandlerUtils.redirectResponse(exchange, "/logout")
               } else {
-                HandlerUtils.redirectResponse(exchange, "/error/not-found")
+                HandlerUtils.redirectResponse(exchange, "/whoops/not-found")
               }
             }
-            case None => HandlerUtils.redirectResponse(exchange, "/error/not-found")
+            case None => HandlerUtils.redirectResponse(exchange, "/whoops/not-found")
           }
         }
-        case _ => HandlerUtils.redirectResponse(exchange, "/error/not-found")
+        case _ => HandlerUtils.redirectResponse(exchange, "/whoops/not-found")
       }
 
       case e: Exception => {

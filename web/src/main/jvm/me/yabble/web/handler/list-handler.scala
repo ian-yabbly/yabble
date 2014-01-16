@@ -34,7 +34,12 @@ class YListHandler(
       "/x/list/{id}/comment",
       "/x/list/{id}/comment/{comment-id}/delete",
       "/x/list/{id}/invite",
-      "/x/list/{id}/unvite")
+      "/x/list/{id}/unvite",
+      "/x/list/{id}/item/{item-id}/comment",
+      "/x/list/{id}/item/{item-id}/comment/{comment-id}/delete",
+      "/x/list/{id}/item/{item-id}/vote",
+      "/x/list/{id}/item/{item-id}/vote/delete",
+      "/list/{id}/item/{item-id}")
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
@@ -44,13 +49,18 @@ class YListHandler(
         .zipWithIndex
         .find(t => pathMatcher.`match`(t._1, path))
         .map(t => t._2 match {
-          case 0 => redirectToList(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
-          case 1 => view(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
-          case 2 => view(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
-          case 3 => commentIndex(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
-          case 4 => commentDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
-          case 5 => invite(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
-          case 6 => unvite(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  0 => redirectToList(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  1 => view(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  2 => view(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  3 => commentIndex(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  4 => commentDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  5 => invite(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  6 => unvite(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  7 => itemCommentIndex(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  8 => itemCommentDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case  9 => itemVote(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 10 => itemVoteDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 11 => item(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case _ => error(s"Unexpected match [${t._1}]")
         })
         .isDefined
@@ -148,6 +158,60 @@ class YListHandler(
 
     val list = ylistService.find(id)
     redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
+  }
+
+  def itemCommentIndex(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val itemId = pathVars("item-id")
+
+    exchange.getRequestMethod.toLowerCase match {
+      case "post" => {
+        val me = requiredMe()
+        val nvps = allNvps(exchange)
+        val body = requiredFirstParamValue(nvps, "body")
+        val commentId = ylistService.createItemComment(new Comment.Free(itemId, me.id, body))
+        val list = ylistService.find(id)
+        redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
+      }
+
+      case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)
+    }
+  }
+
+  def itemCommentDelete(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val itemId = pathVars("item-id")
+    val commentId = pathVars("comment-id")
+
+    ylistService.deactivateItemComment(commentId)
+    val list = ylistService.find(id)
+    redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
+  }
+
+  def itemVote(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val me = requiredMe()
+    val itemId = pathVars("item-id")
+    ylistService.createItemVote(itemId, me.id)
+    val list = ylistService.find(id)
+    redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
+  }
+
+  def itemVoteDelete(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val me = requiredMe()
+    val itemId = pathVars("item-id")
+    ylistService.deleteItemVote(itemId, me.id)
+    val list = ylistService.find(id)
+    redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
+  }
+
+  def item(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val itemId = pathVars("item-id")
+    val list = ylistService.find(id)
+    val context = Map("list" -> list, "item" -> list.item(itemId))
+    htmlTemplateResponse(exchange, List("item.html", "layout/layout.html"), context)        
   }
 }
 

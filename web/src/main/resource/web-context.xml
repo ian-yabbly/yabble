@@ -62,6 +62,8 @@
         <entry key='__doLessInBrowser' value='${web.less.do-in-browser}'/>
         <entry key='__canonicalBaseUrl' value='${web.canonical-base-url}'/>
         <entry key='__minifyJs' value='${web.minifyJs}'/>
+        <entry key='__cookieName' value='${web.session.cookie-name}'/>
+        <entry key='__cookieDomain' value='${web.session.cookie-domain}'/>
       </map>
     </constructor-arg>
   </bean>

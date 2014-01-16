@@ -103,10 +103,13 @@ class ScalaUberspect extends UberspectImpl {
     case _ => super.getIterator(obj, info)
   }
 
+/*
   override def getPropertyGet(obj: Object, identifier: String, info: Info): VelPropertyGet = {
     logger.info("object [{}]", obj)
     logger.info("identifier [{}]", identifier)
     logger.info("info [{}]", info)
+    obj.
     super.getPropertyGet(obj, identifier, info)
   }
+*/
 }

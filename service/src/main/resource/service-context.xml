@@ -110,12 +110,21 @@
       class='me.yabble.service.dao.YListItemDao'
       c:user-dao-ref='service.user-dao'
       c:image-dao-ref='service.image-dao'
+      c:ylist-item-vote-dao-ref='service.ylist-item-vote-dao'
+      c:ylist-item-comment-dao-ref='service.ylist-item-comment-dao'
       c:npt-ref='service.jdbc-template'
       />
 
   <bean
       id='service.ylist-item-comment-dao'
       class='me.yabble.service.dao.YListItemCommentDao'
+      c:user-dao-ref='service.user-dao'
+      c:npt-ref='service.jdbc-template'
+      />
+
+  <bean
+      id='service.ylist-item-vote-dao'
+      class='me.yabble.service.dao.YListItemVoteDao'
       c:user-dao-ref='service.user-dao'
       c:npt-ref='service.jdbc-template'
       />
@@ -149,6 +158,7 @@
           c:ylist-comment-dao-ref='service.ylist-comment-dao'
           c:ylist-item-dao-ref='service.ylist-item-dao'
           c:ylist-item-comment-dao-ref='service.ylist-item-comment-dao'
+          c:ylist-item-vote-dao-ref='service.ylist-item-vote-dao'
           />
     </property>
   </bean>

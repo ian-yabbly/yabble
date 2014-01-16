@@ -1,19 +1,19 @@
-#if($__optUser.isPresent())
-  #set($isHelpful = $item.optionalVoteByUser($__user.Id).isDefined())
+#if($__optUser.isDefined())
+  #set($isHelpful = $item.optionalVoteByUser($__user.id()).isDefined())
 #else
   #set($isHelpful = false)
 #end
 #set($hasVotes = $item.votes().size() > 0)
 <div id="list-item" class="flexible-container">
-  <a href=#appUrl("/list/$list.externalId()/$list.slug()") class="button back-button full-width">
+  <a href=#appUrl("/list/$list.id()/$list.slug()") class="button back-button full-width">
     Back to List: &ldquo;$list.title()&rdquo;
   </a>
   <div id="list-item-meta" class="clearfix">
     <div class="float-left">
-      #profileImage($item.user(), 44)
+      #squareUserImage($item.user(), 44)
       <span class="username">#userDisplayName($item.user())</span>
     </div>
-    <a href=#appUrl("/list/$list.externalId()/item/$item.externalId()/vote")
+    <a href=#appUrl("/x/list/$list.id()/item/$item.id()/vote")
        class="float-right button-toggle-list-item-vote#if($hasVotes) tooltip-trigger#end#if($isHelpful) has-voted#end">
       <span class="list-item-vote-count">$item.votes().size()</span>
       <span class="icon">U</span>
@@ -29,12 +29,12 @@
       #end
     </a>
   </div>
-  #if(!$item.images().isEmpty())
-    #set($i = $item.images().get(0))
+  #if($item.images().nonEmpty())
+    #set($i = $item.images().head())
     <a href=#transformImageUrl($i, "w-506") target=_blank class="list-item-image">
       <img src=#transformImageUrl($i, "w-506")
            width="506"
-           height="$__imageService.getDimensionsByImageAndTransform($i.getId(), 'w-506').getHeight()">
+           height="$__imageService.getDimensionsByImageAndTransform($i.id(), 'w-506').height()">
     </a>
   #elseif(!$item.externalImages.isEmpty())
     #set($i = $item.externalImages().get(0))
@@ -52,14 +52,14 @@
     <ul>
       #foreach($comment in $item.comments())
         <li class="comment list-item-with-user-image">
-          #if($__optUser.isPresent() && $__user.Id == $comment.user().Id)
-            <a href=#appUrl("/list/$list.externalId()/item/$item.externalId()/comment/$comment.externalId()/delete")
+          #if($__optUser.isDefined() && $__user.id() == $comment.user().id())
+            <a href=#appUrl("/x/list/$list.id()/item/$item.id()/comment/$comment.id()/delete")
                class="icon comment-delete">x</a>
           #end
-          #profileImage($comment.user(), 54)
+          #squareUserImage($comment.user(), 54)
           <span class=username>#userDisplayName($comment.user())</span>
           &nbsp;<span class=small-bullet>&bull;</span>&nbsp;
-          <span class=comment-posted-date>$Format.timeAgo($comment.creationDate(), $__user.Tz)</span>
+          <span class=comment-posted-date>$Format.timeAgo($comment.creationDate(), $__user.tz())</span>
           <p>#m($comment.body(), true)</p>
         </li>
       #end
@@ -67,11 +67,11 @@
     <form
         method=post
         class="list-item-with-user-image add-comment-form""
-        action=#appUrl("/list/$list.externalId()/item/$item.externalId()/comment")>
-      #if($__optUser.isPresent())
-        #profileImage($__user, 54)
+        action=#appUrl("/x/list/$list.id()/item/$item.id()/comment")>
+      #if($__optUser.isDefined())
+        #squareUserImage($__user, 54)
         <input type="hidden" name="username" value="#userDisplayName($__user)">
-        <input type="hidden" name="user-image-url" value="#profileImageUrl($__user, 54)">
+        <input type="hidden" name="user-image-url" value="#squareUserImageUrl($__user, 54)">
       #end
       <textarea name=body class=full-width placeholder="Say something awesome&hellip;"></textarea>
       <div class=clearfix><input type=submit class="orange-button float-right" value="COMMENT"></div>
