@@ -6,6 +6,8 @@ import me.yabble.service.dao._
 
 trait IUserService extends IService[User.Free, User.Persisted, User.Update] {
   def findOrCreateByEmail(email: String): User.Persisted
+  def optionalByNameOrEmail(nameOrEmail: String): Option[User.Persisted]
+  def optionalByEmail(email: String): Option[User.Persisted]
 }
 
 class UserService(private val userDao: UserDao)
@@ -22,4 +24,10 @@ class UserService(private val userDao: UserDao)
       }
     }
   }
+
+  override def optionalByNameOrEmail(nameOrEmail: String) = {
+    userDao.optionalByEmail(nameOrEmail).orElse(userDao.optionalByName(nameOrEmail))
+  }
+
+  override def optionalByEmail(email: String) = userDao.optionalByEmail(email)
 }

@@ -141,10 +141,12 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     id
   }
 
-  private def optional(f: F): Option[P] = {
-    val params = getQueryParams(f)
+  private def optional(f: F): Option[P] = optionalQuery(getQueryParams(f))
+
+
+  protected def optionalQuery(params: Map[String, Any]): Option[P] = {
     var b = new StringBuilder()
-    b.append("select id from ").append(tableName).append(" where ")
+    b.append("select * from ").append(tableName).append(" where ")
     params.foreach(t => {
       b.append(t._1)
       t._2 match {
@@ -154,12 +156,8 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     })
     b = b.dropRight(5)
     val stmt = b.toString()
-
-    npt.query(stmt, params, getRowMapper).toList match {
-      case Nil => None
-      case head :: Nil => Some(head)
-      case vs => throw new UnexpectedNumberOfRowsSelectedException(vs.size)
-    }
+    log.info("optionalQuery stmt [{}]", stmt)
+    optional(all(stmt, params))
   }
 
   def createOrUpdate(f: F): String = {
@@ -419,6 +417,10 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate)
   with Log
 {
   def optionalByEmailForUpdate(email: String): Option[User.Persisted] = optional("select * from users where email = :email for update", Map("email" -> email))
+
+  def optionalByEmail(email: String): Option[User.Persisted] = optionalQuery(Map("email" -> email))
+
+  def optionalByName(name: String): Option[User.Persisted] = optionalQuery(Map("name" -> name))
 
   def allByYList(id: String): List[User.Persisted] = all(
       "select u.* from users u inner join list_users lu on u.id = lu.user_id where lu.list_id = :list_id",

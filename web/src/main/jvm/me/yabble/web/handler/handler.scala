@@ -21,6 +21,7 @@ import org.slf4j.LoggerFactory
 import com.sun.net.httpserver._
 
 import org.apache.commons.io.IOUtils
+import org.apache.commons.lang.exception.ExceptionUtils
 import org.apache.http.NameValuePair
 import org.apache.http.client.utils.URLEncodedUtils
 
@@ -164,17 +165,17 @@ trait Handler extends Log {
   def postNvps(e: HttpExchange): List[NameValuePair] = URLEncodedUtils.parse(IOUtils.toString(e.getRequestBody, encoding), java.nio.charset.Charset.forName(encoding)).toList
   def allNvps(e: HttpExchange): List[NameValuePair] = queryNvps(e) ++ postNvps(e)
 
-  def firstParamValue(nvps: List[NameValuePair], names: String*): Option[String] = names.find(name => {
-        nvps.find(_.getName == name).isDefined
-      }).map(name => {
-        nvps.find(_.getName == name).map(_.getValue).get
-      })
+  def optionalFirstParamValue(nvps: List[NameValuePair], name: String): Option[String] = nvps.filter(_.getName == name)
+      .map(_.getValue)
+      .filter(_ != null)
+      .filter(_ != "")
+      .headOption
 
-  def requiredFirstParamValue(nvps: List[NameValuePair], names: String*): String = {
-    val ret = firstParamValue(nvps, names: _*)
+  def firstParamValue(nvps: List[NameValuePair], name: String): String = {
+    val ret = optionalFirstParamValue(nvps, name)
     ret match {
       case Some(v) => v
-      case None => throw new MissingParamException(names.mkString(", "))
+      case None => throw new MissingParamException(name)
     }
   }
 
@@ -195,16 +196,25 @@ abstract class TemplateHandler(
       context: Map[String, Any] = Map(),
       status: Int = 200)
   {
-    //try {
-      val response = template.renderToString(templates, supplementContext(exchange, context)).getBytes(encoding)
-      exchange.getResponseHeaders.set("Content-Type", "text/html; charset="+encoding)
-      exchange.sendResponseHeaders(status, response.length)
-      IOUtils.write(response, exchange.getResponseBody)
-    //} catch {
-      //case e: Exception => {
-        //log.error(e.getMessage, e)
-      //}
-    //}
+    val response = try {
+          template.renderToString(templates, supplementContext(exchange, context))
+        } catch {
+          case e: Exception => {
+            val stackTraceStr = ExceptionUtils.getStackTrace(e)
+
+            """
+            <p style='font-size: 18px;'>%s</p>
+            <pre>
+              %s
+            </pre>
+            """.format(e.getMessage, stackTraceStr)
+          }
+        }
+
+    val responseBytes = response.getBytes(encoding)
+    exchange.getResponseHeaders.set("Content-Type", "text/html; charset="+encoding)
+    exchange.sendResponseHeaders(status, responseBytes.length)
+    IOUtils.write(responseBytes, exchange.getResponseBody)
   }
 
   private def supplementContext(exchange: HttpExchange, c: Map[String, Any]): Map[String, Any] = {

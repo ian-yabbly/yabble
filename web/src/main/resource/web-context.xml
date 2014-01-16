@@ -97,6 +97,8 @@
         <ref bean='web.ylist-handler'/>        
         <ref bean='web.new-ylist-handler'/>
         <ref bean='web.new-ylist-item-handler'/>
+        <ref bean='web.login-handler'/>
+        <ref bean='web.register-handler'/>
         <ref bean='web.user-handler'/>
         <ref bean='web.bing-image-search-handler'/>
       </list>
@@ -159,6 +161,24 @@
       c:template-ref='web.velocity-template'
       c:encoding='${app.encoding}'
       c:ylist-service-ref='service.ylist-service'
+      />
+
+  <bean
+      id='web.login-handler'
+      class='me.yabble.web.handler.LoginHandler'
+      c:user-service-ref='service.user-service'
+      c:session-service-ref='web.session-service'
+      c:template-ref='web.velocity-template'
+      c:encoding='${app.encoding}'
+      />
+
+  <bean
+      id='web.register-handler'
+      class='me.yabble.web.handler.RegisterHandler'
+      c:user-service-ref='service.user-service'
+      c:session-service-ref='web.session-service'
+      c:template-ref='web.velocity-template'
+      c:encoding='${app.encoding}'
       />
 
   <bean

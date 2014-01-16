@@ -8,11 +8,11 @@
           id=email
           type=email
           name=email
-          value="$!form.Email.Value"
+          value="$!form.Name.Value"
           placeholder="Enter your email"
           class=full-width>
-      #if($form.Email.hasErrorMessage())
-        <div class="form-error">$springMacroRequestContext.getMessage($form.Email.ErrorMessage, $form.Email.ErrorMessage)</div>
+      #if(!$form.Email.ErrorMessageList.isEmpty())
+        <div class="form-error">$form.Email.ErrorMessageList.get(0).Code</div>
       #end
     </div>
     <div class=form-row>
@@ -24,8 +24,8 @@
           value="$!form.Name.Value"
           placeholder="Choose a username"
           class=full-width>
-      #if ($form.Name.hasErrorMessage())
-        <div class="form-error">$springMacroRequestContext.getMessage($form.Name.ErrorMessage, $form.Name.ErrorMessage)</div>
+      #if(!$form.Name.ErrorMessageList.isEmpty())
+        <div class="form-error">$form.Name.ErrorMessageList.get(0).Code</div>
       #end
     </div>
     <div class=form-row>
@@ -37,8 +37,8 @@
           value="$!form.Password.Value"
           placeholder="Enter a password"
           class=full-width>
-      #if ($form.Password.hasErrorMessage())
-        <div class="form-error">$springMacroRequestContext.getMessage($form.Password.ErrorMessage, $form.Password.ErrorMessage)</div>
+      #if(!$form.Password.ErrorMessageList.isEmpty())
+        <div class="form-error">$form.Password.ErrorMessageList.get(0).Code</div>
       #end
     </div>
     <input type=hidden name=accept-privacy-policy value=1>

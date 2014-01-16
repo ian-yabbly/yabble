@@ -51,8 +51,8 @@ class NewYListHandler(
       case "post" => {
         val nvps = allNvps(exchange)
         val formBuilder = getOrCreateForm().toBuilder()
-        formBuilder.setTitle(formField(firstParamValue(nvps, "title")))
-        formBuilder.setBody(formField(firstParamValue(nvps, "body")))
+        formBuilder.setTitle(formField(optionalFirstParamValue(nvps, "title")))
+        formBuilder.setBody(formField(optionalFirstParamValue(nvps, "body")))
         val form = formBuilder.build()
         persistForm(form)
 

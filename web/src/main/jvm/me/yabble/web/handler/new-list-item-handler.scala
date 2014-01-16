@@ -57,8 +57,8 @@ class NewYListItemHandler(
       case "post" => {
         val nvps = allNvps(exchange)
         val formBuilder = getOrCreateForm(listId).toBuilder()
-        formBuilder.setTitle(formField(firstParamValue(nvps, "title")))
-        formBuilder.setBody(formField(firstParamValue(nvps, "body")))
+        formBuilder.setTitle(formField(optionalFirstParamValue(nvps, "title")))
+        formBuilder.setBody(formField(optionalFirstParamValue(nvps, "body")))
 
         formBuilder.clearImageUrl();
         params(nvps, "image-url").foreach(u => formBuilder.addImageUrl(u))
