@@ -118,7 +118,7 @@ class YListHandler(
       case "post" => {
         val me = requiredMe()
         val nvps = allNvps(exchange)
-        val body = requiredFirstParamValue(nvps, "body")
+        val body = firstParamValue(nvps, "body")
         val commentId = ylistService.createComment(new Comment.Free(id, me.id, body))
         val list = ylistService.find(id)
         redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
@@ -140,7 +140,7 @@ class YListHandler(
   def invite(exchange: HttpExchange, pathVars: Map[String, String]) {
     val id = pathVars("id")
     val nvps = allNvps(exchange)
-    val email = requiredFirstParamValue(nvps, "email")
+    val email = firstParamValue(nvps, "email")
 
     val user = userService.findOrCreateByEmail(email)
     ylistService.addUser(id, user.id)
@@ -152,7 +152,7 @@ class YListHandler(
   def unvite(exchange: HttpExchange, pathVars: Map[String, String]) {
     val id = pathVars("id")
     val nvps = allNvps(exchange)
-    val uid = requiredFirstParamValue(nvps, "user")
+    val uid = firstParamValue(nvps, "user")
 
     ylistService.removeUser(id, uid)
 
@@ -168,7 +168,7 @@ class YListHandler(
       case "post" => {
         val me = requiredMe()
         val nvps = allNvps(exchange)
-        val body = requiredFirstParamValue(nvps, "body")
+        val body = firstParamValue(nvps, "body")
         val commentId = ylistService.createItemComment(new Comment.Free(itemId, me.id, body))
         val list = ylistService.find(id)
         redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))

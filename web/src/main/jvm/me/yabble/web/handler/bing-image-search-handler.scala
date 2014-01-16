@@ -55,7 +55,7 @@ class BingImageSearchHandler(
 
   def imageSearch(exchange: HttpExchange, pathVars: Map[String, String]) {
     val nvps = queryNvps(exchange)
-    val query = requiredFirstParamValue(nvps, "query")
+    val query = firstParamValue(nvps, "query")
 
     val params = Map(
         ("Query" -> "'%s'".format(query)),
@@ -77,7 +77,7 @@ class BingImageSearchHandler(
 
   def newsSearch(exchange: HttpExchange, pathVars: Map[String, String]) {
     val nvps = queryNvps(exchange)
-    val query = requiredFirstParamValue(nvps, "query")
+    val query = firstParamValue(nvps, "query")
 
     val params = Map(
         ("Query" -> "'%s'".format(query)),

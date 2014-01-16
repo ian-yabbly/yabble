@@ -4,13 +4,11 @@ import me.yabble.common.http.client.GetRequest;
 import me.yabble.common.http.client.HttpClient;
 import me.yabble.common.http.client.Response;
 import me.yabble.common.http.client.ResponseHandler;
-import me.yabble.common.wq.WorkQueue;
-import me.yabble.common.txn.SpringTransactionSynchronization;
 import me.yabble.service.dao.ImageDao;
 import me.yabble.service.model.Dimensions;
 import me.yabble.service.model.Image;
 import me.yabble.service.model.ImageTransform;
-import me.yabble.service.proto.ServiceProtos.EntityEvent;
+import me.yabble.service.proto.ServiceProtos.*;
 
 import com.google.common.base.Function;
 import com.google.common.base.Optional;
@@ -67,14 +65,10 @@ public class ImageServiceImpl implements ImageService {
     private String convertPath;
     private String identifyPath;
     private String defaultProfileImageUrl;
-    private WorkQueue workQueue;
-    private SpringTransactionSynchronization txnSync;
 
     public ImageServiceImpl(
             ImageDao imageDao,
             HttpClient httpClient,
-            WorkQueue workQueue,
-            SpringTransactionSynchronization txnSync,
             S3Store s3Store,
             String convertPath,
             String identifyPath,
@@ -82,8 +76,6 @@ public class ImageServiceImpl implements ImageService {
     {
         this.httpClient = httpClient;
         this.imageDao = imageDao;
-        this.workQueue = workQueue;
-        this.txnSync = txnSync;
         this.s3Store = s3Store;
         this.convertPath = convertPath;
         this.identifyPath = identifyPath;
@@ -294,7 +286,7 @@ public class ImageServiceImpl implements ImageService {
             InputStream is = null;
             try {
                 is = new FileInputStream(oriented);
-                s3Store.put(imageName, is, Optional.of(mimeType), DEFAULT_CACHE_METADATA);
+                s3Store.put(imageName, is, size, Optional.of(mimeType), DEFAULT_CACHE_METADATA);
             } finally {
                 if (is != null) { is.close(); }
             }
@@ -317,22 +309,6 @@ public class ImageServiceImpl implements ImageService {
             if (!id.equals(createdId)) {
                 throw new RuntimeException(String.format("IDs are not equal [%s] [%s]", id, createdId));
             }
-
-            txnSync.add(new Function<Void, Void>() {
-                public Void apply(Void ingored) {
-                    workQueue.submit(
-                            "entity-event",
-                            EntityEvent.newBuilder()
-                                    .setEntityType(EntityEvent.EntityType.IMAGE)
-                                    .setEventType(EntityEvent.EventType.CREATE)
-                                    .setEntityId(id)
-                                    .setEventTime(DateTime.now().toString())
-                                    .build()
-                                    .toByteArray());
-
-                    return null;
-                }
-            });
 
             return id;
         } catch (Exception e) {
@@ -523,7 +499,7 @@ public class ImageServiceImpl implements ImageService {
             InputStream is = null;
             try {
                 is = new FileInputStream(out);
-                s3Store.put(imageName, is, Optional.of(original.mimeType()), DEFAULT_CACHE_METADATA);
+                s3Store.put(imageName, is, size, Optional.of(original.mimeType()), DEFAULT_CACHE_METADATA);
             } finally {
                 if (is != null) { is.close(); }
             }
@@ -546,22 +522,6 @@ public class ImageServiceImpl implements ImageService {
             if (!id.equals(createdId)) {
                 throw new RuntimeException(String.format("IDs are not equal [%s] [%s]", id, createdId));
             }
-
-            txnSync.add(new Function<Void, Void>() {
-                public Void apply(Void ingored) {
-                    workQueue.submit(
-                            "entity-event",
-                            EntityEvent.newBuilder()
-                                    .setEntityType(EntityEvent.EntityType.IMAGE)
-                                    .setEventType(EntityEvent.EventType.CREATE)
-                                    .setEntityId(String.valueOf(id))
-                                    .setEventTime(DateTime.now().toString())
-                                    .build()
-                                    .toByteArray());
-
-                    return null;
-                }
-            });
 
             return id;
         } catch (RuntimeException e) {

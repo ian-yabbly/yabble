@@ -49,7 +49,7 @@ class ImageHandler(
     val id = pathVars("id")
     val nvps = queryNvps(exchange)
 
-    firstParamValue(nvps, "t") match {
+    optionalFirstParamValue(nvps, "t") match {
       case Some(transform) => {
         userService.optional(id) match {
           case Some(user) => user.image match {
@@ -75,7 +75,7 @@ class ImageHandler(
     val id = pathVars("id")
     val nvps = queryNvps(exchange)
 
-    firstParamValue(nvps, "t") match {
+    optionalFirstParamValue(nvps, "t") match {
       case Some(transform) => imageTransformResponse(exchange, id, transform)
       case None => imageResponse(exchange, id)
     }

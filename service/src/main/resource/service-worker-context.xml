@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<beans
+    xmlns='http://www.springframework.org/schema/beans'
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:c='http://www.springframework.org/schema/c'
+    xmlns:p='http://www.springframework.org/schema/p'
+    xsi:schemaLocation='
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd'
+        >
+
+  <bean
+      class='org.springframework.beans.factory.config.PropertyPlaceholderConfigurer'
+      p:system-properties-mode-name='SYSTEM_PROPERTIES_MODE_OVERRIDE'
+      p:ignore-unresolvable-placeholders='true'
+      p:ignore-resource-not-found='true'
+      >
+    <property name='locations'>
+      <list>
+        <value>classpath:service.properties</value>
+        <value>file://${app.home}/etc/override.properties</value>
+        <value>file://${app.home}/etc/local.properties</value>
+      </list>
+    </property>
+  </bean>
+
+  <bean
+      id='service.entity-event-worker'
+      class='me.yabble.service.worker.EntityEventWorker'
+      c:txn-template-ref='service.txn-template'
+      c:work-queue-ref='common.work-queue'
+      />
+
+  <bean
+      id='service.image-preview-worker'
+      class='me.yabble.service.worker.ImagePreviewWorker'
+      c:txn-template-ref='service.txn-template'
+      c:work-queue-ref='common.work-queue'
+      c:image-service-ref='service.image-service'
+      />
+
+  <bean
+      id='service.user-notification-worker'
+      class='me.yabble.service.worker.UserNotificationWorker'
+      c:txn-template-ref='service.txn-template'
+      c:work-queue-ref='common.work-queue'
+      c:user-service-ref='service.user-service'
+      />
+
+</beans>

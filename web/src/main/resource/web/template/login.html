@@ -1,0 +1,51 @@
+<div class=flexible-container>
+  <form action=#appUrl("/login") method=post>
+    <h1>Login</h1>
+
+    <div class=form-row>
+      <label for=name>Email:</label>
+      <input
+          id=name
+          type=text
+          name=name
+          value='$!form.Name.Value'
+          placeholder='Email or username'
+          >
+    </div>
+
+    <div class=form-row>
+      <label for=password>Password:</label>
+      <input
+          id=password
+          type=password
+          name=password
+          value='$!form.Password.Value'
+          placeholder='Password'
+          >
+    </div>
+
+    <input type=submit value="LOGIN" class="centered-submit">
+
+  </form>
+
+  <h2>OR</h2>
+
+  <form action=#appUrl("/forgot") method=post>
+    <h2>I forgot my password</h2>
+
+    <div class=form-row>
+      <label for=forgot-email>Email:</label>
+      <input
+          id=forgot-email
+          type=text
+          name=name
+          value='$!form.Name.Value'
+          placeholder='Email or username'
+          >
+    </div>
+
+    <input type=submit value="REMIND ME" class="centered-submit">
+  </form>
+
+</div>
+

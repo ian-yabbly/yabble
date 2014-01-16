@@ -4,5 +4,11 @@
       yabble.me
     </a>
     <a href="#appUrl('/new')" class="button float-right">New Yabble</a>
+    #if ($__optUser.isDefined())
+      <a href="#appUrl('/logout')" class="float-right" style="margin-right: 10px;">logout #userDisplayName($__user)</a>
+    #else
+      <a href="#appUrl('/register')" class="float-right" style="margin-right: 10px;">register</a>
+      <a href="#appUrl('/login')" class="float-right" style="margin-right: 10px;">login</a>
+    #end
   </div>
 </div>

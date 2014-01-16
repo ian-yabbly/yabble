@@ -13,6 +13,28 @@ object Entity {
   case class Update(id: String)
 }
 
+object UserNotification {
+  class Free(
+      val userId: String,
+      val kind: UserNotificationType,
+      val data: Option[Array[Byte]])
+    extends Entity.Free
+
+  class Update(
+      id: String)
+    extends Entity.Update(id)
+
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val user: User.Persisted,
+      val kind: UserNotificationType,
+      val data: Option[Array[Byte]])
+    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+}
+
 object User {
   class Free(
       val name: Option[String],

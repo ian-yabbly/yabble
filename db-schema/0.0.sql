@@ -42,7 +42,7 @@ create table lists (
   creation_date timestamptz not null default now(),
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
-  user_id varchar(8) references users (id),
+  user_id varchar(8) not null references users (id),
   title text not null,
   body text null,
   primary key (id)
@@ -53,8 +53,8 @@ create table list_comments (
   creation_date timestamptz not null default now(),
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
-  parent_id varchar(8) references lists (id),
-  user_id varchar(8) references users (id),
+  parent_id varchar(8) not null references lists (id),
+  user_id varchar(8) not null references users (id),
   body text null,
   primary key (id)
 );
@@ -70,8 +70,8 @@ create table list_items (
   creation_date timestamptz not null default now(),
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
-  list_id varchar(8) references lists (id),
-  user_id varchar(8) references users (id),
+  list_id varchar(8) not null references lists (id),
+  user_id varchar(8) not null references users (id),
   title text null,
   body text null,
   primary key (id)
@@ -88,8 +88,8 @@ create table list_item_comments (
   creation_date timestamptz not null default now(),
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
-  parent_id varchar(8) references list_items (id),
-  user_id varchar(8) references users (id),
+  parent_id varchar(8) not null references list_items (id),
+  user_id varchar(8) not null references users (id),
   body text null,
   primary key (id)
 );
@@ -99,8 +99,19 @@ create table list_item_votes (
   creation_date timestamptz not null default now(),
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
-  parent_id varchar(8) references list_items (id),
-  user_id varchar(8) references users (id),
+  parent_id varchar(8) not null references list_items (id),
+  user_id varchar(8) not null references users (id),
   primary key (id),
   unique (parent_id, user_id)
+);
+
+create table user_notifications (
+  id varchar(8) not null references ids (value),
+  creation_date timestamptz not null default now(),
+  last_updated_date timestamptz not null default now(),
+  is_active boolean not null default true,
+  user_id varchar(8) not null references users (id),
+  type varchar(64) not null,
+  data bytea,
+  primary key (id)
 );

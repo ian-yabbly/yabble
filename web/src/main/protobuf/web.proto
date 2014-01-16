@@ -10,12 +10,15 @@ message Session {
     optional string value = 2;
   }
 
-  required string id                   = 1;
-  required string creation_date        = 2;
-  optional string user_id              = 3;
-  repeated Attribute attribute         = 4;
-  optional ListForm list_form          = 5;
-  optional ListItemForm list_item_form = 6;
+  required string id                        = 1;
+  required string creation_date             = 2;
+  optional string user_id                   = 3;
+  repeated Attribute attribute              = 4;
+  optional ListForm list_form               = 5;
+  optional ListItemForm list_item_form      = 6;
+  optional LoginForm login_form             = 7;
+  optional string after_login_redirect_path = 8;
+  optional RegisterForm register_form       = 9;
 }
 
 message Message {
@@ -26,6 +29,17 @@ message Message {
 message FormField {
   optional string value          = 1;
   repeated Message error_message = 2;
+}
+
+message LoginForm {
+  required FormField name     = 1;
+  required FormField password = 2;
+}
+
+message RegisterForm {
+  required FormField name     = 1;
+  required FormField email    = 2;
+  required FormField password = 3;
 }
 
 message ListForm {

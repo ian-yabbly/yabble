@@ -81,12 +81,25 @@
       class='me.yabble.service.dao.UserDao'
       c:image-dao-ref='service.image-dao'
       c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
+      />
+
+  <bean
+      id='service.user-notification-dao'
+      class='me.yabble.service.dao.UserNotificationDao'
+      c:user-dao-ref='service.user-dao'
+      c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
       />
 
   <bean
       id='service.image-dao'
       class='me.yabble.service.dao.ImageDao'
       c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
       />
 
   <bean
@@ -96,6 +109,8 @@
       c:ylist-comment-dao-ref='service.ylist-comment-dao'
       c:ylist-item-dao-ref='service.ylist-item-dao'
       c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
       />
 
   <bean
@@ -103,6 +118,8 @@
       class='me.yabble.service.dao.YListCommentDao'
       c:user-dao-ref='service.user-dao'
       c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
       />
 
   <bean
@@ -113,6 +130,8 @@
       c:ylist-item-vote-dao-ref='service.ylist-item-vote-dao'
       c:ylist-item-comment-dao-ref='service.ylist-item-comment-dao'
       c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
       />
 
   <bean
@@ -120,6 +139,8 @@
       class='me.yabble.service.dao.YListItemCommentDao'
       c:user-dao-ref='service.user-dao'
       c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
       />
 
   <bean
@@ -127,6 +148,8 @@
       class='me.yabble.service.dao.YListItemVoteDao'
       c:user-dao-ref='service.user-dao'
       c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
       />
   <!-- END DAO -->
 
@@ -141,6 +164,7 @@
       <bean
           class='me.yabble.service.UserService'
           c:user-dao-ref='service.user-dao'
+          c:user-notification-dao-ref='service.user-notification-dao'
           />
     </property>
   </bean>
@@ -174,8 +198,6 @@
           class='me.yabble.service.ImageServiceImpl'
           c:image-dao-ref='service.image-dao'
           c:http-client-ref='common.http-client'
-          c:work-queue-ref='common.work-queue'
-          c:txn-sync-ref='common.txn-sync'
           c:s3-store-ref='service.s3-store'
           c:convert-path='${imagemagick.convert-path}'
           c:identify-path='${imagemagick.identify-path}'

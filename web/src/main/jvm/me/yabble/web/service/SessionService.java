@@ -368,9 +368,10 @@ public class SessionService {
 
         ctx.setAttribute("web-session-id", sessionId);
 
+        DateTime now = DateTime.now();
         Session session = Session.newBuilder()
                 .setId(sessionId)
-                .setCreationDate(DateTime.now().toString())
+                .setCreationDate(now.toString())
                 .build();
         persist(session);
 
