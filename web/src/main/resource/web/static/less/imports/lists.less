@@ -13,7 +13,6 @@
     }
   }
 
-  .list-item-controls,
   .list-item-image,
   .list-item-body {
     display: inline-block;
@@ -29,7 +28,7 @@
   }
 
   .list-item .list-item-image {
-    margin: 0 @margin-regular;
+    margin: 0 @margin-regular 0 0;
 
     &:hover {
       border-color: @blue;
@@ -39,110 +38,70 @@
   .list-item-body {
     max-width: 40%;
   }
-
-  @control-dimension: 40px;
-
+  
+/* list item controls */
+    
   .list-item-controls {
-    line-height: @control-dimension;
-  }
-
-  .list-item-comment-count,
-  .list-item-comment-icon,
-  .button-toggle-list-item-vote {
     display: block;
-    font-size: 1.25em;
-    width: @control-dimension + 10;
-    text-align: center;
-  }
-
-  .list-item-comment-count {
-    color: #000;
-  }
-
-  a.button-toggle-list-item-vote {
-    background: @light-gray;
-    text-decoration: none;
-
-    &,
-    &.has-voted {
-      cursor: pointer;
-      .rounded(4px);
-
-      .list-item-vote-count {
-        display: block;
-      }
-
-      &.has-voted,
-      &:hover {
+    line-height: 40px;
+    margin: @margin-regular 0 0;
+    
+    a[href].button {
+      padding-left: 5px;
+    }
+    
+    .button, 
+    .list-item-vote-count,
+    a {
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 @margin-regular 0 0;
+    }
+    
+    .icon {
+      display: inline-block;
+      width: 30px;
+      line-height: 30px;
+      .rounded(15px);
+      margin: 0 @margin-small 0 0;
+      text-align: center;
+    }
+    
+    .list-item-vote-count {
+      color: @orange;
+      cursor: default;
+      
+      .icon {
         background: @orange;
-
-        &,
-        .list-item-vote-count {
-          color: #fff;
-        }
+        color: #fff;
       }
     }
-
-    &.has-voted {
-      &:hover {
-        background: @light-orange;
-
-        &,
-        .list-item-vote-count {
-          color: #fff;
-        }
+    
+    .list-item-comment-count {
+      .icon {
+        background: @blue;
+        color: #fff;
+        font-size: 0.9em;
       }
     }
-
-    .tooltip {
-      font-size: 0.75em;
-      line-height: 1.4;
-      text-align: left;
-      max-width: 250px;
-
-      li {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    
+    .button {
+      .icon {
+        background: #fff;
+        margin-top: 5px;
+        color: @orange;
+        font-size: 1.25em;
       }
     }
-  }
-
-  #list-items .button-toggle-list-item-vote .tooltip {
-    margin-left: @control-dimension + 10 + @padding-small;
+    
+    a[href].button-toggle-list-item-vote {
+      .orange-button;
+      margin-top: 0;
+    }
   }
 
   #list-items .flexible-container {
     padding-top: @padding-regular;
-  }
-
-  #list-item .button-toggle-list-item-vote .tooltip {
-    left: auto;
-    right: 0;
-    margin-top: @control-dimension + 10 + @padding-small;
-
-    .pointer {
-      left: auto;
-      right: @padding-small;
-    }
-  }
-
-  .button-toggle-list-item-vote,
-  .list-item-comment-icon {
-    color: @blue;
-  }
-
-  .list-item-comment-icon {
-    margin-top: @margin-small;
-  }
-
-  .button-toggle-list-item-vote {
-    &.has-voted {
-      &,
-      .list-item-vote-count {
-        color: @orange;
-      }
-    }
   }
 
 /* list header */

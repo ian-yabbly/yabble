@@ -41,8 +41,12 @@
 
   .list-item-with-user-image {
     position: relative;
-    padding: @padding-large @padding-large @padding-large (@padding-large + 60);
+    padding: @padding-large @padding-large 0 (@padding-large + 60);
     min-height: 60px;
+    
+    &:last-child {
+      padding-bottom: @padding-large;
+    }
 
     .user-image {
       position: absolute;

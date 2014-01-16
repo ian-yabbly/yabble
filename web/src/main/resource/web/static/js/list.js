@@ -78,16 +78,16 @@
           });
         });
 
-        utils.exists($('.button-toggle-list-item-vote'), function(btnToggleVote) {
-          btnToggleVote.click(function() {
-            var t = $(this),
-                c = t.children('.list-item-vote-count');
-            $.get(t.attr('href'));
-            c.text(parseInt(c.text(), 10) + (t.hasClass('has-voted') ? -1 : 1));
-            t.toggleClass('has-voted');
-            return false;
-          });
-        });
+        // utils.exists($('.button-toggle-list-item-vote'), function(btnToggleVote) {
+        //   btnToggleVote.click(function() {
+        //     var t = $(this),
+        //         c = t.children('.list-item-vote-count');
+        //     $.get(t.attr('href'));
+        //     c.text(parseInt(c.text(), 10) + (t.hasClass('has-voted') ? -1 : 1));
+        //     t.toggleClass('has-voted');
+        //     return false;
+        //   });
+        // });
 
         new TabSet({
           tabs : $('.tab')
