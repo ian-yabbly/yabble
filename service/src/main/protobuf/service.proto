@@ -4,16 +4,17 @@ option java_package = "me.yabble.service.proto";
 option java_outer_classname = "ServiceProtos";
 
 enum EntityType {
-  USER              =  1;
-  LIST              =  2;
-  LIST_COMMENT      =  3;
-  LIST_ITEM         =  4;
-  LIST_ITEM_COMMENT =  5;
-  IMAGE             =  6;
-  LIST_ITEM_VOTE    =  7;
-  USER_NOTIFICATION =  8;
-  LIST_VOTE         =  9;
-  LIST_USER         = 10;
+  USER                   =  1;
+  LIST                   =  2;
+  LIST_COMMENT           =  3;
+  LIST_ITEM              =  4;
+  LIST_ITEM_COMMENT      =  5;
+  IMAGE                  =  6;
+  LIST_ITEM_VOTE         =  7;
+  USER_NOTIFICATION      =  8;
+  LIST_VOTE              =  9;
+  LIST_USER              = 10;
+  USER_NOTIFICATION_PUSH = 11;
 }
 
 enum EventType {

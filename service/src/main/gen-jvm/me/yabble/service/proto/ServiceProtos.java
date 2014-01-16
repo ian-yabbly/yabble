@@ -20,6 +20,7 @@ public final class ServiceProtos {
     USER_NOTIFICATION(7, 8),
     LIST_VOTE(8, 9),
     LIST_USER(9, 10),
+    USER_NOTIFICATION_PUSH(10, 11),
     ;
     
     public static final int USER_VALUE = 1;
@@ -32,6 +33,7 @@ public final class ServiceProtos {
     public static final int USER_NOTIFICATION_VALUE = 8;
     public static final int LIST_VOTE_VALUE = 9;
     public static final int LIST_USER_VALUE = 10;
+    public static final int USER_NOTIFICATION_PUSH_VALUE = 11;
     
     
     public final int getNumber() { return value; }
@@ -48,6 +50,7 @@ public final class ServiceProtos {
         case 8: return USER_NOTIFICATION;
         case 9: return LIST_VOTE;
         case 10: return LIST_USER;
+        case 11: return USER_NOTIFICATION_PUSH;
         default: return null;
       }
     }
@@ -78,7 +81,7 @@ public final class ServiceProtos {
     }
     
     private static final EntityType[] VALUES = {
-      USER, LIST, LIST_COMMENT, LIST_ITEM, LIST_ITEM_COMMENT, IMAGE, LIST_ITEM_VOTE, USER_NOTIFICATION, LIST_VOTE, LIST_USER, 
+      USER, LIST, LIST_COMMENT, LIST_ITEM, LIST_ITEM_COMMENT, IMAGE, LIST_ITEM_VOTE, USER_NOTIFICATION, LIST_VOTE, LIST_USER, USER_NOTIFICATION_PUSH, 
     };
     
     public static EntityType valueOf(
@@ -2685,14 +2688,15 @@ public final class ServiceProtos {
       "vice.proto.Attribute\"t\n\014Notification\032d\n\n" +
       "ListInvite\022\017\n\007list_id\030\001 \002(\t\022\017\n\007user_id\030\002",
       " \002(\t\0224\n\006source\030\003 \002(\0132$.me.yabble.service" +
-      ".proto.EntityEvent*\254\001\n\nEntityType\022\010\n\004USE" +
+      ".proto.EntityEvent*\310\001\n\nEntityType\022\010\n\004USE" +
       "R\020\001\022\010\n\004LIST\020\002\022\020\n\014LIST_COMMENT\020\003\022\r\n\tLIST_" +
       "ITEM\020\004\022\025\n\021LIST_ITEM_COMMENT\020\005\022\t\n\005IMAGE\020\006" +
       "\022\022\n\016LIST_ITEM_VOTE\020\007\022\025\n\021USER_NOTIFICATIO" +
-      "N\020\010\022\r\n\tLIST_VOTE\020\t\022\r\n\tLIST_USER\020\n*D\n\tEve" +
-      "ntType\022\n\n\006CREATE\020\001\022\010\n\004READ\020\002\022\n\n\006UPDATE\020\003" +
-      "\022\n\n\006DELETE\020\004\022\t\n\005TOUCH\020\005B(\n\027me.yabble.ser" +
-      "vice.protoB\rServiceProtos"
+      "N\020\010\022\r\n\tLIST_VOTE\020\t\022\r\n\tLIST_USER\020\n\022\032\n\026USE" +
+      "R_NOTIFICATION_PUSH\020\013*D\n\tEventType\022\n\n\006CR" +
+      "EATE\020\001\022\010\n\004READ\020\002\022\n\n\006UPDATE\020\003\022\n\n\006DELETE\020\004" +
+      "\022\t\n\005TOUCH\020\005B(\n\027me.yabble.service.protoB\r" +
+      "ServiceProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

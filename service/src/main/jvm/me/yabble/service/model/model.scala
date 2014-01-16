@@ -33,6 +33,24 @@ object UserNotification {
       val kind: UserNotificationType,
       val data: Option[Array[Byte]])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+
+  object Push {
+    class Free(
+        val userNotificationId: String)
+      extends Entity.Free
+
+    class Update(
+        id: String)
+      extends Entity.Update(id)
+
+    class Persisted(
+        id: String,
+        creationDate: DateTime,
+        lastUpdatedDate: DateTime,
+        isActive: Boolean,
+        val userNotificationId: String)
+      extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+  }
 }
 
 object User {

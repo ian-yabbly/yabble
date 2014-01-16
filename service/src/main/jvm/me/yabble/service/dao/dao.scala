@@ -667,3 +667,30 @@ class UserNotificationDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txn
     }
   }
 }
+
+class UserNotificationPushDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
+    extends EntityDao[UserNotification.Push.Free, UserNotification.Push.Persisted, UserNotification.Push.Update](
+        "user_notifications",
+        EntityType.USER_NOTIFICATION_PUSH,
+        npt,
+        txnSync,
+        workQueue)
+    with Log
+{
+  override def getInsertParams(f: UserNotification.Push.Free) = Map("user_notification_id" -> f.userNotificationId)
+
+  override def getUpdateParams(u: UserNotification.Push.Update) = Map()
+
+  override def getQueryParams(f: UserNotification.Push.Free) = Map("user_notification_id" -> f.userNotificationId)
+
+  override def getRowMapper() = new RowMapper[UserNotification.Push.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): UserNotification.Push.Persisted = {
+      new UserNotification.Push.Persisted(
+          rs.getString("id"),
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("user_notification_id"))
+    }
+  }
+}

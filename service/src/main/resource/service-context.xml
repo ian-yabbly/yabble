@@ -95,6 +95,14 @@
       />
 
   <bean
+      id='service.user-notification-push-dao'
+      class='me.yabble.service.dao.UserNotificationPushDao'
+      c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
+      />
+
+  <bean
       id='service.image-dao'
       class='me.yabble.service.dao.ImageDao'
       c:npt-ref='service.jdbc-template'

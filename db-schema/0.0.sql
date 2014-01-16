@@ -115,3 +115,12 @@ create table user_notifications (
   data bytea,
   primary key (id)
 );
+
+create table user_notification_pushes (
+  id varchar(8) not null references ids (value),
+  creation_date timestamptz not null default now(),
+  last_updated_date timestamptz not null default now(),
+  is_active boolean not null default true,
+  user_notification_id varchar(8) not null references user_notifications (id),
+  primary key (id)
+);
