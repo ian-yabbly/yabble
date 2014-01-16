@@ -40,9 +40,9 @@
               listContribs  = $('#list-contributors ul');
           elFormInviteToList.submit(function() {
             var email = $.trim(txtInviteeEmail.val());
+            txtInviteeEmail.focus();
             if(email) {
               elFormInviteToList.removeClass('success error').addClass('loading');
-              txtInviteeEmail.focus();
               formUtils.asyncSubmit(elFormInviteToList)
                 .done(function() {
                   elFormInviteToList.addClass('success');
@@ -58,6 +58,11 @@
                   }, 2000);                  
                   elFormInviteToList.addClass('error');
                 })
+            } else {
+              setTimeout(function() {
+                elFormInviteToList.removeClass('loading error');
+              }, 2000);
+              elFormInviteToList.addClass('error');
             }
             return false;
           });
