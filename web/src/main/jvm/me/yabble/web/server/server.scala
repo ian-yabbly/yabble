@@ -7,6 +7,7 @@ import me.yabble.common.TextUtils
 import me.yabble.common.ctx.ExecutionContext
 import me.yabble.service._
 import me.yabble.service.model._
+import me.yabble.service.proto.ServiceProtos.EntityType
 import me.yabble.web.proto.WebProtos._
 import me.yabble.web.handler.Handler
 import me.yabble.web.handler.{Utils => HandlerUtils}
@@ -85,7 +86,7 @@ class BaseFilter(sessionService: SessionService, sessionCookieName: String)
       chain.doFilter(exchange)
     } catch {
       case e: EntityNotFoundException => e.kind match {
-        case "user" => {
+        case EntityType.USER => {
           optional2Option(sessionService.optional()) match {
             case Some(session) => {
               if (session.hasUserId() && session.getUserId == e.id) {

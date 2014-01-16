@@ -199,7 +199,9 @@ abstract class TemplateHandler(
     val response = try {
           template.renderToString(templates, supplementContext(exchange, context))
         } catch {
+          case e: NotFoundException => throw e
           case e: Exception => {
+            log.error(e.getMessage, e)
             val stackTraceStr = ExceptionUtils.getStackTrace(e)
 
             """

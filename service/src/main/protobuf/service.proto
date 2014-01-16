@@ -3,34 +3,46 @@ package me.yabble.service.proto;
 option java_package = "me.yabble.service.proto";
 option java_outer_classname = "ServiceProtos";
 
+enum EntityType {
+  USER              =  1;
+  LIST              =  2;
+  LIST_COMMENT      =  3;
+  LIST_ITEM         =  4;
+  LIST_ITEM_COMMENT =  5;
+  IMAGE             =  6;
+  LIST_ITEM_VOTE    =  7;
+  USER_NOTIFICATION =  8;
+  LIST_VOTE         =  9;
+  LIST_USER         = 10;
+}
+
+enum EventType {
+  CREATE = 1;
+  READ   = 2;
+  UPDATE = 3;
+  DELETE = 4;
+  TOUCH  = 5;
+}
+
+message Attribute {
+  required string key   = 1;
+  optional string value = 2;
+}
+
 message EntityEvent {
-  enum EntityType {
-    USER              = 1;
-    LIST              = 2;
-    LIST_COMMENT      = 3;
-    LIST_ITEM         = 4;
-    LIST_ITEM_COMMENT = 5;
-    IMAGE             = 6;
-  }
-
-  enum EventType {
-    CREATE = 1;
-    READ   = 2;
-    UPDATE = 3;
-    DELETE = 4;
-    TOUCH  = 5;
-  }
-
-  message Attribute {
-    required string key   = 1;
-    optional string value = 2;
-  }
-
   required string entity_id       = 1;
   required EntityType entity_type = 2;
   required EventType event_type   = 3;
   required string event_time      = 4;
   optional int64 delay_ms         = 5;
-  optional int64 user_id          = 6;
+  optional string user_id         = 6;
   repeated Attribute attribute    = 7;
+}
+
+message Notification {
+  message ListInvite {
+    required string list_id     = 1;
+    required string user_id     = 2;
+    required EntityEvent source = 3;
+  }
 }

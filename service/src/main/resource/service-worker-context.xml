@@ -40,4 +40,12 @@
       c:image-service-ref='service.image-service'
       />
 
+  <bean
+      id='service.user-notification-worker'
+      class='me.yabble.service.worker.UserNotificationWorker'
+      c:txn-template-ref='service.txn-template'
+      c:work-queue-ref='common.work-queue'
+      c:user-service-ref='service.user-service'
+      />
+
 </beans>

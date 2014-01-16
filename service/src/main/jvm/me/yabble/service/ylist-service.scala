@@ -41,7 +41,10 @@ class YListService(
   override def deactivateComment(commentId: String) = ylistCommentDao.deactivate(commentId)
   override def deactivateItemComment(commentId: String) = ylistItemCommentDao.deactivate(commentId)
 
-  override def addUser(lid: String, uid: String) = ylistDao.addUser(lid, uid)
+  override def addUser(lid: String, uid: String) = {
+    ylistDao.addUser(lid, uid)
+  }
+
   override def removeUser(lid: String, uid: String) = ylistDao.removeUser(lid, uid)
 
   override def createItemVote(iid: String, uid: String) = ylistItemVoteDao.maybeActivateOrCreate(new Vote.Free(iid, uid))
