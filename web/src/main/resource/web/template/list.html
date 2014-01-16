@@ -30,12 +30,7 @@
     <a href=#appUrl("/list/$list.id()")
        data-tab-content-id=list-items
        class="tab#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab#end">
-      Choices ($list.items().size())
-    </a>
-    <a href=#appUrl("/list/$list.id()/$list.slug()/tab/list-comments")
-       data-tab-content-id=list-comments
-       class="tab#if($tabId == "list-comments") active-tab#end">
-      Comments (<span class="comment-count">$list.comments().size()</span>)
+       Options ($list.items().size())
     </a>
     <a href=#appUrl("/list/$list.id()/$list.slug()/tab/list-activity")
        data-tab-content-id=list-activity
@@ -98,39 +93,7 @@
         #end
       </ul>
     </div>
-  </div>
-  <div id=list-comments class="tab-content#if($tabId == "list-comments") active-tab-content#end">
-    <div class="comments-list flexible-container">
-      <ul>
-        #foreach($comment in $list.comments())
-          <li class="comment list-item-with-user-image">
-            #if($__optUser.isDefined() && $__user.id() == $comment.user().id())
-              <a href=#appUrl("/x/list/$list.id()/comment/$comment.id()/delete")
-                 class="icon comment-delete">x</a>
-            #end
-            #squareUserImage($comment.user(), 54)
-            <span class=username>#userDisplayName($comment.user())</span>
-            &nbsp;<span class=small-bullet>&bull;</span>&nbsp;
-            <span class=comment-posted-date>$Format.timeAgo($comment.creationDate(), $__user.tz())</span>
-            <p>#formatUserMarkup($comment.body(), true)</p>
-          </li>
-        #end
-      </ul>
-      <form
-          id=frm-add-list-comment
-          class="list-item-with-user-image add-comment-form"
-          method=post
-          action=#appUrl("/x/list/$list.id()/comment")>
-        #if($__optUser.isDefined())
-          #squareUserImage($__user, 54)
-          <input type="hidden" name="username" value="#userDisplayName($__user)">
-          <input type="hidden" name="user-image-url" value="#squareUserImageUrl($__user, 54)">
-        #end
-        <textarea name=body class=full-width placeholder="Say something awesome&hellip;"></textarea>
-        <div class=clearfix><input type=submit class="orange-button float-right" value="COMMENT"></div>
-      </form>
-    </div>
-  </div>
+  </div>  
   <div id="list-activity" class="tab-content#if($tabId == "list-activity") active-tab-content#end">
     <ul class="flexible-container">
       #foreach($h in $history)
