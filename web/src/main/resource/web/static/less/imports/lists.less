@@ -292,7 +292,8 @@
       .box-sizing;
     }
 
-    input[type="submit"] {
+    input[type="submit"],
+    #success-indicator {
       position: absolute;
       top: 5px;
       right: 5px;
@@ -302,14 +303,40 @@
       line-height: 30px;
       font-size: 0.75em;
       .rounded(15px);
+      .transition-property(opacity, 250ms, linear);
+    }
+    
+    #success-indicator {
+      color: #fff;
+      text-align: center;
+      font-size: 1.25em;
+      background: @green;
+      .opacity(0);
     }
 
     &.loading {
       input[type="submit"] {
-        .static-background('loading.gif', transparent, scroll, no-repeat, center, center);
+        .is-loading;
         color: transparent;
       }
     }
+    
+    &.error {
+      input[type="submit"] {
+        .has-error;
+        color: transparent;
+      }      
+    }
+    
+    &.success {
+      input[type="submit"] {
+        .opacity(0);
+      }
+      
+      #success-indicator {
+        .opacity(1);
+      }
+    }      
   }
 
 /* list activity */
