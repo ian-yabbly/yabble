@@ -151,7 +151,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     id
   }
 
-  private def optional(f: F): Option[P] = optionalQuery(getQueryParams(f))
+  private def optional(f: F, activeOnly: Boolean = true): Option[P] = optionalQuery(getQueryParams(f), activeOnly)
 
   protected def addTxnSync(kind: EntityType, event: EventType, id: String, userId: Option[String]) {
     txnSync.add(new Function[Void, Void]() {
@@ -171,7 +171,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     })
   }
 
-  protected def optionalQuery(params: Map[String, Any]): Option[P] = {
+  protected def optionalQuery(params: Map[String, Any], activeOnly: Boolean = true): Option[P] = {
     var b = new StringBuilder()
     b.append("select * from ").append(tableName).append(" where ")
     params.foreach(t => {
@@ -181,7 +181,13 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
         case v => b.append(" = :").append(t._1).append(" and ")
       }
     })
-    b.append("is_active = true")
+
+    if (activeOnly) {
+      b.append("is_active = true")
+    } else {
+      b = b.dropRight(5)
+    }
+
     val stmt = b.toString()
     log.info("optionalQuery stmt [{}]", stmt)
     optional(all(stmt, params))
@@ -195,7 +201,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
   }
 
   def maybeActivateOrCreate(f: F) {
-    optional(f) match {
+    optional(f, false) match {
       case Some(v) => activate(v.id)
       case None => create(f)
     }
