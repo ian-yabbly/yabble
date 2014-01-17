@@ -110,3 +110,19 @@
     $__canonicalBaseUrl/i/user/$u.id()?t=s-$width
   #end
 #end
+
+#macro(itemImage $item $width)
+  #if($item.images().nonEmpty())
+    #set($i = $item.images().head())
+    <span class="list-item-image is-loading">
+       <img src=#transformImageUrl($i, "w-$width")
+            width=$width
+            height=$__imageService.getDimensionsByImageAndTransform($i.id(), "w-$width").height()>
+    </span>
+  #else
+    <span class="list-item-image no-list-item-image" 
+          style="width: ${width}px; height: ${width}px; line-height: ${width}px;">
+      i
+    </span>
+  #end
+#end
