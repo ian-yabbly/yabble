@@ -39,6 +39,12 @@
       />
   <!-- END HTTP Client -->
 
+  <bean
+      id='common.mailer'
+      class='me.yabble.common.mail.MailgunMailer'
+      c:http-client-ref='common.http-client'
+      />
+
   <!-- Redis -->
   <bean
       id="common.redis-client"

@@ -48,7 +48,7 @@
         <!-- TODO Set to `false` in prod -->
         <prop key='velocimacro.library.autoreload'>${velocity.velocimacro.library.autoreload}</prop>
 
-        <prop key='runtime.introspector.uberspect'>me.yabble.web.template.ScalaUberspect</prop>
+        <prop key='runtime.introspector.uberspect'>me.yabble.service.velocity.ScalaUberspect</prop>
       </props>
     </constructor-arg>
 

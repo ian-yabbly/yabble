@@ -21,6 +21,10 @@ import static org.apache.commons.lang.WordUtils.capitalizeFully;
 public class TextUtils {
     public static final Pattern WHITESPACE_PATTERN = Pattern.compile("\\w+");
 
+    public static String replaceNewlinesWithSpace(String v) {
+        return v.replaceAll("\\r\\n|\\r|\\n", " ");
+    }
+
     public static String enumToCode(Enum e) {
         if (e == null) { return null; }
         return stringToCode(e.name());

@@ -73,6 +73,25 @@
       c:aws-secret-key="${aws.secret-key}"
       c:bucket-name="${service.s3-store.bucket-name}"
       />
+
+  <bean
+      id='service.mail-velocity-engine'
+      class='org.apache.velocity.app.VelocityEngine'
+      >
+    <constructor-arg>
+      <props>
+        <prop key='runtime.references.strict'>true</prop>
+        <prop key='input.encoding'>${app.encoding}</prop>
+        <prop key='output.encoding'>${app.encoding}</prop>
+
+        <prop key='resource.loader'>classpath</prop>
+        <prop key='classpath.resource.loader.class'>org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>
+        <prop key='velocimacro.library'>velocity/mail-macros.vm</prop>
+        <prop key='velocimacro.arguments.strict'>true</prop>
+        <prop key='runtime.introspector.uberspect'>me.yabble.service.velocity.ScalaUberspect</prop>
+      </props>
+    </constructor-arg>
+  </bean>
   <!-- END MISC -->
 
   <!-- DAO -->

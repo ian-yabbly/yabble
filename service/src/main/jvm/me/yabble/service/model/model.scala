@@ -1,6 +1,7 @@
 package me.yabble.service.model
 
 import me.yabble.service.NotFoundException
+import me.yabble.service.proto.ServiceProtos.EntityType
 
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -17,6 +18,8 @@ object UserNotification {
   class Free(
       val userId: String,
       val kind: UserNotificationType,
+      val refId: Option[String],
+      val refType: Option[EntityType],
       val data: Option[Array[Byte]])
     extends Entity.Free
 
@@ -31,6 +34,8 @@ object UserNotification {
       isActive: Boolean,
       val user: User.Persisted,
       val kind: UserNotificationType,
+      val refId: Option[String],
+      val refType: Option[EntityType],
       val data: Option[Array[Byte]])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
 

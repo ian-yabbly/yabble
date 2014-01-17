@@ -111,6 +111,8 @@ create table user_notifications (
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
   user_id varchar(8) not null references users (id),
+  ref_id varchar(8) null references ids (value),
+  ref_type varchar(64) null,
   type varchar(64) not null,
   data bytea,
   primary key (id)

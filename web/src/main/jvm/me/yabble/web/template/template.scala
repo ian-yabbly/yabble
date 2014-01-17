@@ -6,12 +6,8 @@ import org.apache.commons.io.FilenameUtils
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.VelocityEngine
 import org.apache.velocity.context.Context
-import org.apache.velocity.util.introspection._
 
 import com.google.common.collect.Maps
-
-import org.slf4j.Logger
-import org.slf4j.LoggerFactory
 
 import java.io.StringWriter
 import java.io.Writer
@@ -93,23 +89,4 @@ class VelocityTemplate(
   private def renderToWriter(t: String, context: Context, writer: Writer) {
     engine.mergeTemplate("/%s".format(t), encoding, context, writer)
   }
-}
-
-class ScalaUberspect extends UberspectImpl {
-  def logger = LoggerFactory.getLogger("me.yabble.web.template.ScalaUberspect")
-
-  override def getIterator(obj: Object, info: Info): java.util.Iterator[_] = obj match {
-    case l: scala.collection.Iterable[_] => asJavaIterable(l).iterator()
-    case _ => super.getIterator(obj, info)
-  }
-
-/*
-  override def getPropertyGet(obj: Object, identifier: String, info: Info): VelPropertyGet = {
-    logger.info("object [{}]", obj)
-    logger.info("identifier [{}]", identifier)
-    logger.info("info [{}]", info)
-    obj.
-    super.getPropertyGet(obj, identifier, info)
-  }
-*/
 }

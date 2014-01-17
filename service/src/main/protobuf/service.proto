@@ -1,5 +1,7 @@
 package me.yabble.service.proto;
 
+import "common.proto";
+
 option java_package = "me.yabble.service.proto";
 option java_outer_classname = "ServiceProtos";
 
@@ -46,4 +48,16 @@ message Notification {
     required string user_id     = 2;
     required EntityEvent source = 3;
   }
+}
+
+message UserCommunication {
+  enum Type {
+    EMAIL = 1;
+  }
+
+  required string user_id                     = 1;
+  required Type type                          = 2;
+  optional EntityType ref_type                = 3;
+  optional string ref_id                      = 4;
+  optional me.yabble.common.proto.Email email = 5;
 }

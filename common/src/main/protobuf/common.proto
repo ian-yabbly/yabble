@@ -9,3 +9,15 @@ message DelayedJob {
   required string qname = 3;
   required string datetime_to_submit = 4;
 }
+
+message Email {
+  required string from      =  1;
+  optional string from_name =  2;
+  optional string reply_to  =  3;
+  repeated string to        =  4;
+  repeated string cc        =  5;
+  repeated string bcc       =  6;
+  optional string subject   =  7;
+  optional string text_body =  8;
+  optional string html_body =  9;
+}

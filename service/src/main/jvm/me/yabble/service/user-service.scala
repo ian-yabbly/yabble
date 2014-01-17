@@ -5,10 +5,14 @@ import me.yabble.service.model._
 import me.yabble.service.dao._
 
 trait IUserService extends IService[User.Free, User.Persisted, User.Update] {
-  def create(f: UserNotification.Free): String
   def findOrCreateByEmail(email: String): User.Persisted
   def optionalByNameOrEmail(nameOrEmail: String): Option[User.Persisted]
   def optionalByEmail(email: String): Option[User.Persisted]
+
+  // User notifications
+  def create(f: UserNotification.Free): String
+  def findNotification(id: String): UserNotification.Persisted
+  // END User notifications
 }
 
 class UserService(
@@ -18,8 +22,6 @@ class UserService(
   with IUserService
   with Log
 {
-  override def create(f: UserNotification.Free) = userNotificationDao.create(f)
-
   override def findOrCreateByEmail(email: String): User.Persisted = {
     userDao.optionalByEmailForUpdate(email) match {
       case Some(user) => user
@@ -35,4 +37,9 @@ class UserService(
   }
 
   override def optionalByEmail(email: String) = userDao.optionalByEmail(email)
+
+  // User notifications
+  override def create(f: UserNotification.Free) = userNotificationDao.create(f)
+  override def findNotification(id: String) = userNotificationDao.find(id)
+  // END User notifications
 }

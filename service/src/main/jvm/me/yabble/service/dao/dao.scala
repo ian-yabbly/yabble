@@ -146,14 +146,15 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
       }
     }
 
-    addTxnSync(kind, EventType.CREATE, id, None)
+    addEntityEventTxnSync(kind, EventType.CREATE, id, None)
 
     id
   }
 
   private def optional(f: F, activeOnly: Boolean = true): Option[P] = optionalQuery(getQueryParams(f), activeOnly)
 
-  protected def addTxnSync(kind: EntityType, event: EventType, id: String, userId: Option[String]) {
+  protected def addEntityEventTxnSync(kind: EntityType, event: EventType, id: String, userId: Option[String]) {
+    //log.info("Adding entity event txn sync [{}] [{}]", enumToCode(kind), enumToCode(event))
     txnSync.add(new Function[Void, Void]() {
       override def apply(ingored: Void): Void = {
         val b = EntityEvent.newBuilder()
@@ -189,7 +190,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     }
 
     val stmt = b.toString()
-    log.info("optionalQuery stmt [{}]", stmt)
+    //log.info("optionalQuery stmt [{}]", stmt)
     optional(all(stmt, params))
   }
 
@@ -494,7 +495,7 @@ class YListDao(
     npt.queryForList("select * from list_users where list_id = :list_id and user_id = :user_id for update", params).toList match {
       case Nil => {
         npt.update("insert into list_users (list_id, user_id) values (:list_id, :user_id)", params)
-        addTxnSync(EntityType.LIST_USER, EventType.CREATE, lid, Some(uid))
+        addEntityEventTxnSync(EntityType.LIST_USER, EventType.CREATE, lid, Some(uid))
         true
       }
       case head :: Nil => false
@@ -507,7 +508,7 @@ class YListDao(
       Map("list_id" -> lid, "user_id" -> uid)) match {
         case 0 => false
         case 1 => {
-          addTxnSync(EntityType.LIST_USER, EventType.DELETE, lid, Some(uid))
+          addEntityEventTxnSync(EntityType.LIST_USER, EventType.DELETE, lid, Some(uid))
           true
         }
         case n: Int => throw new UnexpectedNumberOfRowsUpdatedException(n)
@@ -654,11 +655,21 @@ class UserNotificationDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txn
     extends EntityDao[UserNotification.Free, UserNotification.Persisted, UserNotification.Update]("user_notifications", EntityType.USER_NOTIFICATION, npt, txnSync, workQueue)
     with Log
 {
-  override def getInsertParams(f: UserNotification.Free) = Map("user_id" -> f.userId, "type" -> enumToCode(f.kind), "data" -> f.data.orNull)
+  override def getInsertParams(f: UserNotification.Free) = Map(
+      "user_id" -> f.userId,
+      "type" -> enumToCode(f.kind),
+      "ref_id" -> f.refId.orNull,
+      "ref_type" -> f.refType.map(enumToCode(_)).orNull,
+      "data" -> f.data.orNull)
 
   override def getUpdateParams(u: UserNotification.Update) = Map()
 
-  override def getQueryParams(f: UserNotification.Free) = Map("user_id" -> f.userId, "type" -> enumToCode(f.kind), "data" -> f.data.orNull)
+  override def getQueryParams(f: UserNotification.Free) = Map(
+      "user_id" -> f.userId,
+      "type" -> enumToCode(f.kind),
+      "ref_id" -> f.refId.orNull,
+      "ref_type" -> f.refType.map(enumToCode(_)).orNull,
+      "data" -> f.data.orNull)
 
   override def getRowMapper() = new RowMapper[UserNotification.Persisted]() {
     override def mapRow(rs: ResultSet, rowNum: Int): UserNotification.Persisted = {
@@ -669,6 +680,8 @@ class UserNotificationDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txn
           rs.getBoolean("is_active"),
           userDao.find(rs.getString("user_id")),
           codeToEnum(rs.getString("type"), classOf[UserNotificationType]),
+          Option(rs.getString("ref_id")),
+          Option(codeToEnum(rs.getString("ref_type"), classOf[EntityType])),
           Option(rs.getBytes("data")))
     }
   }
