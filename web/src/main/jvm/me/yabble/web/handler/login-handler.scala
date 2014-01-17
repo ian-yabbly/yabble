@@ -123,6 +123,38 @@ class LoginHandler(
   def forgot(exchange: HttpExchange, pathVars: Map[String, String]) {
     exchange.getRequestMethod.toLowerCase match {
       case "post" => {
+        val nvps = allNvps(exchange)
+        val formBuilder = getOrCreateForm().toBuilder()
+        try {
+          formBuilder.setName(formField(optionalFirstParamValue(nvps, "name")))
+
+          var isValid = true
+          if (!formBuilder.getName.hasValue) {
+            formBuilder.setName(formBuilder.getName().toBuilder().addErrorMessage(message("required")))
+            isValid = false
+          }
+
+          val optUser = userService.optionalByNameOrEmail(formBuilder.getName.getValue) match {
+            case Some(user) => {
+              Some(user)
+            }
+            case None => {
+              formBuilder.setName(formBuilder.getName().toBuilder().addErrorMessage(message("not-found")))
+              isValid = false
+              None
+            }
+          }
+
+          if (!isValid) {
+            redirectResponse(exchange, "/login")
+            return
+          }
+
+          // Send a forgot password mail
+        } finally {
+          val form = formBuilder.build()
+          persistForm(form)
+        }
       }
 
       case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)

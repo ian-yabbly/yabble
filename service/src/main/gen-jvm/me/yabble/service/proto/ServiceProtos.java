@@ -3356,6 +3356,11 @@ public final class ServiceProtos {
     boolean hasListLink();
     me.yabble.service.proto.ServiceProtos.UserPush.YListLink getListLink();
     me.yabble.service.proto.ServiceProtos.UserPush.YListLinkOrBuilder getListLinkOrBuilder();
+    
+    // optional .me.yabble.service.proto.UserPush.ForgotPassword forgot_password = 2;
+    boolean hasForgotPassword();
+    me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword getForgotPassword();
+    me.yabble.service.proto.ServiceProtos.UserPush.ForgotPasswordOrBuilder getForgotPasswordOrBuilder();
   }
   public static final class UserPush extends
       com.google.protobuf.GeneratedMessage
@@ -3768,6 +3773,389 @@ public final class ServiceProtos {
       // @@protoc_insertion_point(class_scope:me.yabble.service.proto.UserPush.YListLink)
     }
     
+    public interface ForgotPasswordOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+      
+      // required string user_id = 1;
+      boolean hasUserId();
+      String getUserId();
+    }
+    public static final class ForgotPassword extends
+        com.google.protobuf.GeneratedMessage
+        implements ForgotPasswordOrBuilder {
+      // Use ForgotPassword.newBuilder() to construct.
+      private ForgotPassword(Builder builder) {
+        super(builder);
+      }
+      private ForgotPassword(boolean noInit) {}
+      
+      private static final ForgotPassword defaultInstance;
+      public static ForgotPassword getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      public ForgotPassword getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_ForgotPassword_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_ForgotPassword_fieldAccessorTable;
+      }
+      
+      private int bitField0_;
+      // required string user_id = 1;
+      public static final int USER_ID_FIELD_NUMBER = 1;
+      private java.lang.Object userId_;
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getUserId() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          return (String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+            userId_ = s;
+          }
+          return s;
+        }
+      }
+      private com.google.protobuf.ByteString getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      
+      private void initFields() {
+        userId_ = "";
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+        
+        if (!hasUserId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getUserIdBytes());
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getUserIdBytes());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+      
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+      
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements me.yabble.service.proto.ServiceProtos.UserPush.ForgotPasswordOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_ForgotPassword_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_ForgotPassword_fieldAccessorTable;
+        }
+        
+        // Construct using me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+        
+        private Builder(BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+        
+        public Builder clear() {
+          super.clear();
+          userId_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          return this;
+        }
+        
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+        
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.getDescriptor();
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword getDefaultInstanceForType() {
+          return me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.getDefaultInstance();
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword build() {
+          me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+        
+        private me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return result;
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword buildPartial() {
+          me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword result = new me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.userId_ = userId_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword) {
+            return mergeFrom((me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword other) {
+          if (other == me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.getDefaultInstance()) return this;
+          if (other.hasUserId()) {
+            setUserId(other.getUserId());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public final boolean isInitialized() {
+          if (!hasUserId()) {
+            
+            return false;
+          }
+          return true;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                userId_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        }
+        
+        private int bitField0_;
+        
+        // required string user_id = 1;
+        private java.lang.Object userId_ = "";
+        public boolean hasUserId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public String getUserId() {
+          java.lang.Object ref = userId_;
+          if (!(ref instanceof String)) {
+            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            userId_ = s;
+            return s;
+          } else {
+            return (String) ref;
+          }
+        }
+        public Builder setUserId(String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          userId_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearUserId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          userId_ = getDefaultInstance().getUserId();
+          onChanged();
+          return this;
+        }
+        void setUserId(com.google.protobuf.ByteString value) {
+          bitField0_ |= 0x00000001;
+          userId_ = value;
+          onChanged();
+        }
+        
+        // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.UserPush.ForgotPassword)
+      }
+      
+      static {
+        defaultInstance = new ForgotPassword(true);
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:me.yabble.service.proto.UserPush.ForgotPassword)
+    }
+    
     private int bitField0_;
     // optional .me.yabble.service.proto.UserPush.YListLink list_link = 1;
     public static final int LIST_LINK_FIELD_NUMBER = 1;
@@ -3782,8 +4170,22 @@ public final class ServiceProtos {
       return listLink_;
     }
     
+    // optional .me.yabble.service.proto.UserPush.ForgotPassword forgot_password = 2;
+    public static final int FORGOT_PASSWORD_FIELD_NUMBER = 2;
+    private me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword forgotPassword_;
+    public boolean hasForgotPassword() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword getForgotPassword() {
+      return forgotPassword_;
+    }
+    public me.yabble.service.proto.ServiceProtos.UserPush.ForgotPasswordOrBuilder getForgotPasswordOrBuilder() {
+      return forgotPassword_;
+    }
+    
     private void initFields() {
       listLink_ = me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDefaultInstance();
+      forgotPassword_ = me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.getDefaultInstance();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -3792,6 +4194,12 @@ public final class ServiceProtos {
       
       if (hasListLink()) {
         if (!getListLink().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (hasForgotPassword()) {
+        if (!getForgotPassword().isInitialized()) {
           memoizedIsInitialized = 0;
           return false;
         }
@@ -3806,6 +4214,9 @@ public final class ServiceProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         output.writeMessage(1, listLink_);
       }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(2, forgotPassword_);
+      }
       getUnknownFields().writeTo(output);
     }
     
@@ -3818,6 +4229,10 @@ public final class ServiceProtos {
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(1, listLink_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, forgotPassword_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
@@ -3936,6 +4351,7 @@ public final class ServiceProtos {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getListLinkFieldBuilder();
+          getForgotPasswordFieldBuilder();
         }
       }
       private static Builder create() {
@@ -3950,6 +4366,12 @@ public final class ServiceProtos {
           listLinkBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000001);
+        if (forgotPasswordBuilder_ == null) {
+          forgotPassword_ = me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.getDefaultInstance();
+        } else {
+          forgotPasswordBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
       
@@ -3996,6 +4418,14 @@ public final class ServiceProtos {
         } else {
           result.listLink_ = listLinkBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (forgotPasswordBuilder_ == null) {
+          result.forgotPassword_ = forgotPassword_;
+        } else {
+          result.forgotPassword_ = forgotPasswordBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -4015,6 +4445,9 @@ public final class ServiceProtos {
         if (other.hasListLink()) {
           mergeListLink(other.getListLink());
         }
+        if (other.hasForgotPassword()) {
+          mergeForgotPassword(other.getForgotPassword());
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
@@ -4022,6 +4455,12 @@ public final class ServiceProtos {
       public final boolean isInitialized() {
         if (hasListLink()) {
           if (!getListLink().isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (hasForgotPassword()) {
+          if (!getForgotPassword().isInitialized()) {
             
             return false;
           }
@@ -4059,6 +4498,15 @@ public final class ServiceProtos {
               }
               input.readMessage(subBuilder, extensionRegistry);
               setListLink(subBuilder.buildPartial());
+              break;
+            }
+            case 18: {
+              me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.Builder subBuilder = me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.newBuilder();
+              if (hasForgotPassword()) {
+                subBuilder.mergeFrom(getForgotPassword());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setForgotPassword(subBuilder.buildPartial());
               break;
             }
           }
@@ -4157,6 +4605,96 @@ public final class ServiceProtos {
         return listLinkBuilder_;
       }
       
+      // optional .me.yabble.service.proto.UserPush.ForgotPassword forgot_password = 2;
+      private me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword forgotPassword_ = me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword, me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.Builder, me.yabble.service.proto.ServiceProtos.UserPush.ForgotPasswordOrBuilder> forgotPasswordBuilder_;
+      public boolean hasForgotPassword() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword getForgotPassword() {
+        if (forgotPasswordBuilder_ == null) {
+          return forgotPassword_;
+        } else {
+          return forgotPasswordBuilder_.getMessage();
+        }
+      }
+      public Builder setForgotPassword(me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword value) {
+        if (forgotPasswordBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          forgotPassword_ = value;
+          onChanged();
+        } else {
+          forgotPasswordBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder setForgotPassword(
+          me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.Builder builderForValue) {
+        if (forgotPasswordBuilder_ == null) {
+          forgotPassword_ = builderForValue.build();
+          onChanged();
+        } else {
+          forgotPasswordBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder mergeForgotPassword(me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword value) {
+        if (forgotPasswordBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              forgotPassword_ != me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.getDefaultInstance()) {
+            forgotPassword_ =
+              me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.newBuilder(forgotPassword_).mergeFrom(value).buildPartial();
+          } else {
+            forgotPassword_ = value;
+          }
+          onChanged();
+        } else {
+          forgotPasswordBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      public Builder clearForgotPassword() {
+        if (forgotPasswordBuilder_ == null) {
+          forgotPassword_ = me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.getDefaultInstance();
+          onChanged();
+        } else {
+          forgotPasswordBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      public me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.Builder getForgotPasswordBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getForgotPasswordFieldBuilder().getBuilder();
+      }
+      public me.yabble.service.proto.ServiceProtos.UserPush.ForgotPasswordOrBuilder getForgotPasswordOrBuilder() {
+        if (forgotPasswordBuilder_ != null) {
+          return forgotPasswordBuilder_.getMessageOrBuilder();
+        } else {
+          return forgotPassword_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword, me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.Builder, me.yabble.service.proto.ServiceProtos.UserPush.ForgotPasswordOrBuilder> 
+          getForgotPasswordFieldBuilder() {
+        if (forgotPasswordBuilder_ == null) {
+          forgotPasswordBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword, me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.Builder, me.yabble.service.proto.ServiceProtos.UserPush.ForgotPasswordOrBuilder>(
+                  forgotPassword_,
+                  getParentForChildren(),
+                  isClean());
+          forgotPassword_ = null;
+        }
+        return forgotPasswordBuilder_;
+      }
+      
       // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.UserPush)
     }
     
@@ -4203,6 +4741,11 @@ public final class ServiceProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_me_yabble_service_proto_UserPush_YListLink_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_me_yabble_service_proto_UserPush_ForgotPassword_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_me_yabble_service_proto_UserPush_ForgotPassword_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4227,18 +4770,21 @@ public final class ServiceProtos {
       "erCommunication\022\017\n\007user_id\030\001 \002(\t\0225\n\010ref_" +
       "type\030\002 \001(\0162#.me.yabble.service.proto.Ent" +
       "ityType\022\016\n\006ref_id\030\003 \001(\t\022,\n\005email\030\004 \001(\0132\035" +
-      ".me.yabble.common.proto.Email\"h\n\010UserPus" +
-      "h\022>\n\tlist_link\030\001 \001(\0132+.me.yabble.service" +
-      ".proto.UserPush.YListLink\032\034\n\tYListLink\022\017" +
-      "\n\007list_id\030\001 \002(\t*\336\001\n\nEntityType\022\010\n\004USER\020\001" +
-      "\022\t\n\005YLIST\020\002\022\021\n\rYLIST_COMMENT\020\003\022\016\n\nYLIST_",
-      "ITEM\020\004\022\026\n\022YLIST_ITEM_COMMENT\020\005\022\t\n\005IMAGE\020" +
-      "\006\022\023\n\017YLIST_ITEM_VOTE\020\007\022\025\n\021USER_NOTIFICAT" +
-      "ION\020\010\022\016\n\nYLIST_VOTE\020\t\022\016\n\nYLIST_USER\020\n\022\032\n" +
-      "\026USER_NOTIFICATION_PUSH\020\013\022\r\n\tUSER_AUTH\020\014" +
-      "*D\n\tEventType\022\n\n\006CREATE\020\001\022\010\n\004READ\020\002\022\n\n\006U" +
-      "PDATE\020\003\022\n\n\006DELETE\020\004\022\t\n\005TOUCH\020\005B(\n\027me.yab" +
-      "ble.service.protoB\rServiceProtos"
+      ".me.yabble.common.proto.Email\"\326\001\n\010UserPu" +
+      "sh\022>\n\tlist_link\030\001 \001(\0132+.me.yabble.servic" +
+      "e.proto.UserPush.YListLink\022I\n\017forgot_pas" +
+      "sword\030\002 \001(\01320.me.yabble.service.proto.Us" +
+      "erPush.ForgotPassword\032\034\n\tYListLink\022\017\n\007li",
+      "st_id\030\001 \002(\t\032!\n\016ForgotPassword\022\017\n\007user_id" +
+      "\030\001 \002(\t*\336\001\n\nEntityType\022\010\n\004USER\020\001\022\t\n\005YLIST" +
+      "\020\002\022\021\n\rYLIST_COMMENT\020\003\022\016\n\nYLIST_ITEM\020\004\022\026\n" +
+      "\022YLIST_ITEM_COMMENT\020\005\022\t\n\005IMAGE\020\006\022\023\n\017YLIS" +
+      "T_ITEM_VOTE\020\007\022\025\n\021USER_NOTIFICATION\020\010\022\016\n\n" +
+      "YLIST_VOTE\020\t\022\016\n\nYLIST_USER\020\n\022\032\n\026USER_NOT" +
+      "IFICATION_PUSH\020\013\022\r\n\tUSER_AUTH\020\014*D\n\tEvent" +
+      "Type\022\n\n\006CREATE\020\001\022\010\n\004READ\020\002\022\n\n\006UPDATE\020\003\022\n" +
+      "\n\006DELETE\020\004\022\t\n\005TOUCH\020\005B(\n\027me.yabble.servi" +
+      "ce.protoB\rServiceProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -4290,7 +4836,7 @@ public final class ServiceProtos {
           internal_static_me_yabble_service_proto_UserPush_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_service_proto_UserPush_descriptor,
-              new java.lang.String[] { "ListLink", },
+              new java.lang.String[] { "ListLink", "ForgotPassword", },
               me.yabble.service.proto.ServiceProtos.UserPush.class,
               me.yabble.service.proto.ServiceProtos.UserPush.Builder.class);
           internal_static_me_yabble_service_proto_UserPush_YListLink_descriptor =
@@ -4301,6 +4847,14 @@ public final class ServiceProtos {
               new java.lang.String[] { "ListId", },
               me.yabble.service.proto.ServiceProtos.UserPush.YListLink.class,
               me.yabble.service.proto.ServiceProtos.UserPush.YListLink.Builder.class);
+          internal_static_me_yabble_service_proto_UserPush_ForgotPassword_descriptor =
+            internal_static_me_yabble_service_proto_UserPush_descriptor.getNestedTypes().get(1);
+          internal_static_me_yabble_service_proto_UserPush_ForgotPassword_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_me_yabble_service_proto_UserPush_ForgotPassword_descriptor,
+              new java.lang.String[] { "UserId", },
+              me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.class,
+              me.yabble.service.proto.ServiceProtos.UserPush.ForgotPassword.Builder.class);
           return null;
         }
       };
