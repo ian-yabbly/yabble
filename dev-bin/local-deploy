@@ -40,7 +40,7 @@ git reset --hard v$version
 ant clean dist-archive
 
 mkdir -p $deploy_dir/etc
-cp -r $BASEDIR/config/$config/* $deploy_dir/etc
+cp -r $BASEDIR/config/$config/etc/* $deploy_dir/etc
 mkdir -p $deploy_dir/var/log
 mkdir -p $vdir
 tar -C$vdir -xzf$BASEDIR/target/yabble-$version.tar.gz
