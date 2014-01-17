@@ -1,8 +1,7 @@
 #!/bin/bash
 set -e
 source $(dirname $0)/include
-NODE=`which node`
-$NODE build-lib/r.js -o \
+/usr/local/bin/node $BASEDIR/build-lib/r.js -o \
   baseUrl=$BASEDIR/web/src/main/resource/web/static/js/ \
   paths.requireLib=vendor/require-2.1.10 \
   paths.text=vendor/require-text \
