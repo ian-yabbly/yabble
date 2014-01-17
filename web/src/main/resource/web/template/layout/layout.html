@@ -9,6 +9,16 @@
   <body data-yabbly-enable-logs=true>
     #parse("toolbar.html")
     #if($__content)$__content#end
+    #if($__optUser.isDefined())
+      <script>
+        document.YABBLE_USER = {};
+        document.YABBLE_USER.id = '$__user.id()';
+        #if($__user.email().isDefined())
+          document.YABBLE_USER.email = '$__user.email()';
+        #end
+        document.YABBLE_USER.displayName = '$__user.displayName()';
+      </script>
+    #end
     #if($__minifyJs == "true")
       <script src=#staticUrl("/js/main.min.js")></script>
     #else

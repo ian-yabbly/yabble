@@ -3,16 +3,16 @@
     <a id=logo href="#appUrl('/')">
       yabble.me
     </a>
-    <a href="#appUrl('/new')" class="button float-right">New Yabble</a>
     #if ($__optUser.isDefined())
-      #if ($__user.canLogin())
-        <a href="#appUrl('/logout')" class="float-right" style="margin-right: 10px;">logout #userDisplayName($__user)</a>
+      #if ($__userCanLogin)
+        <a href="#appUrl('/logout')" class="float-right" class="button gray-button float-right">logout #userDisplayName($__user)</a>
       #else
-        <a href='#appUrl("/register?r=$__currentPath")' class="float-right" style="margin-right: 10px;">register</a>
+        <a href='#appUrl("/register?r=$__currentPath")' class="button gray-button float-right">register</a>
       #end
     #else
-      <a href="#appUrl('/register')" class="float-right" style="margin-right: 10px;">register</a>
-      <a href="#appUrl('/login')" class="float-right" style="margin-right: 10px;">login</a>
+      <a href="#appUrl('/register')" class="button gray-button float-right" >Register</a>
+      <a href="#appUrl('/login')" class="button gray-button float-right">Login</a>
     #end
+    <a href="#appUrl('/new')" class="button float-right">New Yabble</a>  
   </div>
 </div>

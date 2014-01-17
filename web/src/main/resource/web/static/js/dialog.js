@@ -30,7 +30,7 @@
           }
 
           // We use a single dialog container for all dialogs on a given page
-          container = $('#dialog-body');
+          container = $('#dialog-container');
           if(container.length === 0) {
             container = $('<div id="dialog-container"></div>').appendTo(body);
           }
@@ -114,11 +114,11 @@
           setY = typeof setY === 'undefined' ? true : setY;
           setX = typeof setX === 'undefined' ? true : setX;
           if(setY) {
-            top = ((document.body.clientHeight - this.height) / 2) + 'px';
+            top = ((container.height() - this.height) / 2) + 'px';
             props.top = top;
           }
           if(setX) {
-            left = ((document.body.clientWidth - this.width) / 2) + 'px';
+            left = ((container.width() - this.width) / 2) + 'px';
             props.left = left;
           }
           this.element.css(props);
@@ -139,7 +139,6 @@
                   utils.onTransitionEnd(
                       self.element,
                       function() {
-                        body.addClass('no-scroll');
                         self.publish(Dialog.Event.SHOWN, self);
                       }
                   );
@@ -169,7 +168,6 @@
                 function() {
                   self.element.removeClass('active-dialog');
                   containers.css('display', '');
-                  body.removeClass('no-scroll');
                   self.hideLoading();
                   self.publish.apply(self, [ Dialog.Event.HIDDEN, self ].concat(args));
                 }

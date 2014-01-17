@@ -40,19 +40,19 @@
   </div>
   <div id="list-items" class="tab-content#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab-content#end">
     <div class="flexible-container">
-      <div class=text-center><a id=button-add-item data-list-external-id=$list.id() class="orange-button button">Add Option</a></div>
+      <div class=text-center><a id=button-add-item data-list-id=$list.id() class="orange-button button">Add Option</a></div>
       <ul>
         #foreach($item in $list.items())
           <li class="list-item" data-item-id="$item.id()">
+           <a href=#appUrl("/list/$list.id()/item/$item.id()") class=list-item-link>
             <span class="list-item-content">
               #if($item.images().nonEmpty())
                 #set($i = $item.images().head())
-                 <a href=#appUrl("/list/$list.id()/item/$item.id()")
-                    class="list-item-image is-loading">
+                <span class="list-item-image is-loading">
                    <img src="#transformImageUrl($i, 'w-325')"
                         width="325"
                         height="$__imageService.getDimensionsByImageAndTransform($i.id(), 'w-325').height()">
-                 </a>
+                 </span>
               #end
               <span class="list-item-body">
                 #if ($item.title().isDefined())
@@ -63,52 +63,8 @@
                   #formatUserMarkup($item.body().get(), true)
                 #end
               </span>
-            </span>
-            <span class="list-item-controls">
-              #if($__optUser.isDefined())
-                #set($isHelpful = $item.optionalVoteByUser($__user.id()).isDefined())
-              #else
-                #set($isHelpful = false)
-              #end
-              #set($hasVotes = $item.votes().size() > 0)
-              #set($voteUrl = "/x/list/$list.id()/item/$item.id()/vote")
-              #if($isHelpful)
-                #set($voteUrl = "$voteUrl/delete")              
-              #end
-              <a href=#appUrl("$voteUrl")
-                 class="button-toggle-list-item-vote button gray-button #if($isHelpful) has-voted#end">
-                <span class="icon">U</span>
-                #if($isHelpful) 
-                  Remove your vote
-                #else
-                  Vote for this option
-                #end
-              </a>
-              <span class="list-item-vote-count">
-                <span class="icon">U</span>
-                #set($itemVoteCount = $item.votes().size())
-                #if($itemVoteCount == 0)
-                  no one has voted for this option
-                #elseif($itemVoteCount < 3) 
-                  #foreach($vote in $item.votes())
-                    #if($foreach.index > 0)
-                      ,
-                    #end
-                    #if($foreach.index == 2)     
-                      and             
-                    #end
-                    #userDisplayName($vote.user())
-                  #end
-                  voted for this option
-                #else
-                  $itemVoteCount people voted for this option
-                #end
-              </span>              
-              <a href=#appUrl("/list/$list.id()/item/$item.id()") class="list-item-comment-count">
-                <span class="icon">%</span>
-                $item.comments().size() comments</span>
-              </a>
-            </span>            
+            </a>
+            #parse('list-item-controls.html')
           </li>
         #end
       </ul>

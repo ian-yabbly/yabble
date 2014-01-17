@@ -15,7 +15,7 @@
       ],
       function($, Dialog, mustache, stringUtils, formUtils, strings, utils, 
         textFormAddItem, textImageSearchResult) {
-        var AddItemDialog, dlg, tmplFormAddItem, tmplImageSearchResultItem;
+        var AddItemDialog, tmplFormAddItem, tmplImageSearchResultItem;
 
         tmplFormAddItem = mustache.compile(textFormAddItem);
         tmplImageSearchResultItem = mustache.compile(textImageSearchResult)
@@ -23,8 +23,15 @@
         AddItemDialog = function(props) {
           var self = this;
 
-          props = props || {};
-          Dialog.call(this, props);
+          props = $.extend(props || {}, {
+            element : Dialog.createHtml({
+              id      : 'add-item',
+              content : tmplFormAddItem({ listId: props.listId })
+            }),
+            fixed   : true
+          })
+          
+          Dialog.call(this, props);  
           
           this.setupForms();
                     
@@ -266,22 +273,6 @@
           return this.clearSearchResults()
               .hideDetailsForm()
               .setSearchType(AddItemDialog.SearchType.IMAGE_SEARCH);
-        };
-
-        AddItemDialog.get = function(listExternalId) {
-          // TODO: if this dialog ever needs to be used in the context of 
-          // multiple lists, we'll need to write an API for setting
-          // the list external id.
-          if(!dlg) {
-            dlg = new AddItemDialog({
-              element : Dialog.createHtml({
-                id      : 'add-item',
-                content : tmplFormAddItem({ listId: listExternalId })
-              }),
-              fixed   : true
-            });
-          }
-          return dlg;
         };
         
         AddItemDialog.SearchType = {

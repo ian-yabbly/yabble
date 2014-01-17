@@ -30,7 +30,7 @@ if test -z "$APP_HOME"; then
   if test -e $BASEDIR/etc/override.properties; then
     info "Setting APP_HOME to $BASEDIR"
     export APP_HOME=$BASEDIR
-  elif test -e $HOME/opt/yabble/etc/override.propertie; then
+  elif test -e $HOME/opt/yabble/etc/override.properties; then
     info "Setting APP_HOME to $HOME/opt/yabble"
     export APP_HOME=$HOME/opt/yabble
   else

@@ -1,7 +1,6 @@
 <div class=flexible-container>
   <form action=#appUrl("/login") method=post>
     <h1>Login</h1>
-
     <div class=form-row>
       <label for=name>Email:</label>
       <input
@@ -9,10 +8,9 @@
           type=text
           name=name
           value='$!form.Name.Value'
-          placeholder='Email or username'
-          >
+          placeholder='Enter your email address or username'
+          class=full-width>
     </div>
-
     <div class=form-row>
       <label for=password>Password:</label>
       <input
@@ -20,19 +18,13 @@
           type=password
           name=password
           value='$!form.Password.Value'
-          placeholder='Password'
-          >
+          placeholder='Enter your password'
+          class=full-width>
     </div>
-
     <input type=submit value="LOGIN" class="centered-submit">
-
   </form>
-
-  <h2>OR</h2>
-
-  <form action=#appUrl("/forgot") method=post>
-    <h2>I forgot my password</h2>
-
+  <form action=#appUrl("/forgot") method=post class=section>
+    <h2>Forgot your password?</h2>
     <div class=form-row>
       <label for=forgot-email>Email:</label>
       <input
@@ -40,12 +32,10 @@
           type=text
           name=name
           value='$!form.Name.Value'
-          placeholder='Email or username'
-          >
+          placeholder='Enter your email address or username'
+          class=full-width>
     </div>
-
-    <input type=submit value="REMIND ME" class="centered-submit">
+    <input type=submit value="SUBMIT" class="centered-submit">
   </form>
-
 </div>
 

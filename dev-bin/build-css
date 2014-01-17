@@ -1,0 +1,10 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+LESSFILE=$BASEDIR/web/src/main/resource/web/static/less/main.less
+CSSFILE=$BASEDIR/web/src/main/resource/web/static/css/main.css
+VERSION=`cat $BASEDIR/.version-hash`
+
+lessc -x --modify-var="version-hash='$VERSION'" "$LESSFILE" "$CSSFILE"
+echo "Compiled Minified CSS to '$CSSFILE' with version '$VERSION'"

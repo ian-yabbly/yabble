@@ -1,0 +1,48 @@
+<span class="list-item-controls">
+  #if($__optUser.isDefined())
+    #set($isHelpful = $item.optionalVoteByUser($__user.id()).isDefined())
+  #else
+    #set($isHelpful = false)
+  #end
+  #set($hasVotes = $item.votes().size() > 0)
+  #set($voteUrl = "/x/list/$list.id()/item/$item.id()/vote")
+  #if($isHelpful)
+    #set($voteUrl = "$voteUrl/delete")              
+  #end
+  #set($itemVoteCount = $item.votes().size())              
+  <a href=#appUrl("$voteUrl")
+     class="button-toggle-list-item-vote button gray-button #if($isHelpful) has-voted#end"
+     data-vote-count=$itemVoteCount>
+    <span class="icon">U</span>
+    <span class="button-toggle-list-item-vote-text">
+      #if($isHelpful) 
+        Remove your vote
+      #else
+        Vote for this
+      #end
+    </span>
+  </a>
+  <span class="list-item-vote-count#if($hasVotes) tooltip-trigger#end">
+    <span class="icon">U</span>
+    <span class="list-item-vote-count-text">
+      #if($itemVoteCount == 0)
+        no one has voted for this option   
+      #else
+        $itemVoteCount #if($itemVoteCount == 1) person #else people #end voted for this option
+      #end
+    </span>
+    <span class="tooltip tooltip-below">
+      <span class=pointer><span></span></span>
+      <ul>
+        #foreach($vote in $item.votes())
+          <li data-voter-id=$vote.user().id()>#userDisplayName($vote.user())</li>
+        #end
+      </ul>
+    </span>
+  </span>     
+  #if(!$hideCommentsCount)         
+    <a href=#appUrl("/list/$list.id()/item/$item.id()#comments") class="list-item-comment-count">
+      <span class="icon">%</span>$item.comments().size() comment#if($item.comments().size() > 1)s#end</span>
+    </a>
+  #end
+</span>
