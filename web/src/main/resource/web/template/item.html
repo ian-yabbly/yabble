@@ -12,14 +12,7 @@
     #squareUserImage($item.user(), 44)
     <span class="username">#userDisplayName($item.user())</span>
   </div>
-  #if($item.images().nonEmpty())
-    #set($i = $item.images().head())
-    <a href=#transformImageUrl($i, "w-506") target=_blank class="list-item-image">
-      <img src=#transformImageUrl($i, "w-506")
-           width="506"
-           height="$__imageService.getDimensionsByImageAndTransform($i.id(), 'w-506').height()">
-    </a>
-  #end
+  #itemImage($item, 506)
   #set($hideCommentsCount = true)
   #parse('list-item-controls.html')
   #if($item.body().isDefined())
