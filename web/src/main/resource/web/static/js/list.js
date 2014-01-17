@@ -9,6 +9,7 @@
       'jquery',
       'utils',
       'add-item-dialog',
+      'user-email-dialog',
       'form-utils',
       'mustache',
       'strings',
@@ -18,9 +19,10 @@
       'text!template/mustache/voter.mustache',      
       'menu'
     ],
-    function($, utils, AddItemDialog, formUtils, mustache, strings, 
+    function($, utils, AddItemDialog, UserEmailDialog, formUtils, mustache, strings, 
       TabSet, User, textContribTmpl, textVoterTmpl) {
-      var tmplContributor = mustache.compile(textContribTmpl),
+      var dlgAddItem, dlgUserEmail,        
+          tmplContributor = mustache.compile(textContribTmpl),
           tmplVoter       = mustache.compile(textVoterTmpl);
 
       $(function() {
@@ -32,16 +34,46 @@
             elContribCount.text(parseInt(elContribCount.text(), 10) + change);
           }
         };
-
         utils.exists($('#button-add-item'), function(btnAddItem) {
+          var elItemList = $('#list-items ul');
           btnAddItem.click(function() {
-            AddItemDialog.get(btnAddItem.data('list-external-id')).show();
+            if(!dlgAddItem) {
+              dlgAddItem = new AddItemDialog({ 
+                 listId : btnAddItem.data('list-id')
+               });
+            }
+            if(elItemList.children().size() > 1 && !User.getLoggedInUser().email) {
+              if(!dlgUserEmail) {
+                dlgUserEmail = new UserEmailDialog();
+              }
+              dlgUserEmail.show().done(function() {
+                dlgAddItem.show();
+              });
+            } else {
+              dlgAddItem.show();
+            }
           });
         });
 
         utils.exists($('#form-invite-to-list'), function(elFormInviteToList) {
           var txtInviteeEmail = $('#email'),
               listContribs  = $('#list-contributors ul');
+              
+          if(!User.getLoggedInUser().email) {
+            txtInviteeEmail.focus(function() {
+              if(!User.getLoggedInUser().email) {
+                if(!dlgUserEmail) {
+                  dlgUserEmail = new UserEmailDialog();
+                }
+                txtInviteeEmail.blur();
+                dlgUserEmail.show().done(function() {
+                  txtInviteeEmail.focus();
+                });
+              }
+              return false;
+            })
+          }
+              
           elFormInviteToList.submit(function() {
             var email = $.trim(txtInviteeEmail.val());
             txtInviteeEmail.focus();

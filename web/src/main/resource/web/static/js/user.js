@@ -35,7 +35,13 @@
             loggedInUser = new User(document.YABBLE_USER);
           }
           return loggedInUser;
-        }
+        };
+        
+        User.setLoggedInUserEmail = function(email) {
+          var user = User.getLoggedInUser();
+          document.YABBLE_USER.email = user.email = email;
+          return user;
+        };
         
         return User;        
       }

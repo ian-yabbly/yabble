@@ -17,7 +17,8 @@
     'item.voteCount.zero' : 'no one has voted for this option',
     'item.voteCount' : '{} {} voted for this option',
     'comment.new.empty' : 'Say something awesome.',
-    'user.me' : 'You'
+    'user.me' : 'You',
+    'user.email.empty' : 'Enter your email.'
   };
 
   define(
