@@ -269,6 +269,7 @@
         
         AddItemDialog.prototype.reset = function() {
           this.find('.form-error').remove();
+          this.find('input[type="text"]').val('');
           this.hideLoading();
           return this.clearSearchResults()
               .hideDetailsForm()

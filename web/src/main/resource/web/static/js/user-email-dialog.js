@@ -27,7 +27,7 @@
           });
           Dialog.call(this, props);
           
-          this.find('#create-account').one('click', function() {
+          this.find('#create-account').click(function() {
             self.element.addClass('mode-create-account');
           });
 
@@ -52,6 +52,10 @@
             }
             return false;
           });
+          
+          this.subscribe(Dialog.Event.HIDDEN, function() {
+            self.reset()
+          });
         };
         
         UserEmailDialog.prototype = $.extend({}, Dialog.prototype);
@@ -67,6 +71,13 @@
             }
           });
           return hidden;
+        };
+        
+        UserEmailDialog.prototype.reset = function() {
+          this.element.removeClass('mode-create-account');
+          this.find('.form-error').remove();
+          this.find('input[type="email"], input[type="password"]').val('');
+          return this;
         };
         
         UserEmailDialog.Status = {
