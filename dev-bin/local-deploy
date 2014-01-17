@@ -8,34 +8,23 @@ function print-usage() {
 
   echo "Usage: $(basename $0) [options] version deploy-dir config" 1>&2
   echo "    -h    Print this help message" 1>&2
-  echo "    -M    Major version bump" 1>&2
-  echo "    -m    Minor version bump" 1>&2
-  echo "    -r    Remote [$remote]" 1>&2
-  echo "    -b    Branch [$branch]" 1>&2
   echo 1>&2
 
   log "Exiting"
   exit 1;
 }
 
-is_major=
-is_minor=
-is_revision=1
-while getopts "hmMr:b:" option; do
+while getopts "h" option; do
   case $option in
     h ) print-usage;;
-    m ) is_minor=1 && is_revision=;;
-    M ) is_major=1 && is_revision=;;
-    r ) remote=$OPTARG;;
-    b ) branch=$OPTARG;;
     * ) print-usage "Unknown option: $option";;
   esac
 done
 
 shift $(($OPTIND - 1))
 
-if test $# -ne 1; then
-  print-usage "No arguments are allowed"
+if test $# -ne 3; then
+  print-usage "Three and only three arguments are allowed"
 fi
 
 version=$1
@@ -50,6 +39,9 @@ git reset --hard v$version
 
 ant clean dist-archive
 
+mkdir -p $deploy_dir/etc
+cp -r $BASEDIR/config/$config/* $deploy_dir/etc
+mkdir -p $deploy_dir/var/log
 mkdir -p $vdir
 tar -C$vdir -xzf$BASEDIR/target/yabble-$version.tar.gz
 ln -s $vdir/{artifact,bin,db-schema,.env,lib,.source-version-hash,.version,.version-hash} $deploy_dir
