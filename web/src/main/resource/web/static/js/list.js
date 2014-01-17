@@ -42,7 +42,7 @@
                  listId : btnAddItem.data('list-id')
                });
             }
-            if(elItemList.children().size() > 1 && !User.getLoggedInUser().email) {
+            if(elItemList.children().size() > 0 && !User.getLoggedInUser().email) {
               if(!dlgUserEmail) {
                 dlgUserEmail = new UserEmailDialog();
               }

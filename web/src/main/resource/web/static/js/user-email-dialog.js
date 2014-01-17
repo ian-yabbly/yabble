@@ -9,9 +9,10 @@
         'dialog',
         'form-utils',
         'strings',
+        'xhr',
         'text!template/mustache/dialog-add-user-email.mustache'
       ],
-      function($, mustache, User, Dialog, formUtils, strings, textTmplAddUserEmail) {
+      function($, mustache, User, Dialog, formUtils, strings, xhr, textTmplAddUserEmail) {
         var tmplAddUserEmail = mustache.compile(textTmplAddUserEmail);
         
         var UserEmailDialog = function(props) {
@@ -27,26 +28,60 @@
           });
           Dialog.call(this, props);
           
-          this.txtUserEmail = this.find('#user-email');
+          this.find('#create-account').click(function() {
+            self.element.addClass('mode-create-account');
+          });
+
+          this.txtUserEmail = this.find('#txt-user-email');
           
           this.subscribe(Dialog.Event.SHOWN, function() {
             self.txtUserEmail.focus();
           });
           
           this.find('form').submit(function() {
-            var isValid = formUtils.validateAsNotEmpty(
-              self.txtUserEmail,
-              strings.get('user.email.empty')
-            );
-            if(isValid) {
-              // TODO: Actually post to server
-              self.showLoading();
-              setTimeout(function() {
+            var txtPassword = self.find('#txt-user-password'),
+                password = $.trim(txtPassword.val()),
+                isValid = formUtils.validateAsNotEmpty(
+                  self.txtUserEmail,
+                  strings.get('user.email.empty')
+                );
+            if(self.element.hasClass('mode-create-account') &&
+              (!password || password.length < 6)) {
+                formUtils.showError(
+                  txtPassword, 
+                  strings.get('user.password.invalid')
+                );
+                isValid = false;
+            }
+            if(isValid) {              
+              self.showLoading();              
+              xhr.ajax({
+                url : '/me',
+                method : 'post',
+                data : $(this).serialize()
+              }).done(function() {
                 User.setLoggedInUserEmail($.trim(self.txtUserEmail.val()));
-                self.hide(UserEmailDialog.Status.EMAIL_ENTERED);
-              }, 1000);
+                self.hide(UserEmailDialog.Status.EMAIL_ENTERED);                
+              }).fail(function(xhr, status, error, data) {
+                self.hideLoading();
+                if(xhr && xhr.status !== 200) {
+                  formUtils.showError(
+                    (self.element.hasClass('mode-create-account') 
+                      ? txtPassword 
+                      : self.txtUserEmail
+                    ),
+                    strings.get('form.miscServerError')
+                  );
+                } else {
+                  // todo: handle errors from server
+                }
+              })
             }
             return false;
+          });
+          
+          this.subscribe(Dialog.Event.HIDDEN, function() {
+            self.reset()
           });
         };
         
@@ -63,6 +98,13 @@
             }
           });
           return hidden;
+        };
+        
+        UserEmailDialog.prototype.reset = function() {
+          this.element.removeClass('mode-create-account');
+          this.find('.form-error').remove();
+          this.find('input[type="email"], input[type="password"]').val('');
+          return this;
         };
         
         UserEmailDialog.Status = {

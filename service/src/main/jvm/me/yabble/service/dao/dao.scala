@@ -216,7 +216,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
   }
 
   def update(u: U): Int = {
-    val params = getUpdateParams(u)
+    val params = getUpdateParams(u) + ("id" -> u.id)
     val stmt = optionalStatement("update") match {
       case Some(v) => v
       case None => {
