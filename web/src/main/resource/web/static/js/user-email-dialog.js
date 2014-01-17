@@ -46,7 +46,7 @@
                   strings.get('user.email.empty')
                 );
             if(self.element.hasClass('mode-create-account') &&
-              !password || password.length < 6) {
+              (!password || password.length < 6)) {
                 formUtils.showError(
                   txtPassword, 
                   strings.get('user.password.invalid')
@@ -62,8 +62,19 @@
               }).done(function() {
                 User.setLoggedInUserEmail($.trim(self.txtUserEmail.val()));
                 self.hide(UserEmailDialog.Status.EMAIL_ENTERED);                
-              }).fail(function() {
-                // TODO: Handle errors
+              }).fail(function(xhr, status, error, data) {
+                self.hideLoading();
+                if(xhr && xhr.status !== 200) {
+                  formUtils.showError(
+                    (self.element.hasClass('mode-create-account') 
+                      ? txtPassword 
+                      : self.txtUserEmail
+                    ),
+                    strings.get('form.miscServerError')
+                  );
+                } else {
+                  // todo: handle errors from server
+                }
               })
             }
             return false;

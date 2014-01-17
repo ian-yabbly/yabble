@@ -26,14 +26,17 @@
                 props.method = 'GET';
               }
               $.ajax(props)
-                .done(function(response) {
-                  if(response && !response.statusCode !== ResponseStatusCode.ERROR) {
+                .done(function(data, status, xhr) {
+                  if(data && !data.statusCode !== ResponseStatusCode.ERROR) {
                     requestFinished.resolve.apply(requestFinished, arguments);
                   } else {
-                    requestFinished.reject.apply(requestFinished, arguments);
+                    requestFinished.reject.apply(
+                      requestFinished, 
+                      [ xhr, 'Application Error', 'Application Error', data ]
+                    );
                   }
                 })
-                .fail(function(response) {
+                .fail(function(xhr, status, error) {
                   requestFinished.reject.apply(requestFinished, arguments);
                 });
             } else {
