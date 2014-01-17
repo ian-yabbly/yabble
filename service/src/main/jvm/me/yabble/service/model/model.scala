@@ -68,10 +68,10 @@ object User {
 
   class Update(
       id: String,
-      val name: Option[String],
-      val email: Option[String],
-      val tz: Option[DateTimeZone],
-      val imageId: Option[String])
+      var name: Option[String],
+      var email: Option[String],
+      var tz: Option[DateTimeZone],
+      var imageId: Option[String])
     extends Entity.Update(id)
 
   class Persisted(
@@ -88,6 +88,8 @@ object User {
     def displayName(): String = name.orElse(email).getOrElse("Guest")
 
     def canLogin(): Boolean = name.orElse(email).isDefined
+
+    def toUpdate(): Update = new Update(id, name, email, tz, image.map(_.id))
   }
 
   object Auth {

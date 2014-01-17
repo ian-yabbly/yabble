@@ -2,6 +2,8 @@
 ## UI Template Macros
 ##
 
+#macro(message $code)$__templateMessageSource.getMessage($code)#end
+
 #macro(normalizePath $path)$Utils.normalizePath($path)#end
 
 #macro(appUrl $path)#normalizePath("$__contextPath$path")#end

@@ -48,8 +48,8 @@ class UserNotificationPushWorker(
       val n = userService.findNotification(id)
 
       val optMc = n.kind match {
-        case LIST_INVITE => {
-          val nli = Notification.ListInvite.parseFrom(n.data.get)
+        case YLIST_INVITE => {
+          val nli = Notification.YListInvite.parseFrom(n.data.get)
           val list = ylistService.find(nli.getListId)
           Some(MC(Map("list" -> list), sanatizeSubject("You've been invited: %s".format(list.title))))
         }

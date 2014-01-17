@@ -17,6 +17,7 @@ enum EntityType {
   YLIST_VOTE             =  9;
   YLIST_USER             = 10;
   USER_NOTIFICATION_PUSH = 11;
+  USER_AUTH              = 12;
 }
 
 enum EventType {
@@ -42,8 +43,12 @@ message EntityEvent {
   repeated Attribute attribute    = 7;
 }
 
+/**
+ * These are stored in the DB as supplemental information
+ * for user notifications
+ */
 message Notification {
-  message ListInvite {
+  message YListInvite {
     required string list_id     = 1;
     required string user_id     = 2;
     required EntityEvent source = 3;
@@ -60,4 +65,12 @@ message UserCommunication {
   optional EntityType ref_type                = 3;
   optional string ref_id                      = 4;
   optional me.yabble.common.proto.Email email = 5;
+}
+
+message UserPush {
+  message YListLink {
+    required string list_id = 1;
+  }
+
+  optional YListLink list_link = 1;
 }

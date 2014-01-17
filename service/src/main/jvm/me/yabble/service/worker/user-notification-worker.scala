@@ -25,15 +25,15 @@ class UserNotificationWorker(
     //log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
 
     e.getEntityType match {
-      case EntityType.LIST_USER => {
+      case EntityType.YLIST_USER => {
         e.getEventType match {
           case EventType.CREATE => {
             userService.create(new UserNotification.Free(
                 e.getUserId,
-                UserNotificationType.LIST_INVITE,
+                UserNotificationType.YLIST_INVITE,
                 Some(id),
                 Some(e.getEntityType),
-                Some(Notification.ListInvite.newBuilder()
+                Some(Notification.YListInvite.newBuilder()
                     .setListId(id)
                     .setUserId(e.getUserId)
                     .setSource(e)

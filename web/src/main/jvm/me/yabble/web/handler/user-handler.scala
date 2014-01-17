@@ -30,7 +30,7 @@ class UserHandler(
   extends TemplateHandler(template)
   with FormHandler
 {
-  private val pathPatterns = List("/logout")
+  private val pathPatterns = List("/logout", "/me")
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
@@ -41,6 +41,7 @@ class UserHandler(
         .find(t => pathMatcher.`match`(t._1, path))
         .map(t => t._2 match {
           case 0 => logout(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 1 => me(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case _ => error(s"Unexpected match [${t._1}]")
         })
         .isDefined
@@ -62,5 +63,35 @@ class UserHandler(
     exchange.getResponseHeaders.set("Cache-Control", "no-cache")
 
     redirectResponse(exchange, "/")
+  }
+
+  def me(exchange: HttpExchange, pathVars: Map[String, String]) {
+    exchange.getRequestMethod.toLowerCase match {
+      case "post" => {
+        val me = requiredMe()
+        val nvps = allNvps(exchange)
+
+        optionalFirstParamValue(nvps, "password").foreach(password => {
+          userService.updatePassword(me.id, password)
+        })
+
+        val u = me.toUpdate
+
+        optionalFirstParamValue(nvps, "email").foreach(email => {
+          u.email = Some(email)
+        })
+
+        optionalFirstParamValue(nvps, "name").foreach(name => {
+          u.name = Some(name)
+        })
+
+        userService.update(u)
+
+        // TODO
+        redirectResponse(exchange, "/")
+      }
+
+      case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)
+    }
   }
 }

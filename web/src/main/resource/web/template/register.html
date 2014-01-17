@@ -12,7 +12,7 @@
           placeholder="Enter your email"
           class=full-width>
       #if(!$form.Email.ErrorMessageList.isEmpty())
-        <div class="form-error">$form.Email.ErrorMessageList.get(0).Code</div>
+        <div class="form-error">#message($form.Email.ErrorMessageList.get(0).Code)</div>
       #end
     </div>
     <div class=form-row>

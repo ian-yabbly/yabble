@@ -45,6 +45,18 @@ class RegisterHandler(
   }
 
   def register(exchange: HttpExchange, pathVars: Map[String, String]) {
+    // If the user can login, get them outta here
+    optionalMe() match {
+      case Some(me) => {
+        if (userService.canLogin(me.id)) {
+          redirect(exchange)
+          return
+        }
+      }
+
+      case None => // Do nothing
+    }
+
     exchange.getRequestMethod.toLowerCase match {
       case "get" => {
         val nvps = allNvps(exchange)
@@ -58,6 +70,7 @@ class RegisterHandler(
             }
           })
         })
+
 
         val context = Map("form" -> getOrCreateForm())
         htmlTemplateResponse(exchange, List("register.html", "layout/layout.html"), context)        
@@ -123,6 +136,28 @@ class RegisterHandler(
       }
 
       case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)
+    }
+  }
+
+  private def redirect(exchange: HttpExchange) {
+    optional2Option(sessionService.optional()) match {
+      case Some(session) => {
+        if (session.hasAfterLoginRedirectPath()) {
+          val path = session.getAfterLoginRedirectPath
+          sessionService.withSession(true, new Function[Session, Session]() {
+            override def apply(session: Session): Session = {
+              session.toBuilder()
+                  .clearAfterLoginRedirectPath()
+                  .build()
+            }
+          })
+          redirectResponse(exchange, path)
+        } else {
+          redirectResponse(exchange, "/")
+        }
+      }
+
+      case None => redirectResponse(exchange, "/")
     }
   }
 

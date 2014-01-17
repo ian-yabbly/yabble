@@ -483,9 +483,11 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
 }
 
 class UserAuthDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[User.Auth.Free, User.Auth.Persisted, User.Auth.Update]("users", EntityType.USER, npt, txnSync, workQueue)
+  extends EntityDao[User.Auth.Free, User.Auth.Persisted, User.Auth.Update]("users", EntityType.USER_AUTH, npt, txnSync, workQueue)
   with Log
 {
+  def optionalByUser(id: String): Option[User.Auth.Persisted] = optionalQuery(Map("user_id" -> id))
+
   override def getInsertParams(f: User.Auth.Free) = {
     val salt = SecurityUtils.randomAlphanumeric(16)
     val encPassword = SecurityUtils.encryptPassword(f.clearPassword, salt)
@@ -526,7 +528,7 @@ class YListDao(
     private val ylistCommentDao: YListCommentDao,
     private val ylistItemDao: YListItemDao,
     npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.LIST, npt, txnSync, workQueue)
+  extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.YLIST, npt, txnSync, workQueue)
   with Log
 {
   def addUser(lid: String, uid: String): Boolean = {
@@ -534,7 +536,7 @@ class YListDao(
     npt.queryForList("select * from list_users where list_id = :list_id and user_id = :user_id for update", params).toList match {
       case Nil => {
         npt.update("insert into list_users (list_id, user_id) values (:list_id, :user_id)", params)
-        addEntityEventTxnSync(EntityType.LIST_USER, EventType.CREATE, lid, Some(uid))
+        addEntityEventTxnSync(EntityType.YLIST_USER, EventType.CREATE, lid, Some(uid))
         true
       }
       case head :: Nil => false
@@ -547,7 +549,7 @@ class YListDao(
       Map("list_id" -> lid, "user_id" -> uid)) match {
         case 0 => false
         case 1 => {
-          addEntityEventTxnSync(EntityType.LIST_USER, EventType.DELETE, lid, Some(uid))
+          addEntityEventTxnSync(EntityType.YLIST_USER, EventType.DELETE, lid, Some(uid))
           true
         }
         case n: Int => throw new UnexpectedNumberOfRowsUpdatedException(n)
@@ -584,7 +586,7 @@ class YListItemDao(
     private val ylistItemVoteDao: YListItemVoteDao,
     private val ylistItemCommentDao: YListItemCommentDao,
     npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", EntityType.LIST_ITEM, npt, txnSync, workQueue)
+  extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", EntityType.YLIST_ITEM, npt, txnSync, workQueue)
   with Log
 {
   def allByYList(id: String) = all("all-by-list", Map("list_id" -> id))
@@ -650,10 +652,10 @@ abstract class CommentDao(tableName: String, kind: EntityType, private val userD
 }
 
 class YListCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-    extends CommentDao("list_comments", EntityType.LIST_COMMENT, userDao, npt, txnSync, workQueue)
+    extends CommentDao("list_comments", EntityType.YLIST_COMMENT, userDao, npt, txnSync, workQueue)
 
 class YListItemCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-    extends CommentDao("list_item_comments", EntityType.LIST_ITEM_COMMENT, userDao, npt, txnSync, workQueue)
+    extends CommentDao("list_item_comments", EntityType.YLIST_ITEM_COMMENT, userDao, npt, txnSync, workQueue)
 
 abstract class VoteDao(tableName: String, kind: EntityType, private val userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
   extends EntityDao[Vote.Free, Vote.Persisted, Vote.Update](tableName, kind, npt, txnSync, workQueue)
@@ -685,10 +687,10 @@ abstract class VoteDao(tableName: String, kind: EntityType, private val userDao:
 }
 
 class YListVoteDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-    extends VoteDao("list_votes", EntityType.LIST_VOTE, userDao, npt, txnSync, workQueue)
+    extends VoteDao("list_votes", EntityType.YLIST_VOTE, userDao, npt, txnSync, workQueue)
 
 class YListItemVoteDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-    extends VoteDao("list_item_votes", EntityType.LIST_ITEM_VOTE, userDao, npt, txnSync, workQueue)
+    extends VoteDao("list_item_votes", EntityType.YLIST_ITEM_VOTE, userDao, npt, txnSync, workQueue)
 
 class UserNotificationDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
     extends EntityDao[UserNotification.Free, UserNotification.Persisted, UserNotification.Update]("user_notifications", EntityType.USER_NOTIFICATION, npt, txnSync, workQueue)

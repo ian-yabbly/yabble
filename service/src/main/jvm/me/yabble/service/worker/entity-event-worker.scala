@@ -34,10 +34,20 @@ class EntityEventWorker(
         }
       }
 
-      case EntityType.LIST => {
+      case EntityType.YLIST => {
         e.getEventType match {
           case EventType.CREATE => {
             // Send a mail with a link to this list
+            val listLink = UserPush.YListLink.newBuilder()
+                .setListId(id)
+                .build()
+
+            val bytes = UserPush.newBuilder()
+                .setListLink(listLink)
+                .build()
+                .toByteArray()
+
+            workQueue.submit("user-push", bytes)
           }
 
           case _ => // Do nothing
