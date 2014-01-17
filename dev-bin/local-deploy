@@ -45,5 +45,7 @@ mkdir -p $deploy_dir/var/log
 mkdir -p $vdir
 tar -C$vdir -xzf$BASEDIR/target/yabble-$version.tar.gz
 ln -sf $vdir/{artifact,bin,db-schema,.env,lib,.source-version-hash,.version,.version-hash} $deploy_dir
+chmod 755 $vdir/bin/*
+chmod 644 $vdir/bin/{include,include-java,functions}
 
 cd -
