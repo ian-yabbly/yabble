@@ -48,17 +48,19 @@
         <prop key='input.encoding'>${app.encoding}</prop>
         <prop key='output.encoding'>${app.encoding}</prop>
 
-        <prop key='resource.loader'>file</prop>
+        <prop key='resource.loader'>${web.template.resource-loader}</prop>
+
         <prop key='file.resource.loader.class'>org.apache.velocity.runtime.resource.loader.FileResourceLoader</prop>
         <prop key='file.resource.loader.path'>${web.template.base-path}</prop>
-        <!-- TODO Set to `true` in prod -->
-        <prop key='file.resource.loader.cache'>${velocity.file.resource.loader.cache}</prop>
+        <prop key='file.resource.loader.cache'>false</prop>
         <prop key='file.resource.loader.modificationCheckInterval'>2</prop> <!-- seconds -->
+
+        <prop key='bcp.resource.loader.class'>me.yabble.service.velocity.BasePathClasspathResourceLoader</prop>
+        <prop key='bcp.resource.loader.base-path'>/web/template</prop>
 
         <prop key='velocimacro.library'>lib/macros.vm</prop>
         <prop key='velocimacro.arguments.strict'>true</prop>
-        <!-- TODO Set to `false` in prod -->
-        <prop key='velocimacro.library.autoreload'>${velocity.velocimacro.library.autoreload}</prop>
+        <prop key='velocimacro.library.autoreload'>${web.template.velocimacro-library-autoreload}</prop>
 
         <prop key='runtime.introspector.uberspect'>me.yabble.service.velocity.ScalaUberspect</prop>
       </props>
