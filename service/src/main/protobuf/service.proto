@@ -56,15 +56,10 @@ message Notification {
 }
 
 message UserCommunication {
-  enum Type {
-    EMAIL = 1;
-  }
-
   required string user_id                     = 1;
-  required Type type                          = 2;
-  optional EntityType ref_type                = 3;
-  optional string ref_id                      = 4;
-  optional me.yabble.common.proto.Email email = 5;
+  optional EntityType ref_type                = 2;
+  optional string ref_id                      = 3;
+  optional me.yabble.common.proto.Email email = 4;
 }
 
 message UserPush {

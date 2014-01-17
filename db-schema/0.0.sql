@@ -33,6 +33,7 @@ create table users (
   name varchar(32) null,
   lower_name varchar(32) null,
   email varchar(512) null,
+  lower_email varchar(512) null,
   tz varchar(64) null,
   image_id varchar(8) null references images (id),
   primary key (id),

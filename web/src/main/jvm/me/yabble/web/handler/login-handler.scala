@@ -67,42 +67,52 @@ class LoginHandler(
       case "post" => {
         val nvps = allNvps(exchange)
         val formBuilder = getOrCreateForm().toBuilder()
-        formBuilder.setName(formField(optionalFirstParamValue(nvps, "name")))
-        formBuilder.setPassword(formField(optionalFirstParamValue(nvps, "password")))
-        val form = formBuilder.build()
-        persistForm(form)
+        try {
+          formBuilder.setName(formField(optionalFirstParamValue(nvps, "name")))
+          formBuilder.setPassword(formField(optionalFirstParamValue(nvps, "password")))
 
-        // TODO Validation
+          var isValid = true
+          if (!formBuilder.getName.hasValue) {
+            formBuilder.setName(formBuilder.getName().toBuilder().addErrorMessage(message("required")))
+            isValid = false
+          }
 
-        userService.optionalByNameOrEmail(form.getName.getValue) match {
-          case Some(user) => {
-            val session = sessionService.withSession(true, new Function[Session, Session]() {
-              override def apply(session: Session): Session = {
-                session.toBuilder()
-                    .clearLoginForm()
-                    .setUserId(user.id)
-                    .build()
-              }
-            })
+          if (!formBuilder.getPassword.hasValue) {
+            formBuilder.setPassword(formBuilder.getPassword().toBuilder().addErrorMessage(message("required")))
+            isValid = false
+          }
 
-            if (session.hasAfterLoginRedirectPath()) {
-              val path = session.getAfterLoginRedirectPath
-              sessionService.withSession(true, new Function[Session, Session]() {
-                override def apply(session: Session): Session = {
-                  session.toBuilder()
-                      .clearAfterLoginRedirectPath()
-                      .build()
-                }
-              })
-              redirectResponse(exchange, path)
-            } else {
-              redirectResponse(exchange, "/")
+          val optUser = userService.optionalByNameOrEmail(formBuilder.getName.getValue) match {
+            case Some(user) => {
+              Some(user)
+            }
+            case None => {
+              formBuilder.setName(formBuilder.getName().toBuilder().addErrorMessage(message("not-found")))
+              isValid = false
+              None
             }
           }
 
-          case None => {
+          if (!isValid) {
             redirectResponse(exchange, "/login")
+            return
           }
+
+          // optUser must be Some(user) here
+
+          val session = sessionService.withSession(true, new Function[Session, Session]() {
+            override def apply(session: Session): Session = {
+              session.toBuilder()
+                  .clearLoginForm()
+                  .setUserId(optUser.get.id)
+                  .build()
+            }
+          })
+
+          redirect(exchange)
+        } finally {
+          val form = formBuilder.build()
+          persistForm(form)
         }
       }
 
@@ -141,5 +151,27 @@ class LoginHandler(
         session.toBuilder().setLoginForm(form).build()
       }
     })
+  }
+
+  private def redirect(exchange: HttpExchange) {
+    optional2Option(sessionService.optional()) match {
+      case Some(session) => {
+        if (session.hasAfterLoginRedirectPath()) {
+          val path = session.getAfterLoginRedirectPath
+          sessionService.withSession(true, new Function[Session, Session]() {
+            override def apply(session: Session): Session = {
+              session.toBuilder()
+                  .clearAfterLoginRedirectPath()
+                  .build()
+            }
+          })
+          redirectResponse(exchange, path)
+        } else {
+          redirectResponse(exchange, "/")
+        }
+      }
+
+      case None => redirectResponse(exchange, "/")
+    }
   }
 }

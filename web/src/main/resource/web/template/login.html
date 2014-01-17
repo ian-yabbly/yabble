@@ -10,6 +10,9 @@
           value='$!form.Name.Value'
           placeholder='Enter your email address or username'
           class=full-width>
+      #if(!$form.Name.ErrorMessageList.isEmpty())
+        <div class="form-error">#message($form.Name.ErrorMessageList.get(0).Code)</div>
+      #end
     </div>
     <div class=form-row>
       <label for=password>Password:</label>
@@ -20,6 +23,9 @@
           value='$!form.Password.Value'
           placeholder='Enter your password'
           class=full-width>
+      #if(!$form.Password.ErrorMessageList.isEmpty())
+        <div class="form-error">#message($form.Password.ErrorMessageList.get(0).Code)</div>
+      #end
     </div>
     <input type=submit value="LOGIN" class="centered-submit">
   </form>
@@ -34,6 +40,9 @@
           value='$!form.Name.Value'
           placeholder='Enter your email address or username'
           class=full-width>
+      #if(!$form.Name.ErrorMessageList.isEmpty())
+        <div class="form-error">#message($form.Name.ErrorMessageList.get(0).Code)</div>
+      #end
     </div>
     <input type=submit value="SUBMIT" class="centered-submit">
   </form>

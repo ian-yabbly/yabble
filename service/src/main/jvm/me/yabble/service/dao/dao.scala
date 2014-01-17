@@ -172,7 +172,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     })
   }
 
-  protected def optionalQuery(params: Map[String, Any], activeOnly: Boolean = true): Option[P] = {
+  private def stmtFromParams(params: Map[String, Any], activeOnly: Boolean = true): String = {
     var b = new StringBuilder()
     b.append("select * from ").append(tableName).append(" where ")
     params.foreach(t => {
@@ -188,11 +188,15 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     } else {
       b = b.dropRight(5)
     }
-
-    val stmt = b.toString()
-    //log.info("optionalQuery stmt [{}]", stmt)
-    optional(all(stmt, params))
+    b.toString()
   }
+
+  protected def allQuery(params: Map[String, Any], activeOnly: Boolean = true): List[P] = {
+    val stmt = stmtFromParams(params, activeOnly)
+    all(stmt, params)
+  }
+
+  protected def optionalQuery(params: Map[String, Any], activeOnly: Boolean = true): Option[P] = optional(allQuery(params, activeOnly))
 
   def createOrUpdate(f: F): String = {
     optional(f) match {
@@ -460,11 +464,25 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
       "select u.* from users u inner join list_users lu on u.id = lu.user_id where lu.list_id = :list_id",
       Map("list_id" -> id))
 
-  override def getInsertParams(f: User.Free) = Map("name" -> f.name.orNull, "lower_name" -> f.name.map(_.toLowerCase).orNull, "email" -> f.email.orNull, "tz" -> f.tz.orNull)
+  override def getInsertParams(f: User.Free) = Map(
+      "name" -> f.name.orNull,
+      "lower_name" -> f.name.map(_.toLowerCase).orNull,
+      "email" -> f.email.orNull,
+      "lower_email" -> f.email.map(_.toLowerCase).orNull,
+      "tz" -> f.tz.orNull)
 
-  override def getUpdateParams(u: User.Update) = Map("name" -> u.name.orNull, "lower_name" -> u.name.map(_.toLowerCase).orNull, "email" -> u.email.orNull, "tz" -> u.tz.orNull)
+  override def getUpdateParams(u: User.Update) = Map(
+      "name" -> u.name.orNull,
+      "lower_name" -> u.name.map(_.toLowerCase).orNull,
+      "email" -> u.email.orNull,
+      "lower_email" -> u.email.map(_.toLowerCase).orNull,
+      "tz" -> u.tz.orNull)
 
-  override def getQueryParams(f: User.Free) = Map("lower_name" -> f.name.map(_.toLowerCase).orNull, "email" -> f.email.orNull, "tz" -> f.tz.orNull)
+  override def getQueryParams(f: User.Free) = Map(
+      "lower_name" -> f.name.map(_.toLowerCase).orNull,
+      "email" -> f.email.orNull,
+      "lower_email" -> f.email.map(_.toLowerCase).orNull,
+      "tz" -> f.tz.orNull)
 
   override def getRowMapper() = new RowMapper[User.Persisted]() {
     override def mapRow(rs: ResultSet, rowNum: Int): User.Persisted = {
