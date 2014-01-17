@@ -2,10 +2,12 @@ package me.yabble.service.velocity
 
 import me.yabble.common.Log
 
+import org.apache.commons.collections.ExtendedProperties
 import org.apache.commons.io.FilenameUtils
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.VelocityEngine
 import org.apache.velocity.context.Context
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
 import org.apache.velocity.util.introspection._
 
 import com.google.common.collect.Maps
@@ -13,6 +15,7 @@ import com.google.common.collect.Maps
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
+import java.io.InputStream
 import java.io.StringWriter
 import java.io.Writer
 import java.util.{Map => JMap}
@@ -91,7 +94,8 @@ class VelocityTemplate(
   }
 
   private def renderToWriter(t: String, context: Context, writer: Writer) {
-    engine.mergeTemplate("/%s".format(t), encoding, context, writer)
+    val path = if (t.startsWith("/")) t else "/"+t
+    engine.mergeTemplate(path, encoding, context, writer)
   }
 }
 
@@ -112,4 +116,21 @@ class ScalaUberspect extends UberspectImpl {
     super.getPropertyGet(obj, identifier, info)
   }
 */
+}
+
+class BasePathClasspathResourceLoader(private var basePath: String) extends ClasspathResourceLoader {
+  def logger = LoggerFactory.getLogger("me.yabble.web.template.BasePathClasspathResourceLoader")
+
+  def this() = this(null)
+
+  override def getResourceStream(name: String): InputStream = {
+    val p = if (name.startsWith("/")) basePath+name else basePath+"/"+name
+    //logger.info("Getting resource stream for [{}] [{}]", name, p)
+    super.getResourceStream(p)
+  }
+
+  override def init(eprops: ExtendedProperties) {
+    basePath = eprops.getString("base-path")
+    super.init(eprops)
+  }
 }
