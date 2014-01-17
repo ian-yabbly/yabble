@@ -37,7 +37,8 @@ create table users (
   tz varchar(64) null,
   image_id varchar(8) null references images (id),
   primary key (id),
-  unique (lower_name)
+  unique (lower_name),
+  unique (lower_email)
 );
 
 create table user_auths (
