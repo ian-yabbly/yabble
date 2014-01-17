@@ -86,6 +86,8 @@ object User {
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
   {
     def displayName(): String = name.orElse(email).getOrElse("Guest")
+
+    def canLogin(): Boolean = name.orElse(email).isDefined
   }
 }
 

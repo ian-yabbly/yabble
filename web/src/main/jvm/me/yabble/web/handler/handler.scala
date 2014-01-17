@@ -229,6 +229,7 @@ abstract class TemplateHandler(
     m.put("TextUtils", classOf[TextUtils])
 
     m.put("__scheme", exchange.getRequestURI.getScheme)
+    m.put("__currentPath", Utils.noContextPath(exchange))
 
     optionalMe() match {
       case Some(user) => {
