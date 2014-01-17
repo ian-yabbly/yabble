@@ -116,4 +116,8 @@ public class SecurityUtils {
     public static String randomNumeric(int length) {
         return RandomStringUtils.randomNumeric(length);
     }
+
+    public static String encryptPassword(String clear, String salt) {
+        return sha512Hex(String.format("[%s]-[%s]", clear, salt));
+    }
 }

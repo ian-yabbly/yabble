@@ -78,8 +78,10 @@ class UserNotificationPushWorker(
 
   private def emailHtmlBody(n: UserNotification.Persisted, context: Map[String, Any]): String = {
     val ctx = context ++ rootContext + ("__user" -> n.user)
-    template.renderToString(List("/mail/notification/%s.html".format(enumToCode(n.kind))), ctx)
+    template.renderToString(List("notification/"+enumToCode(n.kind), "layout").map(htmlMailPath(_)), ctx)
   }
 
   private def sanatizeSubject(s: String) = replaceNewlinesWithSpace(s)
+
+  private def htmlMailPath(name: String) = "mail/%s.html".format(name)
 }

@@ -17,6 +17,7 @@ trait IUserService extends IService[User.Free, User.Persisted, User.Update] {
 
 class UserService(
     private val userDao: UserDao,
+    private val userAuthDao: UserAuthDao,
     private val userNotificationDao: UserNotificationDao)
   extends Service(userDao)
   with IUserService

@@ -482,6 +482,45 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
   }
 }
 
+class UserAuthDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
+  extends EntityDao[User.Auth.Free, User.Auth.Persisted, User.Auth.Update]("users", EntityType.USER, npt, txnSync, workQueue)
+  with Log
+{
+  override def getInsertParams(f: User.Auth.Free) = {
+    val salt = SecurityUtils.randomAlphanumeric(16)
+    val encPassword = SecurityUtils.encryptPassword(f.clearPassword, salt)
+
+    Map(
+      "user_id" -> f.userId,
+      "enc_password" -> encPassword,
+      "salt" -> salt)
+  }
+
+  override def getUpdateParams(u: User.Auth.Update) = {
+    Map(
+        "reset_token" -> u.resetToken.orNull,
+        "reset_token_creation_date" -> u.resetTokenCreationDate.map(d => dateTime2SqlTimestamp(d)).orNull)
+  }
+
+  override def getQueryParams(f: User.Auth.Free) = Map("user_id" -> f.userId)
+
+  override def getRowMapper() = new RowMapper[User.Auth.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): User.Auth.Persisted = {
+      val id = rs.getString("id")
+      new User.Auth.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("user_id"),
+          rs.getString("enc_password"),
+          rs.getString("salt"),
+          Option(rs.getString("reset_token")),
+          Option(rs.getTimestamp("reset_token_creation_date")))
+    }
+  }
+}
+
 class YListDao(
     private val userDao: UserDao,
     private val ylistCommentDao: YListCommentDao,

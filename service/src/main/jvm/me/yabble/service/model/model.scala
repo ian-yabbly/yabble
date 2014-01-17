@@ -89,6 +89,32 @@ object User {
 
     def canLogin(): Boolean = name.orElse(email).isDefined
   }
+
+  object Auth {
+    class Free(
+        val userId: String,
+        val clearPassword: String)
+      extends Entity.Free
+
+    class Update(
+        id: String,
+        val clearPassword: String,
+        val resetToken: Option[String],
+        val resetTokenCreationDate: Option[DateTime])
+      extends Entity.Update(id)
+
+    class Persisted(
+        id: String,
+        creationDate: DateTime,
+        lastUpdatedDate: DateTime,
+        isActive: Boolean,
+        val userId: String,
+        val encPassword: String,
+        val salt: String,
+        val resetToken: Option[String],
+        val resetTokenCreationDate: Option[DateTime])
+      extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+  }
 }
 
 object Comment {

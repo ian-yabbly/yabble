@@ -34,6 +34,16 @@ class EntityEventWorker(
         }
       }
 
+      case EntityType.LIST => {
+        e.getEventType match {
+          case EventType.CREATE => {
+            // Send a mail with a link to this list
+          }
+
+          case _ => // Do nothing
+        }
+      }
+
       case EntityType.USER_NOTIFICATION => {
         e.getEventType match {
           case EventType.CREATE => {
