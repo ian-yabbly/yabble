@@ -88,7 +88,7 @@ class RegisterHandler(
         if (!formBuilder.getEmail.hasValue()) {
           val b = formBuilder.getEmail.toBuilder()
           b.clearErrorMessage()
-          b.addErrorMessage(Message.newBuilder().setCode("required").build())
+          b.addErrorMessage(message("required"))
           formBuilder.setEmail(b.build())
           isValid = false
         }
@@ -103,6 +103,7 @@ class RegisterHandler(
 
         userService.optionalByEmail(form.getEmail.getValue) match {
           case Some(user) => {
+            //formBuilder.getEmail.addErrorMessage(newMessage("duplicate"))
             redirectResponse(exchange, "/register")
           }
             

@@ -23,7 +23,7 @@ message Session {
 
 message Message {
   required string code          = 1;
-  repeated string params        = 2;
+  repeated string param         = 2;
   optional string display_value = 3;
 }
 

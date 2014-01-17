@@ -235,9 +235,11 @@ abstract class TemplateHandler(
       case Some(user) => {
         m.put("__optUser", Some(user))
         m.put("__user", user)
+        m.put("__userCanLogin", userService.canLogin(user.id))
       }
       case None => {
         m.put("__optUser", None)
+        m.put("__userCanLogin", false)
       }
     }
 
@@ -250,6 +252,13 @@ trait FormHandler extends Handler {
   def formField(value: Option[String]): FormField = value match {
     case Some(v) => FormField.newBuilder().setValue(v).build()
     case None => FormField.newBuilder().build()
+  }
+
+  def message(code: String, params: List[String] = Nil, displayValue: Option[String] = None) = {
+    val b = Message.newBuilder().setCode(code)
+    params.foreach(p => b.addParam(p))
+    displayValue.foreach(v => b.setDisplayValue(v))
+    b.build()
   }
 }
 

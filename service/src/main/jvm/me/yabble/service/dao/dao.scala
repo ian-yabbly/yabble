@@ -483,7 +483,7 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
 }
 
 class UserAuthDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[User.Auth.Free, User.Auth.Persisted, User.Auth.Update]("users", EntityType.USER_AUTH, npt, txnSync, workQueue)
+  extends EntityDao[User.Auth.Free, User.Auth.Persisted, User.Auth.Update]("user_auths", EntityType.USER_AUTH, npt, txnSync, workQueue)
   with Log
 {
   def optionalByUser(id: String): Option[User.Auth.Persisted] = optionalQuery(Map("user_id" -> id))
