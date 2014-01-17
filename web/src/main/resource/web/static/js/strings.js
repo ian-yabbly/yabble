@@ -18,7 +18,8 @@
     'item.voteCount' : '{} {} voted for this option',
     'comment.new.empty' : 'Say something awesome.',
     'user.me' : 'You',
-    'user.email.empty' : 'Enter your email.'
+    'user.email.empty' : 'Enter your email.',
+    'user.password.invalid' : 'Enter a password that is at least 6 characters long.'
   };
 
   define(

@@ -35,12 +35,12 @@
                 })
                 .fail(function(response) {
                   requestFinished.reject.apply(requestFinished, arguments);
-                })
+                });
             } else {
               requestFinished.resolve();
             }
             return requestFinished;
-          });
+          }
         }
       }
     );

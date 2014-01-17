@@ -5,9 +5,9 @@
     </a>
     #if ($__optUser.isDefined())
       #if ($__userCanLogin)
-        <a href="#appUrl('/logout')" class="float-right" class="button gray-button float-right">logout #userDisplayName($__user)</a>
+        <a href="#appUrl('/logout')" class="button gray-button float-right">Logout</a>
       #else
-        <a href='#appUrl("/register?r=$__currentPath")' class="button gray-button float-right">register</a>
+        <a href='#appUrl("/register?r=$__currentPath")' class="button gray-button float-right">Register</a>
       #end
     #else
       <a href="#appUrl('/register')" class="button gray-button float-right" >Register</a>

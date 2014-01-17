@@ -20,6 +20,9 @@
               n.remove();
             }
             target.after(e);
+            target.parents('form:first').one('submit', function() {
+              e.remove();
+            });
             return e;
           },
           validateAsNotEmpty: function(inputs, errorMessages) {

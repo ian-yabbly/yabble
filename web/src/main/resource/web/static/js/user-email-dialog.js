@@ -9,9 +9,10 @@
         'dialog',
         'form-utils',
         'strings',
+        'xhr',
         'text!template/mustache/dialog-add-user-email.mustache'
       ],
-      function($, mustache, User, Dialog, formUtils, strings, textTmplAddUserEmail) {
+      function($, mustache, User, Dialog, formUtils, strings, xhr, textTmplAddUserEmail) {
         var tmplAddUserEmail = mustache.compile(textTmplAddUserEmail);
         
         var UserEmailDialog = function(props) {
@@ -31,24 +32,39 @@
             self.element.addClass('mode-create-account');
           });
 
-          this.txtUserEmail = this.find('#user-email');
+          this.txtUserEmail = this.find('#txt-user-email');
           
           this.subscribe(Dialog.Event.SHOWN, function() {
             self.txtUserEmail.focus();
           });
           
           this.find('form').submit(function() {
-            var isValid = formUtils.validateAsNotEmpty(
-              self.txtUserEmail,
-              strings.get('user.email.empty')
-            );
-            if(isValid) {
-              // TODO: Actually post to server
-              self.showLoading();
-              setTimeout(function() {
+            var txtPassword = self.find('#txt-user-password'),
+                password = $.trim(txtPassword.val()),
+                isValid = formUtils.validateAsNotEmpty(
+                  self.txtUserEmail,
+                  strings.get('user.email.empty')
+                );
+            if(self.element.hasClass('mode-create-account') &&
+              !password || password.length < 6) {
+                formUtils.showError(
+                  txtPassword, 
+                  strings.get('user.password.invalid')
+                );
+                isValid = false;
+            }
+            if(isValid) {              
+              self.showLoading();              
+              xhr.ajax({
+                url : '/me',
+                method : 'post',
+                data : $(this).serialize()
+              }).done(function() {
                 User.setLoggedInUserEmail($.trim(self.txtUserEmail.val()));
-                self.hide(UserEmailDialog.Status.EMAIL_ENTERED);
-              }, 1000);
+                self.hide(UserEmailDialog.Status.EMAIL_ENTERED);                
+              }).fail(function() {
+                // TODO: Handle errors
+              })
             }
             return false;
           });
