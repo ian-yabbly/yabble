@@ -23,6 +23,7 @@
 
   #dialog-container {
     z-index: 10001;
+    overflow: auto;
   }
 
   #dialog-overlay {
@@ -30,7 +31,9 @@
     background-color: rgba(0, 0, 0, 0.75);
   }
 
-  .dialog-visible {
+  .dialog-visible {   
+    overflow: hidden;
+     
     .active-dialog,
     #dialog-container {
       .opacity(1);
