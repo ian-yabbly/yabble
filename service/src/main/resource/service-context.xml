@@ -75,8 +75,9 @@
       />
 
   <bean
-      id='service.mail-velocity-engine'
-      class='org.apache.velocity.app.VelocityEngine'
+      id='service.mail-velocity-template'
+      class='me.yabble.service.velocity.VelocityTemplate'
+      c:encoding='${app.encoding}'
       >
     <constructor-arg>
       <props>
@@ -90,6 +91,17 @@
         <prop key='velocimacro.arguments.strict'>true</prop>
         <prop key='runtime.introspector.uberspect'>me.yabble.service.velocity.ScalaUberspect</prop>
       </props>
+    </constructor-arg>
+
+    <constructor-arg>
+      <map>
+        <entry key='__version' value='${app.version-hash}'/>
+        <entry key='__versionPathPart' value='v-${app.version-hash}'/>
+        <entry key='__formatService' value-ref='service.format-service'/>
+        <entry key='__securityUtilsBean' value-ref='common.security-utils-bean'/>
+        <entry key='__imageService' value-ref='service.image-service'/>
+        <entry key='__rootUrl' value='${service.canonical-base-url}'/>
+      </map>
     </constructor-arg>
   </bean>
   <!-- END MISC -->

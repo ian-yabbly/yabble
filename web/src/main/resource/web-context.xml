@@ -18,6 +18,7 @@
       >
     <property name='locations'>
       <list>
+        <value>classpath:service.properties</value>
         <value>classpath:web.properties</value>
         <value>file://${app.home}/etc/override.properties</value>
         <value>file://${app.home}/etc/local.properties</value>
@@ -27,7 +28,7 @@
 
   <bean
       id='web.velocity-template'
-      class='me.yabble.web.template.VelocityTemplate'
+      class='me.yabble.service.velocity.VelocityTemplate'
       c:encoding='${app.encoding}'
       >
     <constructor-arg>
@@ -60,7 +61,7 @@
         <entry key='__formatService' value-ref='service.format-service'/>
         <entry key='__imageService' value-ref='service.image-service'/>
         <entry key='__doLessInBrowser' value='${web.less.do-in-browser}'/>
-        <entry key='__canonicalBaseUrl' value='${web.canonical-base-url}'/>
+        <entry key='__canonicalBaseUrl' value='${service.canonical-base-url}'/>
         <entry key='__minifyJs' value='${web.minifyJs}'/>
         <entry key='__cookieName' value='${web.session.cookie-name}'/>
         <entry key='__cookieDomain' value='${web.session.cookie-domain}'/>
@@ -81,9 +82,22 @@
       c:router-ref='web.router'
       c:port='${web.port}'
       c:context-path='${web.context-path}'
-      c:session-cookie-name='${web.session.cookie-name}'
-      c:session-service-ref='web.session-service'
-      />
+      >
+    <constructor-arg>
+      <list>
+        <bean
+            class='me.yabble.web.server.BaseFilter'
+            c:session-cookie-name='${web.session.cookie-name}'
+            c:session-service-ref='web.session-service'
+            />
+        <bean
+            class='me.yabble.web.server.LoginLinkFilter'
+            c:security-utils-bean-ref='common.security-utils-bean'
+            c:session-service-ref='web.session-service'
+            />
+      </list>
+    </constructor-arg>
+  </bean>
 
   <bean
       id='web.router'

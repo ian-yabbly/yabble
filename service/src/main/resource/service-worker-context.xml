@@ -53,8 +53,7 @@
       c:ylist-service-ref='service.ylist-service'
       c:from-email='${service.notification.from-email}'
       c:from-name='${service.notification.from-email.name}'
-      c:velocity-engine-ref='service.mail-velocity-engine'
-      c:encoding='${app.encoding}'
+      c:template-ref='service.mail-velocity-template'
       />
 
   <bean

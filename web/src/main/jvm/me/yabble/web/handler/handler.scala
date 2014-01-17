@@ -8,9 +8,9 @@ import me.yabble.service._
 import me.yabble.service.model._
 import me.yabble.web.proto.WebProtos._
 import me.yabble.web.service._
+import me.yabble.service.velocity.VelocityTemplate
 import me.yabble.web.template.{Utils => TemplateUtils}
 import me.yabble.web.template.{Format => TemplateFormat}
-import me.yabble.web.template.VelocityTemplate
 
 import com.google.common.base.Function
 import com.google.gson._
@@ -88,16 +88,6 @@ object Utils {
       }
     }
   }
-}
-
-trait Handler extends Log {
-  val sessionService: SessionService
-  val userService: IUserService
-  val encoding: String
-
-  def utf8 = java.nio.charset.Charset.forName(encoding)
-
-  def maybeHandle(exchange: HttpExchange): Boolean
 
   /**
    * @return path without context and without query string
@@ -110,6 +100,18 @@ trait Handler extends Log {
       case _ => exchange.getRequestURI.getPath.substring(httpContext.getPath.length)
     }
   }
+}
+
+trait Handler extends Log {
+  val sessionService: SessionService
+  val userService: IUserService
+  val encoding: String
+
+  def utf8 = java.nio.charset.Charset.forName(encoding)
+
+  def maybeHandle(exchange: HttpExchange): Boolean
+
+  def noContextPath(exchange: HttpExchange): String = Utils.noContextPath(exchange)
 
   protected def optionalUserId(): Option[String] = o2o(sessionService.optional()) match {
     case Some(session) => {

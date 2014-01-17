@@ -8,10 +8,13 @@ import me.yabble.service._
 import me.yabble.service.model.UserNotification
 import me.yabble.service.model.UserNotificationType._
 import me.yabble.service.proto.ServiceProtos._
+import me.yabble.service.velocity.VelocityTemplate
 
 import org.apache.velocity.VelocityContext
 import org.apache.velocity.app.VelocityEngine
 import org.apache.velocity.context.Context
+
+import org.joda.time.LocalDate
 
 import org.springframework.transaction._
 import org.springframework.transaction.support._
@@ -30,11 +33,13 @@ class UserNotificationPushWorker(
     private val ylistService: IYListService,
     private val fromEmail: String,
     private val fromName: String,
-    private val velocityEngine: VelocityEngine,
-    private val encoding: String)
+    private val template: VelocityTemplate)
   extends AbstractQueueWorker(txnTemplate, workQueue, "user-notification-push", 2)
   with Log
 {
+  private def rootContext = Map(
+      "LocalDate" -> classOf[LocalDate])
+
   override protected def handleWorkItem(item: WorkQueue.Item, status: TransactionStatus) {
     val e = EntityEvent.parseFrom(item.getValue)
     val id = e.getEntityId
@@ -72,15 +77,8 @@ class UserNotificationPushWorker(
   }
 
   private def emailHtmlBody(n: UserNotification.Persisted, context: Map[String, Any]): String = {
-    var writer: Writer = null
-    try {
-      writer = new StringWriter()
-      val vctx = new VelocityContext(context)
-      velocityEngine.mergeTemplate("/mail/notification/%s.html".format(enumToCode(n.kind)), encoding, vctx, writer)
-      writer.toString()
-    } finally {
-      if (writer != null) { writer.close() }
-    }
+    val ctx = context ++ rootContext + ("__user" -> n.user)
+    template.renderToString(List("/mail/notification/%s.html".format(enumToCode(n.kind))), ctx)
   }
 
   private def sanatizeSubject(s: String) = replaceNewlinesWithSpace(s)

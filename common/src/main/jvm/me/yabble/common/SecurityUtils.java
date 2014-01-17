@@ -3,9 +3,35 @@ package me.yabble.common;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang.RandomStringUtils;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.IvParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
+
 import static org.apache.commons.codec.binary.Base64.*;
 
 public class SecurityUtils {
+
+    public static byte[] encrypt(String v, String secret) {
+        try {
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
+            SecretKeySpec key = new SecretKeySpec(utf8Encode(secret), "AES");
+            cipher.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(new byte[cipher.getBlockSize()]));
+            return cipher.doFinal(v.getBytes("utf-8"));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String decrypt(byte[] v, String secret) {
+        try {
+            Cipher cipher = Cipher.getInstance("AES/CBC/PKCS5Padding", "SunJCE");
+            SecretKeySpec key = new SecretKeySpec(utf8Encode(secret), "AES");
+            cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(new    byte[cipher.getBlockSize()]));
+            return utf8Encode(cipher.doFinal(v));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public static String base64Encode(byte[] bs) {
         return encodeBase64String(bs);
