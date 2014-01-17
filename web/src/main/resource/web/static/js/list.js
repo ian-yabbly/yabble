@@ -37,12 +37,13 @@
         utils.exists($('#button-add-item'), function(btnAddItem) {
           var elItemList = $('#list-items ul');
           btnAddItem.click(function() {
+            var user = User.getLoggedInUser();
             if(!dlgAddItem) {
               dlgAddItem = new AddItemDialog({ 
                  listId : btnAddItem.data('list-id')
                });
             }
-            if(elItemList.children().size() > 0 && !User.getLoggedInUser().email) {
+            if(elItemList.children().size() > 0 && (user && !user.email)) {
               if(!dlgUserEmail) {
                 dlgUserEmail = new UserEmailDialog();
               }
@@ -57,11 +58,12 @@
 
         utils.exists($('#form-invite-to-list'), function(elFormInviteToList) {
           var txtInviteeEmail = $('#email'),
+              user = User.getLoggedInUser(),
               listContribs  = $('#list-contributors ul');
               
-          if(!User.getLoggedInUser().email) {
+          if(user && !user.email) {
             txtInviteeEmail.focus(function() {
-              if(!User.getLoggedInUser().email) {
+              if(!user.email) {
                 if(!dlgUserEmail) {
                   dlgUserEmail = new UserEmailDialog();
                 }
