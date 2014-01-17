@@ -44,6 +44,6 @@ cp -r $BASEDIR/config/$config/* $deploy_dir/etc
 mkdir -p $deploy_dir/var/log
 mkdir -p $vdir
 tar -C$vdir -xzf$BASEDIR/target/yabble-$version.tar.gz
-ln -s $vdir/{artifact,bin,db-schema,.env,lib,.source-version-hash,.version,.version-hash} $deploy_dir
+ln -sf $vdir/{artifact,bin,db-schema,.env,lib,.source-version-hash,.version,.version-hash} $deploy_dir
 
 cd -
