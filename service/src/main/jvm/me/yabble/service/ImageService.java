@@ -55,7 +55,7 @@ public interface ImageService {
 
     boolean maybeSetImagePreviewData(String id);
 
-    Dimensions getDimensionsByImageAndTransform(String id, String transform);
+    Optional<Dimensions> getDimensionsByImageAndTransform(String id, String transform);
 
     public static class ImageException extends RuntimeException {
         public ImageException(String message) {

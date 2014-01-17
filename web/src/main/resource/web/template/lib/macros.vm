@@ -114,10 +114,11 @@
 #macro(itemImage $item $width)
   #if($item.images().nonEmpty())
     #set($i = $item.images().head())
+    #set($dims = $__imageService.getDimensionsByImageAndTransform($i.id(), "w-$width"))
     <span class="list-item-image is-loading">
        <img src=#transformImageUrl($i, "w-$width")
             width=$width
-            height=$__imageService.getDimensionsByImageAndTransform($i.id(), "w-$width").height()>
+            #if($dims.isPresent())height=$dims.get().height()#end>
     </span>
   #else
     <span class="list-item-image no-list-item-image" 

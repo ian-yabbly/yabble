@@ -706,62 +706,59 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public Dimensions getDimensionsByImageAndTransform(String id, String transform) {
-        long height = 0l;
-        long width = 0l;
-
+    public Optional<Dimensions> getDimensionsByImageAndTransform(String id, String transform) {
         Image.Persisted i = imageDao.find(id);
         ImageTransform t = new ImageTransform(transform);
+        Optional<Dimensions> dims = Optional.<Dimensions>absent();
 
         switch (t.getType()) {
+            case RESIZE_COVER:            
+            case RESIZE_SQUARE:
             case RESIZE_BOX:
-                height = t.getHeight().get();
-                width = t.getWidth().get();
+                dims = Optional.of(
+                    new Dimensions(t.getWidth().get(), t.getHeight().get())
+                );
                 break;
             case RESIZE_WIDTH:
-                long th = BigDecimal.valueOf(t.getWidth().get())
-                    .divide(
-                        BigDecimal.valueOf((long) i.width().get()),
-                        3,
-                        RoundingMode.HALF_EVEN
-                    ).multiply(
-                        BigDecimal.valueOf((long) i.height().get())
-                    )
-                    .setScale(0, RoundingMode.HALF_EVEN)
-                    .longValueExact();
-
-                height = th;
-                width = t.getWidth().get();
+                if(i.width().isDefined() && i.height().isDefined()) {
+                    long th = BigDecimal.valueOf(t.getWidth().get())
+                        .divide(
+                            BigDecimal.valueOf((long) i.width().get()),
+                            3,
+                            RoundingMode.HALF_EVEN
+                        ).multiply(
+                            BigDecimal.valueOf((long) i.height().get())
+                        )
+                        .setScale(0, RoundingMode.HALF_EVEN)
+                        .longValueExact();
+                    dims = Optional.of(
+                        new Dimensions(t.getWidth().get(), th)
+                    );
+                }
                 break;
             case RESIZE_HEIGHT:
-                long tw = BigDecimal.valueOf(t.getHeight().get())
-                    .divide(
-                        BigDecimal.valueOf((long) i.height().get()),
-                        3,
-                        RoundingMode.HALF_EVEN
-                    ).multiply(
-                        BigDecimal.valueOf((long) i.width().get())
-                    )
-                    .setScale(0, RoundingMode.HALF_EVEN)
-                    .longValueExact();
-
-                height = t.getHeight().get();
-                width = tw;
-                break;
-            case RESIZE_SQUARE:
-                height = t.getHeight().get();
-                width = t.getWidth().get();
-                break;
-            case RESIZE_COVER:
-                height = t.getHeight().get();
-                width = t.getWidth().get();
+                if(i.width().isDefined() && i.height().isDefined()) {
+                    long tw = BigDecimal.valueOf(t.getHeight().get())
+                        .divide(
+                            BigDecimal.valueOf((long) i.height().get()),
+                            3,
+                            RoundingMode.HALF_EVEN
+                        ).multiply(
+                            BigDecimal.valueOf((long) i.width().get())
+                        )
+                        .setScale(0, RoundingMode.HALF_EVEN)
+                        .longValueExact();
+                    dims = Optional.of(
+                        new Dimensions(tw, t.getHeight().get())
+                    );
+                }
                 break;
             default:
                 throw new RuntimeException(
                         String.format("Unexpected transform type [%s]", t.getType()));
         }
 
-        return new Dimensions(width, height);
+        return dims;
     }
 
     private String run(String cmd) throws IOException {
