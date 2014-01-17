@@ -4,8 +4,8 @@ import me.yabble.common.Predef._
 import me.yabble.common.Log
 import me.yabble.service._
 import me.yabble.service.model._
+import me.yabble.service.velocity.VelocityTemplate
 import me.yabble.web.service._
-import me.yabble.web.template.VelocityTemplate
 
 import com.sun.net.httpserver._
 

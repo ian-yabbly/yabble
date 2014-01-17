@@ -623,11 +623,1202 @@ public final class CommonProtos {
     // @@protoc_insertion_point(class_scope:me.yabble.common.proto.DelayedJob)
   }
   
+  public interface EmailOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // required string from = 1;
+    boolean hasFrom();
+    String getFrom();
+    
+    // optional string from_name = 2;
+    boolean hasFromName();
+    String getFromName();
+    
+    // optional string reply_to = 3;
+    boolean hasReplyTo();
+    String getReplyTo();
+    
+    // repeated string to = 4;
+    java.util.List<String> getToList();
+    int getToCount();
+    String getTo(int index);
+    
+    // repeated string cc = 5;
+    java.util.List<String> getCcList();
+    int getCcCount();
+    String getCc(int index);
+    
+    // repeated string bcc = 6;
+    java.util.List<String> getBccList();
+    int getBccCount();
+    String getBcc(int index);
+    
+    // optional string subject = 7;
+    boolean hasSubject();
+    String getSubject();
+    
+    // optional string text_body = 8;
+    boolean hasTextBody();
+    String getTextBody();
+    
+    // optional string html_body = 9;
+    boolean hasHtmlBody();
+    String getHtmlBody();
+  }
+  public static final class Email extends
+      com.google.protobuf.GeneratedMessage
+      implements EmailOrBuilder {
+    // Use Email.newBuilder() to construct.
+    private Email(Builder builder) {
+      super(builder);
+    }
+    private Email(boolean noInit) {}
+    
+    private static final Email defaultInstance;
+    public static Email getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public Email getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return me.yabble.common.proto.CommonProtos.internal_static_me_yabble_common_proto_Email_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return me.yabble.common.proto.CommonProtos.internal_static_me_yabble_common_proto_Email_fieldAccessorTable;
+    }
+    
+    private int bitField0_;
+    // required string from = 1;
+    public static final int FROM_FIELD_NUMBER = 1;
+    private java.lang.Object from_;
+    public boolean hasFrom() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public String getFrom() {
+      java.lang.Object ref = from_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          from_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getFromBytes() {
+      java.lang.Object ref = from_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        from_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string from_name = 2;
+    public static final int FROM_NAME_FIELD_NUMBER = 2;
+    private java.lang.Object fromName_;
+    public boolean hasFromName() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public String getFromName() {
+      java.lang.Object ref = fromName_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          fromName_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getFromNameBytes() {
+      java.lang.Object ref = fromName_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        fromName_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string reply_to = 3;
+    public static final int REPLY_TO_FIELD_NUMBER = 3;
+    private java.lang.Object replyTo_;
+    public boolean hasReplyTo() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public String getReplyTo() {
+      java.lang.Object ref = replyTo_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          replyTo_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getReplyToBytes() {
+      java.lang.Object ref = replyTo_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        replyTo_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // repeated string to = 4;
+    public static final int TO_FIELD_NUMBER = 4;
+    private com.google.protobuf.LazyStringList to_;
+    public java.util.List<String>
+        getToList() {
+      return to_;
+    }
+    public int getToCount() {
+      return to_.size();
+    }
+    public String getTo(int index) {
+      return to_.get(index);
+    }
+    
+    // repeated string cc = 5;
+    public static final int CC_FIELD_NUMBER = 5;
+    private com.google.protobuf.LazyStringList cc_;
+    public java.util.List<String>
+        getCcList() {
+      return cc_;
+    }
+    public int getCcCount() {
+      return cc_.size();
+    }
+    public String getCc(int index) {
+      return cc_.get(index);
+    }
+    
+    // repeated string bcc = 6;
+    public static final int BCC_FIELD_NUMBER = 6;
+    private com.google.protobuf.LazyStringList bcc_;
+    public java.util.List<String>
+        getBccList() {
+      return bcc_;
+    }
+    public int getBccCount() {
+      return bcc_.size();
+    }
+    public String getBcc(int index) {
+      return bcc_.get(index);
+    }
+    
+    // optional string subject = 7;
+    public static final int SUBJECT_FIELD_NUMBER = 7;
+    private java.lang.Object subject_;
+    public boolean hasSubject() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getSubject() {
+      java.lang.Object ref = subject_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          subject_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getSubjectBytes() {
+      java.lang.Object ref = subject_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        subject_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string text_body = 8;
+    public static final int TEXT_BODY_FIELD_NUMBER = 8;
+    private java.lang.Object textBody_;
+    public boolean hasTextBody() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public String getTextBody() {
+      java.lang.Object ref = textBody_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          textBody_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getTextBodyBytes() {
+      java.lang.Object ref = textBody_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        textBody_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional string html_body = 9;
+    public static final int HTML_BODY_FIELD_NUMBER = 9;
+    private java.lang.Object htmlBody_;
+    public boolean hasHtmlBody() {
+      return ((bitField0_ & 0x00000020) == 0x00000020);
+    }
+    public String getHtmlBody() {
+      java.lang.Object ref = htmlBody_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          htmlBody_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getHtmlBodyBytes() {
+      java.lang.Object ref = htmlBody_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        htmlBody_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    private void initFields() {
+      from_ = "";
+      fromName_ = "";
+      replyTo_ = "";
+      to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      cc_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      bcc_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      subject_ = "";
+      textBody_ = "";
+      htmlBody_ = "";
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!hasFrom()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getFromBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeBytes(2, getFromNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeBytes(3, getReplyToBytes());
+      }
+      for (int i = 0; i < to_.size(); i++) {
+        output.writeBytes(4, to_.getByteString(i));
+      }
+      for (int i = 0; i < cc_.size(); i++) {
+        output.writeBytes(5, cc_.getByteString(i));
+      }
+      for (int i = 0; i < bcc_.size(); i++) {
+        output.writeBytes(6, bcc_.getByteString(i));
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(7, getSubjectBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeBytes(8, getTextBodyBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        output.writeBytes(9, getHtmlBodyBytes());
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getFromBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, getFromNameBytes());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(3, getReplyToBytes());
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < to_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(to_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getToList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < cc_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(cc_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getCcList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < bcc_.size(); i++) {
+          dataSize += com.google.protobuf.CodedOutputStream
+            .computeBytesSizeNoTag(bcc_.getByteString(i));
+        }
+        size += dataSize;
+        size += 1 * getBccList().size();
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, getSubjectBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(8, getTextBodyBytes());
+      }
+      if (((bitField0_ & 0x00000020) == 0x00000020)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(9, getHtmlBodyBytes());
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static me.yabble.common.proto.CommonProtos.Email parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.common.proto.CommonProtos.Email parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(me.yabble.common.proto.CommonProtos.Email prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements me.yabble.common.proto.CommonProtos.EmailOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.common.proto.CommonProtos.internal_static_me_yabble_common_proto_Email_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.common.proto.CommonProtos.internal_static_me_yabble_common_proto_Email_fieldAccessorTable;
+      }
+      
+      // Construct using me.yabble.common.proto.CommonProtos.Email.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        from_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        fromName_ = "";
+        bitField0_ = (bitField0_ & ~0x00000002);
+        replyTo_ = "";
+        bitField0_ = (bitField0_ & ~0x00000004);
+        to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        cc_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        bcc_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        subject_ = "";
+        bitField0_ = (bitField0_ & ~0x00000040);
+        textBody_ = "";
+        bitField0_ = (bitField0_ & ~0x00000080);
+        htmlBody_ = "";
+        bitField0_ = (bitField0_ & ~0x00000100);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return me.yabble.common.proto.CommonProtos.Email.getDescriptor();
+      }
+      
+      public me.yabble.common.proto.CommonProtos.Email getDefaultInstanceForType() {
+        return me.yabble.common.proto.CommonProtos.Email.getDefaultInstance();
+      }
+      
+      public me.yabble.common.proto.CommonProtos.Email build() {
+        me.yabble.common.proto.CommonProtos.Email result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private me.yabble.common.proto.CommonProtos.Email buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        me.yabble.common.proto.CommonProtos.Email result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public me.yabble.common.proto.CommonProtos.Email buildPartial() {
+        me.yabble.common.proto.CommonProtos.Email result = new me.yabble.common.proto.CommonProtos.Email(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.from_ = from_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.fromName_ = fromName_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.replyTo_ = replyTo_;
+        if (((bitField0_ & 0x00000008) == 0x00000008)) {
+          to_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              to_);
+          bitField0_ = (bitField0_ & ~0x00000008);
+        }
+        result.to_ = to_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          cc_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              cc_);
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
+        result.cc_ = cc_;
+        if (((bitField0_ & 0x00000020) == 0x00000020)) {
+          bcc_ = new com.google.protobuf.UnmodifiableLazyStringList(
+              bcc_);
+          bitField0_ = (bitField0_ & ~0x00000020);
+        }
+        result.bcc_ = bcc_;
+        if (((from_bitField0_ & 0x00000040) == 0x00000040)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.subject_ = subject_;
+        if (((from_bitField0_ & 0x00000080) == 0x00000080)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        result.textBody_ = textBody_;
+        if (((from_bitField0_ & 0x00000100) == 0x00000100)) {
+          to_bitField0_ |= 0x00000020;
+        }
+        result.htmlBody_ = htmlBody_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof me.yabble.common.proto.CommonProtos.Email) {
+          return mergeFrom((me.yabble.common.proto.CommonProtos.Email)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(me.yabble.common.proto.CommonProtos.Email other) {
+        if (other == me.yabble.common.proto.CommonProtos.Email.getDefaultInstance()) return this;
+        if (other.hasFrom()) {
+          setFrom(other.getFrom());
+        }
+        if (other.hasFromName()) {
+          setFromName(other.getFromName());
+        }
+        if (other.hasReplyTo()) {
+          setReplyTo(other.getReplyTo());
+        }
+        if (!other.to_.isEmpty()) {
+          if (to_.isEmpty()) {
+            to_ = other.to_;
+            bitField0_ = (bitField0_ & ~0x00000008);
+          } else {
+            ensureToIsMutable();
+            to_.addAll(other.to_);
+          }
+          onChanged();
+        }
+        if (!other.cc_.isEmpty()) {
+          if (cc_.isEmpty()) {
+            cc_ = other.cc_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureCcIsMutable();
+            cc_.addAll(other.cc_);
+          }
+          onChanged();
+        }
+        if (!other.bcc_.isEmpty()) {
+          if (bcc_.isEmpty()) {
+            bcc_ = other.bcc_;
+            bitField0_ = (bitField0_ & ~0x00000020);
+          } else {
+            ensureBccIsMutable();
+            bcc_.addAll(other.bcc_);
+          }
+          onChanged();
+        }
+        if (other.hasSubject()) {
+          setSubject(other.getSubject());
+        }
+        if (other.hasTextBody()) {
+          setTextBody(other.getTextBody());
+        }
+        if (other.hasHtmlBody()) {
+          setHtmlBody(other.getHtmlBody());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!hasFrom()) {
+          
+          return false;
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              from_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              fromName_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              replyTo_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              ensureToIsMutable();
+              to_.add(input.readBytes());
+              break;
+            }
+            case 42: {
+              ensureCcIsMutable();
+              cc_.add(input.readBytes());
+              break;
+            }
+            case 50: {
+              ensureBccIsMutable();
+              bcc_.add(input.readBytes());
+              break;
+            }
+            case 58: {
+              bitField0_ |= 0x00000040;
+              subject_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000080;
+              textBody_ = input.readBytes();
+              break;
+            }
+            case 74: {
+              bitField0_ |= 0x00000100;
+              htmlBody_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // required string from = 1;
+      private java.lang.Object from_ = "";
+      public boolean hasFrom() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getFrom() {
+        java.lang.Object ref = from_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          from_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setFrom(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        from_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFrom() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        from_ = getDefaultInstance().getFrom();
+        onChanged();
+        return this;
+      }
+      void setFrom(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        from_ = value;
+        onChanged();
+      }
+      
+      // optional string from_name = 2;
+      private java.lang.Object fromName_ = "";
+      public boolean hasFromName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public String getFromName() {
+        java.lang.Object ref = fromName_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          fromName_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setFromName(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+        fromName_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearFromName() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        fromName_ = getDefaultInstance().getFromName();
+        onChanged();
+        return this;
+      }
+      void setFromName(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000002;
+        fromName_ = value;
+        onChanged();
+      }
+      
+      // optional string reply_to = 3;
+      private java.lang.Object replyTo_ = "";
+      public boolean hasReplyTo() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public String getReplyTo() {
+        java.lang.Object ref = replyTo_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          replyTo_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setReplyTo(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
+        replyTo_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearReplyTo() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        replyTo_ = getDefaultInstance().getReplyTo();
+        onChanged();
+        return this;
+      }
+      void setReplyTo(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000004;
+        replyTo_ = value;
+        onChanged();
+      }
+      
+      // repeated string to = 4;
+      private com.google.protobuf.LazyStringList to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureToIsMutable() {
+        if (!((bitField0_ & 0x00000008) == 0x00000008)) {
+          to_ = new com.google.protobuf.LazyStringArrayList(to_);
+          bitField0_ |= 0x00000008;
+         }
+      }
+      public java.util.List<String>
+          getToList() {
+        return java.util.Collections.unmodifiableList(to_);
+      }
+      public int getToCount() {
+        return to_.size();
+      }
+      public String getTo(int index) {
+        return to_.get(index);
+      }
+      public Builder setTo(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureToIsMutable();
+        to_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addTo(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureToIsMutable();
+        to_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllTo(
+          java.lang.Iterable<String> values) {
+        ensureToIsMutable();
+        super.addAll(values, to_);
+        onChanged();
+        return this;
+      }
+      public Builder clearTo() {
+        to_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000008);
+        onChanged();
+        return this;
+      }
+      void addTo(com.google.protobuf.ByteString value) {
+        ensureToIsMutable();
+        to_.add(value);
+        onChanged();
+      }
+      
+      // repeated string cc = 5;
+      private com.google.protobuf.LazyStringList cc_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureCcIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          cc_ = new com.google.protobuf.LazyStringArrayList(cc_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+      public java.util.List<String>
+          getCcList() {
+        return java.util.Collections.unmodifiableList(cc_);
+      }
+      public int getCcCount() {
+        return cc_.size();
+      }
+      public String getCc(int index) {
+        return cc_.get(index);
+      }
+      public Builder setCc(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureCcIsMutable();
+        cc_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addCc(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureCcIsMutable();
+        cc_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllCc(
+          java.lang.Iterable<String> values) {
+        ensureCcIsMutable();
+        super.addAll(values, cc_);
+        onChanged();
+        return this;
+      }
+      public Builder clearCc() {
+        cc_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+      void addCc(com.google.protobuf.ByteString value) {
+        ensureCcIsMutable();
+        cc_.add(value);
+        onChanged();
+      }
+      
+      // repeated string bcc = 6;
+      private com.google.protobuf.LazyStringList bcc_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureBccIsMutable() {
+        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
+          bcc_ = new com.google.protobuf.LazyStringArrayList(bcc_);
+          bitField0_ |= 0x00000020;
+         }
+      }
+      public java.util.List<String>
+          getBccList() {
+        return java.util.Collections.unmodifiableList(bcc_);
+      }
+      public int getBccCount() {
+        return bcc_.size();
+      }
+      public String getBcc(int index) {
+        return bcc_.get(index);
+      }
+      public Builder setBcc(
+          int index, String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBccIsMutable();
+        bcc_.set(index, value);
+        onChanged();
+        return this;
+      }
+      public Builder addBcc(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBccIsMutable();
+        bcc_.add(value);
+        onChanged();
+        return this;
+      }
+      public Builder addAllBcc(
+          java.lang.Iterable<String> values) {
+        ensureBccIsMutable();
+        super.addAll(values, bcc_);
+        onChanged();
+        return this;
+      }
+      public Builder clearBcc() {
+        bcc_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000020);
+        onChanged();
+        return this;
+      }
+      void addBcc(com.google.protobuf.ByteString value) {
+        ensureBccIsMutable();
+        bcc_.add(value);
+        onChanged();
+      }
+      
+      // optional string subject = 7;
+      private java.lang.Object subject_ = "";
+      public boolean hasSubject() {
+        return ((bitField0_ & 0x00000040) == 0x00000040);
+      }
+      public String getSubject() {
+        java.lang.Object ref = subject_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          subject_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setSubject(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000040;
+        subject_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearSubject() {
+        bitField0_ = (bitField0_ & ~0x00000040);
+        subject_ = getDefaultInstance().getSubject();
+        onChanged();
+        return this;
+      }
+      void setSubject(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000040;
+        subject_ = value;
+        onChanged();
+      }
+      
+      // optional string text_body = 8;
+      private java.lang.Object textBody_ = "";
+      public boolean hasTextBody() {
+        return ((bitField0_ & 0x00000080) == 0x00000080);
+      }
+      public String getTextBody() {
+        java.lang.Object ref = textBody_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          textBody_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setTextBody(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
+        textBody_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearTextBody() {
+        bitField0_ = (bitField0_ & ~0x00000080);
+        textBody_ = getDefaultInstance().getTextBody();
+        onChanged();
+        return this;
+      }
+      void setTextBody(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000080;
+        textBody_ = value;
+        onChanged();
+      }
+      
+      // optional string html_body = 9;
+      private java.lang.Object htmlBody_ = "";
+      public boolean hasHtmlBody() {
+        return ((bitField0_ & 0x00000100) == 0x00000100);
+      }
+      public String getHtmlBody() {
+        java.lang.Object ref = htmlBody_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          htmlBody_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setHtmlBody(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000100;
+        htmlBody_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearHtmlBody() {
+        bitField0_ = (bitField0_ & ~0x00000100);
+        htmlBody_ = getDefaultInstance().getHtmlBody();
+        onChanged();
+        return this;
+      }
+      void setHtmlBody(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000100;
+        htmlBody_ = value;
+        onChanged();
+      }
+      
+      // @@protoc_insertion_point(builder_scope:me.yabble.common.proto.Email)
+    }
+    
+    static {
+      defaultInstance = new Email(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:me.yabble.common.proto.Email)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_me_yabble_common_proto_DelayedJob_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_me_yabble_common_proto_DelayedJob_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_me_yabble_common_proto_Email_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_me_yabble_common_proto_Email_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -640,8 +1831,11 @@ public final class CommonProtos {
       "\n\014common.proto\022\026me.yabble.common.proto\"T" +
       "\n\nDelayedJob\022\n\n\002id\030\001 \002(\003\022\017\n\007item_id\030\002 \002(" +
       "\003\022\r\n\005qname\030\003 \002(\t\022\032\n\022datetime_to_submit\030\004" +
-      " \002(\tB&\n\026me.yabble.common.protoB\014CommonPr" +
-      "otos"
+      " \002(\t\"\226\001\n\005Email\022\014\n\004from\030\001 \002(\t\022\021\n\tfrom_nam" +
+      "e\030\002 \001(\t\022\020\n\010reply_to\030\003 \001(\t\022\n\n\002to\030\004 \003(\t\022\n\n" +
+      "\002cc\030\005 \003(\t\022\013\n\003bcc\030\006 \003(\t\022\017\n\007subject\030\007 \001(\t\022" +
+      "\021\n\ttext_body\030\010 \001(\t\022\021\n\thtml_body\030\t \001(\tB&\n" +
+      "\026me.yabble.common.protoB\014CommonProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -656,6 +1850,14 @@ public final class CommonProtos {
               new java.lang.String[] { "Id", "ItemId", "Qname", "DatetimeToSubmit", },
               me.yabble.common.proto.CommonProtos.DelayedJob.class,
               me.yabble.common.proto.CommonProtos.DelayedJob.Builder.class);
+          internal_static_me_yabble_common_proto_Email_descriptor =
+            getDescriptor().getMessageTypes().get(1);
+          internal_static_me_yabble_common_proto_Email_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_me_yabble_common_proto_Email_descriptor,
+              new java.lang.String[] { "From", "FromName", "ReplyTo", "To", "Cc", "Bcc", "Subject", "TextBody", "HtmlBody", },
+              me.yabble.common.proto.CommonProtos.Email.class,
+              me.yabble.common.proto.CommonProtos.Email.Builder.class);
           return null;
         }
       };

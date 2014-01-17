@@ -1,6 +1,7 @@
 package me.yabble.service.model
 
 import me.yabble.service.NotFoundException
+import me.yabble.service.proto.ServiceProtos.EntityType
 
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
@@ -17,6 +18,8 @@ object UserNotification {
   class Free(
       val userId: String,
       val kind: UserNotificationType,
+      val refId: Option[String],
+      val refType: Option[EntityType],
       val data: Option[Array[Byte]])
     extends Entity.Free
 
@@ -31,6 +34,8 @@ object UserNotification {
       isActive: Boolean,
       val user: User.Persisted,
       val kind: UserNotificationType,
+      val refId: Option[String],
+      val refType: Option[EntityType],
       val data: Option[Array[Byte]])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
 
@@ -63,10 +68,10 @@ object User {
 
   class Update(
       id: String,
-      val name: Option[String],
-      val email: Option[String],
-      val tz: Option[DateTimeZone],
-      val imageId: Option[String])
+      var name: Option[String],
+      var email: Option[String],
+      var tz: Option[DateTimeZone],
+      var imageId: Option[String])
     extends Entity.Update(id)
 
   class Persisted(
@@ -81,6 +86,36 @@ object User {
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
   {
     def displayName(): String = name.orElse(email).getOrElse("Guest")
+
+    def canLogin(): Boolean = name.orElse(email).isDefined
+
+    def toUpdate(): Update = new Update(id, name, email, tz, image.map(_.id))
+  }
+
+  object Auth {
+    class Free(
+        val userId: String,
+        val clearPassword: String)
+      extends Entity.Free
+
+    class Update(
+        id: String,
+        val clearPassword: String,
+        val resetToken: Option[String],
+        val resetTokenCreationDate: Option[DateTime])
+      extends Entity.Update(id)
+
+    class Persisted(
+        id: String,
+        creationDate: DateTime,
+        lastUpdatedDate: DateTime,
+        isActive: Boolean,
+        val userId: String,
+        val encPassword: String,
+        val salt: String,
+        val resetToken: Option[String],
+        val resetTokenCreationDate: Option[DateTime])
+      extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
   }
 }
 

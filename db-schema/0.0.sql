@@ -37,6 +37,20 @@ create table users (
   primary key (id)
 );
 
+create table user_auths (
+  id varchar(8) not null references ids (value),
+  creation_date timestamptz not null default now(),
+  last_updated_date timestamptz not null default now(),
+  is_active boolean not null default true,
+  user_id varchar(8) not null references users (id),
+  enc_password char(128) not null,
+  salt char(16) not null,
+  reset_token char(8) null,
+  reset_token_creation_date timestamptz null,
+  primary key (id),
+  unique (user_id)
+);
+
 create table lists (
   id varchar(8) not null references ids (value),
   creation_date timestamptz not null default now(),
@@ -111,6 +125,8 @@ create table user_notifications (
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
   user_id varchar(8) not null references users (id),
+  ref_id varchar(8) null references ids (value),
+  ref_type varchar(64) null,
   type varchar(64) not null,
   data bytea,
   primary key (id)

@@ -146,14 +146,15 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
       }
     }
 
-    addTxnSync(kind, EventType.CREATE, id, None)
+    addEntityEventTxnSync(kind, EventType.CREATE, id, None)
 
     id
   }
 
   private def optional(f: F, activeOnly: Boolean = true): Option[P] = optionalQuery(getQueryParams(f), activeOnly)
 
-  protected def addTxnSync(kind: EntityType, event: EventType, id: String, userId: Option[String]) {
+  protected def addEntityEventTxnSync(kind: EntityType, event: EventType, id: String, userId: Option[String]) {
+    //log.info("Adding entity event txn sync [{}] [{}]", enumToCode(kind), enumToCode(event))
     txnSync.add(new Function[Void, Void]() {
       override def apply(ingored: Void): Void = {
         val b = EntityEvent.newBuilder()
@@ -189,7 +190,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     }
 
     val stmt = b.toString()
-    log.info("optionalQuery stmt [{}]", stmt)
+    //log.info("optionalQuery stmt [{}]", stmt)
     optional(all(stmt, params))
   }
 
@@ -481,12 +482,53 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
   }
 }
 
+class UserAuthDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
+  extends EntityDao[User.Auth.Free, User.Auth.Persisted, User.Auth.Update]("user_auths", EntityType.USER_AUTH, npt, txnSync, workQueue)
+  with Log
+{
+  def optionalByUser(id: String): Option[User.Auth.Persisted] = optionalQuery(Map("user_id" -> id))
+
+  override def getInsertParams(f: User.Auth.Free) = {
+    val salt = SecurityUtils.randomAlphanumeric(16)
+    val encPassword = SecurityUtils.encryptPassword(f.clearPassword, salt)
+
+    Map(
+      "user_id" -> f.userId,
+      "enc_password" -> encPassword,
+      "salt" -> salt)
+  }
+
+  override def getUpdateParams(u: User.Auth.Update) = {
+    Map(
+        "reset_token" -> u.resetToken.orNull,
+        "reset_token_creation_date" -> u.resetTokenCreationDate.map(d => dateTime2SqlTimestamp(d)).orNull)
+  }
+
+  override def getQueryParams(f: User.Auth.Free) = Map("user_id" -> f.userId)
+
+  override def getRowMapper() = new RowMapper[User.Auth.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): User.Auth.Persisted = {
+      val id = rs.getString("id")
+      new User.Auth.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("user_id"),
+          rs.getString("enc_password"),
+          rs.getString("salt"),
+          Option(rs.getString("reset_token")),
+          Option(rs.getTimestamp("reset_token_creation_date")))
+    }
+  }
+}
+
 class YListDao(
     private val userDao: UserDao,
     private val ylistCommentDao: YListCommentDao,
     private val ylistItemDao: YListItemDao,
     npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.LIST, npt, txnSync, workQueue)
+  extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.YLIST, npt, txnSync, workQueue)
   with Log
 {
   def addUser(lid: String, uid: String): Boolean = {
@@ -494,7 +536,7 @@ class YListDao(
     npt.queryForList("select * from list_users where list_id = :list_id and user_id = :user_id for update", params).toList match {
       case Nil => {
         npt.update("insert into list_users (list_id, user_id) values (:list_id, :user_id)", params)
-        addTxnSync(EntityType.LIST_USER, EventType.CREATE, lid, Some(uid))
+        addEntityEventTxnSync(EntityType.YLIST_USER, EventType.CREATE, lid, Some(uid))
         true
       }
       case head :: Nil => false
@@ -507,7 +549,7 @@ class YListDao(
       Map("list_id" -> lid, "user_id" -> uid)) match {
         case 0 => false
         case 1 => {
-          addTxnSync(EntityType.LIST_USER, EventType.DELETE, lid, Some(uid))
+          addEntityEventTxnSync(EntityType.YLIST_USER, EventType.DELETE, lid, Some(uid))
           true
         }
         case n: Int => throw new UnexpectedNumberOfRowsUpdatedException(n)
@@ -544,7 +586,7 @@ class YListItemDao(
     private val ylistItemVoteDao: YListItemVoteDao,
     private val ylistItemCommentDao: YListItemCommentDao,
     npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", EntityType.LIST_ITEM, npt, txnSync, workQueue)
+  extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", EntityType.YLIST_ITEM, npt, txnSync, workQueue)
   with Log
 {
   def allByYList(id: String) = all("all-by-list", Map("list_id" -> id))
@@ -610,10 +652,10 @@ abstract class CommentDao(tableName: String, kind: EntityType, private val userD
 }
 
 class YListCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-    extends CommentDao("list_comments", EntityType.LIST_COMMENT, userDao, npt, txnSync, workQueue)
+    extends CommentDao("list_comments", EntityType.YLIST_COMMENT, userDao, npt, txnSync, workQueue)
 
 class YListItemCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-    extends CommentDao("list_item_comments", EntityType.LIST_ITEM_COMMENT, userDao, npt, txnSync, workQueue)
+    extends CommentDao("list_item_comments", EntityType.YLIST_ITEM_COMMENT, userDao, npt, txnSync, workQueue)
 
 abstract class VoteDao(tableName: String, kind: EntityType, private val userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
   extends EntityDao[Vote.Free, Vote.Persisted, Vote.Update](tableName, kind, npt, txnSync, workQueue)
@@ -645,20 +687,30 @@ abstract class VoteDao(tableName: String, kind: EntityType, private val userDao:
 }
 
 class YListVoteDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-    extends VoteDao("list_votes", EntityType.LIST_VOTE, userDao, npt, txnSync, workQueue)
+    extends VoteDao("list_votes", EntityType.YLIST_VOTE, userDao, npt, txnSync, workQueue)
 
 class YListItemVoteDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-    extends VoteDao("list_item_votes", EntityType.LIST_ITEM_VOTE, userDao, npt, txnSync, workQueue)
+    extends VoteDao("list_item_votes", EntityType.YLIST_ITEM_VOTE, userDao, npt, txnSync, workQueue)
 
 class UserNotificationDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
     extends EntityDao[UserNotification.Free, UserNotification.Persisted, UserNotification.Update]("user_notifications", EntityType.USER_NOTIFICATION, npt, txnSync, workQueue)
     with Log
 {
-  override def getInsertParams(f: UserNotification.Free) = Map("user_id" -> f.userId, "type" -> enumToCode(f.kind), "data" -> f.data.orNull)
+  override def getInsertParams(f: UserNotification.Free) = Map(
+      "user_id" -> f.userId,
+      "type" -> enumToCode(f.kind),
+      "ref_id" -> f.refId.orNull,
+      "ref_type" -> f.refType.map(enumToCode(_)).orNull,
+      "data" -> f.data.orNull)
 
   override def getUpdateParams(u: UserNotification.Update) = Map()
 
-  override def getQueryParams(f: UserNotification.Free) = Map("user_id" -> f.userId, "type" -> enumToCode(f.kind), "data" -> f.data.orNull)
+  override def getQueryParams(f: UserNotification.Free) = Map(
+      "user_id" -> f.userId,
+      "type" -> enumToCode(f.kind),
+      "ref_id" -> f.refId.orNull,
+      "ref_type" -> f.refType.map(enumToCode(_)).orNull,
+      "data" -> f.data.orNull)
 
   override def getRowMapper() = new RowMapper[UserNotification.Persisted]() {
     override def mapRow(rs: ResultSet, rowNum: Int): UserNotification.Persisted = {
@@ -669,6 +721,8 @@ class UserNotificationDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txn
           rs.getBoolean("is_active"),
           userDao.find(rs.getString("user_id")),
           codeToEnum(rs.getString("type"), classOf[UserNotificationType]),
+          Option(rs.getString("ref_id")),
+          Option(codeToEnum(rs.getString("ref_type"), classOf[EntityType])),
           Option(rs.getBytes("data")))
     }
   }

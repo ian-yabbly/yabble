@@ -1,20 +1,23 @@
 package me.yabble.service.proto;
 
+import "common.proto";
+
 option java_package = "me.yabble.service.proto";
 option java_outer_classname = "ServiceProtos";
 
 enum EntityType {
   USER                   =  1;
-  LIST                   =  2;
-  LIST_COMMENT           =  3;
-  LIST_ITEM              =  4;
-  LIST_ITEM_COMMENT      =  5;
+  YLIST                  =  2;
+  YLIST_COMMENT          =  3;
+  YLIST_ITEM             =  4;
+  YLIST_ITEM_COMMENT     =  5;
   IMAGE                  =  6;
-  LIST_ITEM_VOTE         =  7;
+  YLIST_ITEM_VOTE        =  7;
   USER_NOTIFICATION      =  8;
-  LIST_VOTE              =  9;
-  LIST_USER              = 10;
+  YLIST_VOTE             =  9;
+  YLIST_USER             = 10;
   USER_NOTIFICATION_PUSH = 11;
+  USER_AUTH              = 12;
 }
 
 enum EventType {
@@ -40,10 +43,34 @@ message EntityEvent {
   repeated Attribute attribute    = 7;
 }
 
+/**
+ * These are stored in the DB as supplemental information
+ * for user notifications
+ */
 message Notification {
-  message ListInvite {
+  message YListInvite {
     required string list_id     = 1;
     required string user_id     = 2;
     required EntityEvent source = 3;
   }
+}
+
+message UserCommunication {
+  enum Type {
+    EMAIL = 1;
+  }
+
+  required string user_id                     = 1;
+  required Type type                          = 2;
+  optional EntityType ref_type                = 3;
+  optional string ref_id                      = 4;
+  optional me.yabble.common.proto.Email email = 5;
+}
+
+message UserPush {
+  message YListLink {
+    required string list_id = 1;
+  }
+
+  optional YListLink list_link = 1;
 }

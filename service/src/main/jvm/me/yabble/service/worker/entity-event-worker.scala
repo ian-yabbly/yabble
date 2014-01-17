@@ -1,7 +1,7 @@
 package me.yabble.service.worker
 
 import me.yabble.common.Log
-import me.yabble.common.TextUtils._
+//import me.yabble.common.TextUtils._
 import me.yabble.common.wq._
 import me.yabble.service.ImageService
 import me.yabble.service.proto.ServiceProtos._
@@ -19,7 +19,7 @@ class EntityEventWorker(
     val e = EntityEvent.parseFrom(item.getValue)
     val id = e.getEntityId
 
-    log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
+    //log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
 
     workQueue.submit("user-notification", item.getValue)
 
@@ -28,6 +28,36 @@ class EntityEventWorker(
         e.getEventType match {
           case EventType.CREATE => {
             workQueue.submit("image-preview", item.getValue)
+          }
+
+          case _ => // Do nothing
+        }
+      }
+
+      case EntityType.YLIST => {
+        e.getEventType match {
+          case EventType.CREATE => {
+            // Send a mail with a link to this list
+            val listLink = UserPush.YListLink.newBuilder()
+                .setListId(id)
+                .build()
+
+            val bytes = UserPush.newBuilder()
+                .setListLink(listLink)
+                .build()
+                .toByteArray()
+
+            workQueue.submit("user-push", bytes)
+          }
+
+          case _ => // Do nothing
+        }
+      }
+
+      case EntityType.USER_NOTIFICATION => {
+        e.getEventType match {
+          case EventType.CREATE => {
+            workQueue.submit("user-notification-push", item.getValue)
           }
 
           case _ => // Do nothing

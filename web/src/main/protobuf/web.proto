@@ -23,7 +23,8 @@ message Session {
 
 message Message {
   required string code          = 1;
-  optional string display_value = 2;
+  repeated string param         = 2;
+  optional string display_value = 3;
 }
 
 message FormField {
@@ -32,24 +33,28 @@ message FormField {
 }
 
 message LoginForm {
-  required FormField name     = 1;
-  required FormField password = 2;
+  repeated Message error_message = 1;
+  required FormField name        = 2;
+  required FormField password    = 3;
 }
 
 message RegisterForm {
-  required FormField name     = 1;
-  required FormField email    = 2;
-  required FormField password = 3;
+  repeated Message error_message = 1;
+  required FormField name        = 2;
+  required FormField email       = 3;
+  required FormField password    = 4;
 }
 
 message ListForm {
-  required FormField title = 1;
-  required FormField body  = 2;
+  repeated Message error_message = 1;
+  required FormField title       = 2;
+  required FormField body        = 3;
 }
 
 message ListItemForm {
-  required string list_id   = 1;
-  required FormField title  = 2;
-  required FormField body   = 3;
-  repeated string image_url = 4;
+  repeated Message error_message = 1;
+  required string list_id        = 2;
+  required FormField title       = 3;
+  required FormField body        = 4;
+  repeated string image_url      = 5;
 }

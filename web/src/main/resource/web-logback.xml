@@ -17,16 +17,16 @@
   </appender>
 
   <appender name='FILE' class='ch.qos.logback.core.rolling.RollingFileAppender'>
-    <file>${app.home}/var/log/${app.name:-yabble}.log</file>
+    <file>${app.home}/var/log/${app.name:-app}.log</file>
 
     <rollingPolicy class='ch.qos.logback.core.rolling.TimeBasedRollingPolicy'>
-      <fileNamePattern>${app.home}/var/log/${app.name:-yabble}.log.%d{yyyy-MM-dd}</fileNamePattern>
+      <fileNamePattern>${app.home}/var/log/${app.name:-app}.log.%d{yyyy-MM-dd}</fileNamePattern>
 
       <maxHistory>30</maxHistory>
     </rollingPolicy>
 
     <encoder>
-      <pattern>%date %level [%thread] %logger{10} [%X{source-version-hash}] [%X{session-id}] [%X{request-id}:%X{request-uri}] [uid:%X{user-id}] [%file:%line] %msg%n</pattern>
+      <pattern>%date %level [%thread] [%file:%line] %msg%n</pattern>
     </encoder>
   </appender>
 

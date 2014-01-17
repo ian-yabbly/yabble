@@ -5,7 +5,7 @@ import me.yabble.common.Log
 import me.yabble.service._
 import me.yabble.service.model._
 import me.yabble.web.service._
-import me.yabble.web.template.VelocityTemplate
+import me.yabble.service.velocity.VelocityTemplate
 import me.yabble.web.proto.WebProtos._
 
 import com.google.common.base.Function

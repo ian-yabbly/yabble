@@ -11,29 +11,31 @@ public final class ServiceProtos {
   public enum EntityType
       implements com.google.protobuf.ProtocolMessageEnum {
     USER(0, 1),
-    LIST(1, 2),
-    LIST_COMMENT(2, 3),
-    LIST_ITEM(3, 4),
-    LIST_ITEM_COMMENT(4, 5),
+    YLIST(1, 2),
+    YLIST_COMMENT(2, 3),
+    YLIST_ITEM(3, 4),
+    YLIST_ITEM_COMMENT(4, 5),
     IMAGE(5, 6),
-    LIST_ITEM_VOTE(6, 7),
+    YLIST_ITEM_VOTE(6, 7),
     USER_NOTIFICATION(7, 8),
-    LIST_VOTE(8, 9),
-    LIST_USER(9, 10),
+    YLIST_VOTE(8, 9),
+    YLIST_USER(9, 10),
     USER_NOTIFICATION_PUSH(10, 11),
+    USER_AUTH(11, 12),
     ;
     
     public static final int USER_VALUE = 1;
-    public static final int LIST_VALUE = 2;
-    public static final int LIST_COMMENT_VALUE = 3;
-    public static final int LIST_ITEM_VALUE = 4;
-    public static final int LIST_ITEM_COMMENT_VALUE = 5;
+    public static final int YLIST_VALUE = 2;
+    public static final int YLIST_COMMENT_VALUE = 3;
+    public static final int YLIST_ITEM_VALUE = 4;
+    public static final int YLIST_ITEM_COMMENT_VALUE = 5;
     public static final int IMAGE_VALUE = 6;
-    public static final int LIST_ITEM_VOTE_VALUE = 7;
+    public static final int YLIST_ITEM_VOTE_VALUE = 7;
     public static final int USER_NOTIFICATION_VALUE = 8;
-    public static final int LIST_VOTE_VALUE = 9;
-    public static final int LIST_USER_VALUE = 10;
+    public static final int YLIST_VOTE_VALUE = 9;
+    public static final int YLIST_USER_VALUE = 10;
     public static final int USER_NOTIFICATION_PUSH_VALUE = 11;
+    public static final int USER_AUTH_VALUE = 12;
     
     
     public final int getNumber() { return value; }
@@ -41,16 +43,17 @@ public final class ServiceProtos {
     public static EntityType valueOf(int value) {
       switch (value) {
         case 1: return USER;
-        case 2: return LIST;
-        case 3: return LIST_COMMENT;
-        case 4: return LIST_ITEM;
-        case 5: return LIST_ITEM_COMMENT;
+        case 2: return YLIST;
+        case 3: return YLIST_COMMENT;
+        case 4: return YLIST_ITEM;
+        case 5: return YLIST_ITEM_COMMENT;
         case 6: return IMAGE;
-        case 7: return LIST_ITEM_VOTE;
+        case 7: return YLIST_ITEM_VOTE;
         case 8: return USER_NOTIFICATION;
-        case 9: return LIST_VOTE;
-        case 10: return LIST_USER;
+        case 9: return YLIST_VOTE;
+        case 10: return YLIST_USER;
         case 11: return USER_NOTIFICATION_PUSH;
+        case 12: return USER_AUTH;
         default: return null;
       }
     }
@@ -81,7 +84,7 @@ public final class ServiceProtos {
     }
     
     private static final EntityType[] VALUES = {
-      USER, LIST, LIST_COMMENT, LIST_ITEM, LIST_ITEM_COMMENT, IMAGE, LIST_ITEM_VOTE, USER_NOTIFICATION, LIST_VOTE, LIST_USER, USER_NOTIFICATION_PUSH, 
+      USER, YLIST, YLIST_COMMENT, YLIST_ITEM, YLIST_ITEM_COMMENT, IMAGE, YLIST_ITEM_VOTE, USER_NOTIFICATION, YLIST_VOTE, YLIST_USER, USER_NOTIFICATION_PUSH, USER_AUTH, 
     };
     
     public static EntityType valueOf(
@@ -1759,7 +1762,7 @@ public final class ServiceProtos {
       return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_fieldAccessorTable;
     }
     
-    public interface ListInviteOrBuilder
+    public interface YListInviteOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
       
       // required string list_id = 1;
@@ -1775,32 +1778,32 @@ public final class ServiceProtos {
       me.yabble.service.proto.ServiceProtos.EntityEvent getSource();
       me.yabble.service.proto.ServiceProtos.EntityEventOrBuilder getSourceOrBuilder();
     }
-    public static final class ListInvite extends
+    public static final class YListInvite extends
         com.google.protobuf.GeneratedMessage
-        implements ListInviteOrBuilder {
-      // Use ListInvite.newBuilder() to construct.
-      private ListInvite(Builder builder) {
+        implements YListInviteOrBuilder {
+      // Use YListInvite.newBuilder() to construct.
+      private YListInvite(Builder builder) {
         super(builder);
       }
-      private ListInvite(boolean noInit) {}
+      private YListInvite(boolean noInit) {}
       
-      private static final ListInvite defaultInstance;
-      public static ListInvite getDefaultInstance() {
+      private static final YListInvite defaultInstance;
+      public static YListInvite getDefaultInstance() {
         return defaultInstance;
       }
       
-      public ListInvite getDefaultInstanceForType() {
+      public YListInvite getDefaultInstanceForType() {
         return defaultInstance;
       }
       
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_ListInvite_descriptor;
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_YListInvite_descriptor;
       }
       
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_ListInvite_fieldAccessorTable;
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_YListInvite_fieldAccessorTable;
       }
       
       private int bitField0_;
@@ -1956,41 +1959,41 @@ public final class ServiceProtos {
         return super.writeReplace();
       }
       
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseFrom(
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data).buildParsed();
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseFrom(
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseFrom(byte[] data)
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data).buildParsed();
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseFrom(
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
         return newBuilder().mergeFrom(data, extensionRegistry)
                  .buildParsed();
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseFrom(java.io.InputStream input)
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseFrom(java.io.InputStream input)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input).buildParsed();
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseFrom(
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input, extensionRegistry)
                  .buildParsed();
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseDelimitedFrom(java.io.InputStream input)
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
         Builder builder = newBuilder();
         if (builder.mergeDelimitedFrom(input)) {
@@ -1999,7 +2002,7 @@ public final class ServiceProtos {
           return null;
         }
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseDelimitedFrom(
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -2010,12 +2013,12 @@ public final class ServiceProtos {
           return null;
         }
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseFrom(
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
         return newBuilder().mergeFrom(input).buildParsed();
       }
-      public static me.yabble.service.proto.ServiceProtos.Notification.ListInvite parseFrom(
+      public static me.yabble.service.proto.ServiceProtos.Notification.YListInvite parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
@@ -2025,7 +2028,7 @@ public final class ServiceProtos {
       
       public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
-      public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.Notification.ListInvite prototype) {
+      public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.Notification.YListInvite prototype) {
         return newBuilder().mergeFrom(prototype);
       }
       public Builder toBuilder() { return newBuilder(this); }
@@ -2038,18 +2041,18 @@ public final class ServiceProtos {
       }
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder>
-         implements me.yabble.service.proto.ServiceProtos.Notification.ListInviteOrBuilder {
+         implements me.yabble.service.proto.ServiceProtos.Notification.YListInviteOrBuilder {
         public static final com.google.protobuf.Descriptors.Descriptor
             getDescriptor() {
-          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_ListInvite_descriptor;
+          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_YListInvite_descriptor;
         }
         
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_ListInvite_fieldAccessorTable;
+          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_Notification_YListInvite_fieldAccessorTable;
         }
         
-        // Construct using me.yabble.service.proto.ServiceProtos.Notification.ListInvite.newBuilder()
+        // Construct using me.yabble.service.proto.ServiceProtos.Notification.YListInvite.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
@@ -2088,24 +2091,24 @@ public final class ServiceProtos {
         
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return me.yabble.service.proto.ServiceProtos.Notification.ListInvite.getDescriptor();
+          return me.yabble.service.proto.ServiceProtos.Notification.YListInvite.getDescriptor();
         }
         
-        public me.yabble.service.proto.ServiceProtos.Notification.ListInvite getDefaultInstanceForType() {
-          return me.yabble.service.proto.ServiceProtos.Notification.ListInvite.getDefaultInstance();
+        public me.yabble.service.proto.ServiceProtos.Notification.YListInvite getDefaultInstanceForType() {
+          return me.yabble.service.proto.ServiceProtos.Notification.YListInvite.getDefaultInstance();
         }
         
-        public me.yabble.service.proto.ServiceProtos.Notification.ListInvite build() {
-          me.yabble.service.proto.ServiceProtos.Notification.ListInvite result = buildPartial();
+        public me.yabble.service.proto.ServiceProtos.Notification.YListInvite build() {
+          me.yabble.service.proto.ServiceProtos.Notification.YListInvite result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(result);
           }
           return result;
         }
         
-        private me.yabble.service.proto.ServiceProtos.Notification.ListInvite buildParsed()
+        private me.yabble.service.proto.ServiceProtos.Notification.YListInvite buildParsed()
             throws com.google.protobuf.InvalidProtocolBufferException {
-          me.yabble.service.proto.ServiceProtos.Notification.ListInvite result = buildPartial();
+          me.yabble.service.proto.ServiceProtos.Notification.YListInvite result = buildPartial();
           if (!result.isInitialized()) {
             throw newUninitializedMessageException(
               result).asInvalidProtocolBufferException();
@@ -2113,8 +2116,8 @@ public final class ServiceProtos {
           return result;
         }
         
-        public me.yabble.service.proto.ServiceProtos.Notification.ListInvite buildPartial() {
-          me.yabble.service.proto.ServiceProtos.Notification.ListInvite result = new me.yabble.service.proto.ServiceProtos.Notification.ListInvite(this);
+        public me.yabble.service.proto.ServiceProtos.Notification.YListInvite buildPartial() {
+          me.yabble.service.proto.ServiceProtos.Notification.YListInvite result = new me.yabble.service.proto.ServiceProtos.Notification.YListInvite(this);
           int from_bitField0_ = bitField0_;
           int to_bitField0_ = 0;
           if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
@@ -2139,16 +2142,16 @@ public final class ServiceProtos {
         }
         
         public Builder mergeFrom(com.google.protobuf.Message other) {
-          if (other instanceof me.yabble.service.proto.ServiceProtos.Notification.ListInvite) {
-            return mergeFrom((me.yabble.service.proto.ServiceProtos.Notification.ListInvite)other);
+          if (other instanceof me.yabble.service.proto.ServiceProtos.Notification.YListInvite) {
+            return mergeFrom((me.yabble.service.proto.ServiceProtos.Notification.YListInvite)other);
           } else {
             super.mergeFrom(other);
             return this;
           }
         }
         
-        public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.Notification.ListInvite other) {
-          if (other == me.yabble.service.proto.ServiceProtos.Notification.ListInvite.getDefaultInstance()) return this;
+        public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.Notification.YListInvite other) {
+          if (other == me.yabble.service.proto.ServiceProtos.Notification.YListInvite.getDefaultInstance()) return this;
           if (other.hasListId()) {
             setListId(other.getListId());
           }
@@ -2392,15 +2395,15 @@ public final class ServiceProtos {
           return sourceBuilder_;
         }
         
-        // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.Notification.ListInvite)
+        // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.Notification.YListInvite)
       }
       
       static {
-        defaultInstance = new ListInvite(true);
+        defaultInstance = new YListInvite(true);
         defaultInstance.initFields();
       }
       
-      // @@protoc_insertion_point(class_scope:me.yabble.service.proto.Notification.ListInvite)
+      // @@protoc_insertion_point(class_scope:me.yabble.service.proto.Notification.YListInvite)
     }
     
     private void initFields() {
@@ -2648,6 +2651,1663 @@ public final class ServiceProtos {
     // @@protoc_insertion_point(class_scope:me.yabble.service.proto.Notification)
   }
   
+  public interface UserCommunicationOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // required string user_id = 1;
+    boolean hasUserId();
+    String getUserId();
+    
+    // required .me.yabble.service.proto.UserCommunication.Type type = 2;
+    boolean hasType();
+    me.yabble.service.proto.ServiceProtos.UserCommunication.Type getType();
+    
+    // optional .me.yabble.service.proto.EntityType ref_type = 3;
+    boolean hasRefType();
+    me.yabble.service.proto.ServiceProtos.EntityType getRefType();
+    
+    // optional string ref_id = 4;
+    boolean hasRefId();
+    String getRefId();
+    
+    // optional .me.yabble.common.proto.Email email = 5;
+    boolean hasEmail();
+    me.yabble.common.proto.CommonProtos.Email getEmail();
+    me.yabble.common.proto.CommonProtos.EmailOrBuilder getEmailOrBuilder();
+  }
+  public static final class UserCommunication extends
+      com.google.protobuf.GeneratedMessage
+      implements UserCommunicationOrBuilder {
+    // Use UserCommunication.newBuilder() to construct.
+    private UserCommunication(Builder builder) {
+      super(builder);
+    }
+    private UserCommunication(boolean noInit) {}
+    
+    private static final UserCommunication defaultInstance;
+    public static UserCommunication getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public UserCommunication getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserCommunication_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserCommunication_fieldAccessorTable;
+    }
+    
+    public enum Type
+        implements com.google.protobuf.ProtocolMessageEnum {
+      EMAIL(0, 1),
+      ;
+      
+      public static final int EMAIL_VALUE = 1;
+      
+      
+      public final int getNumber() { return value; }
+      
+      public static Type valueOf(int value) {
+        switch (value) {
+          case 1: return EMAIL;
+          default: return null;
+        }
+      }
+      
+      public static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalGetValueMap() {
+        return internalValueMap;
+      }
+      private static com.google.protobuf.Internal.EnumLiteMap<Type>
+          internalValueMap =
+            new com.google.protobuf.Internal.EnumLiteMap<Type>() {
+              public Type findValueByNumber(int number) {
+                return Type.valueOf(number);
+              }
+            };
+      
+      public final com.google.protobuf.Descriptors.EnumValueDescriptor
+          getValueDescriptor() {
+        return getDescriptor().getValues().get(index);
+      }
+      public final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptorForType() {
+        return getDescriptor();
+      }
+      public static final com.google.protobuf.Descriptors.EnumDescriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.UserCommunication.getDescriptor().getEnumTypes().get(0);
+      }
+      
+      private static final Type[] VALUES = {
+        EMAIL, 
+      };
+      
+      public static Type valueOf(
+          com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+        if (desc.getType() != getDescriptor()) {
+          throw new java.lang.IllegalArgumentException(
+            "EnumValueDescriptor is not for this type.");
+        }
+        return VALUES[desc.getIndex()];
+      }
+      
+      private final int index;
+      private final int value;
+      
+      private Type(int index, int value) {
+        this.index = index;
+        this.value = value;
+      }
+      
+      // @@protoc_insertion_point(enum_scope:me.yabble.service.proto.UserCommunication.Type)
+    }
+    
+    private int bitField0_;
+    // required string user_id = 1;
+    public static final int USER_ID_FIELD_NUMBER = 1;
+    private java.lang.Object userId_;
+    public boolean hasUserId() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public String getUserId() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          userId_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getUserIdBytes() {
+      java.lang.Object ref = userId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        userId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // required .me.yabble.service.proto.UserCommunication.Type type = 2;
+    public static final int TYPE_FIELD_NUMBER = 2;
+    private me.yabble.service.proto.ServiceProtos.UserCommunication.Type type_;
+    public boolean hasType() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    public me.yabble.service.proto.ServiceProtos.UserCommunication.Type getType() {
+      return type_;
+    }
+    
+    // optional .me.yabble.service.proto.EntityType ref_type = 3;
+    public static final int REF_TYPE_FIELD_NUMBER = 3;
+    private me.yabble.service.proto.ServiceProtos.EntityType refType_;
+    public boolean hasRefType() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    public me.yabble.service.proto.ServiceProtos.EntityType getRefType() {
+      return refType_;
+    }
+    
+    // optional string ref_id = 4;
+    public static final int REF_ID_FIELD_NUMBER = 4;
+    private java.lang.Object refId_;
+    public boolean hasRefId() {
+      return ((bitField0_ & 0x00000008) == 0x00000008);
+    }
+    public String getRefId() {
+      java.lang.Object ref = refId_;
+      if (ref instanceof String) {
+        return (String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        String s = bs.toStringUtf8();
+        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          refId_ = s;
+        }
+        return s;
+      }
+    }
+    private com.google.protobuf.ByteString getRefIdBytes() {
+      java.lang.Object ref = refId_;
+      if (ref instanceof String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+        refId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+    
+    // optional .me.yabble.common.proto.Email email = 5;
+    public static final int EMAIL_FIELD_NUMBER = 5;
+    private me.yabble.common.proto.CommonProtos.Email email_;
+    public boolean hasEmail() {
+      return ((bitField0_ & 0x00000010) == 0x00000010);
+    }
+    public me.yabble.common.proto.CommonProtos.Email getEmail() {
+      return email_;
+    }
+    public me.yabble.common.proto.CommonProtos.EmailOrBuilder getEmailOrBuilder() {
+      return email_;
+    }
+    
+    private void initFields() {
+      userId_ = "";
+      type_ = me.yabble.service.proto.ServiceProtos.UserCommunication.Type.EMAIL;
+      refType_ = me.yabble.service.proto.ServiceProtos.EntityType.USER;
+      refId_ = "";
+      email_ = me.yabble.common.proto.CommonProtos.Email.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (!hasUserId()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasType()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (hasEmail()) {
+        if (!getEmail().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeBytes(1, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeEnum(2, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeEnum(3, refType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        output.writeBytes(4, getRefIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        output.writeMessage(5, email_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(1, getUserIdBytes());
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(2, type_.getNumber());
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(3, refType_.getNumber());
+      }
+      if (((bitField0_ & 0x00000008) == 0x00000008)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, getRefIdBytes());
+      }
+      if (((bitField0_ & 0x00000010) == 0x00000010)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, email_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserCommunication parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.UserCommunication prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements me.yabble.service.proto.ServiceProtos.UserCommunicationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserCommunication_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserCommunication_fieldAccessorTable;
+      }
+      
+      // Construct using me.yabble.service.proto.ServiceProtos.UserCommunication.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getEmailFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        userId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000001);
+        type_ = me.yabble.service.proto.ServiceProtos.UserCommunication.Type.EMAIL;
+        bitField0_ = (bitField0_ & ~0x00000002);
+        refType_ = me.yabble.service.proto.ServiceProtos.EntityType.USER;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        refId_ = "";
+        bitField0_ = (bitField0_ & ~0x00000008);
+        if (emailBuilder_ == null) {
+          email_ = me.yabble.common.proto.CommonProtos.Email.getDefaultInstance();
+        } else {
+          emailBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return me.yabble.service.proto.ServiceProtos.UserCommunication.getDescriptor();
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.UserCommunication getDefaultInstanceForType() {
+        return me.yabble.service.proto.ServiceProtos.UserCommunication.getDefaultInstance();
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.UserCommunication build() {
+        me.yabble.service.proto.ServiceProtos.UserCommunication result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private me.yabble.service.proto.ServiceProtos.UserCommunication buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        me.yabble.service.proto.ServiceProtos.UserCommunication result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.UserCommunication buildPartial() {
+        me.yabble.service.proto.ServiceProtos.UserCommunication result = new me.yabble.service.proto.ServiceProtos.UserCommunication(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        result.userId_ = userId_;
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        result.type_ = type_;
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        result.refType_ = refType_;
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000008;
+        }
+        result.refId_ = refId_;
+        if (((from_bitField0_ & 0x00000010) == 0x00000010)) {
+          to_bitField0_ |= 0x00000010;
+        }
+        if (emailBuilder_ == null) {
+          result.email_ = email_;
+        } else {
+          result.email_ = emailBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof me.yabble.service.proto.ServiceProtos.UserCommunication) {
+          return mergeFrom((me.yabble.service.proto.ServiceProtos.UserCommunication)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.UserCommunication other) {
+        if (other == me.yabble.service.proto.ServiceProtos.UserCommunication.getDefaultInstance()) return this;
+        if (other.hasUserId()) {
+          setUserId(other.getUserId());
+        }
+        if (other.hasType()) {
+          setType(other.getType());
+        }
+        if (other.hasRefType()) {
+          setRefType(other.getRefType());
+        }
+        if (other.hasRefId()) {
+          setRefId(other.getRefId());
+        }
+        if (other.hasEmail()) {
+          mergeEmail(other.getEmail());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (!hasUserId()) {
+          
+          return false;
+        }
+        if (!hasType()) {
+          
+          return false;
+        }
+        if (hasEmail()) {
+          if (!getEmail().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 16: {
+              int rawValue = input.readEnum();
+              me.yabble.service.proto.ServiceProtos.UserCommunication.Type value = me.yabble.service.proto.ServiceProtos.UserCommunication.Type.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(2, rawValue);
+              } else {
+                bitField0_ |= 0x00000002;
+                type_ = value;
+              }
+              break;
+            }
+            case 24: {
+              int rawValue = input.readEnum();
+              me.yabble.service.proto.ServiceProtos.EntityType value = me.yabble.service.proto.ServiceProtos.EntityType.valueOf(rawValue);
+              if (value == null) {
+                unknownFields.mergeVarintField(3, rawValue);
+              } else {
+                bitField0_ |= 0x00000004;
+                refType_ = value;
+              }
+              break;
+            }
+            case 34: {
+              bitField0_ |= 0x00000008;
+              refId_ = input.readBytes();
+              break;
+            }
+            case 42: {
+              me.yabble.common.proto.CommonProtos.Email.Builder subBuilder = me.yabble.common.proto.CommonProtos.Email.newBuilder();
+              if (hasEmail()) {
+                subBuilder.mergeFrom(getEmail());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setEmail(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // required string user_id = 1;
+      private java.lang.Object userId_ = "";
+      public boolean hasUserId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getUserId() {
+        java.lang.Object ref = userId_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          userId_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setUserId(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearUserId() {
+        bitField0_ = (bitField0_ & ~0x00000001);
+        userId_ = getDefaultInstance().getUserId();
+        onChanged();
+        return this;
+      }
+      void setUserId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000001;
+        userId_ = value;
+        onChanged();
+      }
+      
+      // required .me.yabble.service.proto.UserCommunication.Type type = 2;
+      private me.yabble.service.proto.ServiceProtos.UserCommunication.Type type_ = me.yabble.service.proto.ServiceProtos.UserCommunication.Type.EMAIL;
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      public me.yabble.service.proto.ServiceProtos.UserCommunication.Type getType() {
+        return type_;
+      }
+      public Builder setType(me.yabble.service.proto.ServiceProtos.UserCommunication.Type value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000002;
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearType() {
+        bitField0_ = (bitField0_ & ~0x00000002);
+        type_ = me.yabble.service.proto.ServiceProtos.UserCommunication.Type.EMAIL;
+        onChanged();
+        return this;
+      }
+      
+      // optional .me.yabble.service.proto.EntityType ref_type = 3;
+      private me.yabble.service.proto.ServiceProtos.EntityType refType_ = me.yabble.service.proto.ServiceProtos.EntityType.USER;
+      public boolean hasRefType() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      public me.yabble.service.proto.ServiceProtos.EntityType getRefType() {
+        return refType_;
+      }
+      public Builder setRefType(me.yabble.service.proto.ServiceProtos.EntityType value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        bitField0_ |= 0x00000004;
+        refType_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRefType() {
+        bitField0_ = (bitField0_ & ~0x00000004);
+        refType_ = me.yabble.service.proto.ServiceProtos.EntityType.USER;
+        onChanged();
+        return this;
+      }
+      
+      // optional string ref_id = 4;
+      private java.lang.Object refId_ = "";
+      public boolean hasRefId() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      public String getRefId() {
+        java.lang.Object ref = refId_;
+        if (!(ref instanceof String)) {
+          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          refId_ = s;
+          return s;
+        } else {
+          return (String) ref;
+        }
+      }
+      public Builder setRefId(String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000008;
+        refId_ = value;
+        onChanged();
+        return this;
+      }
+      public Builder clearRefId() {
+        bitField0_ = (bitField0_ & ~0x00000008);
+        refId_ = getDefaultInstance().getRefId();
+        onChanged();
+        return this;
+      }
+      void setRefId(com.google.protobuf.ByteString value) {
+        bitField0_ |= 0x00000008;
+        refId_ = value;
+        onChanged();
+      }
+      
+      // optional .me.yabble.common.proto.Email email = 5;
+      private me.yabble.common.proto.CommonProtos.Email email_ = me.yabble.common.proto.CommonProtos.Email.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.common.proto.CommonProtos.Email, me.yabble.common.proto.CommonProtos.Email.Builder, me.yabble.common.proto.CommonProtos.EmailOrBuilder> emailBuilder_;
+      public boolean hasEmail() {
+        return ((bitField0_ & 0x00000010) == 0x00000010);
+      }
+      public me.yabble.common.proto.CommonProtos.Email getEmail() {
+        if (emailBuilder_ == null) {
+          return email_;
+        } else {
+          return emailBuilder_.getMessage();
+        }
+      }
+      public Builder setEmail(me.yabble.common.proto.CommonProtos.Email value) {
+        if (emailBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          email_ = value;
+          onChanged();
+        } else {
+          emailBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder setEmail(
+          me.yabble.common.proto.CommonProtos.Email.Builder builderForValue) {
+        if (emailBuilder_ == null) {
+          email_ = builderForValue.build();
+          onChanged();
+        } else {
+          emailBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder mergeEmail(me.yabble.common.proto.CommonProtos.Email value) {
+        if (emailBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010) &&
+              email_ != me.yabble.common.proto.CommonProtos.Email.getDefaultInstance()) {
+            email_ =
+              me.yabble.common.proto.CommonProtos.Email.newBuilder(email_).mergeFrom(value).buildPartial();
+          } else {
+            email_ = value;
+          }
+          onChanged();
+        } else {
+          emailBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000010;
+        return this;
+      }
+      public Builder clearEmail() {
+        if (emailBuilder_ == null) {
+          email_ = me.yabble.common.proto.CommonProtos.Email.getDefaultInstance();
+          onChanged();
+        } else {
+          emailBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000010);
+        return this;
+      }
+      public me.yabble.common.proto.CommonProtos.Email.Builder getEmailBuilder() {
+        bitField0_ |= 0x00000010;
+        onChanged();
+        return getEmailFieldBuilder().getBuilder();
+      }
+      public me.yabble.common.proto.CommonProtos.EmailOrBuilder getEmailOrBuilder() {
+        if (emailBuilder_ != null) {
+          return emailBuilder_.getMessageOrBuilder();
+        } else {
+          return email_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.common.proto.CommonProtos.Email, me.yabble.common.proto.CommonProtos.Email.Builder, me.yabble.common.proto.CommonProtos.EmailOrBuilder> 
+          getEmailFieldBuilder() {
+        if (emailBuilder_ == null) {
+          emailBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.common.proto.CommonProtos.Email, me.yabble.common.proto.CommonProtos.Email.Builder, me.yabble.common.proto.CommonProtos.EmailOrBuilder>(
+                  email_,
+                  getParentForChildren(),
+                  isClean());
+          email_ = null;
+        }
+        return emailBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.UserCommunication)
+    }
+    
+    static {
+      defaultInstance = new UserCommunication(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:me.yabble.service.proto.UserCommunication)
+  }
+  
+  public interface UserPushOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+    
+    // optional .me.yabble.service.proto.UserPush.YListLink list_link = 1;
+    boolean hasListLink();
+    me.yabble.service.proto.ServiceProtos.UserPush.YListLink getListLink();
+    me.yabble.service.proto.ServiceProtos.UserPush.YListLinkOrBuilder getListLinkOrBuilder();
+  }
+  public static final class UserPush extends
+      com.google.protobuf.GeneratedMessage
+      implements UserPushOrBuilder {
+    // Use UserPush.newBuilder() to construct.
+    private UserPush(Builder builder) {
+      super(builder);
+    }
+    private UserPush(boolean noInit) {}
+    
+    private static final UserPush defaultInstance;
+    public static UserPush getDefaultInstance() {
+      return defaultInstance;
+    }
+    
+    public UserPush getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+    
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_descriptor;
+    }
+    
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_fieldAccessorTable;
+    }
+    
+    public interface YListLinkOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+      
+      // required string list_id = 1;
+      boolean hasListId();
+      String getListId();
+    }
+    public static final class YListLink extends
+        com.google.protobuf.GeneratedMessage
+        implements YListLinkOrBuilder {
+      // Use YListLink.newBuilder() to construct.
+      private YListLink(Builder builder) {
+        super(builder);
+      }
+      private YListLink(boolean noInit) {}
+      
+      private static final YListLink defaultInstance;
+      public static YListLink getDefaultInstance() {
+        return defaultInstance;
+      }
+      
+      public YListLink getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+      
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_YListLink_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_YListLink_fieldAccessorTable;
+      }
+      
+      private int bitField0_;
+      // required string list_id = 1;
+      public static final int LIST_ID_FIELD_NUMBER = 1;
+      private java.lang.Object listId_;
+      public boolean hasListId() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public String getListId() {
+        java.lang.Object ref = listId_;
+        if (ref instanceof String) {
+          return (String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          String s = bs.toStringUtf8();
+          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+            listId_ = s;
+          }
+          return s;
+        }
+      }
+      private com.google.protobuf.ByteString getListIdBytes() {
+        java.lang.Object ref = listId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+          listId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      
+      private void initFields() {
+        listId_ = "";
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+        
+        if (!hasListId()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+      
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeBytes(1, getListIdBytes());
+        }
+        getUnknownFields().writeTo(output);
+      }
+      
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+      
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(1, getListIdBytes());
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+      
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+      
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return newBuilder().mergeFrom(data, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        Builder builder = newBuilder();
+        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+          return builder.buildParsed();
+        } else {
+          return null;
+        }
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input).buildParsed();
+      }
+      public static me.yabble.service.proto.ServiceProtos.UserPush.YListLink parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return newBuilder().mergeFrom(input, extensionRegistry)
+                 .buildParsed();
+      }
+      
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.UserPush.YListLink prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+      
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements me.yabble.service.proto.ServiceProtos.UserPush.YListLinkOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_YListLink_descriptor;
+        }
+        
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_YListLink_fieldAccessorTable;
+        }
+        
+        // Construct using me.yabble.service.proto.ServiceProtos.UserPush.YListLink.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+        
+        private Builder(BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+        
+        public Builder clear() {
+          super.clear();
+          listId_ = "";
+          bitField0_ = (bitField0_ & ~0x00000001);
+          return this;
+        }
+        
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+        
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDescriptor();
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.UserPush.YListLink getDefaultInstanceForType() {
+          return me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDefaultInstance();
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.UserPush.YListLink build() {
+          me.yabble.service.proto.ServiceProtos.UserPush.YListLink result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+        
+        private me.yabble.service.proto.ServiceProtos.UserPush.YListLink buildParsed()
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          me.yabble.service.proto.ServiceProtos.UserPush.YListLink result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(
+              result).asInvalidProtocolBufferException();
+          }
+          return result;
+        }
+        
+        public me.yabble.service.proto.ServiceProtos.UserPush.YListLink buildPartial() {
+          me.yabble.service.proto.ServiceProtos.UserPush.YListLink result = new me.yabble.service.proto.ServiceProtos.UserPush.YListLink(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.listId_ = listId_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+        
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof me.yabble.service.proto.ServiceProtos.UserPush.YListLink) {
+            return mergeFrom((me.yabble.service.proto.ServiceProtos.UserPush.YListLink)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+        
+        public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.UserPush.YListLink other) {
+          if (other == me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDefaultInstance()) return this;
+          if (other.hasListId()) {
+            setListId(other.getListId());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+        
+        public final boolean isInitialized() {
+          if (!hasListId()) {
+            
+            return false;
+          }
+          return true;
+        }
+        
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder(
+              this.getUnknownFields());
+          while (true) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  this.setUnknownFields(unknownFields.build());
+                  onChanged();
+                  return this;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                listId_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        }
+        
+        private int bitField0_;
+        
+        // required string list_id = 1;
+        private java.lang.Object listId_ = "";
+        public boolean hasListId() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        public String getListId() {
+          java.lang.Object ref = listId_;
+          if (!(ref instanceof String)) {
+            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+            listId_ = s;
+            return s;
+          } else {
+            return (String) ref;
+          }
+        }
+        public Builder setListId(String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
+          listId_ = value;
+          onChanged();
+          return this;
+        }
+        public Builder clearListId() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          listId_ = getDefaultInstance().getListId();
+          onChanged();
+          return this;
+        }
+        void setListId(com.google.protobuf.ByteString value) {
+          bitField0_ |= 0x00000001;
+          listId_ = value;
+          onChanged();
+        }
+        
+        // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.UserPush.YListLink)
+      }
+      
+      static {
+        defaultInstance = new YListLink(true);
+        defaultInstance.initFields();
+      }
+      
+      // @@protoc_insertion_point(class_scope:me.yabble.service.proto.UserPush.YListLink)
+    }
+    
+    private int bitField0_;
+    // optional .me.yabble.service.proto.UserPush.YListLink list_link = 1;
+    public static final int LIST_LINK_FIELD_NUMBER = 1;
+    private me.yabble.service.proto.ServiceProtos.UserPush.YListLink listLink_;
+    public boolean hasListLink() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    public me.yabble.service.proto.ServiceProtos.UserPush.YListLink getListLink() {
+      return listLink_;
+    }
+    public me.yabble.service.proto.ServiceProtos.UserPush.YListLinkOrBuilder getListLinkOrBuilder() {
+      return listLink_;
+    }
+    
+    private void initFields() {
+      listLink_ = me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+      
+      if (hasListLink()) {
+        if (!getListLink().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+    
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(1, listLink_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+    
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+    
+      size = 0;
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, listLink_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+    
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+    
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return newBuilder().mergeFrom(data, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      Builder builder = newBuilder();
+      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
+        return builder.buildParsed();
+      } else {
+        return null;
+      }
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input).buildParsed();
+    }
+    public static me.yabble.service.proto.ServiceProtos.UserPush parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return newBuilder().mergeFrom(input, extensionRegistry)
+               .buildParsed();
+    }
+    
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(me.yabble.service.proto.ServiceProtos.UserPush prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+    
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements me.yabble.service.proto.ServiceProtos.UserPushOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_descriptor;
+      }
+      
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.service.proto.ServiceProtos.internal_static_me_yabble_service_proto_UserPush_fieldAccessorTable;
+      }
+      
+      // Construct using me.yabble.service.proto.ServiceProtos.UserPush.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+      
+      private Builder(BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getListLinkFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+      
+      public Builder clear() {
+        super.clear();
+        if (listLinkBuilder_ == null) {
+          listLink_ = me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDefaultInstance();
+        } else {
+          listLinkBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+      
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return me.yabble.service.proto.ServiceProtos.UserPush.getDescriptor();
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.UserPush getDefaultInstanceForType() {
+        return me.yabble.service.proto.ServiceProtos.UserPush.getDefaultInstance();
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.UserPush build() {
+        me.yabble.service.proto.ServiceProtos.UserPush result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+      
+      private me.yabble.service.proto.ServiceProtos.UserPush buildParsed()
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        me.yabble.service.proto.ServiceProtos.UserPush result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(
+            result).asInvalidProtocolBufferException();
+        }
+        return result;
+      }
+      
+      public me.yabble.service.proto.ServiceProtos.UserPush buildPartial() {
+        me.yabble.service.proto.ServiceProtos.UserPush result = new me.yabble.service.proto.ServiceProtos.UserPush(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (listLinkBuilder_ == null) {
+          result.listLink_ = listLink_;
+        } else {
+          result.listLink_ = listLinkBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+      
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof me.yabble.service.proto.ServiceProtos.UserPush) {
+          return mergeFrom((me.yabble.service.proto.ServiceProtos.UserPush)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+      
+      public Builder mergeFrom(me.yabble.service.proto.ServiceProtos.UserPush other) {
+        if (other == me.yabble.service.proto.ServiceProtos.UserPush.getDefaultInstance()) return this;
+        if (other.hasListLink()) {
+          mergeListLink(other.getListLink());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+      
+      public final boolean isInitialized() {
+        if (hasListLink()) {
+          if (!getListLink().isInitialized()) {
+            
+            return false;
+          }
+        }
+        return true;
+      }
+      
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder(
+            this.getUnknownFields());
+        while (true) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              this.setUnknownFields(unknownFields.build());
+              onChanged();
+              return this;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                this.setUnknownFields(unknownFields.build());
+                onChanged();
+                return this;
+              }
+              break;
+            }
+            case 10: {
+              me.yabble.service.proto.ServiceProtos.UserPush.YListLink.Builder subBuilder = me.yabble.service.proto.ServiceProtos.UserPush.YListLink.newBuilder();
+              if (hasListLink()) {
+                subBuilder.mergeFrom(getListLink());
+              }
+              input.readMessage(subBuilder, extensionRegistry);
+              setListLink(subBuilder.buildPartial());
+              break;
+            }
+          }
+        }
+      }
+      
+      private int bitField0_;
+      
+      // optional .me.yabble.service.proto.UserPush.YListLink list_link = 1;
+      private me.yabble.service.proto.ServiceProtos.UserPush.YListLink listLink_ = me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.service.proto.ServiceProtos.UserPush.YListLink, me.yabble.service.proto.ServiceProtos.UserPush.YListLink.Builder, me.yabble.service.proto.ServiceProtos.UserPush.YListLinkOrBuilder> listLinkBuilder_;
+      public boolean hasListLink() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      public me.yabble.service.proto.ServiceProtos.UserPush.YListLink getListLink() {
+        if (listLinkBuilder_ == null) {
+          return listLink_;
+        } else {
+          return listLinkBuilder_.getMessage();
+        }
+      }
+      public Builder setListLink(me.yabble.service.proto.ServiceProtos.UserPush.YListLink value) {
+        if (listLinkBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          listLink_ = value;
+          onChanged();
+        } else {
+          listLinkBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder setListLink(
+          me.yabble.service.proto.ServiceProtos.UserPush.YListLink.Builder builderForValue) {
+        if (listLinkBuilder_ == null) {
+          listLink_ = builderForValue.build();
+          onChanged();
+        } else {
+          listLinkBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder mergeListLink(me.yabble.service.proto.ServiceProtos.UserPush.YListLink value) {
+        if (listLinkBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001) &&
+              listLink_ != me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDefaultInstance()) {
+            listLink_ =
+              me.yabble.service.proto.ServiceProtos.UserPush.YListLink.newBuilder(listLink_).mergeFrom(value).buildPartial();
+          } else {
+            listLink_ = value;
+          }
+          onChanged();
+        } else {
+          listLinkBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000001;
+        return this;
+      }
+      public Builder clearListLink() {
+        if (listLinkBuilder_ == null) {
+          listLink_ = me.yabble.service.proto.ServiceProtos.UserPush.YListLink.getDefaultInstance();
+          onChanged();
+        } else {
+          listLinkBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000001);
+        return this;
+      }
+      public me.yabble.service.proto.ServiceProtos.UserPush.YListLink.Builder getListLinkBuilder() {
+        bitField0_ |= 0x00000001;
+        onChanged();
+        return getListLinkFieldBuilder().getBuilder();
+      }
+      public me.yabble.service.proto.ServiceProtos.UserPush.YListLinkOrBuilder getListLinkOrBuilder() {
+        if (listLinkBuilder_ != null) {
+          return listLinkBuilder_.getMessageOrBuilder();
+        } else {
+          return listLink_;
+        }
+      }
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.service.proto.ServiceProtos.UserPush.YListLink, me.yabble.service.proto.ServiceProtos.UserPush.YListLink.Builder, me.yabble.service.proto.ServiceProtos.UserPush.YListLinkOrBuilder> 
+          getListLinkFieldBuilder() {
+        if (listLinkBuilder_ == null) {
+          listLinkBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.service.proto.ServiceProtos.UserPush.YListLink, me.yabble.service.proto.ServiceProtos.UserPush.YListLink.Builder, me.yabble.service.proto.ServiceProtos.UserPush.YListLinkOrBuilder>(
+                  listLink_,
+                  getParentForChildren(),
+                  isClean());
+          listLink_ = null;
+        }
+        return listLinkBuilder_;
+      }
+      
+      // @@protoc_insertion_point(builder_scope:me.yabble.service.proto.UserPush)
+    }
+    
+    static {
+      defaultInstance = new UserPush(true);
+      defaultInstance.initFields();
+    }
+    
+    // @@protoc_insertion_point(class_scope:me.yabble.service.proto.UserPush)
+  }
+  
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_me_yabble_service_proto_Attribute_descriptor;
   private static
@@ -2664,10 +4324,25 @@ public final class ServiceProtos {
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_me_yabble_service_proto_Notification_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
-    internal_static_me_yabble_service_proto_Notification_ListInvite_descriptor;
+    internal_static_me_yabble_service_proto_Notification_YListInvite_descriptor;
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
-      internal_static_me_yabble_service_proto_Notification_ListInvite_fieldAccessorTable;
+      internal_static_me_yabble_service_proto_Notification_YListInvite_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_me_yabble_service_proto_UserCommunication_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_me_yabble_service_proto_UserCommunication_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_me_yabble_service_proto_UserPush_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_me_yabble_service_proto_UserPush_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_me_yabble_service_proto_UserPush_YListLink_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_me_yabble_service_proto_UserPush_YListLink_fieldAccessorTable;
   
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2678,25 +4353,34 @@ public final class ServiceProtos {
   static {
     java.lang.String[] descriptorData = {
       "\n\rservice.proto\022\027me.yabble.service.proto" +
-      "\"\'\n\tAttribute\022\013\n\003key\030\001 \002(\t\022\r\n\005value\030\002 \001(" +
-      "\t\"\200\002\n\013EntityEvent\022\021\n\tentity_id\030\001 \002(\t\0228\n\013" +
-      "entity_type\030\002 \002(\0162#.me.yabble.service.pr" +
-      "oto.EntityType\0226\n\nevent_type\030\003 \002(\0162\".me." +
-      "yabble.service.proto.EventType\022\022\n\nevent_" +
-      "time\030\004 \002(\t\022\020\n\010delay_ms\030\005 \001(\003\022\017\n\007user_id\030" +
-      "\006 \001(\t\0225\n\tattribute\030\007 \003(\0132\".me.yabble.ser" +
-      "vice.proto.Attribute\"t\n\014Notification\032d\n\n" +
-      "ListInvite\022\017\n\007list_id\030\001 \002(\t\022\017\n\007user_id\030\002",
-      " \002(\t\0224\n\006source\030\003 \002(\0132$.me.yabble.service" +
-      ".proto.EntityEvent*\310\001\n\nEntityType\022\010\n\004USE" +
-      "R\020\001\022\010\n\004LIST\020\002\022\020\n\014LIST_COMMENT\020\003\022\r\n\tLIST_" +
-      "ITEM\020\004\022\025\n\021LIST_ITEM_COMMENT\020\005\022\t\n\005IMAGE\020\006" +
-      "\022\022\n\016LIST_ITEM_VOTE\020\007\022\025\n\021USER_NOTIFICATIO" +
-      "N\020\010\022\r\n\tLIST_VOTE\020\t\022\r\n\tLIST_USER\020\n\022\032\n\026USE" +
-      "R_NOTIFICATION_PUSH\020\013*D\n\tEventType\022\n\n\006CR" +
-      "EATE\020\001\022\010\n\004READ\020\002\022\n\n\006UPDATE\020\003\022\n\n\006DELETE\020\004" +
-      "\022\t\n\005TOUCH\020\005B(\n\027me.yabble.service.protoB\r" +
-      "ServiceProtos"
+      "\032\014common.proto\"\'\n\tAttribute\022\013\n\003key\030\001 \002(\t" +
+      "\022\r\n\005value\030\002 \001(\t\"\200\002\n\013EntityEvent\022\021\n\tentit" +
+      "y_id\030\001 \002(\t\0228\n\013entity_type\030\002 \002(\0162#.me.yab" +
+      "ble.service.proto.EntityType\0226\n\nevent_ty" +
+      "pe\030\003 \002(\0162\".me.yabble.service.proto.Event" +
+      "Type\022\022\n\nevent_time\030\004 \002(\t\022\020\n\010delay_ms\030\005 \001" +
+      "(\003\022\017\n\007user_id\030\006 \001(\t\0225\n\tattribute\030\007 \003(\0132\"" +
+      ".me.yabble.service.proto.Attribute\"u\n\014No" +
+      "tification\032e\n\013YListInvite\022\017\n\007list_id\030\001 \002",
+      "(\t\022\017\n\007user_id\030\002 \002(\t\0224\n\006source\030\003 \002(\0132$.me" +
+      ".yabble.service.proto.EntityEvent\"\353\001\n\021Us" +
+      "erCommunication\022\017\n\007user_id\030\001 \002(\t\022=\n\004type" +
+      "\030\002 \002(\0162/.me.yabble.service.proto.UserCom" +
+      "munication.Type\0225\n\010ref_type\030\003 \001(\0162#.me.y" +
+      "abble.service.proto.EntityType\022\016\n\006ref_id" +
+      "\030\004 \001(\t\022,\n\005email\030\005 \001(\0132\035.me.yabble.common" +
+      ".proto.Email\"\021\n\004Type\022\t\n\005EMAIL\020\001\"h\n\010UserP" +
+      "ush\022>\n\tlist_link\030\001 \001(\0132+.me.yabble.servi" +
+      "ce.proto.UserPush.YListLink\032\034\n\tYListLink",
+      "\022\017\n\007list_id\030\001 \002(\t*\336\001\n\nEntityType\022\010\n\004USER" +
+      "\020\001\022\t\n\005YLIST\020\002\022\021\n\rYLIST_COMMENT\020\003\022\016\n\nYLIS" +
+      "T_ITEM\020\004\022\026\n\022YLIST_ITEM_COMMENT\020\005\022\t\n\005IMAG" +
+      "E\020\006\022\023\n\017YLIST_ITEM_VOTE\020\007\022\025\n\021USER_NOTIFIC" +
+      "ATION\020\010\022\016\n\nYLIST_VOTE\020\t\022\016\n\nYLIST_USER\020\n\022" +
+      "\032\n\026USER_NOTIFICATION_PUSH\020\013\022\r\n\tUSER_AUTH" +
+      "\020\014*D\n\tEventType\022\n\n\006CREATE\020\001\022\010\n\004READ\020\002\022\n\n" +
+      "\006UPDATE\020\003\022\n\n\006DELETE\020\004\022\t\n\005TOUCH\020\005B(\n\027me.y" +
+      "abble.service.protoB\rServiceProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -2727,20 +4411,45 @@ public final class ServiceProtos {
               new java.lang.String[] { },
               me.yabble.service.proto.ServiceProtos.Notification.class,
               me.yabble.service.proto.ServiceProtos.Notification.Builder.class);
-          internal_static_me_yabble_service_proto_Notification_ListInvite_descriptor =
+          internal_static_me_yabble_service_proto_Notification_YListInvite_descriptor =
             internal_static_me_yabble_service_proto_Notification_descriptor.getNestedTypes().get(0);
-          internal_static_me_yabble_service_proto_Notification_ListInvite_fieldAccessorTable = new
+          internal_static_me_yabble_service_proto_Notification_YListInvite_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
-              internal_static_me_yabble_service_proto_Notification_ListInvite_descriptor,
+              internal_static_me_yabble_service_proto_Notification_YListInvite_descriptor,
               new java.lang.String[] { "ListId", "UserId", "Source", },
-              me.yabble.service.proto.ServiceProtos.Notification.ListInvite.class,
-              me.yabble.service.proto.ServiceProtos.Notification.ListInvite.Builder.class);
+              me.yabble.service.proto.ServiceProtos.Notification.YListInvite.class,
+              me.yabble.service.proto.ServiceProtos.Notification.YListInvite.Builder.class);
+          internal_static_me_yabble_service_proto_UserCommunication_descriptor =
+            getDescriptor().getMessageTypes().get(3);
+          internal_static_me_yabble_service_proto_UserCommunication_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_me_yabble_service_proto_UserCommunication_descriptor,
+              new java.lang.String[] { "UserId", "Type", "RefType", "RefId", "Email", },
+              me.yabble.service.proto.ServiceProtos.UserCommunication.class,
+              me.yabble.service.proto.ServiceProtos.UserCommunication.Builder.class);
+          internal_static_me_yabble_service_proto_UserPush_descriptor =
+            getDescriptor().getMessageTypes().get(4);
+          internal_static_me_yabble_service_proto_UserPush_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_me_yabble_service_proto_UserPush_descriptor,
+              new java.lang.String[] { "ListLink", },
+              me.yabble.service.proto.ServiceProtos.UserPush.class,
+              me.yabble.service.proto.ServiceProtos.UserPush.Builder.class);
+          internal_static_me_yabble_service_proto_UserPush_YListLink_descriptor =
+            internal_static_me_yabble_service_proto_UserPush_descriptor.getNestedTypes().get(0);
+          internal_static_me_yabble_service_proto_UserPush_YListLink_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_me_yabble_service_proto_UserPush_YListLink_descriptor,
+              new java.lang.String[] { "ListId", },
+              me.yabble.service.proto.ServiceProtos.UserPush.YListLink.class,
+              me.yabble.service.proto.ServiceProtos.UserPush.YListLink.Builder.class);
           return null;
         }
       };
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          me.yabble.common.proto.CommonProtos.getDescriptor(),
         }, assigner);
   }
   

@@ -5,3 +5,5 @@ source $(dirname $0)/include
 createdb $DB_NAME
 
 psql -c "create table schema_versions (version varchar(32) not null, is_active boolean not null default false, creation_date timestamptz not null default current_timestamp)" $DB_NAME
+
+$BINDIR/db-migrate

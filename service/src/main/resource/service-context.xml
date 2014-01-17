@@ -73,6 +73,37 @@
       c:aws-secret-key="${aws.secret-key}"
       c:bucket-name="${service.s3-store.bucket-name}"
       />
+
+  <bean
+      id='service.mail-velocity-template'
+      class='me.yabble.service.velocity.VelocityTemplate'
+      c:encoding='${app.encoding}'
+      >
+    <constructor-arg>
+      <props>
+        <prop key='runtime.references.strict'>true</prop>
+        <prop key='input.encoding'>${app.encoding}</prop>
+        <prop key='output.encoding'>${app.encoding}</prop>
+
+        <prop key='resource.loader'>classpath</prop>
+        <prop key='classpath.resource.loader.class'>org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader</prop>
+        <prop key='velocimacro.library'>velocity/mail-macros.vm</prop>
+        <prop key='velocimacro.arguments.strict'>true</prop>
+        <prop key='runtime.introspector.uberspect'>me.yabble.service.velocity.ScalaUberspect</prop>
+      </props>
+    </constructor-arg>
+
+    <constructor-arg>
+      <map>
+        <entry key='__version' value='${app.version-hash}'/>
+        <entry key='__versionPathPart' value='v-${app.version-hash}'/>
+        <entry key='__formatService' value-ref='service.format-service'/>
+        <entry key='__securityUtilsBean' value-ref='common.security-utils-bean'/>
+        <entry key='__imageService' value-ref='service.image-service'/>
+        <entry key='__rootUrl' value='${service.canonical-base-url}'/>
+      </map>
+    </constructor-arg>
+  </bean>
   <!-- END MISC -->
 
   <!-- DAO -->
@@ -80,6 +111,14 @@
       id='service.user-dao'
       class='me.yabble.service.dao.UserDao'
       c:image-dao-ref='service.image-dao'
+      c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
+      />
+
+  <bean
+      id='service.user-auth-dao'
+      class='me.yabble.service.dao.UserAuthDao'
       c:npt-ref='service.jdbc-template'
       c:txn-sync-ref='common.txn-sync'
       c:work-queue-ref='common.work-queue'
@@ -172,6 +211,7 @@
       <bean
           class='me.yabble.service.UserService'
           c:user-dao-ref='service.user-dao'
+          c:user-auth-dao-ref='service.user-auth-dao'
           c:user-notification-dao-ref='service.user-notification-dao'
           />
     </property>

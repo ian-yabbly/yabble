@@ -1,7 +1,7 @@
 package me.yabble.service.worker
 
 import me.yabble.common.Log
-import me.yabble.common.TextUtils._
+//import me.yabble.common.TextUtils._
 import me.yabble.common.wq._
 import me.yabble.service.IUserService
 import me.yabble.service.model.UserNotification
@@ -22,17 +22,18 @@ class UserNotificationWorker(
     val e = EntityEvent.parseFrom(item.getValue)
     val id = e.getEntityId
 
-    log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
+    //log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
 
     e.getEntityType match {
-      case EntityType.LIST_USER => {
+      case EntityType.YLIST_USER => {
         e.getEventType match {
           case EventType.CREATE => {
-            log.info("Creating notification")
             userService.create(new UserNotification.Free(
                 e.getUserId,
-                UserNotificationType.LIST_INVITE,
-                Some(Notification.ListInvite.newBuilder()
+                UserNotificationType.YLIST_INVITE,
+                Some(id),
+                Some(e.getEntityType),
+                Some(Notification.YListInvite.newBuilder()
                     .setListId(id)
                     .setUserId(e.getUserId)
                     .setSource(e)

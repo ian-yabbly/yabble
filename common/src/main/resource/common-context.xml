@@ -39,6 +39,18 @@
       />
   <!-- END HTTP Client -->
 
+  <bean
+      id='common.mailer'
+      class='me.yabble.common.mail.MailgunMailer'
+      c:http-client-ref='common.http-client'
+      />
+
+  <bean
+      id='common.security-utils-bean'
+      class='me.yabble.common.SecurityUtilsBean'
+      c:secret='${app.secret}'
+      />
+
   <!-- Redis -->
   <bean
       id="common.redis-client"

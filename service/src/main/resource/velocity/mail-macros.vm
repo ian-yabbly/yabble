@@ -1,0 +1,7 @@
+#macro(ll $path)#loginLink($path)#end
+
+#macro(loginLink $path)
+  #set ($now = $LocalDate.now())
+  #set ($sigPath = "/l${path}/${__user.id()}/${now}")
+  #set ($sig = $__securityUtilsBean.sign($__user.id(), $sigPath))
+${__rootUrl}${sigPath}/${sig}#end

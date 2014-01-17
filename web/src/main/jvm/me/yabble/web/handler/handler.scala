@@ -8,9 +8,9 @@ import me.yabble.service._
 import me.yabble.service.model._
 import me.yabble.web.proto.WebProtos._
 import me.yabble.web.service._
+import me.yabble.service.velocity.VelocityTemplate
 import me.yabble.web.template.{Utils => TemplateUtils}
 import me.yabble.web.template.{Format => TemplateFormat}
-import me.yabble.web.template.VelocityTemplate
 
 import com.google.common.base.Function
 import com.google.gson._
@@ -88,16 +88,6 @@ object Utils {
       }
     }
   }
-}
-
-trait Handler extends Log {
-  val sessionService: SessionService
-  val userService: IUserService
-  val encoding: String
-
-  def utf8 = java.nio.charset.Charset.forName(encoding)
-
-  def maybeHandle(exchange: HttpExchange): Boolean
 
   /**
    * @return path without context and without query string
@@ -110,6 +100,18 @@ trait Handler extends Log {
       case _ => exchange.getRequestURI.getPath.substring(httpContext.getPath.length)
     }
   }
+}
+
+trait Handler extends Log {
+  val sessionService: SessionService
+  val userService: IUserService
+  val encoding: String
+
+  def utf8 = java.nio.charset.Charset.forName(encoding)
+
+  def maybeHandle(exchange: HttpExchange): Boolean
+
+  def noContextPath(exchange: HttpExchange): String = Utils.noContextPath(exchange)
 
   protected def optionalUserId(): Option[String] = o2o(sessionService.optional()) match {
     case Some(session) => {
@@ -227,14 +229,17 @@ abstract class TemplateHandler(
     m.put("TextUtils", classOf[TextUtils])
 
     m.put("__scheme", exchange.getRequestURI.getScheme)
+    m.put("__currentPath", Utils.noContextPath(exchange))
 
     optionalMe() match {
       case Some(user) => {
         m.put("__optUser", Some(user))
         m.put("__user", user)
+        m.put("__userCanLogin", userService.canLogin(user.id))
       }
       case None => {
         m.put("__optUser", None)
+        m.put("__userCanLogin", false)
       }
     }
 
@@ -247,6 +252,13 @@ trait FormHandler extends Handler {
   def formField(value: Option[String]): FormField = value match {
     case Some(v) => FormField.newBuilder().setValue(v).build()
     case None => FormField.newBuilder().build()
+  }
+
+  def message(code: String, params: List[String] = Nil, displayValue: Option[String] = None) = {
+    val b = Message.newBuilder().setCode(code)
+    params.foreach(p => b.addParam(p))
+    displayValue.foreach(v => b.setDisplayValue(v))
+    b.build()
   }
 }
 

@@ -26,14 +26,12 @@
   </bean>
 
   <bean
-      id='service.entity-event-worker'
       class='me.yabble.service.worker.EntityEventWorker'
       c:txn-template-ref='service.txn-template'
       c:work-queue-ref='common.work-queue'
       />
 
   <bean
-      id='service.image-preview-worker'
       class='me.yabble.service.worker.ImagePreviewWorker'
       c:txn-template-ref='service.txn-template'
       c:work-queue-ref='common.work-queue'
@@ -41,11 +39,39 @@
       />
 
   <bean
-      id='service.user-notification-worker'
       class='me.yabble.service.worker.UserNotificationWorker'
       c:txn-template-ref='service.txn-template'
       c:work-queue-ref='common.work-queue'
       c:user-service-ref='service.user-service'
+      />
+
+  <bean
+      class='me.yabble.service.worker.UserNotificationPushWorker'
+      c:txn-template-ref='service.txn-template'
+      c:work-queue-ref='common.work-queue'
+      c:user-service-ref='service.user-service'
+      c:ylist-service-ref='service.ylist-service'
+      c:from-email='${service.notification.from-email}'
+      c:from-name='${service.notification.from-email.name}'
+      c:template-ref='service.mail-velocity-template'
+      />
+
+  <bean
+      class='me.yabble.service.worker.UserPushWorker'
+      c:txn-template-ref='service.txn-template'
+      c:work-queue-ref='common.work-queue'
+      c:ylist-service-ref='service.ylist-service'
+      c:from-email='${service.push.from-email}'
+      c:from-name='${service.push.from-email.name}'
+      c:template-ref='service.mail-velocity-template'
+      />
+
+  <bean
+      class='me.yabble.service.worker.UserCommunicationWorker'
+      c:txn-template-ref='service.txn-template'
+      c:work-queue-ref='common.work-queue'
+      c:user-service-ref='service.user-service'
+      c:mailer-ref='common.mailer'
       />
 
 </beans>
