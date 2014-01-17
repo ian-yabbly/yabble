@@ -27,6 +27,10 @@
           });
           Dialog.call(this, props);
           
+          this.find('#create-account').one('click', function() {
+            self.element.addClass('mode-create-account');
+          });
+
           this.txtUserEmail = this.find('#user-email');
           
           this.subscribe(Dialog.Event.SHOWN, function() {

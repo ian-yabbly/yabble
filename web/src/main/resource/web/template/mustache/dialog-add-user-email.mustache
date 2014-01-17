@@ -5,8 +5,8 @@
     email address allows us to keep you up to date with changes that are made
     to your yabble.
   </h4>  
-  <h4>
-    You can also <a href=/register?r={{{redirUrl}}}>create an account</a> if you 
+  <h4 id=create-account>
+    You can also <a id=link-create-account class=link>create an account</a> if you
     want to login later with an email and password.
   </h4>
 </div>
@@ -19,6 +19,15 @@
       name=email 
       id=user-email 
       placeholder="Enter your email address">
+  </div>
+  <div id=user-password class=form-row>
+    <label for=user-password>Password:</label>
+    <input
+      type=password
+      class=full-width
+      name=password
+      id=user-password
+      placeholder="Enter a password">
   </div>
   <input id=button-submit-user-email type=submit value=SUBMIT>
 </form>

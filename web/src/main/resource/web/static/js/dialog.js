@@ -130,6 +130,7 @@
               show = function() {
                 visibleDialog = self;
                 containers.css('display', 'block');
+                self.element.css('display', 'block');
                 utils.requestAnimationFrame(function() {
                   self.getDimensions();
                   if(!self.fixed) {
@@ -168,6 +169,7 @@
                 function() {
                   self.element.removeClass('active-dialog');
                   containers.css('display', '');
+                  self.element.css('display', '');
                   self.hideLoading();
                   self.publish.apply(self, [ Dialog.Event.HIDDEN, self ].concat(args));
                 }
