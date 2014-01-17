@@ -76,7 +76,7 @@ class UserNotificationPushWorker(
     try {
       writer = new StringWriter()
       val vctx = new VelocityContext(context)
-      velocityEngine.mergeTemplate(enumToCode(n.kind), encoding, vctx, writer)
+      velocityEngine.mergeTemplate("/mail/notification/%s.html".format(enumToCode(n.kind)), encoding, vctx, writer)
       writer.toString()
     } finally {
       if (writer != null) { writer.close() }
