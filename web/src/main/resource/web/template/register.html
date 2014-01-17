@@ -8,7 +8,7 @@
           id=email
           type=email
           name=email
-          value="$!form.Name.Value"
+          value="$!form.Email.Value"
           placeholder="Enter your email"
           class=full-width>
       #if(!$form.Email.ErrorMessageList.isEmpty())
@@ -25,7 +25,7 @@
           placeholder="Choose a username"
           class=full-width>
       #if(!$form.Name.ErrorMessageList.isEmpty())
-        <div class="form-error">$form.Name.ErrorMessageList.get(0).Code</div>
+        <div class="form-error">#message($form.Name.ErrorMessageList.get(0).Code)</div>
       #end
     </div>
     <div class=form-row>
@@ -38,7 +38,7 @@
           placeholder="Enter a password"
           class=full-width>
       #if(!$form.Password.ErrorMessageList.isEmpty())
-        <div class="form-error">$form.Password.ErrorMessageList.get(0).Code</div>
+        <div class="form-error">#message($form.Password.ErrorMessageList.get(0).Code)</div>
       #end
     </div>
     <input type=hidden name=accept-privacy-policy value=1>

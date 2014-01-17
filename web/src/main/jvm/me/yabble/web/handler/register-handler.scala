@@ -79,36 +79,69 @@ class RegisterHandler(
       case "post" => {
         val nvps = allNvps(exchange)
         val formBuilder = getOrCreateForm().toBuilder()
-        formBuilder.setEmail(formField(optionalFirstParamValue(nvps, "email")))
-        formBuilder.setName(formField(optionalFirstParamValue(nvps, "name")))
-        formBuilder.setPassword(formField(optionalFirstParamValue(nvps, "password")))
+        try {
+          formBuilder.setEmail(formField(optionalFirstParamValue(nvps, "email")))
+          formBuilder.setName(formField(optionalFirstParamValue(nvps, "name")))
+          formBuilder.setPassword(formField(optionalFirstParamValue(nvps, "password")))
 
-        // TODO Validation
-        var isValid = true
-        if (!formBuilder.getEmail.hasValue()) {
-          val b = formBuilder.getEmail.toBuilder()
-          b.clearErrorMessage()
-          b.addErrorMessage(message("required"))
-          formBuilder.setEmail(b.build())
-          isValid = false
-        }
-
-        val form = formBuilder.build()
-        persistForm(form)
-
-        if (!isValid) {
-          redirectResponse(exchange, "/register")
-          return
-        }
-
-        userService.optionalByEmail(form.getEmail.getValue) match {
-          case Some(user) => {
-            //formBuilder.getEmail.addErrorMessage(newMessage("duplicate"))
-            redirectResponse(exchange, "/register")
+          // TODO Validation
+          var isValid = true
+          if (!formBuilder.getEmail.hasValue()) {
+            val b = formBuilder.getEmail.toBuilder()
+            b.clearErrorMessage()
+            b.addErrorMessage(message("required"))
+            formBuilder.setEmail(b.build())
+            isValid = false
           }
-            
-          case None => {
-            val uid = userService.create(new User.Free(Option(form.getName.getValue), Option(form.getEmail.getValue), None, None))
+
+          if (formBuilder.getEmail.hasValue) {
+            userService.optionalByEmail(formBuilder.getEmail.getValue) match {
+              case Some(user) => {
+                formBuilder.setEmail(formBuilder.getEmail.toBuilder().addErrorMessage(message("duplicate")).build())
+                isValid = false
+              }
+
+              case None => // Do nothing
+            }
+          }
+
+          if (formBuilder.getName.hasValue) {
+            userService.optionalByName(formBuilder.getName.getValue) match {
+              case Some(user) => {
+                formBuilder.setName(formBuilder.getName.toBuilder().addErrorMessage(message("duplicate")).build())
+                isValid = false
+              }
+
+              case None => // Do nothing
+            }
+          }
+
+          val optPassword = if (formBuilder.getPassword.hasValue) {
+            if (userService.isPasswordValid(formBuilder.getPassword.getValue)) {
+              Some(formBuilder.getPassword.getValue)
+            } else {
+              log.info("Invalid password [{}]", formBuilder.getPassword.getValue)
+              formBuilder.setPassword(formBuilder.getPassword.toBuilder().addErrorMessage(message("invalid")).build())
+              isValid = false
+              None
+            }
+          } else {
+            None
+          }
+
+          if (!isValid) {
+            redirectResponse(exchange, "/register")
+            return
+          }
+              
+          try {
+            val name = if (formBuilder.getName.hasValue) Some(formBuilder.getName.getValue) else None
+            val email = if (formBuilder.getEmail.hasValue) Some(formBuilder.getEmail.getValue) else None
+            val uid = userService.create(new User.Free(name, email, None, None))
+
+            optPassword.foreach(password => {
+              userService.updatePassword(uid, password)
+            })
 
             val session = sessionService.withSession(true, new Function[Session, Session]() {
               override def apply(session: Session): Session = {
@@ -132,7 +165,14 @@ class RegisterHandler(
             } else {
               redirectResponse(exchange, "/")
             }
+          } catch {
+            case e: Exception => {
+              log.error(e.getMessage, e)
+              redirectResponse(exchange, "/register")
+            }
           }
+        } finally {
+          persistForm(formBuilder.build())
         }
       }
 

@@ -10,6 +10,12 @@ trait IUserService extends IService[User.Free, User.Persisted, User.Update] {
   def findOrCreateByEmail(email: String): User.Persisted
   def optionalByNameOrEmail(nameOrEmail: String): Option[User.Persisted]
   def optionalByEmail(email: String): Option[User.Persisted]
+  def optionalByName(name: String): Option[User.Persisted]
+  //def isNameValid(name: String): Boolean
+
+  def isPasswordValid(password: String): Boolean = {
+    password.length >= 4
+  }
 
   // User notifications
   def create(f: UserNotification.Free): String
@@ -57,6 +63,8 @@ class UserService(
   }
 
   override def optionalByEmail(email: String) = userDao.optionalByEmail(email)
+
+  override def optionalByName(name: String) = userDao.optionalByName(name)
 
   // User notifications
   override def create(f: UserNotification.Free) = userNotificationDao.create(f)

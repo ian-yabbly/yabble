@@ -51,6 +51,7 @@ class UserPushWorker(
           emailBuilder.setHtmlBody(emailHtmlBody(list.user, "list-link", Map("list" -> list)))
           
           val bytes = UserCommunication.newBuilder()
+              .setType(UserCommunication.Type.EMAIL)
               .setUserId(list.user.id)
               .setEmail(emailBuilder.build())
               .build()

@@ -57,7 +57,9 @@
 #end
 
 #macro(userDisplayName $u)
-  #if($u.email().isDefined())
+  #if($u.name().isDefined())
+    $u.name().get()
+  #elseif($u.email().isDefined())
     $u.email().get()
   #elseif($__optUser.isDefined() && $__user.id() == $u.id())
     You

@@ -31,10 +31,12 @@ create table users (
   last_updated_date timestamptz not null default now(),
   is_active boolean not null default true,
   name varchar(32) null,
+  lower_name varchar(32) null,
   email varchar(512) null,
   tz varchar(64) null,
   image_id varchar(8) null references images (id),
-  primary key (id)
+  primary key (id),
+  unique (lower_name)
 );
 
 create table user_auths (
