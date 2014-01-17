@@ -385,7 +385,7 @@ public class SessionService {
                     sessionCookieDomain,
                     DateUtils.formatDate(cookieExpr.toDate())));
         } else {
-            log.info("Not setting HTTP session cookie because http-servlet-response is not present in execution context");
+            log.info("Not setting HTTP session cookie because http-exchange is not present in execution context");
         }
 
         return session;
