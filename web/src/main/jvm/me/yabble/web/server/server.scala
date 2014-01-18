@@ -61,37 +61,6 @@ class Server(
   }
 }
 
-/*
-class LoginLinkFilter(private val appSecret: String)
-  extends Filter
-  with Log
-{
-  override def description() = "login-link-filter"
-
-  override def doFilter(exchange: HttpExchange, chain: Filter.Chain) {
-    val path = HandlerUtils.noContextPath(exchange)
-    if (path.startsWith("/l/")) {
-      // Format is /e/the/normal/url/{uid}/{local-date}/{signature}
-      val parts = Iterables.toArray(Splitter.on('/').split(path), classOf[String])
-
-      val signature = parts(parts.length-1)
-      val localDate = LocalDate.parse(parts(parts.length-2))
-      val uid = Long.parseLong(parts(parts.length-3))
-      val sigParts = new String[parts.length-1];
-      System.arraycopy(parts, 0, sigParts, 0, sigParts.length);
-      String testSig = securityUtilsBean.sign(uid, Joiner.on('/').join(sigParts));
-      if (!signature.equals(testSig)) {
-          // TODO Put up a flash message here
-          response.setStatus(SC_MOVED_TEMPORARILY);
-          response.sendRedirect(request.getContextPath() + "/");
-      } else {
-    } else {
-      chain.doFilter(exchange)
-    }
-  }
-}
-*/
-
 class BaseFilter(sessionService: SessionService, sessionCookieName: String)
   extends Filter
   with Log

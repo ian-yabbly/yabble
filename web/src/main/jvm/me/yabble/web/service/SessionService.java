@@ -366,6 +366,8 @@ public class SessionService {
         ExecutionContext ctx = ExecutionContext.getRequired();
         String sessionId = randomAlphanumeric(32).toLowerCase();
 
+        log.info("Creating new session [{}]", sessionId);
+
         ctx.setAttribute("web-session-id", sessionId);
 
         DateTime now = DateTime.now();
@@ -379,13 +381,19 @@ public class SessionService {
         if (null != exchange) {
             DateTime cookieExpr = new DateTime(DateTimeZone.UTC);
             cookieExpr = cookieExpr.plusSeconds(COOKIE_MAX_AGE_SECONDS);
+            exchange.getResponseHeaders().add("Set-Cookie", String.format("%s=%s; Path=/; Expires=%s;",
+                    sessionCookieName,
+                    sessionId,
+                    DateUtils.formatDate(cookieExpr.toDate())));
+            /*
             exchange.getResponseHeaders().add("Set-Cookie", String.format("%s=%s; Path=/; Domain=%s; Expires=%s;",
                     sessionCookieName,
                     sessionId,
                     sessionCookieDomain,
                     DateUtils.formatDate(cookieExpr.toDate())));
+            */
         } else {
-            log.info("Not setting HTTP session cookie because http-servlet-response is not present in execution context");
+            log.info("Not setting HTTP session cookie because http-exchange is not present in execution context");
         }
 
         return session;

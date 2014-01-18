@@ -67,5 +67,10 @@ message UserPush {
     required string list_id = 1;
   }
 
-  optional YListLink list_link = 1;
+  message ForgotPassword {
+    required string user_id = 1;
+  }
+
+  optional YListLink list_link            = 1;
+  optional ForgotPassword forgot_password = 2;
 }
