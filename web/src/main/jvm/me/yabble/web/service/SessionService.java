@@ -392,6 +392,9 @@ public class SessionService {
                     sessionId,
                     sessionCookieDomain,
                     DateUtils.formatDate(cookieExpr.toDate())));
+            //exchange.getResponseHeaders().add("Set-Cookie", "anothe=another;");
+            //exchange.getResponseHeaders().add("Set-Cookie", "anotheew=anotherdasf;");
+            //exchange.getResponseHeaders().add("Set-Cookie", String.format("anotheew=%s;", sessionId));
         } else {
             log.info("Not setting HTTP session cookie because http-exchange is not present in execution context");
         }

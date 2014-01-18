@@ -35,17 +35,23 @@ object Utils {
   def log = LoggerFactory.getLogger("me.yabble.web.server.Utils")
   def utf8 = java.nio.charset.Charset.forName("utf-8")
 
-  def allCookies(exchange: HttpExchange): List[HttpCookie] = if (exchange.getRequestHeaders.getFirst("Cookie") == null) {
+  def allCookies(exchange: HttpExchange): List[HttpCookie] = if (exchange.getRequestHeaders.get("Cookie") == null) {
         return Nil
       } else {
-        HttpCookie.parse(exchange.getRequestHeaders.getFirst("Cookie")).toList
+        exchange.getRequestHeaders.get("Cookie").toList.flatMap(v => {
+          v.split(";\\s*").map(nvp => {
+            val nv = nvp.split("=")
+            new HttpCookie(nv(0), nv(1))
+          })
+        })
       }
 
   def optionalFirstCookie(exchange: HttpExchange, name: String): Option[String] =
       optionalFirstCookie(allCookies(exchange), name)
 
-  def optionalFirstCookie(cookies: List[HttpCookie], name: String): Option[String] =
-      cookies.find(_.getName == name).map(_.getValue)
+  def optionalFirstCookie(cookies: List[HttpCookie], name: String): Option[String] = {
+    cookies.find(_.getName == name).map(_.getValue)
+  }
 
   def jsonResponse(exchange: HttpExchange, j: JsonElement, status: Int) {
     try {

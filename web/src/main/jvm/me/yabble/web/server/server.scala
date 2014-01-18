@@ -72,7 +72,9 @@ class BaseFilter(sessionService: SessionService, sessionCookieName: String)
     try {
       ctx = ExecutionContext.getOrCreate()
       ctx.setAttribute("http-exchange", exchange)
-      HandlerUtils.optionalFirstCookie(exchange, sessionCookieName).foreach(v => ctx.setAttribute("web-session-id", v))
+
+      val optCookie = HandlerUtils.optionalFirstCookie(exchange, sessionCookieName)
+      optCookie.foreach(v => ctx.setAttribute("web-session-id", v))
       chain.doFilter(exchange)
     } catch {
       case e: EntityNotFoundException => e.kind match {
