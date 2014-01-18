@@ -8,6 +8,8 @@ trait IYListService extends IService[YList.Free, YList.Persisted, YList.Update] 
   def create(f: YList.Item.Free): String
   def createComment(f: Comment.Free): String
   def createItemComment(f: Comment.Free): String
+  def activateItem(id: String)
+  def deactivateItem(id: String)
 
   def deactivateComment(commentId: String): Boolean
   def deactivateItemComment(commentId: String): Boolean
@@ -34,6 +36,9 @@ class YListService(
     f.imageIds.foreach(iid => ylistItemDao.addImage(id, iid))
     id
   }
+
+  override def activateItem(id: String) = ylistItemDao.activate(id)
+  override def deactivateItem(id: String) = ylistItemDao.deactivate(id)
 
   override def createComment(f: Comment.Free) = ylistCommentDao.create(f)
   override def createItemComment(f: Comment.Free) = ylistItemCommentDao.create(f)
