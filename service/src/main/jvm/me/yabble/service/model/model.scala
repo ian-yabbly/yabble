@@ -11,6 +11,7 @@ case class Dimensions(width: Long, height: Long)
 object Entity {
   case class Free()
   case class Persisted(id: String, creationDate: DateTime, lastUpdatedDate: DateTime, isActive: Boolean)
+  class Builder(val id: String, val creationDate: DateTime, val lastUpdatedDate: DateTime, val isActive: Boolean)
   case class Update(id: String)
 }
 
@@ -174,6 +175,28 @@ object YList {
   class Update(id: String, val title: String, val body: Option[String])
     extends Entity.Update(id)
 
+  class Builder(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      var user: User.Persisted,
+      var title: String,
+      var body: Option[String],
+      var items: List[Item.Persisted],
+      var comments: List[Comment.Persisted],
+      var users: List[User.Persisted])
+    extends Entity.Builder(id, creationDate, lastUpdatedDate, isActive)
+  {
+    def this(p: Persisted) = this(
+        p.id, p.creationDate, p.lastUpdatedDate, p.isActive,
+        p.user, p.title, p.body, p.items, p.comments, p.users)
+
+    def toPersisted(): Persisted = new Persisted(
+        id, creationDate, lastUpdatedDate, isActive,
+        user, title, body, items, comments, users)
+  }
+
   class Persisted(
       id: String,
       creationDate: DateTime,
@@ -226,6 +249,7 @@ object YList {
       case None => throw new NotFoundException("List item by vote [%s]".format(id))
     }
 
+    def toBuilder(): Builder = new Builder(this)
   }
 
   object Item {

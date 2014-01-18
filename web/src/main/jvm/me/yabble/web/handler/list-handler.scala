@@ -100,8 +100,11 @@ class YListHandler(
         }))
         // END History
 
+        val b = list.toBuilder()
+        b.items = list.items.sortBy(_.votes.size).reverse
+
         val context = Map(
-            "list" -> list, 
+            "list" -> b.toPersisted(),
             "tabId" -> tab,
             "history" -> history
             )
