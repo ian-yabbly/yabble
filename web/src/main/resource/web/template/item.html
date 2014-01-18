@@ -34,7 +34,8 @@
           #squareUserImage($comment.user(), 54)
           <span class=username>#userDisplayName($comment.user())</span>
           &nbsp;<span class=small-bullet>&bull;</span>&nbsp;
-          <span class=comment-posted-date>$Format.timeAgo($comment.creationDate(), $__user.tz())</span>
+          #* TODO __user.tz() if __user is present *#
+          <span class=comment-posted-date>$Format.timeAgo($comment.creationDate())</span>
           <p>#m($comment.body(), true)</p>
         </li>
       #end
