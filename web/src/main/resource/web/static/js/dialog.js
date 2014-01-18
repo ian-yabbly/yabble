@@ -1,6 +1,3 @@
-/**
- * COMMENT
- */
 (function(window, document, require, define, undefined) {
   'use strict';
 
