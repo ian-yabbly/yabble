@@ -26,7 +26,7 @@
       </form>
     </div>
   </div>
-  <div class="tabs flexible-container">
+  <div class="tabs flexible-container clearfix">
     <a href=#appUrl("/list/$list.id()")
        data-tab-content-id=list-items
        class="tab#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab#end">
@@ -36,6 +36,14 @@
        data-tab-content-id=list-activity
        class="tab#if($tabId == "list-activity") active-tab#end">
       Activity ($history.size())
+    </a>
+    <a id=button-share-list class="button float-right menu-trigger" data-list-id=$list.id()>
+      Share
+      <span class="tooltip tooltip-below">
+        <span class=pointer><span></span></span>
+        <label for=list-share-url>Share Url:</label>
+        <input type="text" id=list-share-url class=is-loading readonly>        
+      </span>
     </a>
   </div>
   <div id="list-items" class="tab-content#if(!$tabId || $tabId == "" || $tabId == "list-items") active-tab-content#end">

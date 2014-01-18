@@ -26,6 +26,10 @@
         min-width: 0;
       }
     }
+    
+    #dialog-user-email {
+      width: 80%;
+    }
   }
 
   @media screen and (max-width: 700px) {
@@ -65,6 +69,10 @@
         border-right: none;
       }
     }
+    
+    #button-share-list {
+      display: none;
+    }
 
     a.active-tab {
       &,
@@ -85,6 +93,21 @@
           background: transparent;
           color: #000;
           border: none;
+        }
+      }
+    }
+    
+    .list-item-controls {
+      a[href].button-toggle-list-item-vote,
+      .list-item-vote-count,
+      .list-item-comment-count {
+        display: block;
+        margin: @margin-regular auto;
+        max-width: 300px;
+        text-align: left;
+        
+        &:last-child {
+          margin-right: auto;
         }
       }
     }
