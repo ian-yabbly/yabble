@@ -96,7 +96,7 @@
       }
       
       .tooltip {
-        margin-left: -@margin-small / 2;
+        margin-left: -@margin-small;
         margin-top: 40px + @margin-small;
         min-width: 200px;
         max-width: 300px;
@@ -366,6 +366,45 @@
 
     .history-timestamp {
       color: @dark-gray;
+    }
+  }
+  
+/* share list */
+  
+  #button-share-list  {
+    display: none;
+    overflow: visible;
+    
+    .tooltip,
+    .pointer span {
+      background: #fff;
+      .box-shadow(0 0 8px rgba(0, 0, 0, 0.55));
+    }
+    
+    .tooltip {
+      left: auto;
+      right: 0px;
+      margin-top: 45px + @margin-small;
+      line-height: 1.4;
+      
+      .pointer {
+        left: auto;
+        right: 29px;
+      }
+    }    
+    
+    label {
+      text-align: left;
+    }
+    
+    input[type="text"] {
+      padding: @padding-small;
+      background-size: 20px 20px;
+    }
+    
+    &:hover, 
+    &.show-menu {    
+      background: @dark-blue;
     }
   }
 

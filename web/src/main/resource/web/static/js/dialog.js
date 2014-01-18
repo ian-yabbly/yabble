@@ -1,6 +1,3 @@
-/**
- * COMMENT
- */
 (function(window, document, require, define, undefined) {
   'use strict';
 
@@ -95,7 +92,10 @@
         Dialog.prototype.bindResizeListeners = function() {
           var self = this;
           this.updatePositionListener = function() {
-            self.setPosition();
+            self.getDimensions();
+            utils.requestAnimationFrame(function() {
+              self.setPosition();              
+            });
           };
           $(window).bind('resize', this.updatePositionListener);
           return this;

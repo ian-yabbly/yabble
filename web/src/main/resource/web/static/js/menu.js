@@ -51,7 +51,6 @@
                   f.focus();
                 }
                 $document.bind('click', onClickHideMenu);
-                return false;
               }
             });
           });

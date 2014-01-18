@@ -8,19 +8,22 @@
     [
       'jquery',
       'utils',
+      'xhr',
       'add-item-dialog',
       'user-email-dialog',
       'form-utils',
       'mustache',
       'strings',
+      'string-utils',
       'tabset',
       'user',
       'text!template/mustache/contributor.mustache',
       'text!template/mustache/voter.mustache',      
       'menu'
     ],
-    function($, utils, AddItemDialog, UserEmailDialog, formUtils, mustache, strings, 
-      TabSet, User, textContribTmpl, textVoterTmpl) {
+    function($, utils, xhr, AddItemDialog, UserEmailDialog, formUtils,
+      mustache, strings, stringUtils, TabSet, User, textContribTmpl, 
+      textVoterTmpl) {
       var dlgAddItem, dlgUserEmail,        
           tmplContributor = mustache.compile(textContribTmpl),
           tmplVoter       = mustache.compile(textVoterTmpl);
@@ -34,6 +37,7 @@
             elContribCount.text(parseInt(elContribCount.text(), 10) + change);
           }
         };
+        
         utils.exists($('#button-add-item'), function(btnAddItem) {
           var elItemList = $('#list-items ul');
           btnAddItem.click(function() {
@@ -178,6 +182,29 @@
               }
             }
             return false;
+          });
+        });
+        
+        utils.exists($('#button-share-list'), function(btnShareList) {
+          var txtShareList = $('#list-share-url');
+          txtShareList.click(function() {
+            txtShareList.select();
+          });
+          btnShareList.one('click', function() {
+            xhr.ajax(
+              stringUtils.format('/list/{}/share', btnShareList.data('list-id'))
+            ).done(function(response) {
+              if(response && response.url) {
+                txtShareList
+                  .removeClass('is-loading')
+                  .val(response && response.url)
+                  .select();
+              } else {
+                txtShareList.removeClass('is-loading').addClass('has-error');                
+              }
+            }).fail(function() {
+              txtShareList.removeClass('is-loading').addClass('has-error');
+            });
           });
         });
 

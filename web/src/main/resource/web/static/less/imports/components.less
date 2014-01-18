@@ -110,10 +110,14 @@
     }
   }
 
-/* * */
+/* tabs */
 
   .tabs {
     border-bottom: 1px solid @gray;
+
+    .button {
+      margin: 10px 0
+    }
   }
 
   a.tab {
@@ -173,7 +177,7 @@
     .pointer {
       position: absolute;
       left: @padding-small;
-      width: 20px;
+      width: 30px;
       height: 15px;
       overflow: hidden;
 
@@ -223,14 +227,18 @@
       }
     }
   }
-
+  
   .tooltip-trigger,
   .menu-trigger {
     position: relative;
   }
 
-  .tooltip-trigger:hover .tooltip,
-  .show-menu .menu {
-    display: block;
-    left: 0;
+  .tooltip-trigger:hover,
+  .show-menu { 
+    .tooltip,
+    .menu {
+      display: block;
+      left: 0;
+    }
   }
+  
