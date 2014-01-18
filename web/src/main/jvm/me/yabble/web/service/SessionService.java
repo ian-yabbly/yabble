@@ -366,6 +366,8 @@ public class SessionService {
         ExecutionContext ctx = ExecutionContext.getRequired();
         String sessionId = randomAlphanumeric(32).toLowerCase();
 
+        log.info("Creating new session [{}]", sessionId);
+
         ctx.setAttribute("web-session-id", sessionId);
 
         DateTime now = DateTime.now();
