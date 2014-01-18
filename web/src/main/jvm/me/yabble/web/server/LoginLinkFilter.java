@@ -40,6 +40,7 @@ public class LoginLinkFilter extends Filter {
         final String path = Utils.noContextPath(exchange);
 
         if (path.startsWith("/l/")) {
+            log.info("Path starts with /l/");
             // Format is /l/the/normal/url/{uid}/{local-date}/{signature}
 
             Optional<Session> optSession = sessionService.optional();
