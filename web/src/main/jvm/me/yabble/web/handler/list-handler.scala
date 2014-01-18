@@ -39,7 +39,8 @@ class YListHandler(
       "/x/list/{id}/item/{item-id}/comment/{comment-id}/delete",
       "/x/list/{id}/item/{item-id}/vote",
       "/x/list/{id}/item/{item-id}/vote/delete",
-      "/list/{id}/item/{item-id}")
+      "/list/{id}/item/{item-id}",
+      "/x/list/{id}/item/{item-id}/delete")
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
@@ -61,6 +62,7 @@ class YListHandler(
           case  9 => itemVote(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case 10 => itemVoteDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case 11 => item(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 12 => itemDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case _ => error(s"Unexpected match [${t._1}]")
         })
         .isDefined
@@ -212,6 +214,15 @@ class YListHandler(
     val list = ylistService.find(id)
     val context = Map("list" -> list, "item" -> list.item(itemId))
     htmlTemplateResponse(exchange, List("item.html", "layout/layout.html"), context)        
+  }
+ 
+  def itemDelete(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val me = requiredMe()
+    val itemId = pathVars("item-id")
+    ylistService.deactivateItem(itemId)
+    val list = ylistService.find(id)
+    redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
   }
 }
 

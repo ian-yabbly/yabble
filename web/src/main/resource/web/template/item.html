@@ -8,6 +8,9 @@
   <a href=#appUrl("/list/$list.id()/$list.slug()") class="button back-button full-width">
     Back to List: &ldquo;$list.title()&rdquo;
   </a>
+  <a href=#appUrl("/x/list/$list.id()/item/$item.id()/delete") class="button full-width">
+    delete
+  </a>
   <div id="list-item-meta">
     #squareUserImage($item.user(), 44)
     <span class="username">#userDisplayName($item.user())</span>

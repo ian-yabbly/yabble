@@ -14,6 +14,8 @@ trait IService[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update] {
   def find(id: String): P
   def optional(id: String): Option[P]
   def update(u: U)
+  def activate(id: String)
+  def deactivate(id: String)
 }
 
 class Service[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update](
@@ -25,4 +27,6 @@ class Service[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update](
   override def find(id: String): P = dao.find(id)
   override def optional(id: String): Option[P] = dao.optional(id)
   override def update(u: U) { dao.update(u) }
+  override def activate(id: String) = dao.activate(id)
+  override def deactivate(id: String) = dao.deactivate(id)
 }
