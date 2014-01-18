@@ -65,12 +65,12 @@
     line-height: 40px;
     margin: @margin-regular 0 0;
     
-    a[href].button-toggle-list-item-vote,
+    a[href].button,
     .list-item-vote-count,
     a {
       display: inline-block;
       vertical-align: top;
-      margin: 0 @margin-regular 0 0;
+      margin: 0 @margin-regular @margin-small 0;
       
       &:last-child {
         margin-right: 0;
@@ -84,6 +84,7 @@
       .rounded(15px);
       margin: 0 @margin-small 0 0;
       text-align: center;
+      text-transform: none;
     }
     
     .list-item-vote-count {
@@ -119,10 +120,9 @@
       }
     }
     
-    a[href].button-toggle-list-item-vote {
+    a[href].button {
       padding-left: 5px;
-      text-align: left;
-      min-width: 220px;
+      text-align: left;      
       
       .icon {
         background: #fff;
@@ -135,8 +135,16 @@
         .icon {
           color: @medium-gray;
         }
-      }
+      }      
       
+      &:active {
+        .icon {
+          color: @very-dark-gray;
+        }
+      }         
+    }
+    
+    a[href].button-toggle-list-item-vote {      
       &.has-voted {
         .orange-button;
         margin-top: 0;

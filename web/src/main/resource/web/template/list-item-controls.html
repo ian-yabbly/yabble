@@ -42,7 +42,10 @@
   </span>     
   #if(!$hideCommentsCount)         
     <a href=#appUrl("/list/$list.id()/item/$item.id()#comments") class="list-item-comment-count">
-      <span class="icon">%</span>$item.comments().size() comment#if($item.comments().size() != 1)s#end</span>
+      <span class="icon">%</span>$item.comments().size() comment#if($item.comments().size() != 1)s#end  
     </a>
+  #end
+  #if($__optUser.isDefined() && $__user.id() == $item.user().id())
+    <a href=#appUrl("/x/list/$list.id()/item/$item.id()/delete") class="button gray-button"><span class=icon>x</span>Delete Item</a>
   #end
 </span>
