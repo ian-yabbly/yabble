@@ -88,6 +88,17 @@ object User {
   {
     def displayName(): String = name.orElse(email).getOrElse("Guest")
 
+    def nameAndEmail(): String = name match {
+      case Some(n) => email match {
+        case Some(e) => "%s (%s)".format(n, e)
+        case None => n
+      }
+      case None => email match {
+        case Some(e) => e
+        case None => "Guest"
+      }
+    }
+
     def canLogin(): Boolean = name.orElse(email).isDefined
 
     def toUpdate(): Update = new Update(id, name, email, tz, image.map(_.id))
