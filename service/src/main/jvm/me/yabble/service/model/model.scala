@@ -10,9 +10,29 @@ case class Dimensions(width: Long, height: Long)
 
 object Entity {
   case class Free()
-  case class Persisted(id: String, creationDate: DateTime, lastUpdatedDate: DateTime, isActive: Boolean)
+  case class Persisted(val id: String, val creationDate: DateTime, val lastUpdatedDate: DateTime, val isActive: Boolean)
   class Builder(val id: String, val creationDate: DateTime, val lastUpdatedDate: DateTime, val isActive: Boolean)
-  case class Update(id: String)
+  case class Update(val id: String)
+}
+
+object EntityWithUser {
+  class Free(val userId: String) extends Entity.Free with HasUserId
+
+  class Persisted(
+      id: String, creationDate: DateTime, lastUpdatedDate: DateTime, isActive: Boolean,
+      val user: User.Persisted)
+    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+    with HasUser
+
+  class Update(id: String) extends Entity.Update(id)
+}
+
+trait HasUser {
+  val user: User.Persisted
+}
+
+trait HasUserId {
+  val userId: String
 }
 
 object UserNotification {
@@ -23,6 +43,7 @@ object UserNotification {
       val refType: Option[EntityType],
       val data: Option[Array[Byte]])
     extends Entity.Free
+    with HasUserId
 
   class Update(
       id: String)
@@ -39,6 +60,7 @@ object UserNotification {
       val refType: Option[EntityType],
       val data: Option[Array[Byte]])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+    with HasUser
 
   object Push {
     class Free(
@@ -134,9 +156,9 @@ object User {
 object Comment {
   class Free(
       val parentId: String,
-      val userId: String,
+      userId: String,
       val body: String)
-    extends Entity.Free
+    extends EntityWithUser.Free(userId)
 
   class Update(
       id: String,
@@ -149,21 +171,21 @@ object Comment {
       lastUpdatedDate: DateTime,
       isActive: Boolean,
       val parentId: String,
-      val user: User.Persisted,
+      user: User.Persisted,
       val body: String)
-    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+    extends EntityWithUser.Persisted(id, creationDate, lastUpdatedDate, isActive, user)
 }
 
 object Vote {
   class Free(
       val parentId: String,
-      val userId: String)
-    extends Entity.Free
+      userId: String)
+    extends EntityWithUser.Free(userId)
+    with HasUserId
 
   class Update(
       id: String,
-      val parentId: String,
-      val userId: String)
+      val parentId: String)
     extends Entity.Update(id)
 
   class Persisted(
@@ -172,16 +194,16 @@ object Vote {
       lastUpdatedDate: DateTime,
       isActive: Boolean,
       val parentId: String,
-      val user: User.Persisted)
-    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+      user: User.Persisted)
+    extends EntityWithUser.Persisted(id, creationDate, lastUpdatedDate, isActive, user)
 }
 
 object YList {
   class Free(
-      val userId: String,
+      userId: String,
       val title: String,
       val body: Option[String])
-    extends Entity.Free
+    extends EntityWithUser.Free(userId)
 
   class Update(id: String, val title: String, val body: Option[String])
     extends Entity.Update(id)
@@ -213,13 +235,13 @@ object YList {
       creationDate: DateTime,
       lastUpdatedDate: DateTime,
       isActive: Boolean,
-      val user: User.Persisted,
+      user: User.Persisted,
       val title: String,
       val body: Option[String],
       val items: List[Item.Persisted],
       val comments: List[Comment.Persisted],
       val users: List[User.Persisted])
-    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+    extends EntityWithUser.Persisted(id, creationDate, lastUpdatedDate, isActive, user)
   {
     def slug(): String = SlugUtils.gen(title)
 
@@ -266,11 +288,11 @@ object YList {
   object Item {
     class Free(
         val listId: String,
-        val userId: String,
+        userId: String,
         val title: Option[String],
         val body: Option[String],
         val imageIds: List[String])
-      extends Entity.Free
+      extends EntityWithUser.Free(userId)
 
     class Update(
         id: String,
@@ -284,13 +306,13 @@ object YList {
         lastUpdatedDate: DateTime,
         isActive: Boolean,
         val listId: String,
-        val user: User.Persisted,
+        user: User.Persisted,
         val title: Option[String],
         val body: Option[String],
         val images: List[Image.Persisted],
         val votes: List[Vote.Persisted],
         val comments: List[Comment.Persisted])
-      extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+      extends EntityWithUser.Persisted(id, creationDate, lastUpdatedDate, isActive, user)
     {
       def optionalComment(id: String): Option[Comment.Persisted] = comments.find(_.id == id)
 

@@ -1,4 +1,4 @@
-package com.yabble.service
+package me.yabble.service
 
 import me.yabble.common.Log
 import me.yabble.service._
@@ -10,11 +10,11 @@ trait YabbleService {
 }
 
 class YabbleServiceImpl(
-    private val userService: UserService,
-    private val ylistSerivce: YListService)
+    private val ylistService: YListService)
   extends YabbleService
   with Log
 {
   override def mergeUsers(srcUid: String, destUid: String) {
+    ylistService.mergeUsers(srcUid, destUid)
   }
 }

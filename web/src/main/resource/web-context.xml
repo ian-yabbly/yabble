@@ -204,6 +204,7 @@
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'
       c:encoding='${app.encoding}'
+      c:yabble-service-ref='service.yabble-service'
       />
 
   <bean

@@ -24,7 +24,8 @@ class LoginHandler(
     val sessionService: SessionService,
     val userService: UserService,
     val encoding: String,
-    template: VelocityTemplate)
+    template: VelocityTemplate,
+    val yabbleService: YabbleService)
   extends TemplateHandler(template)
   with FormHandler
 {

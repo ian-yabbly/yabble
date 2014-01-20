@@ -20,6 +20,8 @@ trait YListService extends IService[YList.Free, YList.Persisted, YList.Update] {
   def createItemVote(iid: String, uid: String)
   def deleteItemVote(iid: String, uid: String)
 
+  def mergeUsers(srcUid: String, destUid: String)
+
   def allByUser(uid: String): List[YList.Persisted]
 }
 
@@ -56,6 +58,14 @@ class YListServiceImpl(
 
   override def createItemVote(iid: String, uid: String) = ylistItemVoteDao.maybeActivateOrCreate(new Vote.Free(iid, uid))
   override def deleteItemVote(iid: String, uid: String) = ylistItemVoteDao.maybeDeactivate(new Vote.Free(iid, uid))
+
+  override def mergeUsers(srcUid: String, destUid: String) {
+    ylistDao.mergeUsers(srcUid, destUid)
+    ylistItemDao.mergeUsers(srcUid, destUid)
+    ylistCommentDao.mergeUsers(srcUid, destUid)
+    ylistItemCommentDao.mergeUsers(srcUid, destUid)
+    ylistItemVoteDao.mergeUsers(srcUid, destUid)
+  }
 
   override def allByUser(uid: String) = ylistDao.allByUser(uid)
 }
