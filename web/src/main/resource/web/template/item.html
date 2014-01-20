@@ -5,7 +5,7 @@
 #end
 #set($hasVotes = $item.votes().size() > 0)
 <div id="list-item" class="flexible-container">
-  <a href=#appUrl("/list/$list.id()/$list.slug()") class="button back-button full-width">
+  <a href=#appUrl("/list/$list.id()/$list.slug()") class="back-link full-width">
     Back to List: &ldquo;$list.title()&rdquo;
   </a>
   <div id="list-item-meta">
@@ -51,6 +51,9 @@
       #end
       <textarea name=body class=full-width placeholder="Say something awesome&hellip;"></textarea>
       <div class=clearfix><input type=submit class="orange-button float-right" value="COMMENT"></div>
-    </form>
+    </form>    
   </div>
+  <a href=#appUrl("/list/$list.id()/$list.slug()") class="back-link full-width">
+    Back to List: &ldquo;$list.title()&rdquo;
+  </a>    
 </div>
