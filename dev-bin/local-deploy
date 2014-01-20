@@ -6,7 +6,7 @@ function print-usage() {
   if test -n "$1"; then echo $1 1>&2; fi
   echo 1>&2
 
-  echo "Usage: $(basename $0) [options] version deploy-dir config" 1>&2
+  echo "Usage: $(basename $0) [options] git-commit deploy-dir config" 1>&2
   echo "    -h    Print this help message" 1>&2
   echo 1>&2
 
@@ -23,19 +23,16 @@ done
 
 shift $(($OPTIND - 1))
 
-if test $# -ne 3; then
-  print-usage "Three and only three arguments are allowed"
+if test $# -ne 2; then
+  print-usage "Two and only two arguments are allowed"
 fi
 
-version=$1
-deploy_dir=$2
-config=$3
-
-vdir=$deploy_dir/.versions/$version
+deploy_dir=$1
+config=$2
 
 cd $BASEDIR
 
-git reset --hard v$version
+vdir=$deploy_dir/.versions/$version
 
 ant clean dist-archive
 
