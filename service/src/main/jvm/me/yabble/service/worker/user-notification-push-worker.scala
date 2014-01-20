@@ -29,8 +29,8 @@ case class MC(context: Map[String, Any], subject: String)
 class UserNotificationPushWorker(
     txnTemplate: TransactionTemplate,
     private val workQueue: WorkQueue,
-    private val userService: IUserService,
-    private val ylistService: IYListService,
+    private val userService: UserService,
+    private val ylistService: YListService,
     private val fromEmail: String,
     private val fromName: String,
     private val template: VelocityTemplate)

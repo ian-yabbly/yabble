@@ -22,8 +22,9 @@ import scala.collection.JavaConversions._
 
 class UserHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val encoding: String,
+    private val ylistService: YListService,
     private val sessionCookieName: String,
     private val sessionCookieDomain: String,
     val template: VelocityTemplate)
@@ -67,6 +68,13 @@ class UserHandler(
 
   def me(exchange: HttpExchange, pathVars: Map[String, String]) {
     exchange.getRequestMethod.toLowerCase match {
+      case "get" => {
+        val context = collection.mutable.Map[String, Any]()
+        optionalMe().foreach(me => context.put("lists", ylistService.allByUser(me.id)))
+
+        htmlTemplateResponse(exchange, List("me.html", "layout/layout.html"), context.toMap)
+      }
+
       case "post" => {
         val me = requiredMe()
         val nvps = allNvps(exchange)

@@ -222,6 +222,7 @@
       c:session-service-ref='web.session-service'
       c:template-ref='web.velocity-template'
       c:encoding='${app.encoding}'
+      c:ylist-service-ref='service.ylist-service'
       c:session-cookie-name='${web.session.cookie-name}'
       c:session-cookie-domain='${web.session.cookie-domain}'
       />

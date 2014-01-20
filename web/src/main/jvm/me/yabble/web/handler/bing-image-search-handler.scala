@@ -25,7 +25,7 @@ import scala.collection.JavaConversions._
 
 class BingImageSearchHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val template: VelocityTemplate,
     val encoding: String,
     private val httpClient: HttpClient,

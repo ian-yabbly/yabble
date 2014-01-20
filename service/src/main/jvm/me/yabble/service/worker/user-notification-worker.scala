@@ -3,7 +3,7 @@ package me.yabble.service.worker
 import me.yabble.common.Log
 //import me.yabble.common.TextUtils._
 import me.yabble.common.wq._
-import me.yabble.service.IUserService
+import me.yabble.service.UserService
 import me.yabble.service.model.UserNotification
 import me.yabble.service.model.UserNotificationType
 import me.yabble.service.proto.ServiceProtos._
@@ -14,7 +14,7 @@ import org.springframework.transaction.support._
 class UserNotificationWorker(
     txnTemplate: TransactionTemplate,
     workQueue: WorkQueue,
-    private val userService: IUserService)
+    private val userService: UserService)
   extends AbstractQueueWorker(txnTemplate, workQueue, "user-notification", 2)
   with Log
 {

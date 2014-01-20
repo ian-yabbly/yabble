@@ -20,7 +20,7 @@ import scala.collection.JavaConversions._
 
 class ImageHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val encoding: String,
     private val imageService: ImageService)
   extends Handler

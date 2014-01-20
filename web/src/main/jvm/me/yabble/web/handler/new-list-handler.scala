@@ -18,9 +18,9 @@ import scala.collection.JavaConversions._
 
 class NewYListHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val encoding: String,
-    private val ylistService: IYListService,
+    private val ylistService: YListService,
     template: VelocityTemplate)
   extends TemplateHandler(template)
   with FormHandler

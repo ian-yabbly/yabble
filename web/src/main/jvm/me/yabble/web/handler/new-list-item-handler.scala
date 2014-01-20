@@ -18,9 +18,9 @@ import scala.collection.JavaConversions._
 
 class NewYListItemHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val encoding: String,
-    private val ylistService: IYListService,
+    private val ylistService: YListService,
     private val imageService: ImageService,
     val template: VelocityTemplate)
   extends TemplateHandler(template)

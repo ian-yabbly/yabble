@@ -573,6 +573,10 @@ class YListDao(
         case n: Int => throw new UnexpectedNumberOfRowsUpdatedException(n)
       }
 
+  def allByUser(uid: String): List[YList.Persisted] = all(
+      "select * from lists where user_id = :user_id and is_active = true order by creation_date desc",
+      Map("user_id" -> uid))
+
   override def getInsertParams(f: YList.Free) = Map("user_id" -> f.userId, "title" -> f.title, "body" -> f.body.orNull)
 
   override def getUpdateParams(u: YList.Update) = Map("title" -> u.title, "body" -> u.body.orNull)

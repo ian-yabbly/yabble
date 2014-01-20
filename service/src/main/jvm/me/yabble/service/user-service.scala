@@ -4,7 +4,7 @@ import me.yabble.common.Log
 import me.yabble.service.model._
 import me.yabble.service.dao._
 
-trait IUserService extends IService[User.Free, User.Persisted, User.Update] {
+trait UserService extends IService[User.Free, User.Persisted, User.Update] {
   def canLogin(uid: String): Boolean
   def updatePassword(uid: String, clear: String)
   def findOrCreateByEmail(email: String): User.Persisted
@@ -23,12 +23,12 @@ trait IUserService extends IService[User.Free, User.Persisted, User.Update] {
   // END User notifications
 }
 
-class UserService(
+class UserServiceImpl(
     private val userDao: UserDao,
     private val userAuthDao: UserAuthDao,
     private val userNotificationDao: UserNotificationDao)
   extends Service(userDao)
-  with IUserService
+  with UserService
   with Log
 {
   override def canLogin(uid: String) = {

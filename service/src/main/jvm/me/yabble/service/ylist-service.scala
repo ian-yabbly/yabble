@@ -4,7 +4,7 @@ import me.yabble.common.Log
 import me.yabble.service.model._
 import me.yabble.service.dao._
 
-trait IYListService extends IService[YList.Free, YList.Persisted, YList.Update] {
+trait YListService extends IService[YList.Free, YList.Persisted, YList.Update] {
   def create(f: YList.Item.Free): String
   def createComment(f: Comment.Free): String
   def createItemComment(f: Comment.Free): String
@@ -19,16 +19,18 @@ trait IYListService extends IService[YList.Free, YList.Persisted, YList.Update] 
 
   def createItemVote(iid: String, uid: String)
   def deleteItemVote(iid: String, uid: String)
+
+  def allByUser(uid: String): List[YList.Persisted]
 }
 
-class YListService(
+class YListServiceImpl(
     private val ylistDao: YListDao,
     private val ylistCommentDao: YListCommentDao,
     private val ylistItemDao: YListItemDao,
     private val ylistItemCommentDao: YListItemCommentDao,
     private val ylistItemVoteDao: YListItemVoteDao)
   extends Service(ylistDao)
-  with IYListService
+  with YListService
   with Log
 {
   override def create(f: YList.Item.Free) = {
@@ -54,4 +56,6 @@ class YListService(
 
   override def createItemVote(iid: String, uid: String) = ylistItemVoteDao.maybeActivateOrCreate(new Vote.Free(iid, uid))
   override def deleteItemVote(iid: String, uid: String) = ylistItemVoteDao.maybeDeactivate(new Vote.Free(iid, uid))
+
+  override def allByUser(uid: String) = ylistDao.allByUser(uid)
 }

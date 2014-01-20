@@ -110,7 +110,7 @@ object Utils {
 
 trait Handler extends Log {
   val sessionService: SessionService
-  val userService: IUserService
+  val userService: UserService
   val encoding: String
 
   def utf8 = java.nio.charset.Charset.forName(encoding)
@@ -118,6 +118,8 @@ trait Handler extends Log {
   def maybeHandle(exchange: HttpExchange): Boolean
 
   def noContextPath(exchange: HttpExchange): String = Utils.noContextPath(exchange)
+
+  protected def optionalSession(): Option[Session] = o2o(sessionService.optional())
 
   protected def optionalUserId(): Option[String] = o2o(sessionService.optional()) match {
     case Some(session) => {
@@ -236,6 +238,16 @@ abstract class TemplateHandler(
 
     m.put("__scheme", exchange.getRequestURI.getScheme)
     m.put("__currentPath", Utils.noContextPath(exchange))
+
+    optionalSession() match {
+      case Some(session) => {
+        m.put("__optSession", Some(session))
+        m.put("__session", session)
+      }
+      case None => {
+        m.put("__optSession", None)
+      }
+    }
 
     optionalMe() match {
       case Some(user) => {
