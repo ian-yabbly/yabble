@@ -45,12 +45,17 @@
     color: #000;
     text-decoration: none;
     
-    &:hover {
+    &:hover,
+    &:focus {
       color: @light-blue;
       
       .list-item-image {
         border-color: @blue;
       }
+    }
+    
+    &:focus {
+      outline: none;
     }
   }
 
@@ -422,6 +427,15 @@
     position: static;
     margin: @margin-large auto;
     width: 800px;
+    
+    .no-list-item-image {
+      height: 512px;
+      line-height: 512px;
+    }
+    
+    h3 {
+      margin: 0 0 @margin-large;
+    }
   }
   
   #add-item-image-search,

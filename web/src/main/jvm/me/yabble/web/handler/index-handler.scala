@@ -15,7 +15,7 @@ import scala.collection.JavaConversions._
 
 class IndexHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val encoding: String,
     template: VelocityTemplate)
   extends TemplateHandler(template)

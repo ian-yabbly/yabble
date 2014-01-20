@@ -42,8 +42,6 @@ class Server(
           server.createContext(contextPath, router)
         }
 
-    //context.getFilters.add(new BaseFilter(sessionService, sessionCookieName))
-
     filters.foreach(f => context.getFilters.add(f))
 
     server.setExecutor(null)
@@ -94,11 +92,15 @@ class BaseFilter(sessionService: SessionService, sessionCookieName: String)
         case _ => HandlerUtils.redirectResponse(exchange, "/whoops/not-found")
       }
 
+      case e: NotFoundException => {
+        log.warn(e.getMessage, e)
+        HandlerUtils.plainTextResponse(exchange, Some(e.getMessage), 404)
+      }
+
       case e: Exception => {
         log.error(e.getMessage, e)
         exchange.getResponseHeaders.set("Content-Type", "text/plain; charset=utf-8")
         exchange.sendResponseHeaders(500, 0)
-        exchange.getResponseBody.close()
       }
     } finally {
       if (null != ctx) { ExecutionContext.remove() }

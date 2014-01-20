@@ -35,16 +35,13 @@ object Utils {
   def log = LoggerFactory.getLogger("me.yabble.web.server.Utils")
   def utf8 = java.nio.charset.Charset.forName("utf-8")
 
-  def allCookies(exchange: HttpExchange): List[HttpCookie] = if (exchange.getRequestHeaders.get("Cookie") == null) {
-        return Nil
-      } else {
-        exchange.getRequestHeaders.get("Cookie").toList.flatMap(v => {
-          v.split(";\\s*").map(nvp => {
-            val nv = nvp.split("=")
-            new HttpCookie(nv(0), nv(1))
-          })
-        })
-      }
+  def allCookies(exchange: HttpExchange): List[HttpCookie] = optionalFirstHeader(exchange, "Cookie") match {
+    case Some(v) => v.split(";\\s*").toList.map(nvp => {
+      val nv = nvp.split("=")
+      new HttpCookie(nv(0), nv(1))
+    })
+    case None => Nil
+  }
 
   def optionalFirstCookie(exchange: HttpExchange, name: String): Option[String] =
       optionalFirstCookie(allCookies(exchange), name)
@@ -53,7 +50,12 @@ object Utils {
     cookies.find(_.getName == name).map(_.getValue)
   }
 
-  def jsonResponse(exchange: HttpExchange, j: JsonElement, status: Int) {
+  def optionalFirstHeader(exchange: HttpExchange, name: String): Option[String] = exchange.getRequestHeaders.getFirst(name) match {
+    case null => None
+    case v: String => Some(v)
+  }
+
+  def jsonResponse(exchange: HttpExchange, j: JsonElement, status: Int = 200) {
     try {
       val responseBytes = gson.toJson(j).getBytes(utf8)
       exchange.getResponseHeaders.set("Content-Type", "application/json; charset=utf-8")
@@ -106,18 +108,34 @@ object Utils {
       case _ => exchange.getRequestURI.getPath.substring(httpContext.getPath.length)
     }
   }
+
+  def contextPath(exchange: HttpExchange): String = {
+    val httpContext = exchange.getHttpContext
+    httpContext.getPath match {
+      case null => ""
+      case "/" => ""
+      case p => p
+    }
+  }
 }
 
 trait Handler extends Log {
   val sessionService: SessionService
-  val userService: IUserService
+  val userService: UserService
   val encoding: String
 
   def utf8 = java.nio.charset.Charset.forName(encoding)
 
+  def isXhr(exchange: HttpExchange): Boolean = Utils.optionalFirstHeader(exchange, "x-requested-with") match {
+    case Some(v) => v.equalsIgnoreCase("XMLHttpRequest")
+    case None => false
+  }
+
   def maybeHandle(exchange: HttpExchange): Boolean
 
   def noContextPath(exchange: HttpExchange): String = Utils.noContextPath(exchange)
+
+  protected def optionalSession(): Option[Session] = o2o(sessionService.optional())
 
   protected def optionalUserId(): Option[String] = o2o(sessionService.optional()) match {
     case Some(session) => {
@@ -236,6 +254,17 @@ abstract class TemplateHandler(
 
     m.put("__scheme", exchange.getRequestURI.getScheme)
     m.put("__currentPath", Utils.noContextPath(exchange))
+    m.put("__contextPath", Utils.contextPath(exchange))
+
+    optionalSession() match {
+      case Some(session) => {
+        m.put("__optSession", Some(session))
+        m.put("__session", session)
+      }
+      case None => {
+        m.put("__optSession", None)
+      }
+    }
 
     optionalMe() match {
       case Some(user) => {
@@ -254,7 +283,6 @@ abstract class TemplateHandler(
 }
 
 trait FormHandler extends Handler {
-
   def formField(value: Option[String]): FormField = value match {
     case Some(v) => FormField.newBuilder().setValue(v).build()
     case None => FormField.newBuilder().build()

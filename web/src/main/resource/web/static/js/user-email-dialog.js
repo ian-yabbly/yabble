@@ -73,7 +73,25 @@
                     strings.get('form.miscServerError')
                   );
                 } else {
-                  // todo: handle errors from server
+                  if (data && data.form && data.form.email && data.form.email.errors && data.form.email.errors.length) {
+                    var errors = data.form.email.errors;
+                    var isDuplicate = false;
+                    for (var i = 0, ii = errors.length; i < ii; i++) {
+                      if (errors[i].code === 'duplicate') {
+                        isDuplicate = true;
+                        break;
+                      }
+                    }
+
+                    if (isDuplicate) {
+                      formUtils.showError(
+                        self.txtUserEmail,
+                        strings.get('user.email.duplicate', document.location.pathname || document.location.toString())
+                      );
+                    } else {
+                      formUtils.showError(self.txtUserEmail, strings.get('form.miscServerError'));
+                    }
+                  }
                 }
               })
             }

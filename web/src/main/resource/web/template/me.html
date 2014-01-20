@@ -1,0 +1,40 @@
+<div class=flexible-container>
+  <h2>User</h2>
+  #if ($__optUser.isDefined())
+    <table>
+      <tr>
+        <th>ID</th><td>$__user.id()</td>
+      </tr>
+      <tr>
+        <th>name</th><td>$__user.name()</td>
+      </tr>
+      <tr>
+        <th>email</th><td>$__user.email()</td>
+      </tr>
+    </table>
+    <ul>
+      #foreach ($l in $lists)
+      <li><a href=#appUrl("/list/$l.id()/$l.slug()")>$l.title()</a></li>
+      #end
+    </ul>
+
+    <h2>Edit</h2>
+    <form method=post>
+      <input type=text name=name value='$!form.Name.Value' placeholder='Username'><br>
+      <input type=email name=email value='$!form.Email.Value' placeholder='Email'><br>
+      <input type=password name=password value='' placeholder='Password'><br>
+      <input type=submit value='Submit'>
+    </form>
+  #else
+  <p>You're not logged in.</p>
+  #end
+
+  <h2>Session</h2>
+  #if ($__optSession.isDefined())
+  <pre style='text-align: left;'>
+$__session
+  </pre>
+  #else
+  <p>No session is present</p>
+  #end
+</div>

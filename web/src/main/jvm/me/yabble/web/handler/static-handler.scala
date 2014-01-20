@@ -22,7 +22,7 @@ import scala.collection.JavaConversions._
 
 class StaticHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val staticBaseResourcePath: String,
     val encoding: String)
   extends Handler
@@ -85,18 +85,21 @@ class StaticHandler(
       }
 
       val resource = resourceLoader.getResource(staticBaseResourcePath + resourcePath)
+      if (resource.exists()) {
+        try {
+          exchange.getResponseHeaders.set("Last-Modified", DateUtils.formatDate(new java.util.Date(resource.lastModified())))
+        } catch {
+          case e: IOException => log.warn(e.getMessage, e)
+        }
 
-      try {
-        exchange.getResponseHeaders.set("Last-Modified", DateUtils.formatDate(new java.util.Date(resource.lastModified())))
-      } catch {
-        case e: IOException => log.warn(e.getMessage, e)
+        exchange.sendResponseHeaders(200, resource.contentLength())
+        IOUtils.copy(resource.getInputStream, exchange.getResponseBody)
+        resource.getInputStream.close()
+      } else {
+        throw new NotFoundException(resourcePath)
       }
-
-      exchange.sendResponseHeaders(200, resource.contentLength())
-      // TODO try/finally
-      IOUtils.copy(resource.getInputStream, exchange.getResponseBody)
-      resource.getInputStream.close()
     } catch {
+      case e: NotFoundException => throw e
       case e: Exception => {
         log.error(e.getMessage, e)
         try {

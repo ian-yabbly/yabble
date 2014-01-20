@@ -18,9 +18,9 @@ import scala.collection.JavaConversions._
 
 class NewYListItemHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val encoding: String,
-    private val ylistService: IYListService,
+    private val ylistService: YListService,
     private val imageService: ImageService,
     val template: VelocityTemplate)
   extends TemplateHandler(template)
@@ -80,7 +80,7 @@ class NewYListItemHandler(
               }).flatten.toList
             }
 
-        ylistService.create(new YList.Item.Free(
+        val itemId = ylistService.create(new YList.Item.Free(
             form.getListId,
             me.id,
             Option(form.getTitle.getValue),
@@ -95,7 +95,7 @@ class NewYListItemHandler(
 
         val list = ylistService.find(listId)
 
-        redirectResponse(exchange, "/list/%s/%s".format(listId, list.slug()))
+        redirectResponse(exchange, "/list/%s/%s#list-item-%s".format(listId, list.slug(), itemId))
       }
 
       case _ => throw new UnsupportedHttpMethod(exchange.getRequestMethod)

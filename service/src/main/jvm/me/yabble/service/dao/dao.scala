@@ -104,6 +104,21 @@ class ORM(
   }
 }
 
+abstract class EntityWithUserDao[F <: EntityWithUser.Free, P <: EntityWithUser.Persisted, U <: Entity.Update](
+    tableName: String,
+    kind: EntityType,
+    npt: NamedParameterJdbcTemplate,
+    txnSync: SpringTransactionSynchronization,
+    workQueue: WorkQueue)
+  extends EntityDao[F, P, U](tableName, kind, npt, txnSync, workQueue)
+{
+  def allByUser(uid: String): List[P] = allQuery(Map("user_id" -> uid))
+
+  def mergeUsers(srcUid: String, destUid: String): Int = npt.update(
+      s"update $tableName set user_id = :dest_user_id where user_id = :src_user_id",
+      mapAsJavaMap(Map("src_user_id" -> srcUid, "dest_user_id" -> destUid)))
+}
+
 abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update](
     tableName: String,
     private val kind: EntityType,
@@ -172,7 +187,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     })
   }
 
-  private def stmtFromParams(params: Map[String, Any], activeOnly: Boolean = true): String = {
+  private def stmtFromParams(params: Map[String, Any], activeOnly: Boolean = true, orderBy: Option[String] = Some("creation_date desc")): String = {
     var b = new StringBuilder()
     b.append("select * from ").append(tableName).append(" where ")
     params.foreach(t => {
@@ -188,11 +203,16 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     } else {
       b = b.dropRight(5)
     }
+
+    orderBy.foreach(order => {
+      b.append(" order by ").append(order)
+    })
+
     b.toString()
   }
 
-  protected def allQuery(params: Map[String, Any], activeOnly: Boolean = true): List[P] = {
-    val stmt = stmtFromParams(params, activeOnly)
+  protected def allQuery(params: Map[String, Any], activeOnly: Boolean = true, orderBy: Option[String] = Some("creation_date desc")): List[P] = {
+    val stmt = stmtFromParams(params, activeOnly, orderBy)
     all(stmt, params)
   }
 
@@ -454,9 +474,9 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
   extends EntityDao[User.Free, User.Persisted, User.Update]("users", EntityType.USER, npt, txnSync, workQueue)
   with Log
 {
-  def optionalByEmailForUpdate(email: String): Option[User.Persisted] = optional("select * from users where email = :email for update", Map("email" -> email))
+  def optionalByEmailForUpdate(email: String): Option[User.Persisted] = optional("select * from users where lower_email = :email for update", Map("email" -> email.toLowerCase()))
 
-  def optionalByEmail(email: String): Option[User.Persisted] = optionalQuery(Map("email" -> email))
+  def optionalByEmail(email: String): Option[User.Persisted] = optionalQuery(Map("lower_email" -> email.toLowerCase()))
 
   def optionalByName(name: String): Option[User.Persisted] = optionalQuery(Map("lower_name" -> name.toLowerCase()))
 
@@ -546,7 +566,7 @@ class YListDao(
     private val ylistCommentDao: YListCommentDao,
     private val ylistItemDao: YListItemDao,
     npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.YLIST, npt, txnSync, workQueue)
+  extends EntityWithUserDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.YLIST, npt, txnSync, workQueue)
   with Log
 {
   def addUser(lid: String, uid: String): Boolean = {
@@ -604,7 +624,7 @@ class YListItemDao(
     private val ylistItemVoteDao: YListItemVoteDao,
     private val ylistItemCommentDao: YListItemCommentDao,
     npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", EntityType.YLIST_ITEM, npt, txnSync, workQueue)
+  extends EntityWithUserDao[YList.Item.Free, YList.Item.Persisted, YList.Item.Update]("list_items", EntityType.YLIST_ITEM, npt, txnSync, workQueue)
   with Log
 {
   def allByYList(id: String) = all("all-by-list", Map("list_id" -> id))
@@ -640,7 +660,7 @@ class YListItemDao(
 }
 
 abstract class CommentDao(tableName: String, kind: EntityType, private val userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[Comment.Free, Comment.Persisted, Comment.Update](tableName, kind, npt, txnSync, workQueue)
+  extends EntityWithUserDao[Comment.Free, Comment.Persisted, Comment.Update](tableName, kind, npt, txnSync, workQueue)
   with Log
 {
   def allByParent(id: String) = all(
@@ -676,7 +696,7 @@ class YListItemCommentDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txn
     extends CommentDao("list_item_comments", EntityType.YLIST_ITEM_COMMENT, userDao, npt, txnSync, workQueue)
 
 abstract class VoteDao(tableName: String, kind: EntityType, private val userDao: UserDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
-  extends EntityDao[Vote.Free, Vote.Persisted, Vote.Update](tableName, kind, npt, txnSync, workQueue)
+  extends EntityWithUserDao[Vote.Free, Vote.Persisted, Vote.Update](tableName, kind, npt, txnSync, workQueue)
   with Log
 {
   def allByParent(id: String) = all(

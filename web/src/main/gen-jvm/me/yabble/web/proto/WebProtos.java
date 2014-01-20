@@ -10,185 +10,636 @@ public final class WebProtos {
   }
   public interface SessionOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // required string id = 1;
+    /**
+     * <code>required string id = 1;</code>
+     */
     boolean hasId();
-    String getId();
-    
+    /**
+     * <code>required string id = 1;</code>
+     */
+    java.lang.String getId();
+    /**
+     * <code>required string id = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getIdBytes();
+
     // required string creation_date = 2;
+    /**
+     * <code>required string creation_date = 2;</code>
+     */
     boolean hasCreationDate();
-    String getCreationDate();
-    
+    /**
+     * <code>required string creation_date = 2;</code>
+     */
+    java.lang.String getCreationDate();
+    /**
+     * <code>required string creation_date = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getCreationDateBytes();
+
     // optional string user_id = 3;
+    /**
+     * <code>optional string user_id = 3;</code>
+     */
     boolean hasUserId();
-    String getUserId();
-    
+    /**
+     * <code>optional string user_id = 3;</code>
+     */
+    java.lang.String getUserId();
+    /**
+     * <code>optional string user_id = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getUserIdBytes();
+
     // repeated .me.yabble.web.proto.Session.Attribute attribute = 4;
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     java.util.List<me.yabble.web.proto.WebProtos.Session.Attribute> 
         getAttributeList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     me.yabble.web.proto.WebProtos.Session.Attribute getAttribute(int index);
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     int getAttributeCount();
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     java.util.List<? extends me.yabble.web.proto.WebProtos.Session.AttributeOrBuilder> 
         getAttributeOrBuilderList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     me.yabble.web.proto.WebProtos.Session.AttributeOrBuilder getAttributeOrBuilder(
         int index);
-    
+
     // optional .me.yabble.web.proto.ListForm list_form = 5;
+    /**
+     * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+     */
     boolean hasListForm();
+    /**
+     * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+     */
     me.yabble.web.proto.WebProtos.ListForm getListForm();
+    /**
+     * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+     */
     me.yabble.web.proto.WebProtos.ListFormOrBuilder getListFormOrBuilder();
-    
+
     // optional .me.yabble.web.proto.ListItemForm list_item_form = 6;
+    /**
+     * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+     */
     boolean hasListItemForm();
+    /**
+     * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+     */
     me.yabble.web.proto.WebProtos.ListItemForm getListItemForm();
+    /**
+     * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+     */
     me.yabble.web.proto.WebProtos.ListItemFormOrBuilder getListItemFormOrBuilder();
-    
+
     // optional .me.yabble.web.proto.LoginForm login_form = 7;
+    /**
+     * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+     */
     boolean hasLoginForm();
+    /**
+     * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+     */
     me.yabble.web.proto.WebProtos.LoginForm getLoginForm();
+    /**
+     * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+     */
     me.yabble.web.proto.WebProtos.LoginFormOrBuilder getLoginFormOrBuilder();
-    
+
     // optional string after_login_redirect_path = 8;
+    /**
+     * <code>optional string after_login_redirect_path = 8;</code>
+     *
+     * <pre>
+     * Deprecated
+     * </pre>
+     */
     boolean hasAfterLoginRedirectPath();
-    String getAfterLoginRedirectPath();
-    
+    /**
+     * <code>optional string after_login_redirect_path = 8;</code>
+     *
+     * <pre>
+     * Deprecated
+     * </pre>
+     */
+    java.lang.String getAfterLoginRedirectPath();
+    /**
+     * <code>optional string after_login_redirect_path = 8;</code>
+     *
+     * <pre>
+     * Deprecated
+     * </pre>
+     */
+    com.google.protobuf.ByteString
+        getAfterLoginRedirectPathBytes();
+
     // optional .me.yabble.web.proto.RegisterForm register_form = 9;
+    /**
+     * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+     */
     boolean hasRegisterForm();
+    /**
+     * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+     */
     me.yabble.web.proto.WebProtos.RegisterForm getRegisterForm();
+    /**
+     * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+     */
     me.yabble.web.proto.WebProtos.RegisterFormOrBuilder getRegisterFormOrBuilder();
+
+    // optional string redirect_path = 10;
+    /**
+     * <code>optional string redirect_path = 10;</code>
+     */
+    boolean hasRedirectPath();
+    /**
+     * <code>optional string redirect_path = 10;</code>
+     */
+    java.lang.String getRedirectPath();
+    /**
+     * <code>optional string redirect_path = 10;</code>
+     */
+    com.google.protobuf.ByteString
+        getRedirectPathBytes();
+
+    // optional .me.yabble.web.proto.UserForm user_form = 11;
+    /**
+     * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+     */
+    boolean hasUserForm();
+    /**
+     * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+     */
+    me.yabble.web.proto.WebProtos.UserForm getUserForm();
+    /**
+     * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+     */
+    me.yabble.web.proto.WebProtos.UserFormOrBuilder getUserFormOrBuilder();
+
+    // repeated .me.yabble.web.proto.Session.FormEntry form = 12;
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    java.util.List<me.yabble.web.proto.WebProtos.Session.FormEntry> 
+        getFormList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    me.yabble.web.proto.WebProtos.Session.FormEntry getForm(int index);
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    int getFormCount();
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    java.util.List<? extends me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder> 
+        getFormOrBuilderList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder getFormOrBuilder(
+        int index);
   }
+  /**
+   * Protobuf type {@code me.yabble.web.proto.Session}
+   */
   public static final class Session extends
       com.google.protobuf.GeneratedMessage
       implements SessionOrBuilder {
     // Use Session.newBuilder() to construct.
-    private Session(Builder builder) {
+    private Session(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private Session(boolean noInit) {}
-    
+    private Session(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final Session defaultInstance;
     public static Session getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public Session getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Session(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              id_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000002;
+              creationDate_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000004;
+              userId_ = input.readBytes();
+              break;
+            }
+            case 34: {
+              if (!((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+                attribute_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Session.Attribute>();
+                mutable_bitField0_ |= 0x00000008;
+              }
+              attribute_.add(input.readMessage(me.yabble.web.proto.WebProtos.Session.Attribute.PARSER, extensionRegistry));
+              break;
+            }
+            case 42: {
+              me.yabble.web.proto.WebProtos.ListForm.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000008) == 0x00000008)) {
+                subBuilder = listForm_.toBuilder();
+              }
+              listForm_ = input.readMessage(me.yabble.web.proto.WebProtos.ListForm.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(listForm_);
+                listForm_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000008;
+              break;
+            }
+            case 50: {
+              me.yabble.web.proto.WebProtos.ListItemForm.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000010) == 0x00000010)) {
+                subBuilder = listItemForm_.toBuilder();
+              }
+              listItemForm_ = input.readMessage(me.yabble.web.proto.WebProtos.ListItemForm.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(listItemForm_);
+                listItemForm_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000010;
+              break;
+            }
+            case 58: {
+              me.yabble.web.proto.WebProtos.LoginForm.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000020) == 0x00000020)) {
+                subBuilder = loginForm_.toBuilder();
+              }
+              loginForm_ = input.readMessage(me.yabble.web.proto.WebProtos.LoginForm.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(loginForm_);
+                loginForm_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000020;
+              break;
+            }
+            case 66: {
+              bitField0_ |= 0x00000040;
+              afterLoginRedirectPath_ = input.readBytes();
+              break;
+            }
+            case 74: {
+              me.yabble.web.proto.WebProtos.RegisterForm.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000080) == 0x00000080)) {
+                subBuilder = registerForm_.toBuilder();
+              }
+              registerForm_ = input.readMessage(me.yabble.web.proto.WebProtos.RegisterForm.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(registerForm_);
+                registerForm_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000080;
+              break;
+            }
+            case 82: {
+              bitField0_ |= 0x00000100;
+              redirectPath_ = input.readBytes();
+              break;
+            }
+            case 90: {
+              me.yabble.web.proto.WebProtos.UserForm.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000200) == 0x00000200)) {
+                subBuilder = userForm_.toBuilder();
+              }
+              userForm_ = input.readMessage(me.yabble.web.proto.WebProtos.UserForm.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(userForm_);
+                userForm_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000200;
+              break;
+            }
+            case 98: {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                form_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Session.FormEntry>();
+                mutable_bitField0_ |= 0x00000800;
+              }
+              form_.add(input.readMessage(me.yabble.web.proto.WebProtos.Session.FormEntry.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000008) == 0x00000008)) {
+          attribute_ = java.util.Collections.unmodifiableList(attribute_);
+        }
+        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+          form_ = java.util.Collections.unmodifiableList(form_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_fieldAccessorTable;
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              me.yabble.web.proto.WebProtos.Session.class, me.yabble.web.proto.WebProtos.Session.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<Session> PARSER =
+        new com.google.protobuf.AbstractParser<Session>() {
+      public Session parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Session(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Session> getParserForType() {
+      return PARSER;
+    }
+
     public interface AttributeOrBuilder
         extends com.google.protobuf.MessageOrBuilder {
-      
+
       // required string key = 1;
+      /**
+       * <code>required string key = 1;</code>
+       */
       boolean hasKey();
-      String getKey();
-      
+      /**
+       * <code>required string key = 1;</code>
+       */
+      java.lang.String getKey();
+      /**
+       * <code>required string key = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getKeyBytes();
+
       // optional string value = 2;
+      /**
+       * <code>optional string value = 2;</code>
+       */
       boolean hasValue();
-      String getValue();
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      java.lang.String getValue();
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      com.google.protobuf.ByteString
+          getValueBytes();
     }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.Session.Attribute}
+     */
     public static final class Attribute extends
         com.google.protobuf.GeneratedMessage
         implements AttributeOrBuilder {
       // Use Attribute.newBuilder() to construct.
-      private Attribute(Builder builder) {
+      private Attribute(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
         super(builder);
+        this.unknownFields = builder.getUnknownFields();
       }
-      private Attribute(boolean noInit) {}
-      
+      private Attribute(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
       private static final Attribute defaultInstance;
       public static Attribute getDefaultInstance() {
         return defaultInstance;
       }
-      
+
       public Attribute getDefaultInstanceForType() {
         return defaultInstance;
       }
-      
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private Attribute(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                bitField0_ |= 0x00000001;
+                key_ = input.readBytes();
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000002;
+                value_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
         return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_Attribute_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_Attribute_fieldAccessorTable;
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_Attribute_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.Session.Attribute.class, me.yabble.web.proto.WebProtos.Session.Attribute.Builder.class);
       }
-      
+
+      public static com.google.protobuf.Parser<Attribute> PARSER =
+          new com.google.protobuf.AbstractParser<Attribute>() {
+        public Attribute parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Attribute(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<Attribute> getParserForType() {
+        return PARSER;
+      }
+
       private int bitField0_;
       // required string key = 1;
       public static final int KEY_FIELD_NUMBER = 1;
       private java.lang.Object key_;
+      /**
+       * <code>required string key = 1;</code>
+       */
       public boolean hasKey() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public String getKey() {
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public java.lang.String getKey() {
         java.lang.Object ref = key_;
-        if (ref instanceof String) {
-          return (String) ref;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
         } else {
           com.google.protobuf.ByteString bs = 
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
-          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
             key_ = s;
           }
           return s;
         }
       }
-      private com.google.protobuf.ByteString getKeyBytes() {
+      /**
+       * <code>required string key = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getKeyBytes() {
         java.lang.Object ref = key_;
-        if (ref instanceof String) {
+        if (ref instanceof java.lang.String) {
           com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
           key_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
-      
+
       // optional string value = 2;
       public static final int VALUE_FIELD_NUMBER = 2;
       private java.lang.Object value_;
+      /**
+       * <code>optional string value = 2;</code>
+       */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getValue() {
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      public java.lang.String getValue() {
         java.lang.Object ref = value_;
-        if (ref instanceof String) {
-          return (String) ref;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
         } else {
           com.google.protobuf.ByteString bs = 
               (com.google.protobuf.ByteString) ref;
-          String s = bs.toStringUtf8();
-          if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+          java.lang.String s = bs.toStringUtf8();
+          if (bs.isValidUtf8()) {
             value_ = s;
           }
           return s;
         }
       }
-      private com.google.protobuf.ByteString getValueBytes() {
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getValueBytes() {
         java.lang.Object ref = value_;
-        if (ref instanceof String) {
+        if (ref instanceof java.lang.String) {
           com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
           value_ = b;
           return b;
         } else {
           return (com.google.protobuf.ByteString) ref;
         }
       }
-      
+
       private void initFields() {
         key_ = "";
         value_ = "";
@@ -197,7 +648,7 @@ public final class WebProtos {
       public final boolean isInitialized() {
         byte isInitialized = memoizedIsInitialized;
         if (isInitialized != -1) return isInitialized == 1;
-        
+
         if (!hasKey()) {
           memoizedIsInitialized = 0;
           return false;
@@ -205,7 +656,7 @@ public final class WebProtos {
         memoizedIsInitialized = 1;
         return true;
       }
-      
+
       public void writeTo(com.google.protobuf.CodedOutputStream output)
                           throws java.io.IOException {
         getSerializedSize();
@@ -217,12 +668,12 @@ public final class WebProtos {
         }
         getUnknownFields().writeTo(output);
       }
-      
+
       private int memoizedSerializedSize = -1;
       public int getSerializedSize() {
         int size = memoizedSerializedSize;
         if (size != -1) return size;
-      
+
         size = 0;
         if (((bitField0_ & 0x00000001) == 0x00000001)) {
           size += com.google.protobuf.CodedOutputStream
@@ -236,94 +687,83 @@ public final class WebProtos {
         memoizedSerializedSize = size;
         return size;
       }
-      
+
       private static final long serialVersionUID = 0L;
       @java.lang.Override
       protected java.lang.Object writeReplace()
           throws java.io.ObjectStreamException {
         return super.writeReplace();
       }
-      
+
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseFrom(
           com.google.protobuf.ByteString data)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return newBuilder().mergeFrom(data).buildParsed();
+        return PARSER.parseFrom(data);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseFrom(
           com.google.protobuf.ByteString data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return newBuilder().mergeFrom(data, extensionRegistry)
-                 .buildParsed();
+        return PARSER.parseFrom(data, extensionRegistry);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseFrom(byte[] data)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return newBuilder().mergeFrom(data).buildParsed();
+        return PARSER.parseFrom(data);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseFrom(
           byte[] data,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return newBuilder().mergeFrom(data, extensionRegistry)
-                 .buildParsed();
+        return PARSER.parseFrom(data, extensionRegistry);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseFrom(java.io.InputStream input)
           throws java.io.IOException {
-        return newBuilder().mergeFrom(input).buildParsed();
+        return PARSER.parseFrom(input);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        return newBuilder().mergeFrom(input, extensionRegistry)
-                 .buildParsed();
+        return PARSER.parseFrom(input, extensionRegistry);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseDelimitedFrom(java.io.InputStream input)
           throws java.io.IOException {
-        Builder builder = newBuilder();
-        if (builder.mergeDelimitedFrom(input)) {
-          return builder.buildParsed();
-        } else {
-          return null;
-        }
+        return PARSER.parseDelimitedFrom(input);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseDelimitedFrom(
           java.io.InputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        Builder builder = newBuilder();
-        if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-          return builder.buildParsed();
-        } else {
-          return null;
-        }
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseFrom(
           com.google.protobuf.CodedInputStream input)
           throws java.io.IOException {
-        return newBuilder().mergeFrom(input).buildParsed();
+        return PARSER.parseFrom(input);
       }
       public static me.yabble.web.proto.WebProtos.Session.Attribute parseFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        return newBuilder().mergeFrom(input, extensionRegistry)
-                 .buildParsed();
+        return PARSER.parseFrom(input, extensionRegistry);
       }
-      
+
       public static Builder newBuilder() { return Builder.create(); }
       public Builder newBuilderForType() { return newBuilder(); }
       public static Builder newBuilder(me.yabble.web.proto.WebProtos.Session.Attribute prototype) {
         return newBuilder().mergeFrom(prototype);
       }
       public Builder toBuilder() { return newBuilder(this); }
-      
+
       @java.lang.Override
       protected Builder newBuilderForType(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         Builder builder = new Builder(parent);
         return builder;
       }
+      /**
+       * Protobuf type {@code me.yabble.web.proto.Session.Attribute}
+       */
       public static final class Builder extends
           com.google.protobuf.GeneratedMessage.Builder<Builder>
          implements me.yabble.web.proto.WebProtos.Session.AttributeOrBuilder {
@@ -331,18 +771,21 @@ public final class WebProtos {
             getDescriptor() {
           return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_Attribute_descriptor;
         }
-        
+
         protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
             internalGetFieldAccessorTable() {
-          return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_Attribute_fieldAccessorTable;
+          return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_Attribute_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  me.yabble.web.proto.WebProtos.Session.Attribute.class, me.yabble.web.proto.WebProtos.Session.Attribute.Builder.class);
         }
-        
+
         // Construct using me.yabble.web.proto.WebProtos.Session.Attribute.newBuilder()
         private Builder() {
           maybeForceBuilderInitialization();
         }
-        
-        private Builder(BuilderParent parent) {
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
           super(parent);
           maybeForceBuilderInitialization();
         }
@@ -353,7 +796,7 @@ public final class WebProtos {
         private static Builder create() {
           return new Builder();
         }
-        
+
         public Builder clear() {
           super.clear();
           key_ = "";
@@ -362,20 +805,20 @@ public final class WebProtos {
           bitField0_ = (bitField0_ & ~0x00000002);
           return this;
         }
-        
+
         public Builder clone() {
           return create().mergeFrom(buildPartial());
         }
-        
+
         public com.google.protobuf.Descriptors.Descriptor
             getDescriptorForType() {
-          return me.yabble.web.proto.WebProtos.Session.Attribute.getDescriptor();
+          return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_Attribute_descriptor;
         }
-        
+
         public me.yabble.web.proto.WebProtos.Session.Attribute getDefaultInstanceForType() {
           return me.yabble.web.proto.WebProtos.Session.Attribute.getDefaultInstance();
         }
-        
+
         public me.yabble.web.proto.WebProtos.Session.Attribute build() {
           me.yabble.web.proto.WebProtos.Session.Attribute result = buildPartial();
           if (!result.isInitialized()) {
@@ -383,17 +826,7 @@ public final class WebProtos {
           }
           return result;
         }
-        
-        private me.yabble.web.proto.WebProtos.Session.Attribute buildParsed()
-            throws com.google.protobuf.InvalidProtocolBufferException {
-          me.yabble.web.proto.WebProtos.Session.Attribute result = buildPartial();
-          if (!result.isInitialized()) {
-            throw newUninitializedMessageException(
-              result).asInvalidProtocolBufferException();
-          }
-          return result;
-        }
-        
+
         public me.yabble.web.proto.WebProtos.Session.Attribute buildPartial() {
           me.yabble.web.proto.WebProtos.Session.Attribute result = new me.yabble.web.proto.WebProtos.Session.Attribute(this);
           int from_bitField0_ = bitField0_;
@@ -410,7 +843,7 @@ public final class WebProtos {
           onBuilt();
           return result;
         }
-        
+
         public Builder mergeFrom(com.google.protobuf.Message other) {
           if (other instanceof me.yabble.web.proto.WebProtos.Session.Attribute) {
             return mergeFrom((me.yabble.web.proto.WebProtos.Session.Attribute)other);
@@ -419,19 +852,23 @@ public final class WebProtos {
             return this;
           }
         }
-        
+
         public Builder mergeFrom(me.yabble.web.proto.WebProtos.Session.Attribute other) {
           if (other == me.yabble.web.proto.WebProtos.Session.Attribute.getDefaultInstance()) return this;
           if (other.hasKey()) {
-            setKey(other.getKey());
+            bitField0_ |= 0x00000001;
+            key_ = other.key_;
+            onChanged();
           }
           if (other.hasValue()) {
-            setValue(other.getValue());
+            bitField0_ |= 0x00000002;
+            value_ = other.value_;
+            onChanged();
           }
           this.mergeUnknownFields(other.getUnknownFields());
           return this;
         }
-        
+
         public final boolean isInitialized() {
           if (!hasKey()) {
             
@@ -439,62 +876,69 @@ public final class WebProtos {
           }
           return true;
         }
-        
+
         public Builder mergeFrom(
             com.google.protobuf.CodedInputStream input,
             com.google.protobuf.ExtensionRegistryLite extensionRegistry)
             throws java.io.IOException {
-          com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-            com.google.protobuf.UnknownFieldSet.newBuilder(
-              this.getUnknownFields());
-          while (true) {
-            int tag = input.readTag();
-            switch (tag) {
-              case 0:
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              default: {
-                if (!parseUnknownField(input, unknownFields,
-                                       extensionRegistry, tag)) {
-                  this.setUnknownFields(unknownFields.build());
-                  onChanged();
-                  return this;
-                }
-                break;
-              }
-              case 10: {
-                bitField0_ |= 0x00000001;
-                key_ = input.readBytes();
-                break;
-              }
-              case 18: {
-                bitField0_ |= 0x00000002;
-                value_ = input.readBytes();
-                break;
-              }
+          me.yabble.web.proto.WebProtos.Session.Attribute parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (me.yabble.web.proto.WebProtos.Session.Attribute) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
             }
           }
+          return this;
         }
-        
         private int bitField0_;
-        
+
         // required string key = 1;
         private java.lang.Object key_ = "";
+        /**
+         * <code>required string key = 1;</code>
+         */
         public boolean hasKey() {
           return ((bitField0_ & 0x00000001) == 0x00000001);
         }
-        public String getKey() {
+        /**
+         * <code>required string key = 1;</code>
+         */
+        public java.lang.String getKey() {
           java.lang.Object ref = key_;
-          if (!(ref instanceof String)) {
-            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
             key_ = s;
             return s;
           } else {
-            return (String) ref;
+            return (java.lang.String) ref;
           }
         }
-        public Builder setKey(String value) {
+        /**
+         * <code>required string key = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getKeyBytes() {
+          java.lang.Object ref = key_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            key_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>required string key = 1;</code>
+         */
+        public Builder setKey(
+            java.lang.String value) {
           if (value == null) {
     throw new NullPointerException();
   }
@@ -503,34 +947,72 @@ public final class WebProtos {
           onChanged();
           return this;
         }
+        /**
+         * <code>required string key = 1;</code>
+         */
         public Builder clearKey() {
           bitField0_ = (bitField0_ & ~0x00000001);
           key_ = getDefaultInstance().getKey();
           onChanged();
           return this;
         }
-        void setKey(com.google.protobuf.ByteString value) {
-          bitField0_ |= 0x00000001;
+        /**
+         * <code>required string key = 1;</code>
+         */
+        public Builder setKeyBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
           key_ = value;
           onChanged();
+          return this;
         }
-        
+
         // optional string value = 2;
         private java.lang.Object value_ = "";
+        /**
+         * <code>optional string value = 2;</code>
+         */
         public boolean hasValue() {
           return ((bitField0_ & 0x00000002) == 0x00000002);
         }
-        public String getValue() {
+        /**
+         * <code>optional string value = 2;</code>
+         */
+        public java.lang.String getValue() {
           java.lang.Object ref = value_;
-          if (!(ref instanceof String)) {
-            String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+          if (!(ref instanceof java.lang.String)) {
+            java.lang.String s = ((com.google.protobuf.ByteString) ref)
+                .toStringUtf8();
             value_ = s;
             return s;
           } else {
-            return (String) ref;
+            return (java.lang.String) ref;
           }
         }
-        public Builder setValue(String value) {
+        /**
+         * <code>optional string value = 2;</code>
+         */
+        public com.google.protobuf.ByteString
+            getValueBytes() {
+          java.lang.Object ref = value_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            value_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string value = 2;</code>
+         */
+        public Builder setValue(
+            java.lang.String value) {
           if (value == null) {
     throw new NullPointerException();
   }
@@ -539,231 +1021,1028 @@ public final class WebProtos {
           onChanged();
           return this;
         }
+        /**
+         * <code>optional string value = 2;</code>
+         */
         public Builder clearValue() {
           bitField0_ = (bitField0_ & ~0x00000002);
           value_ = getDefaultInstance().getValue();
           onChanged();
           return this;
         }
-        void setValue(com.google.protobuf.ByteString value) {
-          bitField0_ |= 0x00000002;
+        /**
+         * <code>optional string value = 2;</code>
+         */
+        public Builder setValueBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
           value_ = value;
           onChanged();
+          return this;
         }
-        
+
         // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.Session.Attribute)
       }
-      
+
       static {
         defaultInstance = new Attribute(true);
         defaultInstance.initFields();
       }
-      
+
       // @@protoc_insertion_point(class_scope:me.yabble.web.proto.Session.Attribute)
     }
-    
+
+    public interface FormEntryOrBuilder
+        extends com.google.protobuf.MessageOrBuilder {
+
+      // required .me.yabble.web.proto.Session.FormEntry.Type type = 1;
+      /**
+       * <code>required .me.yabble.web.proto.Session.FormEntry.Type type = 1;</code>
+       */
+      boolean hasType();
+      /**
+       * <code>required .me.yabble.web.proto.Session.FormEntry.Type type = 1;</code>
+       */
+      me.yabble.web.proto.WebProtos.Session.FormEntry.Type getType();
+
+      // required bytes serialized_form = 2;
+      /**
+       * <code>required bytes serialized_form = 2;</code>
+       */
+      boolean hasSerializedForm();
+      /**
+       * <code>required bytes serialized_form = 2;</code>
+       */
+      com.google.protobuf.ByteString getSerializedForm();
+    }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.Session.FormEntry}
+     */
+    public static final class FormEntry extends
+        com.google.protobuf.GeneratedMessage
+        implements FormEntryOrBuilder {
+      // Use FormEntry.newBuilder() to construct.
+      private FormEntry(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+        super(builder);
+        this.unknownFields = builder.getUnknownFields();
+      }
+      private FormEntry(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+      private static final FormEntry defaultInstance;
+      public static FormEntry getDefaultInstance() {
+        return defaultInstance;
+      }
+
+      public FormEntry getDefaultInstanceForType() {
+        return defaultInstance;
+      }
+
+      private final com.google.protobuf.UnknownFieldSet unknownFields;
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+          getUnknownFields() {
+        return this.unknownFields;
+      }
+      private FormEntry(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        initFields();
+        int mutable_bitField0_ = 0;
+        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+            com.google.protobuf.UnknownFieldSet.newBuilder();
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!parseUnknownField(input, unknownFields,
+                                       extensionRegistry, tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 8: {
+                int rawValue = input.readEnum();
+                me.yabble.web.proto.WebProtos.Session.FormEntry.Type value = me.yabble.web.proto.WebProtos.Session.FormEntry.Type.valueOf(rawValue);
+                if (value == null) {
+                  unknownFields.mergeVarintField(1, rawValue);
+                } else {
+                  bitField0_ |= 0x00000001;
+                  type_ = value;
+                }
+                break;
+              }
+              case 18: {
+                bitField0_ |= 0x00000002;
+                serializedForm_ = input.readBytes();
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e.getMessage()).setUnfinishedMessage(this);
+        } finally {
+          this.unknownFields = unknownFields.build();
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_FormEntry_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_FormEntry_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.Session.FormEntry.class, me.yabble.web.proto.WebProtos.Session.FormEntry.Builder.class);
+      }
+
+      public static com.google.protobuf.Parser<FormEntry> PARSER =
+          new com.google.protobuf.AbstractParser<FormEntry>() {
+        public FormEntry parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+          return new FormEntry(input, extensionRegistry);
+        }
+      };
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<FormEntry> getParserForType() {
+        return PARSER;
+      }
+
+      /**
+       * Protobuf enum {@code me.yabble.web.proto.Session.FormEntry.Type}
+       */
+      public enum Type
+          implements com.google.protobuf.ProtocolMessageEnum {
+        /**
+         * <code>USER = 1;</code>
+         */
+        USER(0, 1),
+        ;
+
+        /**
+         * <code>USER = 1;</code>
+         */
+        public static final int USER_VALUE = 1;
+
+
+        public final int getNumber() { return value; }
+
+        public static Type valueOf(int value) {
+          switch (value) {
+            case 1: return USER;
+            default: return null;
+          }
+        }
+
+        public static com.google.protobuf.Internal.EnumLiteMap<Type>
+            internalGetValueMap() {
+          return internalValueMap;
+        }
+        private static com.google.protobuf.Internal.EnumLiteMap<Type>
+            internalValueMap =
+              new com.google.protobuf.Internal.EnumLiteMap<Type>() {
+                public Type findValueByNumber(int number) {
+                  return Type.valueOf(number);
+                }
+              };
+
+        public final com.google.protobuf.Descriptors.EnumValueDescriptor
+            getValueDescriptor() {
+          return getDescriptor().getValues().get(index);
+        }
+        public final com.google.protobuf.Descriptors.EnumDescriptor
+            getDescriptorForType() {
+          return getDescriptor();
+        }
+        public static final com.google.protobuf.Descriptors.EnumDescriptor
+            getDescriptor() {
+          return me.yabble.web.proto.WebProtos.Session.FormEntry.getDescriptor().getEnumTypes().get(0);
+        }
+
+        private static final Type[] VALUES = values();
+
+        public static Type valueOf(
+            com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
+          if (desc.getType() != getDescriptor()) {
+            throw new java.lang.IllegalArgumentException(
+              "EnumValueDescriptor is not for this type.");
+          }
+          return VALUES[desc.getIndex()];
+        }
+
+        private final int index;
+        private final int value;
+
+        private Type(int index, int value) {
+          this.index = index;
+          this.value = value;
+        }
+
+        // @@protoc_insertion_point(enum_scope:me.yabble.web.proto.Session.FormEntry.Type)
+      }
+
+      private int bitField0_;
+      // required .me.yabble.web.proto.Session.FormEntry.Type type = 1;
+      public static final int TYPE_FIELD_NUMBER = 1;
+      private me.yabble.web.proto.WebProtos.Session.FormEntry.Type type_;
+      /**
+       * <code>required .me.yabble.web.proto.Session.FormEntry.Type type = 1;</code>
+       */
+      public boolean hasType() {
+        return ((bitField0_ & 0x00000001) == 0x00000001);
+      }
+      /**
+       * <code>required .me.yabble.web.proto.Session.FormEntry.Type type = 1;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Session.FormEntry.Type getType() {
+        return type_;
+      }
+
+      // required bytes serialized_form = 2;
+      public static final int SERIALIZED_FORM_FIELD_NUMBER = 2;
+      private com.google.protobuf.ByteString serializedForm_;
+      /**
+       * <code>required bytes serialized_form = 2;</code>
+       */
+      public boolean hasSerializedForm() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required bytes serialized_form = 2;</code>
+       */
+      public com.google.protobuf.ByteString getSerializedForm() {
+        return serializedForm_;
+      }
+
+      private void initFields() {
+        type_ = me.yabble.web.proto.WebProtos.Session.FormEntry.Type.USER;
+        serializedForm_ = com.google.protobuf.ByteString.EMPTY;
+      }
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized != -1) return isInitialized == 1;
+
+        if (!hasType()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        if (!hasSerializedForm()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          output.writeEnum(1, type_.getNumber());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          output.writeBytes(2, serializedForm_);
+        }
+        getUnknownFields().writeTo(output);
+      }
+
+      private int memoizedSerializedSize = -1;
+      public int getSerializedSize() {
+        int size = memoizedSerializedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (((bitField0_ & 0x00000001) == 0x00000001)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeEnumSize(1, type_.getNumber());
+        }
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          size += com.google.protobuf.CodedOutputStream
+            .computeBytesSize(2, serializedForm_);
+        }
+        size += getUnknownFields().getSerializedSize();
+        memoizedSerializedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      protected java.lang.Object writeReplace()
+          throws java.io.ObjectStreamException {
+        return super.writeReplace();
+      }
+
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseDelimitedFrom(input, extensionRegistry);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input);
+      }
+      public static me.yabble.web.proto.WebProtos.Session.FormEntry parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return PARSER.parseFrom(input, extensionRegistry);
+      }
+
+      public static Builder newBuilder() { return Builder.create(); }
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder(me.yabble.web.proto.WebProtos.Session.FormEntry prototype) {
+        return newBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() { return newBuilder(this); }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code me.yabble.web.proto.Session.FormEntry}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessage.Builder<Builder>
+         implements me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_FormEntry_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_FormEntry_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  me.yabble.web.proto.WebProtos.Session.FormEntry.class, me.yabble.web.proto.WebProtos.Session.FormEntry.Builder.class);
+        }
+
+        // Construct using me.yabble.web.proto.WebProtos.Session.FormEntry.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          }
+        }
+        private static Builder create() {
+          return new Builder();
+        }
+
+        public Builder clear() {
+          super.clear();
+          type_ = me.yabble.web.proto.WebProtos.Session.FormEntry.Type.USER;
+          bitField0_ = (bitField0_ & ~0x00000001);
+          serializedForm_ = com.google.protobuf.ByteString.EMPTY;
+          bitField0_ = (bitField0_ & ~0x00000002);
+          return this;
+        }
+
+        public Builder clone() {
+          return create().mergeFrom(buildPartial());
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_FormEntry_descriptor;
+        }
+
+        public me.yabble.web.proto.WebProtos.Session.FormEntry getDefaultInstanceForType() {
+          return me.yabble.web.proto.WebProtos.Session.FormEntry.getDefaultInstance();
+        }
+
+        public me.yabble.web.proto.WebProtos.Session.FormEntry build() {
+          me.yabble.web.proto.WebProtos.Session.FormEntry result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public me.yabble.web.proto.WebProtos.Session.FormEntry buildPartial() {
+          me.yabble.web.proto.WebProtos.Session.FormEntry result = new me.yabble.web.proto.WebProtos.Session.FormEntry(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          if (((from_bitField0_ & 0x00000001) == 0x00000001)) {
+            to_bitField0_ |= 0x00000001;
+          }
+          result.type_ = type_;
+          if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+            to_bitField0_ |= 0x00000002;
+          }
+          result.serializedForm_ = serializedForm_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof me.yabble.web.proto.WebProtos.Session.FormEntry) {
+            return mergeFrom((me.yabble.web.proto.WebProtos.Session.FormEntry)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(me.yabble.web.proto.WebProtos.Session.FormEntry other) {
+          if (other == me.yabble.web.proto.WebProtos.Session.FormEntry.getDefaultInstance()) return this;
+          if (other.hasType()) {
+            setType(other.getType());
+          }
+          if (other.hasSerializedForm()) {
+            setSerializedForm(other.getSerializedForm());
+          }
+          this.mergeUnknownFields(other.getUnknownFields());
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          if (!hasType()) {
+            
+            return false;
+          }
+          if (!hasSerializedForm()) {
+            
+            return false;
+          }
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          me.yabble.web.proto.WebProtos.Session.FormEntry parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (me.yabble.web.proto.WebProtos.Session.FormEntry) e.getUnfinishedMessage();
+            throw e;
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        // required .me.yabble.web.proto.Session.FormEntry.Type type = 1;
+        private me.yabble.web.proto.WebProtos.Session.FormEntry.Type type_ = me.yabble.web.proto.WebProtos.Session.FormEntry.Type.USER;
+        /**
+         * <code>required .me.yabble.web.proto.Session.FormEntry.Type type = 1;</code>
+         */
+        public boolean hasType() {
+          return ((bitField0_ & 0x00000001) == 0x00000001);
+        }
+        /**
+         * <code>required .me.yabble.web.proto.Session.FormEntry.Type type = 1;</code>
+         */
+        public me.yabble.web.proto.WebProtos.Session.FormEntry.Type getType() {
+          return type_;
+        }
+        /**
+         * <code>required .me.yabble.web.proto.Session.FormEntry.Type type = 1;</code>
+         */
+        public Builder setType(me.yabble.web.proto.WebProtos.Session.FormEntry.Type value) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          bitField0_ |= 0x00000001;
+          type_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required .me.yabble.web.proto.Session.FormEntry.Type type = 1;</code>
+         */
+        public Builder clearType() {
+          bitField0_ = (bitField0_ & ~0x00000001);
+          type_ = me.yabble.web.proto.WebProtos.Session.FormEntry.Type.USER;
+          onChanged();
+          return this;
+        }
+
+        // required bytes serialized_form = 2;
+        private com.google.protobuf.ByteString serializedForm_ = com.google.protobuf.ByteString.EMPTY;
+        /**
+         * <code>required bytes serialized_form = 2;</code>
+         */
+        public boolean hasSerializedForm() {
+          return ((bitField0_ & 0x00000002) == 0x00000002);
+        }
+        /**
+         * <code>required bytes serialized_form = 2;</code>
+         */
+        public com.google.protobuf.ByteString getSerializedForm() {
+          return serializedForm_;
+        }
+        /**
+         * <code>required bytes serialized_form = 2;</code>
+         */
+        public Builder setSerializedForm(com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
+          serializedForm_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>required bytes serialized_form = 2;</code>
+         */
+        public Builder clearSerializedForm() {
+          bitField0_ = (bitField0_ & ~0x00000002);
+          serializedForm_ = getDefaultInstance().getSerializedForm();
+          onChanged();
+          return this;
+        }
+
+        // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.Session.FormEntry)
+      }
+
+      static {
+        defaultInstance = new FormEntry(true);
+        defaultInstance.initFields();
+      }
+
+      // @@protoc_insertion_point(class_scope:me.yabble.web.proto.Session.FormEntry)
+    }
+
     private int bitField0_;
     // required string id = 1;
     public static final int ID_FIELD_NUMBER = 1;
     private java.lang.Object id_;
+    /**
+     * <code>required string id = 1;</code>
+     */
     public boolean hasId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public String getId() {
+    /**
+     * <code>required string id = 1;</code>
+     */
+    public java.lang.String getId() {
       java.lang.Object ref = id_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           id_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getIdBytes() {
+    /**
+     * <code>required string id = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getIdBytes() {
       java.lang.Object ref = id_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         id_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     // required string creation_date = 2;
     public static final int CREATION_DATE_FIELD_NUMBER = 2;
     private java.lang.Object creationDate_;
+    /**
+     * <code>required string creation_date = 2;</code>
+     */
     public boolean hasCreationDate() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public String getCreationDate() {
+    /**
+     * <code>required string creation_date = 2;</code>
+     */
+    public java.lang.String getCreationDate() {
       java.lang.Object ref = creationDate_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           creationDate_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getCreationDateBytes() {
+    /**
+     * <code>required string creation_date = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCreationDateBytes() {
       java.lang.Object ref = creationDate_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         creationDate_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     // optional string user_id = 3;
     public static final int USER_ID_FIELD_NUMBER = 3;
     private java.lang.Object userId_;
+    /**
+     * <code>optional string user_id = 3;</code>
+     */
     public boolean hasUserId() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
-    public String getUserId() {
+    /**
+     * <code>optional string user_id = 3;</code>
+     */
+    public java.lang.String getUserId() {
       java.lang.Object ref = userId_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           userId_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getUserIdBytes() {
+    /**
+     * <code>optional string user_id = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getUserIdBytes() {
       java.lang.Object ref = userId_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         userId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     // repeated .me.yabble.web.proto.Session.Attribute attribute = 4;
     public static final int ATTRIBUTE_FIELD_NUMBER = 4;
     private java.util.List<me.yabble.web.proto.WebProtos.Session.Attribute> attribute_;
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     public java.util.List<me.yabble.web.proto.WebProtos.Session.Attribute> getAttributeList() {
       return attribute_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     public java.util.List<? extends me.yabble.web.proto.WebProtos.Session.AttributeOrBuilder> 
         getAttributeOrBuilderList() {
       return attribute_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     public int getAttributeCount() {
       return attribute_.size();
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     public me.yabble.web.proto.WebProtos.Session.Attribute getAttribute(int index) {
       return attribute_.get(index);
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+     */
     public me.yabble.web.proto.WebProtos.Session.AttributeOrBuilder getAttributeOrBuilder(
         int index) {
       return attribute_.get(index);
     }
-    
+
     // optional .me.yabble.web.proto.ListForm list_form = 5;
     public static final int LIST_FORM_FIELD_NUMBER = 5;
     private me.yabble.web.proto.WebProtos.ListForm listForm_;
+    /**
+     * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+     */
     public boolean hasListForm() {
       return ((bitField0_ & 0x00000008) == 0x00000008);
     }
+    /**
+     * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+     */
     public me.yabble.web.proto.WebProtos.ListForm getListForm() {
       return listForm_;
     }
+    /**
+     * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+     */
     public me.yabble.web.proto.WebProtos.ListFormOrBuilder getListFormOrBuilder() {
       return listForm_;
     }
-    
+
     // optional .me.yabble.web.proto.ListItemForm list_item_form = 6;
     public static final int LIST_ITEM_FORM_FIELD_NUMBER = 6;
     private me.yabble.web.proto.WebProtos.ListItemForm listItemForm_;
+    /**
+     * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+     */
     public boolean hasListItemForm() {
       return ((bitField0_ & 0x00000010) == 0x00000010);
     }
+    /**
+     * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+     */
     public me.yabble.web.proto.WebProtos.ListItemForm getListItemForm() {
       return listItemForm_;
     }
+    /**
+     * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+     */
     public me.yabble.web.proto.WebProtos.ListItemFormOrBuilder getListItemFormOrBuilder() {
       return listItemForm_;
     }
-    
+
     // optional .me.yabble.web.proto.LoginForm login_form = 7;
     public static final int LOGIN_FORM_FIELD_NUMBER = 7;
     private me.yabble.web.proto.WebProtos.LoginForm loginForm_;
+    /**
+     * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+     */
     public boolean hasLoginForm() {
       return ((bitField0_ & 0x00000020) == 0x00000020);
     }
+    /**
+     * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+     */
     public me.yabble.web.proto.WebProtos.LoginForm getLoginForm() {
       return loginForm_;
     }
+    /**
+     * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+     */
     public me.yabble.web.proto.WebProtos.LoginFormOrBuilder getLoginFormOrBuilder() {
       return loginForm_;
     }
-    
+
     // optional string after_login_redirect_path = 8;
     public static final int AFTER_LOGIN_REDIRECT_PATH_FIELD_NUMBER = 8;
     private java.lang.Object afterLoginRedirectPath_;
+    /**
+     * <code>optional string after_login_redirect_path = 8;</code>
+     *
+     * <pre>
+     * Deprecated
+     * </pre>
+     */
     public boolean hasAfterLoginRedirectPath() {
       return ((bitField0_ & 0x00000040) == 0x00000040);
     }
-    public String getAfterLoginRedirectPath() {
+    /**
+     * <code>optional string after_login_redirect_path = 8;</code>
+     *
+     * <pre>
+     * Deprecated
+     * </pre>
+     */
+    public java.lang.String getAfterLoginRedirectPath() {
       java.lang.Object ref = afterLoginRedirectPath_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           afterLoginRedirectPath_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getAfterLoginRedirectPathBytes() {
+    /**
+     * <code>optional string after_login_redirect_path = 8;</code>
+     *
+     * <pre>
+     * Deprecated
+     * </pre>
+     */
+    public com.google.protobuf.ByteString
+        getAfterLoginRedirectPathBytes() {
       java.lang.Object ref = afterLoginRedirectPath_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         afterLoginRedirectPath_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     // optional .me.yabble.web.proto.RegisterForm register_form = 9;
     public static final int REGISTER_FORM_FIELD_NUMBER = 9;
     private me.yabble.web.proto.WebProtos.RegisterForm registerForm_;
+    /**
+     * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+     */
     public boolean hasRegisterForm() {
       return ((bitField0_ & 0x00000080) == 0x00000080);
     }
+    /**
+     * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+     */
     public me.yabble.web.proto.WebProtos.RegisterForm getRegisterForm() {
       return registerForm_;
     }
+    /**
+     * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+     */
     public me.yabble.web.proto.WebProtos.RegisterFormOrBuilder getRegisterFormOrBuilder() {
       return registerForm_;
     }
-    
+
+    // optional string redirect_path = 10;
+    public static final int REDIRECT_PATH_FIELD_NUMBER = 10;
+    private java.lang.Object redirectPath_;
+    /**
+     * <code>optional string redirect_path = 10;</code>
+     */
+    public boolean hasRedirectPath() {
+      return ((bitField0_ & 0x00000100) == 0x00000100);
+    }
+    /**
+     * <code>optional string redirect_path = 10;</code>
+     */
+    public java.lang.String getRedirectPath() {
+      java.lang.Object ref = redirectPath_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
+          redirectPath_ = s;
+        }
+        return s;
+      }
+    }
+    /**
+     * <code>optional string redirect_path = 10;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRedirectPathBytes() {
+      java.lang.Object ref = redirectPath_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        redirectPath_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    // optional .me.yabble.web.proto.UserForm user_form = 11;
+    public static final int USER_FORM_FIELD_NUMBER = 11;
+    private me.yabble.web.proto.WebProtos.UserForm userForm_;
+    /**
+     * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+     */
+    public boolean hasUserForm() {
+      return ((bitField0_ & 0x00000200) == 0x00000200);
+    }
+    /**
+     * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+     */
+    public me.yabble.web.proto.WebProtos.UserForm getUserForm() {
+      return userForm_;
+    }
+    /**
+     * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+     */
+    public me.yabble.web.proto.WebProtos.UserFormOrBuilder getUserFormOrBuilder() {
+      return userForm_;
+    }
+
+    // repeated .me.yabble.web.proto.Session.FormEntry form = 12;
+    public static final int FORM_FIELD_NUMBER = 12;
+    private java.util.List<me.yabble.web.proto.WebProtos.Session.FormEntry> form_;
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    public java.util.List<me.yabble.web.proto.WebProtos.Session.FormEntry> getFormList() {
+      return form_;
+    }
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    public java.util.List<? extends me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder> 
+        getFormOrBuilderList() {
+      return form_;
+    }
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    public int getFormCount() {
+      return form_.size();
+    }
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    public me.yabble.web.proto.WebProtos.Session.FormEntry getForm(int index) {
+      return form_.get(index);
+    }
+    /**
+     * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+     */
+    public me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder getFormOrBuilder(
+        int index) {
+      return form_.get(index);
+    }
+
     private void initFields() {
       id_ = "";
       creationDate_ = "";
@@ -774,12 +2053,15 @@ public final class WebProtos {
       loginForm_ = me.yabble.web.proto.WebProtos.LoginForm.getDefaultInstance();
       afterLoginRedirectPath_ = "";
       registerForm_ = me.yabble.web.proto.WebProtos.RegisterForm.getDefaultInstance();
+      redirectPath_ = "";
+      userForm_ = me.yabble.web.proto.WebProtos.UserForm.getDefaultInstance();
+      form_ = java.util.Collections.emptyList();
     }
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       if (!hasId()) {
         memoizedIsInitialized = 0;
         return false;
@@ -818,10 +2100,22 @@ public final class WebProtos {
           return false;
         }
       }
+      if (hasUserForm()) {
+        if (!getUserForm().isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      for (int i = 0; i < getFormCount(); i++) {
+        if (!getForm(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -852,14 +2146,23 @@ public final class WebProtos {
       if (((bitField0_ & 0x00000080) == 0x00000080)) {
         output.writeMessage(9, registerForm_);
       }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        output.writeBytes(10, getRedirectPathBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        output.writeMessage(11, userForm_);
+      }
+      for (int i = 0; i < form_.size(); i++) {
+        output.writeMessage(12, form_.get(i));
+      }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -897,98 +2200,99 @@ public final class WebProtos {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(9, registerForm_);
       }
+      if (((bitField0_ & 0x00000100) == 0x00000100)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(10, getRedirectPathBytes());
+      }
+      if (((bitField0_ & 0x00000200) == 0x00000200)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(11, userForm_);
+      }
+      for (int i = 0; i < form_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, form_.get(i));
+      }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static me.yabble.web.proto.WebProtos.Session parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.Session parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.Session parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.Session parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.Session parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.Session parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.Session parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.Session parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.Session parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.Session parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(me.yabble.web.proto.WebProtos.Session prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.Session}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements me.yabble.web.proto.WebProtos.SessionOrBuilder {
@@ -996,18 +2300,21 @@ public final class WebProtos {
           getDescriptor() {
         return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_fieldAccessorTable;
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.Session.class, me.yabble.web.proto.WebProtos.Session.Builder.class);
       }
-      
+
       // Construct using me.yabble.web.proto.WebProtos.Session.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -1018,12 +2325,14 @@ public final class WebProtos {
           getListItemFormFieldBuilder();
           getLoginFormFieldBuilder();
           getRegisterFormFieldBuilder();
+          getUserFormFieldBuilder();
+          getFormFieldBuilder();
         }
       }
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         id_ = "";
@@ -1064,22 +2373,36 @@ public final class WebProtos {
           registerFormBuilder_.clear();
         }
         bitField0_ = (bitField0_ & ~0x00000100);
+        redirectPath_ = "";
+        bitField0_ = (bitField0_ & ~0x00000200);
+        if (userFormBuilder_ == null) {
+          userForm_ = me.yabble.web.proto.WebProtos.UserForm.getDefaultInstance();
+        } else {
+          userFormBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        if (formBuilder_ == null) {
+          form_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000800);
+        } else {
+          formBuilder_.clear();
+        }
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return me.yabble.web.proto.WebProtos.Session.getDescriptor();
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Session_descriptor;
       }
-      
+
       public me.yabble.web.proto.WebProtos.Session getDefaultInstanceForType() {
         return me.yabble.web.proto.WebProtos.Session.getDefaultInstance();
       }
-      
+
       public me.yabble.web.proto.WebProtos.Session build() {
         me.yabble.web.proto.WebProtos.Session result = buildPartial();
         if (!result.isInitialized()) {
@@ -1087,17 +2410,7 @@ public final class WebProtos {
         }
         return result;
       }
-      
-      private me.yabble.web.proto.WebProtos.Session buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        me.yabble.web.proto.WebProtos.Session result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public me.yabble.web.proto.WebProtos.Session buildPartial() {
         me.yabble.web.proto.WebProtos.Session result = new me.yabble.web.proto.WebProtos.Session(this);
         int from_bitField0_ = bitField0_;
@@ -1159,11 +2472,32 @@ public final class WebProtos {
         } else {
           result.registerForm_ = registerFormBuilder_.build();
         }
+        if (((from_bitField0_ & 0x00000200) == 0x00000200)) {
+          to_bitField0_ |= 0x00000100;
+        }
+        result.redirectPath_ = redirectPath_;
+        if (((from_bitField0_ & 0x00000400) == 0x00000400)) {
+          to_bitField0_ |= 0x00000200;
+        }
+        if (userFormBuilder_ == null) {
+          result.userForm_ = userForm_;
+        } else {
+          result.userForm_ = userFormBuilder_.build();
+        }
+        if (formBuilder_ == null) {
+          if (((bitField0_ & 0x00000800) == 0x00000800)) {
+            form_ = java.util.Collections.unmodifiableList(form_);
+            bitField0_ = (bitField0_ & ~0x00000800);
+          }
+          result.form_ = form_;
+        } else {
+          result.form_ = formBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof me.yabble.web.proto.WebProtos.Session) {
           return mergeFrom((me.yabble.web.proto.WebProtos.Session)other);
@@ -1172,17 +2506,23 @@ public final class WebProtos {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(me.yabble.web.proto.WebProtos.Session other) {
         if (other == me.yabble.web.proto.WebProtos.Session.getDefaultInstance()) return this;
         if (other.hasId()) {
-          setId(other.getId());
+          bitField0_ |= 0x00000001;
+          id_ = other.id_;
+          onChanged();
         }
         if (other.hasCreationDate()) {
-          setCreationDate(other.getCreationDate());
+          bitField0_ |= 0x00000002;
+          creationDate_ = other.creationDate_;
+          onChanged();
         }
         if (other.hasUserId()) {
-          setUserId(other.getUserId());
+          bitField0_ |= 0x00000004;
+          userId_ = other.userId_;
+          onChanged();
         }
         if (attributeBuilder_ == null) {
           if (!other.attribute_.isEmpty()) {
@@ -1220,15 +2560,51 @@ public final class WebProtos {
           mergeLoginForm(other.getLoginForm());
         }
         if (other.hasAfterLoginRedirectPath()) {
-          setAfterLoginRedirectPath(other.getAfterLoginRedirectPath());
+          bitField0_ |= 0x00000080;
+          afterLoginRedirectPath_ = other.afterLoginRedirectPath_;
+          onChanged();
         }
         if (other.hasRegisterForm()) {
           mergeRegisterForm(other.getRegisterForm());
         }
+        if (other.hasRedirectPath()) {
+          bitField0_ |= 0x00000200;
+          redirectPath_ = other.redirectPath_;
+          onChanged();
+        }
+        if (other.hasUserForm()) {
+          mergeUserForm(other.getUserForm());
+        }
+        if (formBuilder_ == null) {
+          if (!other.form_.isEmpty()) {
+            if (form_.isEmpty()) {
+              form_ = other.form_;
+              bitField0_ = (bitField0_ & ~0x00000800);
+            } else {
+              ensureFormIsMutable();
+              form_.addAll(other.form_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.form_.isEmpty()) {
+            if (formBuilder_.isEmpty()) {
+              formBuilder_.dispose();
+              formBuilder_ = null;
+              form_ = other.form_;
+              bitField0_ = (bitField0_ & ~0x00000800);
+              formBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getFormFieldBuilder() : null;
+            } else {
+              formBuilder_.addAllMessages(other.form_);
+            }
+          }
+        }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         if (!hasId()) {
           
@@ -1268,116 +2644,83 @@ public final class WebProtos {
             return false;
           }
         }
+        if (hasUserForm()) {
+          if (!getUserForm().isInitialized()) {
+            
+            return false;
+          }
+        }
+        for (int i = 0; i < getFormCount(); i++) {
+          if (!getForm(i).isInitialized()) {
+            
+            return false;
+          }
+        }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              id_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              creationDate_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              bitField0_ |= 0x00000004;
-              userId_ = input.readBytes();
-              break;
-            }
-            case 34: {
-              me.yabble.web.proto.WebProtos.Session.Attribute.Builder subBuilder = me.yabble.web.proto.WebProtos.Session.Attribute.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addAttribute(subBuilder.buildPartial());
-              break;
-            }
-            case 42: {
-              me.yabble.web.proto.WebProtos.ListForm.Builder subBuilder = me.yabble.web.proto.WebProtos.ListForm.newBuilder();
-              if (hasListForm()) {
-                subBuilder.mergeFrom(getListForm());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setListForm(subBuilder.buildPartial());
-              break;
-            }
-            case 50: {
-              me.yabble.web.proto.WebProtos.ListItemForm.Builder subBuilder = me.yabble.web.proto.WebProtos.ListItemForm.newBuilder();
-              if (hasListItemForm()) {
-                subBuilder.mergeFrom(getListItemForm());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setListItemForm(subBuilder.buildPartial());
-              break;
-            }
-            case 58: {
-              me.yabble.web.proto.WebProtos.LoginForm.Builder subBuilder = me.yabble.web.proto.WebProtos.LoginForm.newBuilder();
-              if (hasLoginForm()) {
-                subBuilder.mergeFrom(getLoginForm());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setLoginForm(subBuilder.buildPartial());
-              break;
-            }
-            case 66: {
-              bitField0_ |= 0x00000080;
-              afterLoginRedirectPath_ = input.readBytes();
-              break;
-            }
-            case 74: {
-              me.yabble.web.proto.WebProtos.RegisterForm.Builder subBuilder = me.yabble.web.proto.WebProtos.RegisterForm.newBuilder();
-              if (hasRegisterForm()) {
-                subBuilder.mergeFrom(getRegisterForm());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setRegisterForm(subBuilder.buildPartial());
-              break;
-            }
+        me.yabble.web.proto.WebProtos.Session parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (me.yabble.web.proto.WebProtos.Session) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // required string id = 1;
       private java.lang.Object id_ = "";
+      /**
+       * <code>required string id = 1;</code>
+       */
       public boolean hasId() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public String getId() {
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public java.lang.String getId() {
         java.lang.Object ref = id_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           id_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setId(String value) {
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getIdBytes() {
+        java.lang.Object ref = id_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          id_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public Builder setId(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1386,34 +2729,72 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>required string id = 1;</code>
+       */
       public Builder clearId() {
         bitField0_ = (bitField0_ & ~0x00000001);
         id_ = getDefaultInstance().getId();
         onChanged();
         return this;
       }
-      void setId(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000001;
+      /**
+       * <code>required string id = 1;</code>
+       */
+      public Builder setIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         id_ = value;
         onChanged();
+        return this;
       }
-      
+
       // required string creation_date = 2;
       private java.lang.Object creationDate_ = "";
+      /**
+       * <code>required string creation_date = 2;</code>
+       */
       public boolean hasCreationDate() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getCreationDate() {
+      /**
+       * <code>required string creation_date = 2;</code>
+       */
+      public java.lang.String getCreationDate() {
         java.lang.Object ref = creationDate_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           creationDate_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setCreationDate(String value) {
+      /**
+       * <code>required string creation_date = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCreationDateBytes() {
+        java.lang.Object ref = creationDate_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          creationDate_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string creation_date = 2;</code>
+       */
+      public Builder setCreationDate(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1422,34 +2803,72 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>required string creation_date = 2;</code>
+       */
       public Builder clearCreationDate() {
         bitField0_ = (bitField0_ & ~0x00000002);
         creationDate_ = getDefaultInstance().getCreationDate();
         onChanged();
         return this;
       }
-      void setCreationDate(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000002;
+      /**
+       * <code>required string creation_date = 2;</code>
+       */
+      public Builder setCreationDateBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         creationDate_ = value;
         onChanged();
+        return this;
       }
-      
+
       // optional string user_id = 3;
       private java.lang.Object userId_ = "";
+      /**
+       * <code>optional string user_id = 3;</code>
+       */
       public boolean hasUserId() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public String getUserId() {
+      /**
+       * <code>optional string user_id = 3;</code>
+       */
+      public java.lang.String getUserId() {
         java.lang.Object ref = userId_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           userId_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setUserId(String value) {
+      /**
+       * <code>optional string user_id = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getUserIdBytes() {
+        java.lang.Object ref = userId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          userId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string user_id = 3;</code>
+       */
+      public Builder setUserId(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1458,18 +2877,29 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string user_id = 3;</code>
+       */
       public Builder clearUserId() {
         bitField0_ = (bitField0_ & ~0x00000004);
         userId_ = getDefaultInstance().getUserId();
         onChanged();
         return this;
       }
-      void setUserId(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000004;
+      /**
+       * <code>optional string user_id = 3;</code>
+       */
+      public Builder setUserIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
         userId_ = value;
         onChanged();
+        return this;
       }
-      
+
       // repeated .me.yabble.web.proto.Session.Attribute attribute = 4;
       private java.util.List<me.yabble.web.proto.WebProtos.Session.Attribute> attribute_ =
         java.util.Collections.emptyList();
@@ -1479,10 +2909,13 @@ public final class WebProtos {
           bitField0_ |= 0x00000008;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           me.yabble.web.proto.WebProtos.Session.Attribute, me.yabble.web.proto.WebProtos.Session.Attribute.Builder, me.yabble.web.proto.WebProtos.Session.AttributeOrBuilder> attributeBuilder_;
-      
+
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Session.Attribute> getAttributeList() {
         if (attributeBuilder_ == null) {
           return java.util.Collections.unmodifiableList(attribute_);
@@ -1490,6 +2923,9 @@ public final class WebProtos {
           return attributeBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public int getAttributeCount() {
         if (attributeBuilder_ == null) {
           return attribute_.size();
@@ -1497,6 +2933,9 @@ public final class WebProtos {
           return attributeBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.Session.Attribute getAttribute(int index) {
         if (attributeBuilder_ == null) {
           return attribute_.get(index);
@@ -1504,6 +2943,9 @@ public final class WebProtos {
           return attributeBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder setAttribute(
           int index, me.yabble.web.proto.WebProtos.Session.Attribute value) {
         if (attributeBuilder_ == null) {
@@ -1518,6 +2960,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder setAttribute(
           int index, me.yabble.web.proto.WebProtos.Session.Attribute.Builder builderForValue) {
         if (attributeBuilder_ == null) {
@@ -1529,6 +2974,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder addAttribute(me.yabble.web.proto.WebProtos.Session.Attribute value) {
         if (attributeBuilder_ == null) {
           if (value == null) {
@@ -1542,6 +2990,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder addAttribute(
           int index, me.yabble.web.proto.WebProtos.Session.Attribute value) {
         if (attributeBuilder_ == null) {
@@ -1556,6 +3007,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder addAttribute(
           me.yabble.web.proto.WebProtos.Session.Attribute.Builder builderForValue) {
         if (attributeBuilder_ == null) {
@@ -1567,6 +3021,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder addAttribute(
           int index, me.yabble.web.proto.WebProtos.Session.Attribute.Builder builderForValue) {
         if (attributeBuilder_ == null) {
@@ -1578,6 +3035,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder addAllAttribute(
           java.lang.Iterable<? extends me.yabble.web.proto.WebProtos.Session.Attribute> values) {
         if (attributeBuilder_ == null) {
@@ -1589,6 +3049,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder clearAttribute() {
         if (attributeBuilder_ == null) {
           attribute_ = java.util.Collections.emptyList();
@@ -1599,6 +3062,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public Builder removeAttribute(int index) {
         if (attributeBuilder_ == null) {
           ensureAttributeIsMutable();
@@ -1609,10 +3075,16 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.Session.Attribute.Builder getAttributeBuilder(
           int index) {
         return getAttributeFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.Session.AttributeOrBuilder getAttributeOrBuilder(
           int index) {
         if (attributeBuilder_ == null) {
@@ -1620,6 +3092,9 @@ public final class WebProtos {
           return attributeBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public java.util.List<? extends me.yabble.web.proto.WebProtos.Session.AttributeOrBuilder> 
            getAttributeOrBuilderList() {
         if (attributeBuilder_ != null) {
@@ -1628,15 +3103,24 @@ public final class WebProtos {
           return java.util.Collections.unmodifiableList(attribute_);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.Session.Attribute.Builder addAttributeBuilder() {
         return getAttributeFieldBuilder().addBuilder(
             me.yabble.web.proto.WebProtos.Session.Attribute.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.Session.Attribute.Builder addAttributeBuilder(
           int index) {
         return getAttributeFieldBuilder().addBuilder(
             index, me.yabble.web.proto.WebProtos.Session.Attribute.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.Attribute attribute = 4;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Session.Attribute.Builder> 
            getAttributeBuilderList() {
         return getAttributeFieldBuilder().getBuilderList();
@@ -1655,14 +3139,20 @@ public final class WebProtos {
         }
         return attributeBuilder_;
       }
-      
+
       // optional .me.yabble.web.proto.ListForm list_form = 5;
       private me.yabble.web.proto.WebProtos.ListForm listForm_ = me.yabble.web.proto.WebProtos.ListForm.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.ListForm, me.yabble.web.proto.WebProtos.ListForm.Builder, me.yabble.web.proto.WebProtos.ListFormOrBuilder> listFormBuilder_;
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       public boolean hasListForm() {
         return ((bitField0_ & 0x00000010) == 0x00000010);
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       public me.yabble.web.proto.WebProtos.ListForm getListForm() {
         if (listFormBuilder_ == null) {
           return listForm_;
@@ -1670,6 +3160,9 @@ public final class WebProtos {
           return listFormBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       public Builder setListForm(me.yabble.web.proto.WebProtos.ListForm value) {
         if (listFormBuilder_ == null) {
           if (value == null) {
@@ -1683,6 +3176,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000010;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       public Builder setListForm(
           me.yabble.web.proto.WebProtos.ListForm.Builder builderForValue) {
         if (listFormBuilder_ == null) {
@@ -1694,6 +3190,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000010;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       public Builder mergeListForm(me.yabble.web.proto.WebProtos.ListForm value) {
         if (listFormBuilder_ == null) {
           if (((bitField0_ & 0x00000010) == 0x00000010) &&
@@ -1710,6 +3209,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000010;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       public Builder clearListForm() {
         if (listFormBuilder_ == null) {
           listForm_ = me.yabble.web.proto.WebProtos.ListForm.getDefaultInstance();
@@ -1720,11 +3222,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       public me.yabble.web.proto.WebProtos.ListForm.Builder getListFormBuilder() {
         bitField0_ |= 0x00000010;
         onChanged();
         return getListFormFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       public me.yabble.web.proto.WebProtos.ListFormOrBuilder getListFormOrBuilder() {
         if (listFormBuilder_ != null) {
           return listFormBuilder_.getMessageOrBuilder();
@@ -1732,6 +3240,9 @@ public final class WebProtos {
           return listForm_;
         }
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListForm list_form = 5;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.ListForm, me.yabble.web.proto.WebProtos.ListForm.Builder, me.yabble.web.proto.WebProtos.ListFormOrBuilder> 
           getListFormFieldBuilder() {
@@ -1745,14 +3256,20 @@ public final class WebProtos {
         }
         return listFormBuilder_;
       }
-      
+
       // optional .me.yabble.web.proto.ListItemForm list_item_form = 6;
       private me.yabble.web.proto.WebProtos.ListItemForm listItemForm_ = me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.ListItemForm, me.yabble.web.proto.WebProtos.ListItemForm.Builder, me.yabble.web.proto.WebProtos.ListItemFormOrBuilder> listItemFormBuilder_;
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       public boolean hasListItemForm() {
         return ((bitField0_ & 0x00000020) == 0x00000020);
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       public me.yabble.web.proto.WebProtos.ListItemForm getListItemForm() {
         if (listItemFormBuilder_ == null) {
           return listItemForm_;
@@ -1760,6 +3277,9 @@ public final class WebProtos {
           return listItemFormBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       public Builder setListItemForm(me.yabble.web.proto.WebProtos.ListItemForm value) {
         if (listItemFormBuilder_ == null) {
           if (value == null) {
@@ -1773,6 +3293,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000020;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       public Builder setListItemForm(
           me.yabble.web.proto.WebProtos.ListItemForm.Builder builderForValue) {
         if (listItemFormBuilder_ == null) {
@@ -1784,6 +3307,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000020;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       public Builder mergeListItemForm(me.yabble.web.proto.WebProtos.ListItemForm value) {
         if (listItemFormBuilder_ == null) {
           if (((bitField0_ & 0x00000020) == 0x00000020) &&
@@ -1800,6 +3326,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000020;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       public Builder clearListItemForm() {
         if (listItemFormBuilder_ == null) {
           listItemForm_ = me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance();
@@ -1810,11 +3339,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000020);
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       public me.yabble.web.proto.WebProtos.ListItemForm.Builder getListItemFormBuilder() {
         bitField0_ |= 0x00000020;
         onChanged();
         return getListItemFormFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       public me.yabble.web.proto.WebProtos.ListItemFormOrBuilder getListItemFormOrBuilder() {
         if (listItemFormBuilder_ != null) {
           return listItemFormBuilder_.getMessageOrBuilder();
@@ -1822,6 +3357,9 @@ public final class WebProtos {
           return listItemForm_;
         }
       }
+      /**
+       * <code>optional .me.yabble.web.proto.ListItemForm list_item_form = 6;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.ListItemForm, me.yabble.web.proto.WebProtos.ListItemForm.Builder, me.yabble.web.proto.WebProtos.ListItemFormOrBuilder> 
           getListItemFormFieldBuilder() {
@@ -1835,14 +3373,20 @@ public final class WebProtos {
         }
         return listItemFormBuilder_;
       }
-      
+
       // optional .me.yabble.web.proto.LoginForm login_form = 7;
       private me.yabble.web.proto.WebProtos.LoginForm loginForm_ = me.yabble.web.proto.WebProtos.LoginForm.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.LoginForm, me.yabble.web.proto.WebProtos.LoginForm.Builder, me.yabble.web.proto.WebProtos.LoginFormOrBuilder> loginFormBuilder_;
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       public boolean hasLoginForm() {
         return ((bitField0_ & 0x00000040) == 0x00000040);
       }
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       public me.yabble.web.proto.WebProtos.LoginForm getLoginForm() {
         if (loginFormBuilder_ == null) {
           return loginForm_;
@@ -1850,6 +3394,9 @@ public final class WebProtos {
           return loginFormBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       public Builder setLoginForm(me.yabble.web.proto.WebProtos.LoginForm value) {
         if (loginFormBuilder_ == null) {
           if (value == null) {
@@ -1863,6 +3410,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000040;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       public Builder setLoginForm(
           me.yabble.web.proto.WebProtos.LoginForm.Builder builderForValue) {
         if (loginFormBuilder_ == null) {
@@ -1874,6 +3424,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000040;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       public Builder mergeLoginForm(me.yabble.web.proto.WebProtos.LoginForm value) {
         if (loginFormBuilder_ == null) {
           if (((bitField0_ & 0x00000040) == 0x00000040) &&
@@ -1890,6 +3443,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000040;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       public Builder clearLoginForm() {
         if (loginFormBuilder_ == null) {
           loginForm_ = me.yabble.web.proto.WebProtos.LoginForm.getDefaultInstance();
@@ -1900,11 +3456,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000040);
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       public me.yabble.web.proto.WebProtos.LoginForm.Builder getLoginFormBuilder() {
         bitField0_ |= 0x00000040;
         onChanged();
         return getLoginFormFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       public me.yabble.web.proto.WebProtos.LoginFormOrBuilder getLoginFormOrBuilder() {
         if (loginFormBuilder_ != null) {
           return loginFormBuilder_.getMessageOrBuilder();
@@ -1912,6 +3474,9 @@ public final class WebProtos {
           return loginForm_;
         }
       }
+      /**
+       * <code>optional .me.yabble.web.proto.LoginForm login_form = 7;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.LoginForm, me.yabble.web.proto.WebProtos.LoginForm.Builder, me.yabble.web.proto.WebProtos.LoginFormOrBuilder> 
           getLoginFormFieldBuilder() {
@@ -1925,23 +3490,66 @@ public final class WebProtos {
         }
         return loginFormBuilder_;
       }
-      
+
       // optional string after_login_redirect_path = 8;
       private java.lang.Object afterLoginRedirectPath_ = "";
+      /**
+       * <code>optional string after_login_redirect_path = 8;</code>
+       *
+       * <pre>
+       * Deprecated
+       * </pre>
+       */
       public boolean hasAfterLoginRedirectPath() {
         return ((bitField0_ & 0x00000080) == 0x00000080);
       }
-      public String getAfterLoginRedirectPath() {
+      /**
+       * <code>optional string after_login_redirect_path = 8;</code>
+       *
+       * <pre>
+       * Deprecated
+       * </pre>
+       */
+      public java.lang.String getAfterLoginRedirectPath() {
         java.lang.Object ref = afterLoginRedirectPath_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           afterLoginRedirectPath_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setAfterLoginRedirectPath(String value) {
+      /**
+       * <code>optional string after_login_redirect_path = 8;</code>
+       *
+       * <pre>
+       * Deprecated
+       * </pre>
+       */
+      public com.google.protobuf.ByteString
+          getAfterLoginRedirectPathBytes() {
+        java.lang.Object ref = afterLoginRedirectPath_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          afterLoginRedirectPath_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string after_login_redirect_path = 8;</code>
+       *
+       * <pre>
+       * Deprecated
+       * </pre>
+       */
+      public Builder setAfterLoginRedirectPath(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -1950,25 +3558,50 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string after_login_redirect_path = 8;</code>
+       *
+       * <pre>
+       * Deprecated
+       * </pre>
+       */
       public Builder clearAfterLoginRedirectPath() {
         bitField0_ = (bitField0_ & ~0x00000080);
         afterLoginRedirectPath_ = getDefaultInstance().getAfterLoginRedirectPath();
         onChanged();
         return this;
       }
-      void setAfterLoginRedirectPath(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000080;
+      /**
+       * <code>optional string after_login_redirect_path = 8;</code>
+       *
+       * <pre>
+       * Deprecated
+       * </pre>
+       */
+      public Builder setAfterLoginRedirectPathBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000080;
         afterLoginRedirectPath_ = value;
         onChanged();
+        return this;
       }
-      
+
       // optional .me.yabble.web.proto.RegisterForm register_form = 9;
       private me.yabble.web.proto.WebProtos.RegisterForm registerForm_ = me.yabble.web.proto.WebProtos.RegisterForm.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.RegisterForm, me.yabble.web.proto.WebProtos.RegisterForm.Builder, me.yabble.web.proto.WebProtos.RegisterFormOrBuilder> registerFormBuilder_;
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       public boolean hasRegisterForm() {
         return ((bitField0_ & 0x00000100) == 0x00000100);
       }
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       public me.yabble.web.proto.WebProtos.RegisterForm getRegisterForm() {
         if (registerFormBuilder_ == null) {
           return registerForm_;
@@ -1976,6 +3609,9 @@ public final class WebProtos {
           return registerFormBuilder_.getMessage();
         }
       }
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       public Builder setRegisterForm(me.yabble.web.proto.WebProtos.RegisterForm value) {
         if (registerFormBuilder_ == null) {
           if (value == null) {
@@ -1989,6 +3625,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000100;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       public Builder setRegisterForm(
           me.yabble.web.proto.WebProtos.RegisterForm.Builder builderForValue) {
         if (registerFormBuilder_ == null) {
@@ -2000,6 +3639,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000100;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       public Builder mergeRegisterForm(me.yabble.web.proto.WebProtos.RegisterForm value) {
         if (registerFormBuilder_ == null) {
           if (((bitField0_ & 0x00000100) == 0x00000100) &&
@@ -2016,6 +3658,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000100;
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       public Builder clearRegisterForm() {
         if (registerFormBuilder_ == null) {
           registerForm_ = me.yabble.web.proto.WebProtos.RegisterForm.getDefaultInstance();
@@ -2026,11 +3671,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000100);
         return this;
       }
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       public me.yabble.web.proto.WebProtos.RegisterForm.Builder getRegisterFormBuilder() {
         bitField0_ |= 0x00000100;
         onChanged();
         return getRegisterFormFieldBuilder().getBuilder();
       }
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       public me.yabble.web.proto.WebProtos.RegisterFormOrBuilder getRegisterFormOrBuilder() {
         if (registerFormBuilder_ != null) {
           return registerFormBuilder_.getMessageOrBuilder();
@@ -2038,6 +3689,9 @@ public final class WebProtos {
           return registerForm_;
         }
       }
+      /**
+       * <code>optional .me.yabble.web.proto.RegisterForm register_form = 9;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.RegisterForm, me.yabble.web.proto.WebProtos.RegisterForm.Builder, me.yabble.web.proto.WebProtos.RegisterFormOrBuilder> 
           getRegisterFormFieldBuilder() {
@@ -2051,141 +3705,730 @@ public final class WebProtos {
         }
         return registerFormBuilder_;
       }
-      
+
+      // optional string redirect_path = 10;
+      private java.lang.Object redirectPath_ = "";
+      /**
+       * <code>optional string redirect_path = 10;</code>
+       */
+      public boolean hasRedirectPath() {
+        return ((bitField0_ & 0x00000200) == 0x00000200);
+      }
+      /**
+       * <code>optional string redirect_path = 10;</code>
+       */
+      public java.lang.String getRedirectPath() {
+        java.lang.Object ref = redirectPath_;
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
+          redirectPath_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string redirect_path = 10;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRedirectPathBytes() {
+        java.lang.Object ref = redirectPath_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          redirectPath_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string redirect_path = 10;</code>
+       */
+      public Builder setRedirectPath(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        redirectPath_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string redirect_path = 10;</code>
+       */
+      public Builder clearRedirectPath() {
+        bitField0_ = (bitField0_ & ~0x00000200);
+        redirectPath_ = getDefaultInstance().getRedirectPath();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string redirect_path = 10;</code>
+       */
+      public Builder setRedirectPathBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000200;
+        redirectPath_ = value;
+        onChanged();
+        return this;
+      }
+
+      // optional .me.yabble.web.proto.UserForm user_form = 11;
+      private me.yabble.web.proto.WebProtos.UserForm userForm_ = me.yabble.web.proto.WebProtos.UserForm.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.UserForm, me.yabble.web.proto.WebProtos.UserForm.Builder, me.yabble.web.proto.WebProtos.UserFormOrBuilder> userFormBuilder_;
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      public boolean hasUserForm() {
+        return ((bitField0_ & 0x00000400) == 0x00000400);
+      }
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      public me.yabble.web.proto.WebProtos.UserForm getUserForm() {
+        if (userFormBuilder_ == null) {
+          return userForm_;
+        } else {
+          return userFormBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      public Builder setUserForm(me.yabble.web.proto.WebProtos.UserForm value) {
+        if (userFormBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          userForm_ = value;
+          onChanged();
+        } else {
+          userFormBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      public Builder setUserForm(
+          me.yabble.web.proto.WebProtos.UserForm.Builder builderForValue) {
+        if (userFormBuilder_ == null) {
+          userForm_ = builderForValue.build();
+          onChanged();
+        } else {
+          userFormBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      public Builder mergeUserForm(me.yabble.web.proto.WebProtos.UserForm value) {
+        if (userFormBuilder_ == null) {
+          if (((bitField0_ & 0x00000400) == 0x00000400) &&
+              userForm_ != me.yabble.web.proto.WebProtos.UserForm.getDefaultInstance()) {
+            userForm_ =
+              me.yabble.web.proto.WebProtos.UserForm.newBuilder(userForm_).mergeFrom(value).buildPartial();
+          } else {
+            userForm_ = value;
+          }
+          onChanged();
+        } else {
+          userFormBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000400;
+        return this;
+      }
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      public Builder clearUserForm() {
+        if (userFormBuilder_ == null) {
+          userForm_ = me.yabble.web.proto.WebProtos.UserForm.getDefaultInstance();
+          onChanged();
+        } else {
+          userFormBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000400);
+        return this;
+      }
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      public me.yabble.web.proto.WebProtos.UserForm.Builder getUserFormBuilder() {
+        bitField0_ |= 0x00000400;
+        onChanged();
+        return getUserFormFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      public me.yabble.web.proto.WebProtos.UserFormOrBuilder getUserFormOrBuilder() {
+        if (userFormBuilder_ != null) {
+          return userFormBuilder_.getMessageOrBuilder();
+        } else {
+          return userForm_;
+        }
+      }
+      /**
+       * <code>optional .me.yabble.web.proto.UserForm user_form = 11;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.UserForm, me.yabble.web.proto.WebProtos.UserForm.Builder, me.yabble.web.proto.WebProtos.UserFormOrBuilder> 
+          getUserFormFieldBuilder() {
+        if (userFormBuilder_ == null) {
+          userFormBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.web.proto.WebProtos.UserForm, me.yabble.web.proto.WebProtos.UserForm.Builder, me.yabble.web.proto.WebProtos.UserFormOrBuilder>(
+                  userForm_,
+                  getParentForChildren(),
+                  isClean());
+          userForm_ = null;
+        }
+        return userFormBuilder_;
+      }
+
+      // repeated .me.yabble.web.proto.Session.FormEntry form = 12;
+      private java.util.List<me.yabble.web.proto.WebProtos.Session.FormEntry> form_ =
+        java.util.Collections.emptyList();
+      private void ensureFormIsMutable() {
+        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+          form_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Session.FormEntry>(form_);
+          bitField0_ |= 0x00000800;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          me.yabble.web.proto.WebProtos.Session.FormEntry, me.yabble.web.proto.WebProtos.Session.FormEntry.Builder, me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder> formBuilder_;
+
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public java.util.List<me.yabble.web.proto.WebProtos.Session.FormEntry> getFormList() {
+        if (formBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(form_);
+        } else {
+          return formBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public int getFormCount() {
+        if (formBuilder_ == null) {
+          return form_.size();
+        } else {
+          return formBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Session.FormEntry getForm(int index) {
+        if (formBuilder_ == null) {
+          return form_.get(index);
+        } else {
+          return formBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder setForm(
+          int index, me.yabble.web.proto.WebProtos.Session.FormEntry value) {
+        if (formBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFormIsMutable();
+          form_.set(index, value);
+          onChanged();
+        } else {
+          formBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder setForm(
+          int index, me.yabble.web.proto.WebProtos.Session.FormEntry.Builder builderForValue) {
+        if (formBuilder_ == null) {
+          ensureFormIsMutable();
+          form_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          formBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder addForm(me.yabble.web.proto.WebProtos.Session.FormEntry value) {
+        if (formBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFormIsMutable();
+          form_.add(value);
+          onChanged();
+        } else {
+          formBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder addForm(
+          int index, me.yabble.web.proto.WebProtos.Session.FormEntry value) {
+        if (formBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureFormIsMutable();
+          form_.add(index, value);
+          onChanged();
+        } else {
+          formBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder addForm(
+          me.yabble.web.proto.WebProtos.Session.FormEntry.Builder builderForValue) {
+        if (formBuilder_ == null) {
+          ensureFormIsMutable();
+          form_.add(builderForValue.build());
+          onChanged();
+        } else {
+          formBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder addForm(
+          int index, me.yabble.web.proto.WebProtos.Session.FormEntry.Builder builderForValue) {
+        if (formBuilder_ == null) {
+          ensureFormIsMutable();
+          form_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          formBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder addAllForm(
+          java.lang.Iterable<? extends me.yabble.web.proto.WebProtos.Session.FormEntry> values) {
+        if (formBuilder_ == null) {
+          ensureFormIsMutable();
+          super.addAll(values, form_);
+          onChanged();
+        } else {
+          formBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder clearForm() {
+        if (formBuilder_ == null) {
+          form_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000800);
+          onChanged();
+        } else {
+          formBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public Builder removeForm(int index) {
+        if (formBuilder_ == null) {
+          ensureFormIsMutable();
+          form_.remove(index);
+          onChanged();
+        } else {
+          formBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Session.FormEntry.Builder getFormBuilder(
+          int index) {
+        return getFormFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder getFormOrBuilder(
+          int index) {
+        if (formBuilder_ == null) {
+          return form_.get(index);  } else {
+          return formBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public java.util.List<? extends me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder> 
+           getFormOrBuilderList() {
+        if (formBuilder_ != null) {
+          return formBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(form_);
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Session.FormEntry.Builder addFormBuilder() {
+        return getFormFieldBuilder().addBuilder(
+            me.yabble.web.proto.WebProtos.Session.FormEntry.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Session.FormEntry.Builder addFormBuilder(
+          int index) {
+        return getFormFieldBuilder().addBuilder(
+            index, me.yabble.web.proto.WebProtos.Session.FormEntry.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Session.FormEntry form = 12;</code>
+       */
+      public java.util.List<me.yabble.web.proto.WebProtos.Session.FormEntry.Builder> 
+           getFormBuilderList() {
+        return getFormFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          me.yabble.web.proto.WebProtos.Session.FormEntry, me.yabble.web.proto.WebProtos.Session.FormEntry.Builder, me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder> 
+          getFormFieldBuilder() {
+        if (formBuilder_ == null) {
+          formBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              me.yabble.web.proto.WebProtos.Session.FormEntry, me.yabble.web.proto.WebProtos.Session.FormEntry.Builder, me.yabble.web.proto.WebProtos.Session.FormEntryOrBuilder>(
+                  form_,
+                  ((bitField0_ & 0x00000800) == 0x00000800),
+                  getParentForChildren(),
+                  isClean());
+          form_ = null;
+        }
+        return formBuilder_;
+      }
+
       // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.Session)
     }
-    
+
     static {
       defaultInstance = new Session(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:me.yabble.web.proto.Session)
   }
-  
+
   public interface MessageOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // required string code = 1;
+    /**
+     * <code>required string code = 1;</code>
+     */
     boolean hasCode();
-    String getCode();
-    
+    /**
+     * <code>required string code = 1;</code>
+     */
+    java.lang.String getCode();
+    /**
+     * <code>required string code = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getCodeBytes();
+
     // repeated string param = 2;
-    java.util.List<String> getParamList();
+    /**
+     * <code>repeated string param = 2;</code>
+     */
+    java.util.List<java.lang.String>
+    getParamList();
+    /**
+     * <code>repeated string param = 2;</code>
+     */
     int getParamCount();
-    String getParam(int index);
-    
+    /**
+     * <code>repeated string param = 2;</code>
+     */
+    java.lang.String getParam(int index);
+    /**
+     * <code>repeated string param = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getParamBytes(int index);
+
     // optional string display_value = 3;
+    /**
+     * <code>optional string display_value = 3;</code>
+     */
     boolean hasDisplayValue();
-    String getDisplayValue();
+    /**
+     * <code>optional string display_value = 3;</code>
+     */
+    java.lang.String getDisplayValue();
+    /**
+     * <code>optional string display_value = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getDisplayValueBytes();
   }
+  /**
+   * Protobuf type {@code me.yabble.web.proto.Message}
+   */
   public static final class Message extends
       com.google.protobuf.GeneratedMessage
       implements MessageOrBuilder {
     // Use Message.newBuilder() to construct.
-    private Message(Builder builder) {
+    private Message(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private Message(boolean noInit) {}
-    
+    private Message(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final Message defaultInstance;
     public static Message getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public Message getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Message(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              code_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                param_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              param_.add(input.readBytes());
+              break;
+            }
+            case 26: {
+              bitField0_ |= 0x00000002;
+              displayValue_ = input.readBytes();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          param_ = new com.google.protobuf.UnmodifiableLazyStringList(param_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Message_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Message_fieldAccessorTable;
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Message_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              me.yabble.web.proto.WebProtos.Message.class, me.yabble.web.proto.WebProtos.Message.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<Message> PARSER =
+        new com.google.protobuf.AbstractParser<Message>() {
+      public Message parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Message(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Message> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     // required string code = 1;
     public static final int CODE_FIELD_NUMBER = 1;
     private java.lang.Object code_;
+    /**
+     * <code>required string code = 1;</code>
+     */
     public boolean hasCode() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public String getCode() {
+    /**
+     * <code>required string code = 1;</code>
+     */
+    public java.lang.String getCode() {
       java.lang.Object ref = code_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           code_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getCodeBytes() {
+    /**
+     * <code>required string code = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCodeBytes() {
       java.lang.Object ref = code_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         code_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     // repeated string param = 2;
     public static final int PARAM_FIELD_NUMBER = 2;
     private com.google.protobuf.LazyStringList param_;
-    public java.util.List<String>
+    /**
+     * <code>repeated string param = 2;</code>
+     */
+    public java.util.List<java.lang.String>
         getParamList() {
       return param_;
     }
+    /**
+     * <code>repeated string param = 2;</code>
+     */
     public int getParamCount() {
       return param_.size();
     }
-    public String getParam(int index) {
+    /**
+     * <code>repeated string param = 2;</code>
+     */
+    public java.lang.String getParam(int index) {
       return param_.get(index);
     }
-    
+    /**
+     * <code>repeated string param = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getParamBytes(int index) {
+      return param_.getByteString(index);
+    }
+
     // optional string display_value = 3;
     public static final int DISPLAY_VALUE_FIELD_NUMBER = 3;
     private java.lang.Object displayValue_;
+    /**
+     * <code>optional string display_value = 3;</code>
+     */
     public boolean hasDisplayValue() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
-    public String getDisplayValue() {
+    /**
+     * <code>optional string display_value = 3;</code>
+     */
+    public java.lang.String getDisplayValue() {
       java.lang.Object ref = displayValue_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           displayValue_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getDisplayValueBytes() {
+    /**
+     * <code>optional string display_value = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDisplayValueBytes() {
       java.lang.Object ref = displayValue_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         displayValue_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     private void initFields() {
       code_ = "";
       param_ = com.google.protobuf.LazyStringArrayList.EMPTY;
@@ -2195,7 +4438,7 @@ public final class WebProtos {
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       if (!hasCode()) {
         memoizedIsInitialized = 0;
         return false;
@@ -2203,7 +4446,7 @@ public final class WebProtos {
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -2218,12 +4461,12 @@ public final class WebProtos {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2246,94 +4489,83 @@ public final class WebProtos {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static me.yabble.web.proto.WebProtos.Message parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.Message parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.Message parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.Message parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.Message parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.Message parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.Message parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.Message parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.Message parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.Message parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(me.yabble.web.proto.WebProtos.Message prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.Message}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements me.yabble.web.proto.WebProtos.MessageOrBuilder {
@@ -2341,18 +4573,21 @@ public final class WebProtos {
           getDescriptor() {
         return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Message_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Message_fieldAccessorTable;
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Message_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.Message.class, me.yabble.web.proto.WebProtos.Message.Builder.class);
       }
-      
+
       // Construct using me.yabble.web.proto.WebProtos.Message.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2363,7 +4598,7 @@ public final class WebProtos {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         code_ = "";
@@ -2374,20 +4609,20 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return me.yabble.web.proto.WebProtos.Message.getDescriptor();
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_Message_descriptor;
       }
-      
+
       public me.yabble.web.proto.WebProtos.Message getDefaultInstanceForType() {
         return me.yabble.web.proto.WebProtos.Message.getDefaultInstance();
       }
-      
+
       public me.yabble.web.proto.WebProtos.Message build() {
         me.yabble.web.proto.WebProtos.Message result = buildPartial();
         if (!result.isInitialized()) {
@@ -2395,17 +4630,7 @@ public final class WebProtos {
         }
         return result;
       }
-      
-      private me.yabble.web.proto.WebProtos.Message buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        me.yabble.web.proto.WebProtos.Message result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public me.yabble.web.proto.WebProtos.Message buildPartial() {
         me.yabble.web.proto.WebProtos.Message result = new me.yabble.web.proto.WebProtos.Message(this);
         int from_bitField0_ = bitField0_;
@@ -2428,7 +4653,7 @@ public final class WebProtos {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof me.yabble.web.proto.WebProtos.Message) {
           return mergeFrom((me.yabble.web.proto.WebProtos.Message)other);
@@ -2437,11 +4662,13 @@ public final class WebProtos {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(me.yabble.web.proto.WebProtos.Message other) {
         if (other == me.yabble.web.proto.WebProtos.Message.getDefaultInstance()) return this;
         if (other.hasCode()) {
-          setCode(other.getCode());
+          bitField0_ |= 0x00000001;
+          code_ = other.code_;
+          onChanged();
         }
         if (!other.param_.isEmpty()) {
           if (param_.isEmpty()) {
@@ -2454,12 +4681,14 @@ public final class WebProtos {
           onChanged();
         }
         if (other.hasDisplayValue()) {
-          setDisplayValue(other.getDisplayValue());
+          bitField0_ |= 0x00000004;
+          displayValue_ = other.displayValue_;
+          onChanged();
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         if (!hasCode()) {
           
@@ -2467,67 +4696,69 @@ public final class WebProtos {
         }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              code_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              ensureParamIsMutable();
-              param_.add(input.readBytes());
-              break;
-            }
-            case 26: {
-              bitField0_ |= 0x00000004;
-              displayValue_ = input.readBytes();
-              break;
-            }
+        me.yabble.web.proto.WebProtos.Message parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (me.yabble.web.proto.WebProtos.Message) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // required string code = 1;
       private java.lang.Object code_ = "";
+      /**
+       * <code>required string code = 1;</code>
+       */
       public boolean hasCode() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public String getCode() {
+      /**
+       * <code>required string code = 1;</code>
+       */
+      public java.lang.String getCode() {
         java.lang.Object ref = code_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           code_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setCode(String value) {
+      /**
+       * <code>required string code = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCodeBytes() {
+        java.lang.Object ref = code_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          code_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string code = 1;</code>
+       */
+      public Builder setCode(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2536,18 +4767,29 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>required string code = 1;</code>
+       */
       public Builder clearCode() {
         bitField0_ = (bitField0_ & ~0x00000001);
         code_ = getDefaultInstance().getCode();
         onChanged();
         return this;
       }
-      void setCode(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000001;
+      /**
+       * <code>required string code = 1;</code>
+       */
+      public Builder setCodeBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         code_ = value;
         onChanged();
+        return this;
       }
-      
+
       // repeated string param = 2;
       private com.google.protobuf.LazyStringList param_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureParamIsMutable() {
@@ -2556,18 +4798,37 @@ public final class WebProtos {
           bitField0_ |= 0x00000002;
          }
       }
-      public java.util.List<String>
+      /**
+       * <code>repeated string param = 2;</code>
+       */
+      public java.util.List<java.lang.String>
           getParamList() {
         return java.util.Collections.unmodifiableList(param_);
       }
+      /**
+       * <code>repeated string param = 2;</code>
+       */
       public int getParamCount() {
         return param_.size();
       }
-      public String getParam(int index) {
+      /**
+       * <code>repeated string param = 2;</code>
+       */
+      public java.lang.String getParam(int index) {
         return param_.get(index);
       }
+      /**
+       * <code>repeated string param = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getParamBytes(int index) {
+        return param_.getByteString(index);
+      }
+      /**
+       * <code>repeated string param = 2;</code>
+       */
       public Builder setParam(
-          int index, String value) {
+          int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2576,7 +4837,11 @@ public final class WebProtos {
         onChanged();
         return this;
       }
-      public Builder addParam(String value) {
+      /**
+       * <code>repeated string param = 2;</code>
+       */
+      public Builder addParam(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2585,41 +4850,82 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated string param = 2;</code>
+       */
       public Builder addAllParam(
-          java.lang.Iterable<String> values) {
+          java.lang.Iterable<java.lang.String> values) {
         ensureParamIsMutable();
         super.addAll(values, param_);
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated string param = 2;</code>
+       */
       public Builder clearParam() {
         param_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
-      void addParam(com.google.protobuf.ByteString value) {
-        ensureParamIsMutable();
+      /**
+       * <code>repeated string param = 2;</code>
+       */
+      public Builder addParamBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureParamIsMutable();
         param_.add(value);
         onChanged();
+        return this;
       }
-      
+
       // optional string display_value = 3;
       private java.lang.Object displayValue_ = "";
+      /**
+       * <code>optional string display_value = 3;</code>
+       */
       public boolean hasDisplayValue() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
-      public String getDisplayValue() {
+      /**
+       * <code>optional string display_value = 3;</code>
+       */
+      public java.lang.String getDisplayValue() {
         java.lang.Object ref = displayValue_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           displayValue_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setDisplayValue(String value) {
+      /**
+       * <code>optional string display_value = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDisplayValueBytes() {
+        java.lang.Object ref = displayValue_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          displayValue_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string display_value = 3;</code>
+       */
+      public Builder setDisplayValue(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -2628,128 +4934,269 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string display_value = 3;</code>
+       */
       public Builder clearDisplayValue() {
         bitField0_ = (bitField0_ & ~0x00000004);
         displayValue_ = getDefaultInstance().getDisplayValue();
         onChanged();
         return this;
       }
-      void setDisplayValue(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000004;
+      /**
+       * <code>optional string display_value = 3;</code>
+       */
+      public Builder setDisplayValueBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000004;
         displayValue_ = value;
         onChanged();
+        return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.Message)
     }
-    
+
     static {
       defaultInstance = new Message(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:me.yabble.web.proto.Message)
   }
-  
+
   public interface FormFieldOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // optional string value = 1;
+    /**
+     * <code>optional string value = 1;</code>
+     */
     boolean hasValue();
-    String getValue();
-    
+    /**
+     * <code>optional string value = 1;</code>
+     */
+    java.lang.String getValue();
+    /**
+     * <code>optional string value = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getValueBytes();
+
     // repeated .me.yabble.web.proto.Message error_message = 2;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     java.util.List<me.yabble.web.proto.WebProtos.Message> 
         getErrorMessageList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     me.yabble.web.proto.WebProtos.Message getErrorMessage(int index);
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     int getErrorMessageCount();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index);
   }
+  /**
+   * Protobuf type {@code me.yabble.web.proto.FormField}
+   */
   public static final class FormField extends
       com.google.protobuf.GeneratedMessage
       implements FormFieldOrBuilder {
     // Use FormField.newBuilder() to construct.
-    private FormField(Builder builder) {
+    private FormField(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private FormField(boolean noInit) {}
-    
+    private FormField(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final FormField defaultInstance;
     public static FormField getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public FormField getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private FormField(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              bitField0_ |= 0x00000001;
+              value_ = input.readBytes();
+              break;
+            }
+            case 18: {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                errorMessage_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Message>();
+                mutable_bitField0_ |= 0x00000002;
+              }
+              errorMessage_.add(input.readMessage(me.yabble.web.proto.WebProtos.Message.PARSER, extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+          errorMessage_ = java.util.Collections.unmodifiableList(errorMessage_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_FormField_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_FormField_fieldAccessorTable;
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_FormField_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              me.yabble.web.proto.WebProtos.FormField.class, me.yabble.web.proto.WebProtos.FormField.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<FormField> PARSER =
+        new com.google.protobuf.AbstractParser<FormField>() {
+      public FormField parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new FormField(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<FormField> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     // optional string value = 1;
     public static final int VALUE_FIELD_NUMBER = 1;
     private java.lang.Object value_;
+    /**
+     * <code>optional string value = 1;</code>
+     */
     public boolean hasValue() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public String getValue() {
+    /**
+     * <code>optional string value = 1;</code>
+     */
+    public java.lang.String getValue() {
       java.lang.Object ref = value_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           value_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getValueBytes() {
+    /**
+     * <code>optional string value = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getValueBytes() {
       java.lang.Object ref = value_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         value_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     // repeated .me.yabble.web.proto.Message error_message = 2;
     public static final int ERROR_MESSAGE_FIELD_NUMBER = 2;
     private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     public int getErrorMessageCount() {
       return errorMessage_.size();
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
       return errorMessage_.get(index);
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+     */
     public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index) {
       return errorMessage_.get(index);
     }
-    
+
     private void initFields() {
       value_ = "";
       errorMessage_ = java.util.Collections.emptyList();
@@ -2758,7 +5205,7 @@ public final class WebProtos {
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       for (int i = 0; i < getErrorMessageCount(); i++) {
         if (!getErrorMessage(i).isInitialized()) {
           memoizedIsInitialized = 0;
@@ -2768,7 +5215,7 @@ public final class WebProtos {
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -2780,12 +5227,12 @@ public final class WebProtos {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       if (((bitField0_ & 0x00000001) == 0x00000001)) {
         size += com.google.protobuf.CodedOutputStream
@@ -2799,94 +5246,83 @@ public final class WebProtos {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static me.yabble.web.proto.WebProtos.FormField parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.FormField parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(me.yabble.web.proto.WebProtos.FormField prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.FormField}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements me.yabble.web.proto.WebProtos.FormFieldOrBuilder {
@@ -2894,18 +5330,21 @@ public final class WebProtos {
           getDescriptor() {
         return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_FormField_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_FormField_fieldAccessorTable;
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_FormField_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.FormField.class, me.yabble.web.proto.WebProtos.FormField.Builder.class);
       }
-      
+
       // Construct using me.yabble.web.proto.WebProtos.FormField.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -2917,7 +5356,7 @@ public final class WebProtos {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         value_ = "";
@@ -2930,20 +5369,20 @@ public final class WebProtos {
         }
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return me.yabble.web.proto.WebProtos.FormField.getDescriptor();
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_FormField_descriptor;
       }
-      
+
       public me.yabble.web.proto.WebProtos.FormField getDefaultInstanceForType() {
         return me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       }
-      
+
       public me.yabble.web.proto.WebProtos.FormField build() {
         me.yabble.web.proto.WebProtos.FormField result = buildPartial();
         if (!result.isInitialized()) {
@@ -2951,17 +5390,7 @@ public final class WebProtos {
         }
         return result;
       }
-      
-      private me.yabble.web.proto.WebProtos.FormField buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        me.yabble.web.proto.WebProtos.FormField result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public me.yabble.web.proto.WebProtos.FormField buildPartial() {
         me.yabble.web.proto.WebProtos.FormField result = new me.yabble.web.proto.WebProtos.FormField(this);
         int from_bitField0_ = bitField0_;
@@ -2983,7 +5412,7 @@ public final class WebProtos {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof me.yabble.web.proto.WebProtos.FormField) {
           return mergeFrom((me.yabble.web.proto.WebProtos.FormField)other);
@@ -2992,11 +5421,13 @@ public final class WebProtos {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(me.yabble.web.proto.WebProtos.FormField other) {
         if (other == me.yabble.web.proto.WebProtos.FormField.getDefaultInstance()) return this;
         if (other.hasValue()) {
-          setValue(other.getValue());
+          bitField0_ |= 0x00000001;
+          value_ = other.value_;
+          onChanged();
         }
         if (errorMessageBuilder_ == null) {
           if (!other.errorMessage_.isEmpty()) {
@@ -3027,7 +5458,7 @@ public final class WebProtos {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         for (int i = 0; i < getErrorMessageCount(); i++) {
           if (!getErrorMessage(i).isInitialized()) {
@@ -3037,63 +5468,69 @@ public final class WebProtos {
         }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              bitField0_ |= 0x00000001;
-              value_ = input.readBytes();
-              break;
-            }
-            case 18: {
-              me.yabble.web.proto.WebProtos.Message.Builder subBuilder = me.yabble.web.proto.WebProtos.Message.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addErrorMessage(subBuilder.buildPartial());
-              break;
-            }
+        me.yabble.web.proto.WebProtos.FormField parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (me.yabble.web.proto.WebProtos.FormField) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // optional string value = 1;
       private java.lang.Object value_ = "";
+      /**
+       * <code>optional string value = 1;</code>
+       */
       public boolean hasValue() {
         return ((bitField0_ & 0x00000001) == 0x00000001);
       }
-      public String getValue() {
+      /**
+       * <code>optional string value = 1;</code>
+       */
+      public java.lang.String getValue() {
         java.lang.Object ref = value_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           value_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setValue(String value) {
+      /**
+       * <code>optional string value = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getValueBytes() {
+        java.lang.Object ref = value_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          value_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string value = 1;</code>
+       */
+      public Builder setValue(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -3102,18 +5539,29 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>optional string value = 1;</code>
+       */
       public Builder clearValue() {
         bitField0_ = (bitField0_ & ~0x00000001);
         value_ = getDefaultInstance().getValue();
         onChanged();
         return this;
       }
-      void setValue(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000001;
+      /**
+       * <code>optional string value = 1;</code>
+       */
+      public Builder setValueBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000001;
         value_ = value;
         onChanged();
+        return this;
       }
-      
+
       // repeated .me.yabble.web.proto.Message error_message = 2;
       private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_ =
         java.util.Collections.emptyList();
@@ -3123,10 +5571,13 @@ public final class WebProtos {
           bitField0_ |= 0x00000002;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           me.yabble.web.proto.WebProtos.Message, me.yabble.web.proto.WebProtos.Message.Builder, me.yabble.web.proto.WebProtos.MessageOrBuilder> errorMessageBuilder_;
-      
+
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
         if (errorMessageBuilder_ == null) {
           return java.util.Collections.unmodifiableList(errorMessage_);
@@ -3134,6 +5585,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public int getErrorMessageCount() {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.size();
@@ -3141,6 +5595,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.get(index);
@@ -3148,6 +5605,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -3162,6 +5622,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -3173,6 +5636,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder addErrorMessage(me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
           if (value == null) {
@@ -3186,6 +5652,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -3200,6 +5669,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder addErrorMessage(
           me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -3211,6 +5683,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -3222,6 +5697,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder addAllErrorMessage(
           java.lang.Iterable<? extends me.yabble.web.proto.WebProtos.Message> values) {
         if (errorMessageBuilder_ == null) {
@@ -3233,6 +5711,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder clearErrorMessage() {
         if (errorMessageBuilder_ == null) {
           errorMessage_ = java.util.Collections.emptyList();
@@ -3243,6 +5724,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public Builder removeErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           ensureErrorMessageIsMutable();
@@ -3253,10 +5737,16 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder getErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
           int index) {
         if (errorMessageBuilder_ == null) {
@@ -3264,6 +5754,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
            getErrorMessageOrBuilderList() {
         if (errorMessageBuilder_ != null) {
@@ -3272,15 +5765,24 @@ public final class WebProtos {
           return java.util.Collections.unmodifiableList(errorMessage_);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder() {
         return getErrorMessageFieldBuilder().addBuilder(
             me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().addBuilder(
             index, me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 2;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message.Builder> 
            getErrorMessageBuilderList() {
         return getErrorMessageFieldBuilder().getBuilderList();
@@ -3299,117 +5801,282 @@ public final class WebProtos {
         }
         return errorMessageBuilder_;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.FormField)
     }
-    
+
     static {
       defaultInstance = new FormField(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:me.yabble.web.proto.FormField)
   }
-  
+
   public interface LoginFormOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // repeated .me.yabble.web.proto.Message error_message = 1;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     java.util.List<me.yabble.web.proto.WebProtos.Message> 
         getErrorMessageList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     me.yabble.web.proto.WebProtos.Message getErrorMessage(int index);
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     int getErrorMessageCount();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index);
-    
+
     // required .me.yabble.web.proto.FormField name = 2;
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     boolean hasName();
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getName();
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder();
-    
+
     // required .me.yabble.web.proto.FormField password = 3;
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+     */
     boolean hasPassword();
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getPassword();
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder();
   }
+  /**
+   * Protobuf type {@code me.yabble.web.proto.LoginForm}
+   */
   public static final class LoginForm extends
       com.google.protobuf.GeneratedMessage
       implements LoginFormOrBuilder {
     // Use LoginForm.newBuilder() to construct.
-    private LoginForm(Builder builder) {
+    private LoginForm(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private LoginForm(boolean noInit) {}
-    
+    private LoginForm(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final LoginForm defaultInstance;
     public static LoginForm getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public LoginForm getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private LoginForm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                errorMessage_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Message>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              errorMessage_.add(input.readMessage(me.yabble.web.proto.WebProtos.Message.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = name_.toBuilder();
+              }
+              name_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(name_);
+                name_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 26: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = password_.toBuilder();
+              }
+              password_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(password_);
+                password_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          errorMessage_ = java.util.Collections.unmodifiableList(errorMessage_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_LoginForm_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_LoginForm_fieldAccessorTable;
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_LoginForm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              me.yabble.web.proto.WebProtos.LoginForm.class, me.yabble.web.proto.WebProtos.LoginForm.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<LoginForm> PARSER =
+        new com.google.protobuf.AbstractParser<LoginForm>() {
+      public LoginForm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new LoginForm(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<LoginForm> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     // repeated .me.yabble.web.proto.Message error_message = 1;
     public static final int ERROR_MESSAGE_FIELD_NUMBER = 1;
     private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public int getErrorMessageCount() {
       return errorMessage_.size();
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
       return errorMessage_.get(index);
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index) {
       return errorMessage_.get(index);
     }
-    
+
     // required .me.yabble.web.proto.FormField name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private me.yabble.web.proto.WebProtos.FormField name_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     public boolean hasName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getName() {
       return name_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder() {
       return name_;
     }
-    
+
     // required .me.yabble.web.proto.FormField password = 3;
     public static final int PASSWORD_FIELD_NUMBER = 3;
     private me.yabble.web.proto.WebProtos.FormField password_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+     */
     public boolean hasPassword() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getPassword() {
       return password_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder() {
       return password_;
     }
-    
+
     private void initFields() {
       errorMessage_ = java.util.Collections.emptyList();
       name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -3419,7 +6086,7 @@ public final class WebProtos {
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       if (!hasName()) {
         memoizedIsInitialized = 0;
         return false;
@@ -3445,7 +6112,7 @@ public final class WebProtos {
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -3460,12 +6127,12 @@ public final class WebProtos {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       for (int i = 0; i < errorMessage_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -3483,94 +6150,83 @@ public final class WebProtos {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static me.yabble.web.proto.WebProtos.LoginForm parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.LoginForm parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(me.yabble.web.proto.WebProtos.LoginForm prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.LoginForm}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements me.yabble.web.proto.WebProtos.LoginFormOrBuilder {
@@ -3578,18 +6234,21 @@ public final class WebProtos {
           getDescriptor() {
         return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_LoginForm_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_LoginForm_fieldAccessorTable;
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_LoginForm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.LoginForm.class, me.yabble.web.proto.WebProtos.LoginForm.Builder.class);
       }
-      
+
       // Construct using me.yabble.web.proto.WebProtos.LoginForm.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -3603,7 +6262,7 @@ public final class WebProtos {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (errorMessageBuilder_ == null) {
@@ -3626,20 +6285,20 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return me.yabble.web.proto.WebProtos.LoginForm.getDescriptor();
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_LoginForm_descriptor;
       }
-      
+
       public me.yabble.web.proto.WebProtos.LoginForm getDefaultInstanceForType() {
         return me.yabble.web.proto.WebProtos.LoginForm.getDefaultInstance();
       }
-      
+
       public me.yabble.web.proto.WebProtos.LoginForm build() {
         me.yabble.web.proto.WebProtos.LoginForm result = buildPartial();
         if (!result.isInitialized()) {
@@ -3647,17 +6306,7 @@ public final class WebProtos {
         }
         return result;
       }
-      
-      private me.yabble.web.proto.WebProtos.LoginForm buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        me.yabble.web.proto.WebProtos.LoginForm result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public me.yabble.web.proto.WebProtos.LoginForm buildPartial() {
         me.yabble.web.proto.WebProtos.LoginForm result = new me.yabble.web.proto.WebProtos.LoginForm(this);
         int from_bitField0_ = bitField0_;
@@ -3691,7 +6340,7 @@ public final class WebProtos {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof me.yabble.web.proto.WebProtos.LoginForm) {
           return mergeFrom((me.yabble.web.proto.WebProtos.LoginForm)other);
@@ -3700,7 +6349,7 @@ public final class WebProtos {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(me.yabble.web.proto.WebProtos.LoginForm other) {
         if (other == me.yabble.web.proto.WebProtos.LoginForm.getDefaultInstance()) return this;
         if (errorMessageBuilder_ == null) {
@@ -3738,7 +6387,7 @@ public final class WebProtos {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         if (!hasName()) {
           
@@ -3764,60 +6413,26 @@ public final class WebProtos {
         }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              me.yabble.web.proto.WebProtos.Message.Builder subBuilder = me.yabble.web.proto.WebProtos.Message.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addErrorMessage(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasName()) {
-                subBuilder.mergeFrom(getName());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setName(subBuilder.buildPartial());
-              break;
-            }
-            case 26: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasPassword()) {
-                subBuilder.mergeFrom(getPassword());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setPassword(subBuilder.buildPartial());
-              break;
-            }
+        me.yabble.web.proto.WebProtos.LoginForm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (me.yabble.web.proto.WebProtos.LoginForm) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // repeated .me.yabble.web.proto.Message error_message = 1;
       private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_ =
         java.util.Collections.emptyList();
@@ -3827,10 +6442,13 @@ public final class WebProtos {
           bitField0_ |= 0x00000001;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           me.yabble.web.proto.WebProtos.Message, me.yabble.web.proto.WebProtos.Message.Builder, me.yabble.web.proto.WebProtos.MessageOrBuilder> errorMessageBuilder_;
-      
+
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
         if (errorMessageBuilder_ == null) {
           return java.util.Collections.unmodifiableList(errorMessage_);
@@ -3838,6 +6456,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public int getErrorMessageCount() {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.size();
@@ -3845,6 +6466,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.get(index);
@@ -3852,6 +6476,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -3866,6 +6493,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -3877,6 +6507,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
           if (value == null) {
@@ -3890,6 +6523,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -3904,6 +6540,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -3915,6 +6554,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -3926,6 +6568,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addAllErrorMessage(
           java.lang.Iterable<? extends me.yabble.web.proto.WebProtos.Message> values) {
         if (errorMessageBuilder_ == null) {
@@ -3937,6 +6582,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder clearErrorMessage() {
         if (errorMessageBuilder_ == null) {
           errorMessage_ = java.util.Collections.emptyList();
@@ -3947,6 +6595,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder removeErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           ensureErrorMessageIsMutable();
@@ -3957,10 +6608,16 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder getErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
           int index) {
         if (errorMessageBuilder_ == null) {
@@ -3968,6 +6625,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
            getErrorMessageOrBuilderList() {
         if (errorMessageBuilder_ != null) {
@@ -3976,15 +6636,24 @@ public final class WebProtos {
           return java.util.Collections.unmodifiableList(errorMessage_);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder() {
         return getErrorMessageFieldBuilder().addBuilder(
             me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().addBuilder(
             index, me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message.Builder> 
            getErrorMessageBuilderList() {
         return getErrorMessageFieldBuilder().getBuilderList();
@@ -4003,14 +6672,20 @@ public final class WebProtos {
         }
         return errorMessageBuilder_;
       }
-      
+
       // required .me.yabble.web.proto.FormField name = 2;
       private me.yabble.web.proto.WebProtos.FormField name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> nameBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public boolean hasName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getName() {
         if (nameBuilder_ == null) {
           return name_;
@@ -4018,6 +6693,9 @@ public final class WebProtos {
           return nameBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public Builder setName(me.yabble.web.proto.WebProtos.FormField value) {
         if (nameBuilder_ == null) {
           if (value == null) {
@@ -4031,6 +6709,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public Builder setName(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (nameBuilder_ == null) {
@@ -4042,6 +6723,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public Builder mergeName(me.yabble.web.proto.WebProtos.FormField value) {
         if (nameBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
@@ -4058,6 +6742,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public Builder clearName() {
         if (nameBuilder_ == null) {
           name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -4068,11 +6755,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getNameBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getNameFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder() {
         if (nameBuilder_ != null) {
           return nameBuilder_.getMessageOrBuilder();
@@ -4080,6 +6773,9 @@ public final class WebProtos {
           return name_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getNameFieldBuilder() {
@@ -4093,14 +6789,20 @@ public final class WebProtos {
         }
         return nameBuilder_;
       }
-      
+
       // required .me.yabble.web.proto.FormField password = 3;
       private me.yabble.web.proto.WebProtos.FormField password_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> passwordBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       public boolean hasPassword() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getPassword() {
         if (passwordBuilder_ == null) {
           return password_;
@@ -4108,6 +6810,9 @@ public final class WebProtos {
           return passwordBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       public Builder setPassword(me.yabble.web.proto.WebProtos.FormField value) {
         if (passwordBuilder_ == null) {
           if (value == null) {
@@ -4121,6 +6826,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       public Builder setPassword(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (passwordBuilder_ == null) {
@@ -4132,6 +6840,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       public Builder mergePassword(me.yabble.web.proto.WebProtos.FormField value) {
         if (passwordBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
@@ -4148,6 +6859,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       public Builder clearPassword() {
         if (passwordBuilder_ == null) {
           password_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -4158,11 +6872,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getPasswordBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getPasswordFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder() {
         if (passwordBuilder_ != null) {
           return passwordBuilder_.getMessageOrBuilder();
@@ -4170,6 +6890,9 @@ public final class WebProtos {
           return password_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 3;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getPasswordFieldBuilder() {
@@ -4183,135 +6906,331 @@ public final class WebProtos {
         }
         return passwordBuilder_;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.LoginForm)
     }
-    
+
     static {
       defaultInstance = new LoginForm(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:me.yabble.web.proto.LoginForm)
   }
-  
+
   public interface RegisterFormOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // repeated .me.yabble.web.proto.Message error_message = 1;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     java.util.List<me.yabble.web.proto.WebProtos.Message> 
         getErrorMessageList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     me.yabble.web.proto.WebProtos.Message getErrorMessage(int index);
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     int getErrorMessageCount();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index);
-    
+
     // required .me.yabble.web.proto.FormField name = 2;
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     boolean hasName();
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getName();
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder();
-    
+
     // required .me.yabble.web.proto.FormField email = 3;
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
     boolean hasEmail();
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getEmail();
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getEmailOrBuilder();
-    
+
     // required .me.yabble.web.proto.FormField password = 4;
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
     boolean hasPassword();
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getPassword();
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder();
   }
+  /**
+   * Protobuf type {@code me.yabble.web.proto.RegisterForm}
+   */
   public static final class RegisterForm extends
       com.google.protobuf.GeneratedMessage
       implements RegisterFormOrBuilder {
     // Use RegisterForm.newBuilder() to construct.
-    private RegisterForm(Builder builder) {
+    private RegisterForm(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private RegisterForm(boolean noInit) {}
-    
+    private RegisterForm(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final RegisterForm defaultInstance;
     public static RegisterForm getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public RegisterForm getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private RegisterForm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                errorMessage_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Message>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              errorMessage_.add(input.readMessage(me.yabble.web.proto.WebProtos.Message.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = name_.toBuilder();
+              }
+              name_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(name_);
+                name_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 26: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = email_.toBuilder();
+              }
+              email_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(email_);
+                email_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 34: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = password_.toBuilder();
+              }
+              password_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(password_);
+                password_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          errorMessage_ = java.util.Collections.unmodifiableList(errorMessage_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_RegisterForm_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_RegisterForm_fieldAccessorTable;
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_RegisterForm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              me.yabble.web.proto.WebProtos.RegisterForm.class, me.yabble.web.proto.WebProtos.RegisterForm.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<RegisterForm> PARSER =
+        new com.google.protobuf.AbstractParser<RegisterForm>() {
+      public RegisterForm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new RegisterForm(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<RegisterForm> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     // repeated .me.yabble.web.proto.Message error_message = 1;
     public static final int ERROR_MESSAGE_FIELD_NUMBER = 1;
     private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public int getErrorMessageCount() {
       return errorMessage_.size();
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
       return errorMessage_.get(index);
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index) {
       return errorMessage_.get(index);
     }
-    
+
     // required .me.yabble.web.proto.FormField name = 2;
     public static final int NAME_FIELD_NUMBER = 2;
     private me.yabble.web.proto.WebProtos.FormField name_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     public boolean hasName() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getName() {
       return name_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder() {
       return name_;
     }
-    
+
     // required .me.yabble.web.proto.FormField email = 3;
     public static final int EMAIL_FIELD_NUMBER = 3;
     private me.yabble.web.proto.WebProtos.FormField email_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
     public boolean hasEmail() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getEmail() {
       return email_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getEmailOrBuilder() {
       return email_;
     }
-    
+
     // required .me.yabble.web.proto.FormField password = 4;
     public static final int PASSWORD_FIELD_NUMBER = 4;
     private me.yabble.web.proto.WebProtos.FormField password_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
     public boolean hasPassword() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getPassword() {
       return password_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder() {
       return password_;
     }
-    
+
     private void initFields() {
       errorMessage_ = java.util.Collections.emptyList();
       name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -4322,7 +7241,7 @@ public final class WebProtos {
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       if (!hasName()) {
         memoizedIsInitialized = 0;
         return false;
@@ -4356,7 +7275,7 @@ public final class WebProtos {
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -4374,12 +7293,12 @@ public final class WebProtos {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       for (int i = 0; i < errorMessage_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -4401,94 +7320,83 @@ public final class WebProtos {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static me.yabble.web.proto.WebProtos.RegisterForm parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.RegisterForm parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(me.yabble.web.proto.WebProtos.RegisterForm prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.RegisterForm}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements me.yabble.web.proto.WebProtos.RegisterFormOrBuilder {
@@ -4496,18 +7404,21 @@ public final class WebProtos {
           getDescriptor() {
         return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_RegisterForm_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_RegisterForm_fieldAccessorTable;
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_RegisterForm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.RegisterForm.class, me.yabble.web.proto.WebProtos.RegisterForm.Builder.class);
       }
-      
+
       // Construct using me.yabble.web.proto.WebProtos.RegisterForm.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -4522,7 +7433,7 @@ public final class WebProtos {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (errorMessageBuilder_ == null) {
@@ -4551,20 +7462,20 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return me.yabble.web.proto.WebProtos.RegisterForm.getDescriptor();
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_RegisterForm_descriptor;
       }
-      
+
       public me.yabble.web.proto.WebProtos.RegisterForm getDefaultInstanceForType() {
         return me.yabble.web.proto.WebProtos.RegisterForm.getDefaultInstance();
       }
-      
+
       public me.yabble.web.proto.WebProtos.RegisterForm build() {
         me.yabble.web.proto.WebProtos.RegisterForm result = buildPartial();
         if (!result.isInitialized()) {
@@ -4572,17 +7483,7 @@ public final class WebProtos {
         }
         return result;
       }
-      
-      private me.yabble.web.proto.WebProtos.RegisterForm buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        me.yabble.web.proto.WebProtos.RegisterForm result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public me.yabble.web.proto.WebProtos.RegisterForm buildPartial() {
         me.yabble.web.proto.WebProtos.RegisterForm result = new me.yabble.web.proto.WebProtos.RegisterForm(this);
         int from_bitField0_ = bitField0_;
@@ -4624,7 +7525,7 @@ public final class WebProtos {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof me.yabble.web.proto.WebProtos.RegisterForm) {
           return mergeFrom((me.yabble.web.proto.WebProtos.RegisterForm)other);
@@ -4633,7 +7534,7 @@ public final class WebProtos {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(me.yabble.web.proto.WebProtos.RegisterForm other) {
         if (other == me.yabble.web.proto.WebProtos.RegisterForm.getDefaultInstance()) return this;
         if (errorMessageBuilder_ == null) {
@@ -4674,7 +7575,7 @@ public final class WebProtos {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         if (!hasName()) {
           
@@ -4708,69 +7609,26 @@ public final class WebProtos {
         }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              me.yabble.web.proto.WebProtos.Message.Builder subBuilder = me.yabble.web.proto.WebProtos.Message.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addErrorMessage(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasName()) {
-                subBuilder.mergeFrom(getName());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setName(subBuilder.buildPartial());
-              break;
-            }
-            case 26: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasEmail()) {
-                subBuilder.mergeFrom(getEmail());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setEmail(subBuilder.buildPartial());
-              break;
-            }
-            case 34: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasPassword()) {
-                subBuilder.mergeFrom(getPassword());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setPassword(subBuilder.buildPartial());
-              break;
-            }
+        me.yabble.web.proto.WebProtos.RegisterForm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (me.yabble.web.proto.WebProtos.RegisterForm) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // repeated .me.yabble.web.proto.Message error_message = 1;
       private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_ =
         java.util.Collections.emptyList();
@@ -4780,10 +7638,13 @@ public final class WebProtos {
           bitField0_ |= 0x00000001;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           me.yabble.web.proto.WebProtos.Message, me.yabble.web.proto.WebProtos.Message.Builder, me.yabble.web.proto.WebProtos.MessageOrBuilder> errorMessageBuilder_;
-      
+
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
         if (errorMessageBuilder_ == null) {
           return java.util.Collections.unmodifiableList(errorMessage_);
@@ -4791,6 +7652,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public int getErrorMessageCount() {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.size();
@@ -4798,6 +7662,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.get(index);
@@ -4805,6 +7672,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -4819,6 +7689,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -4830,6 +7703,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
           if (value == null) {
@@ -4843,6 +7719,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -4857,6 +7736,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -4868,6 +7750,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -4879,6 +7764,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addAllErrorMessage(
           java.lang.Iterable<? extends me.yabble.web.proto.WebProtos.Message> values) {
         if (errorMessageBuilder_ == null) {
@@ -4890,6 +7778,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder clearErrorMessage() {
         if (errorMessageBuilder_ == null) {
           errorMessage_ = java.util.Collections.emptyList();
@@ -4900,6 +7791,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder removeErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           ensureErrorMessageIsMutable();
@@ -4910,10 +7804,16 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder getErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
           int index) {
         if (errorMessageBuilder_ == null) {
@@ -4921,6 +7821,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
            getErrorMessageOrBuilderList() {
         if (errorMessageBuilder_ != null) {
@@ -4929,15 +7832,24 @@ public final class WebProtos {
           return java.util.Collections.unmodifiableList(errorMessage_);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder() {
         return getErrorMessageFieldBuilder().addBuilder(
             me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().addBuilder(
             index, me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message.Builder> 
            getErrorMessageBuilderList() {
         return getErrorMessageFieldBuilder().getBuilderList();
@@ -4956,14 +7868,20 @@ public final class WebProtos {
         }
         return errorMessageBuilder_;
       }
-      
+
       // required .me.yabble.web.proto.FormField name = 2;
       private me.yabble.web.proto.WebProtos.FormField name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> nameBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public boolean hasName() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getName() {
         if (nameBuilder_ == null) {
           return name_;
@@ -4971,6 +7889,9 @@ public final class WebProtos {
           return nameBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public Builder setName(me.yabble.web.proto.WebProtos.FormField value) {
         if (nameBuilder_ == null) {
           if (value == null) {
@@ -4984,6 +7905,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public Builder setName(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (nameBuilder_ == null) {
@@ -4995,6 +7919,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public Builder mergeName(me.yabble.web.proto.WebProtos.FormField value) {
         if (nameBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
@@ -5011,6 +7938,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public Builder clearName() {
         if (nameBuilder_ == null) {
           name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -5021,11 +7951,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getNameBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getNameFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder() {
         if (nameBuilder_ != null) {
           return nameBuilder_.getMessageOrBuilder();
@@ -5033,6 +7969,9 @@ public final class WebProtos {
           return name_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getNameFieldBuilder() {
@@ -5046,14 +7985,20 @@ public final class WebProtos {
         }
         return nameBuilder_;
       }
-      
+
       // required .me.yabble.web.proto.FormField email = 3;
       private me.yabble.web.proto.WebProtos.FormField email_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> emailBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       public boolean hasEmail() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getEmail() {
         if (emailBuilder_ == null) {
           return email_;
@@ -5061,6 +8006,9 @@ public final class WebProtos {
           return emailBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       public Builder setEmail(me.yabble.web.proto.WebProtos.FormField value) {
         if (emailBuilder_ == null) {
           if (value == null) {
@@ -5074,6 +8022,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       public Builder setEmail(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (emailBuilder_ == null) {
@@ -5085,6 +8036,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       public Builder mergeEmail(me.yabble.web.proto.WebProtos.FormField value) {
         if (emailBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
@@ -5101,6 +8055,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       public Builder clearEmail() {
         if (emailBuilder_ == null) {
           email_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -5111,11 +8068,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getEmailBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getEmailFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getEmailOrBuilder() {
         if (emailBuilder_ != null) {
           return emailBuilder_.getMessageOrBuilder();
@@ -5123,6 +8086,9 @@ public final class WebProtos {
           return email_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getEmailFieldBuilder() {
@@ -5136,14 +8102,20 @@ public final class WebProtos {
         }
         return emailBuilder_;
       }
-      
+
       // required .me.yabble.web.proto.FormField password = 4;
       private me.yabble.web.proto.WebProtos.FormField password_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> passwordBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       public boolean hasPassword() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getPassword() {
         if (passwordBuilder_ == null) {
           return password_;
@@ -5151,6 +8123,9 @@ public final class WebProtos {
           return passwordBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       public Builder setPassword(me.yabble.web.proto.WebProtos.FormField value) {
         if (passwordBuilder_ == null) {
           if (value == null) {
@@ -5164,6 +8139,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       public Builder setPassword(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (passwordBuilder_ == null) {
@@ -5175,6 +8153,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       public Builder mergePassword(me.yabble.web.proto.WebProtos.FormField value) {
         if (passwordBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
@@ -5191,6 +8172,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       public Builder clearPassword() {
         if (passwordBuilder_ == null) {
           password_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -5201,11 +8185,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getPasswordBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
         return getPasswordFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder() {
         if (passwordBuilder_ != null) {
           return passwordBuilder_.getMessageOrBuilder();
@@ -5213,6 +8203,9 @@ public final class WebProtos {
           return password_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getPasswordFieldBuilder() {
@@ -5226,117 +8219,282 @@ public final class WebProtos {
         }
         return passwordBuilder_;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.RegisterForm)
     }
-    
+
     static {
       defaultInstance = new RegisterForm(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:me.yabble.web.proto.RegisterForm)
   }
-  
+
   public interface ListFormOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // repeated .me.yabble.web.proto.Message error_message = 1;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     java.util.List<me.yabble.web.proto.WebProtos.Message> 
         getErrorMessageList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     me.yabble.web.proto.WebProtos.Message getErrorMessage(int index);
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     int getErrorMessageCount();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index);
-    
+
     // required .me.yabble.web.proto.FormField title = 2;
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+     */
     boolean hasTitle();
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getTitle();
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder();
-    
+
     // required .me.yabble.web.proto.FormField body = 3;
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+     */
     boolean hasBody();
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getBody();
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder();
   }
+  /**
+   * Protobuf type {@code me.yabble.web.proto.ListForm}
+   */
   public static final class ListForm extends
       com.google.protobuf.GeneratedMessage
       implements ListFormOrBuilder {
     // Use ListForm.newBuilder() to construct.
-    private ListForm(Builder builder) {
+    private ListForm(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private ListForm(boolean noInit) {}
-    
+    private ListForm(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final ListForm defaultInstance;
     public static ListForm getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public ListForm getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ListForm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                errorMessage_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Message>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              errorMessage_.add(input.readMessage(me.yabble.web.proto.WebProtos.Message.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = title_.toBuilder();
+              }
+              title_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(title_);
+                title_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 26: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = body_.toBuilder();
+              }
+              body_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(body_);
+                body_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          errorMessage_ = java.util.Collections.unmodifiableList(errorMessage_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListForm_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListForm_fieldAccessorTable;
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListForm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              me.yabble.web.proto.WebProtos.ListForm.class, me.yabble.web.proto.WebProtos.ListForm.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<ListForm> PARSER =
+        new com.google.protobuf.AbstractParser<ListForm>() {
+      public ListForm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ListForm(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ListForm> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     // repeated .me.yabble.web.proto.Message error_message = 1;
     public static final int ERROR_MESSAGE_FIELD_NUMBER = 1;
     private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public int getErrorMessageCount() {
       return errorMessage_.size();
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
       return errorMessage_.get(index);
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index) {
       return errorMessage_.get(index);
     }
-    
+
     // required .me.yabble.web.proto.FormField title = 2;
     public static final int TITLE_FIELD_NUMBER = 2;
     private me.yabble.web.proto.WebProtos.FormField title_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+     */
     public boolean hasTitle() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getTitle() {
       return title_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder() {
       return title_;
     }
-    
+
     // required .me.yabble.web.proto.FormField body = 3;
     public static final int BODY_FIELD_NUMBER = 3;
     private me.yabble.web.proto.WebProtos.FormField body_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+     */
     public boolean hasBody() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getBody() {
       return body_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder() {
       return body_;
     }
-    
+
     private void initFields() {
       errorMessage_ = java.util.Collections.emptyList();
       title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -5346,7 +8504,7 @@ public final class WebProtos {
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       if (!hasTitle()) {
         memoizedIsInitialized = 0;
         return false;
@@ -5372,7 +8530,7 @@ public final class WebProtos {
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -5387,12 +8545,12 @@ public final class WebProtos {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       for (int i = 0; i < errorMessage_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -5410,94 +8568,83 @@ public final class WebProtos {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static me.yabble.web.proto.WebProtos.ListForm parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.ListForm parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(me.yabble.web.proto.WebProtos.ListForm prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.ListForm}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements me.yabble.web.proto.WebProtos.ListFormOrBuilder {
@@ -5505,18 +8652,21 @@ public final class WebProtos {
           getDescriptor() {
         return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListForm_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListForm_fieldAccessorTable;
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListForm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.ListForm.class, me.yabble.web.proto.WebProtos.ListForm.Builder.class);
       }
-      
+
       // Construct using me.yabble.web.proto.WebProtos.ListForm.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -5530,7 +8680,7 @@ public final class WebProtos {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (errorMessageBuilder_ == null) {
@@ -5553,20 +8703,20 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return me.yabble.web.proto.WebProtos.ListForm.getDescriptor();
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListForm_descriptor;
       }
-      
+
       public me.yabble.web.proto.WebProtos.ListForm getDefaultInstanceForType() {
         return me.yabble.web.proto.WebProtos.ListForm.getDefaultInstance();
       }
-      
+
       public me.yabble.web.proto.WebProtos.ListForm build() {
         me.yabble.web.proto.WebProtos.ListForm result = buildPartial();
         if (!result.isInitialized()) {
@@ -5574,17 +8724,7 @@ public final class WebProtos {
         }
         return result;
       }
-      
-      private me.yabble.web.proto.WebProtos.ListForm buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        me.yabble.web.proto.WebProtos.ListForm result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public me.yabble.web.proto.WebProtos.ListForm buildPartial() {
         me.yabble.web.proto.WebProtos.ListForm result = new me.yabble.web.proto.WebProtos.ListForm(this);
         int from_bitField0_ = bitField0_;
@@ -5618,7 +8758,7 @@ public final class WebProtos {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof me.yabble.web.proto.WebProtos.ListForm) {
           return mergeFrom((me.yabble.web.proto.WebProtos.ListForm)other);
@@ -5627,7 +8767,7 @@ public final class WebProtos {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(me.yabble.web.proto.WebProtos.ListForm other) {
         if (other == me.yabble.web.proto.WebProtos.ListForm.getDefaultInstance()) return this;
         if (errorMessageBuilder_ == null) {
@@ -5665,7 +8805,7 @@ public final class WebProtos {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         if (!hasTitle()) {
           
@@ -5691,60 +8831,26 @@ public final class WebProtos {
         }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              me.yabble.web.proto.WebProtos.Message.Builder subBuilder = me.yabble.web.proto.WebProtos.Message.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addErrorMessage(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasTitle()) {
-                subBuilder.mergeFrom(getTitle());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setTitle(subBuilder.buildPartial());
-              break;
-            }
-            case 26: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasBody()) {
-                subBuilder.mergeFrom(getBody());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setBody(subBuilder.buildPartial());
-              break;
-            }
+        me.yabble.web.proto.WebProtos.ListForm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (me.yabble.web.proto.WebProtos.ListForm) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // repeated .me.yabble.web.proto.Message error_message = 1;
       private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_ =
         java.util.Collections.emptyList();
@@ -5754,10 +8860,13 @@ public final class WebProtos {
           bitField0_ |= 0x00000001;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           me.yabble.web.proto.WebProtos.Message, me.yabble.web.proto.WebProtos.Message.Builder, me.yabble.web.proto.WebProtos.MessageOrBuilder> errorMessageBuilder_;
-      
+
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
         if (errorMessageBuilder_ == null) {
           return java.util.Collections.unmodifiableList(errorMessage_);
@@ -5765,6 +8874,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public int getErrorMessageCount() {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.size();
@@ -5772,6 +8884,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.get(index);
@@ -5779,6 +8894,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -5793,6 +8911,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -5804,6 +8925,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
           if (value == null) {
@@ -5817,6 +8941,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -5831,6 +8958,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -5842,6 +8972,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -5853,6 +8986,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addAllErrorMessage(
           java.lang.Iterable<? extends me.yabble.web.proto.WebProtos.Message> values) {
         if (errorMessageBuilder_ == null) {
@@ -5864,6 +9000,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder clearErrorMessage() {
         if (errorMessageBuilder_ == null) {
           errorMessage_ = java.util.Collections.emptyList();
@@ -5874,6 +9013,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder removeErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           ensureErrorMessageIsMutable();
@@ -5884,10 +9026,16 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder getErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
           int index) {
         if (errorMessageBuilder_ == null) {
@@ -5895,6 +9043,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
            getErrorMessageOrBuilderList() {
         if (errorMessageBuilder_ != null) {
@@ -5903,15 +9054,24 @@ public final class WebProtos {
           return java.util.Collections.unmodifiableList(errorMessage_);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder() {
         return getErrorMessageFieldBuilder().addBuilder(
             me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().addBuilder(
             index, me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message.Builder> 
            getErrorMessageBuilderList() {
         return getErrorMessageFieldBuilder().getBuilderList();
@@ -5930,14 +9090,20 @@ public final class WebProtos {
         }
         return errorMessageBuilder_;
       }
-      
+
       // required .me.yabble.web.proto.FormField title = 2;
       private me.yabble.web.proto.WebProtos.FormField title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> titleBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       public boolean hasTitle() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getTitle() {
         if (titleBuilder_ == null) {
           return title_;
@@ -5945,6 +9111,9 @@ public final class WebProtos {
           return titleBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       public Builder setTitle(me.yabble.web.proto.WebProtos.FormField value) {
         if (titleBuilder_ == null) {
           if (value == null) {
@@ -5958,6 +9127,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       public Builder setTitle(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (titleBuilder_ == null) {
@@ -5969,6 +9141,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       public Builder mergeTitle(me.yabble.web.proto.WebProtos.FormField value) {
         if (titleBuilder_ == null) {
           if (((bitField0_ & 0x00000002) == 0x00000002) &&
@@ -5985,6 +9160,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000002;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       public Builder clearTitle() {
         if (titleBuilder_ == null) {
           title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -5995,11 +9173,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getTitleBuilder() {
         bitField0_ |= 0x00000002;
         onChanged();
         return getTitleFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder() {
         if (titleBuilder_ != null) {
           return titleBuilder_.getMessageOrBuilder();
@@ -6007,6 +9191,9 @@ public final class WebProtos {
           return title_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 2;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getTitleFieldBuilder() {
@@ -6020,14 +9207,20 @@ public final class WebProtos {
         }
         return titleBuilder_;
       }
-      
+
       // required .me.yabble.web.proto.FormField body = 3;
       private me.yabble.web.proto.WebProtos.FormField body_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> bodyBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       public boolean hasBody() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getBody() {
         if (bodyBuilder_ == null) {
           return body_;
@@ -6035,6 +9228,9 @@ public final class WebProtos {
           return bodyBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       public Builder setBody(me.yabble.web.proto.WebProtos.FormField value) {
         if (bodyBuilder_ == null) {
           if (value == null) {
@@ -6048,6 +9244,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       public Builder setBody(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (bodyBuilder_ == null) {
@@ -6059,6 +9258,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       public Builder mergeBody(me.yabble.web.proto.WebProtos.FormField value) {
         if (bodyBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
@@ -6075,6 +9277,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       public Builder clearBody() {
         if (bodyBuilder_ == null) {
           body_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -6085,11 +9290,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getBodyBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getBodyFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder() {
         if (bodyBuilder_ != null) {
           return bodyBuilder_.getMessageOrBuilder();
@@ -6097,6 +9308,9 @@ public final class WebProtos {
           return body_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 3;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getBodyFieldBuilder() {
@@ -6110,172 +9324,406 @@ public final class WebProtos {
         }
         return bodyBuilder_;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.ListForm)
     }
-    
+
     static {
       defaultInstance = new ListForm(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:me.yabble.web.proto.ListForm)
   }
-  
+
   public interface ListItemFormOrBuilder
       extends com.google.protobuf.MessageOrBuilder {
-    
+
     // repeated .me.yabble.web.proto.Message error_message = 1;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     java.util.List<me.yabble.web.proto.WebProtos.Message> 
         getErrorMessageList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     me.yabble.web.proto.WebProtos.Message getErrorMessage(int index);
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     int getErrorMessageCount();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index);
-    
+
     // required string list_id = 2;
+    /**
+     * <code>required string list_id = 2;</code>
+     */
     boolean hasListId();
-    String getListId();
-    
+    /**
+     * <code>required string list_id = 2;</code>
+     */
+    java.lang.String getListId();
+    /**
+     * <code>required string list_id = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getListIdBytes();
+
     // required .me.yabble.web.proto.FormField title = 3;
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+     */
     boolean hasTitle();
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getTitle();
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder();
-    
+
     // required .me.yabble.web.proto.FormField body = 4;
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+     */
     boolean hasBody();
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+     */
     me.yabble.web.proto.WebProtos.FormField getBody();
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+     */
     me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder();
-    
+
     // repeated string image_url = 5;
-    java.util.List<String> getImageUrlList();
+    /**
+     * <code>repeated string image_url = 5;</code>
+     */
+    java.util.List<java.lang.String>
+    getImageUrlList();
+    /**
+     * <code>repeated string image_url = 5;</code>
+     */
     int getImageUrlCount();
-    String getImageUrl(int index);
+    /**
+     * <code>repeated string image_url = 5;</code>
+     */
+    java.lang.String getImageUrl(int index);
+    /**
+     * <code>repeated string image_url = 5;</code>
+     */
+    com.google.protobuf.ByteString
+        getImageUrlBytes(int index);
   }
+  /**
+   * Protobuf type {@code me.yabble.web.proto.ListItemForm}
+   */
   public static final class ListItemForm extends
       com.google.protobuf.GeneratedMessage
       implements ListItemFormOrBuilder {
     // Use ListItemForm.newBuilder() to construct.
-    private ListItemForm(Builder builder) {
+    private ListItemForm(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
+      this.unknownFields = builder.getUnknownFields();
     }
-    private ListItemForm(boolean noInit) {}
-    
+    private ListItemForm(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
     private static final ListItemForm defaultInstance;
     public static ListItemForm getDefaultInstance() {
       return defaultInstance;
     }
-    
+
     public ListItemForm getDefaultInstanceForType() {
       return defaultInstance;
     }
-    
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ListItemForm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                errorMessage_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Message>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              errorMessage_.add(input.readMessage(me.yabble.web.proto.WebProtos.Message.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              bitField0_ |= 0x00000001;
+              listId_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = title_.toBuilder();
+              }
+              title_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(title_);
+                title_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 34: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = body_.toBuilder();
+              }
+              body_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(body_);
+                body_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                imageUrl_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              imageUrl_.add(input.readBytes());
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          errorMessage_ = java.util.Collections.unmodifiableList(errorMessage_);
+        }
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          imageUrl_ = new com.google.protobuf.UnmodifiableLazyStringList(imageUrl_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
       return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_descriptor;
     }
-    
+
     protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable;
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              me.yabble.web.proto.WebProtos.ListItemForm.class, me.yabble.web.proto.WebProtos.ListItemForm.Builder.class);
     }
-    
+
+    public static com.google.protobuf.Parser<ListItemForm> PARSER =
+        new com.google.protobuf.AbstractParser<ListItemForm>() {
+      public ListItemForm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ListItemForm(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ListItemForm> getParserForType() {
+      return PARSER;
+    }
+
     private int bitField0_;
     // repeated .me.yabble.web.proto.Message error_message = 1;
     public static final int ERROR_MESSAGE_FIELD_NUMBER = 1;
     private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
         getErrorMessageOrBuilderList() {
       return errorMessage_;
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public int getErrorMessageCount() {
       return errorMessage_.size();
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
       return errorMessage_.get(index);
     }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
     public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
         int index) {
       return errorMessage_.get(index);
     }
-    
+
     // required string list_id = 2;
     public static final int LIST_ID_FIELD_NUMBER = 2;
     private java.lang.Object listId_;
+    /**
+     * <code>required string list_id = 2;</code>
+     */
     public boolean hasListId() {
       return ((bitField0_ & 0x00000001) == 0x00000001);
     }
-    public String getListId() {
+    /**
+     * <code>required string list_id = 2;</code>
+     */
+    public java.lang.String getListId() {
       java.lang.Object ref = listId_;
-      if (ref instanceof String) {
-        return (String) ref;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
       } else {
         com.google.protobuf.ByteString bs = 
             (com.google.protobuf.ByteString) ref;
-        String s = bs.toStringUtf8();
-        if (com.google.protobuf.Internal.isValidUtf8(bs)) {
+        java.lang.String s = bs.toStringUtf8();
+        if (bs.isValidUtf8()) {
           listId_ = s;
         }
         return s;
       }
     }
-    private com.google.protobuf.ByteString getListIdBytes() {
+    /**
+     * <code>required string list_id = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getListIdBytes() {
       java.lang.Object ref = listId_;
-      if (ref instanceof String) {
+      if (ref instanceof java.lang.String) {
         com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8((String) ref);
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
         listId_ = b;
         return b;
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
     }
-    
+
     // required .me.yabble.web.proto.FormField title = 3;
     public static final int TITLE_FIELD_NUMBER = 3;
     private me.yabble.web.proto.WebProtos.FormField title_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+     */
     public boolean hasTitle() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getTitle() {
       return title_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder() {
       return title_;
     }
-    
+
     // required .me.yabble.web.proto.FormField body = 4;
     public static final int BODY_FIELD_NUMBER = 4;
     private me.yabble.web.proto.WebProtos.FormField body_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+     */
     public boolean hasBody() {
       return ((bitField0_ & 0x00000004) == 0x00000004);
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormField getBody() {
       return body_;
     }
+    /**
+     * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+     */
     public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder() {
       return body_;
     }
-    
+
     // repeated string image_url = 5;
     public static final int IMAGE_URL_FIELD_NUMBER = 5;
     private com.google.protobuf.LazyStringList imageUrl_;
-    public java.util.List<String>
+    /**
+     * <code>repeated string image_url = 5;</code>
+     */
+    public java.util.List<java.lang.String>
         getImageUrlList() {
       return imageUrl_;
     }
+    /**
+     * <code>repeated string image_url = 5;</code>
+     */
     public int getImageUrlCount() {
       return imageUrl_.size();
     }
-    public String getImageUrl(int index) {
+    /**
+     * <code>repeated string image_url = 5;</code>
+     */
+    public java.lang.String getImageUrl(int index) {
       return imageUrl_.get(index);
     }
-    
+    /**
+     * <code>repeated string image_url = 5;</code>
+     */
+    public com.google.protobuf.ByteString
+        getImageUrlBytes(int index) {
+      return imageUrl_.getByteString(index);
+    }
+
     private void initFields() {
       errorMessage_ = java.util.Collections.emptyList();
       listId_ = "";
@@ -6287,7 +9735,7 @@ public final class WebProtos {
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized != -1) return isInitialized == 1;
-      
+
       if (!hasListId()) {
         memoizedIsInitialized = 0;
         return false;
@@ -6317,7 +9765,7 @@ public final class WebProtos {
       memoizedIsInitialized = 1;
       return true;
     }
-    
+
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
@@ -6338,12 +9786,12 @@ public final class WebProtos {
       }
       getUnknownFields().writeTo(output);
     }
-    
+
     private int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
-    
+
       size = 0;
       for (int i = 0; i < errorMessage_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
@@ -6374,94 +9822,83 @@ public final class WebProtos {
       memoizedSerializedSize = size;
       return size;
     }
-    
+
     private static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
       return super.writeReplace();
     }
-    
+
     public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data).buildParsed();
+      return PARSER.parseFrom(data);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
-      return newBuilder().mergeFrom(data, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(data, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(java.io.InputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      Builder builder = newBuilder();
-      if (builder.mergeDelimitedFrom(input, extensionRegistry)) {
-        return builder.buildParsed();
-      } else {
-        return null;
-      }
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input).buildParsed();
+      return PARSER.parseFrom(input);
     }
     public static me.yabble.web.proto.WebProtos.ListItemForm parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
-      return newBuilder().mergeFrom(input, extensionRegistry)
-               .buildParsed();
+      return PARSER.parseFrom(input, extensionRegistry);
     }
-    
+
     public static Builder newBuilder() { return Builder.create(); }
     public Builder newBuilderForType() { return newBuilder(); }
     public static Builder newBuilder(me.yabble.web.proto.WebProtos.ListItemForm prototype) {
       return newBuilder().mergeFrom(prototype);
     }
     public Builder toBuilder() { return newBuilder(this); }
-    
+
     @java.lang.Override
     protected Builder newBuilderForType(
         com.google.protobuf.GeneratedMessage.BuilderParent parent) {
       Builder builder = new Builder(parent);
       return builder;
     }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.ListItemForm}
+     */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessage.Builder<Builder>
        implements me.yabble.web.proto.WebProtos.ListItemFormOrBuilder {
@@ -6469,18 +9906,21 @@ public final class WebProtos {
           getDescriptor() {
         return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_descriptor;
       }
-      
+
       protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable;
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.ListItemForm.class, me.yabble.web.proto.WebProtos.ListItemForm.Builder.class);
       }
-      
+
       // Construct using me.yabble.web.proto.WebProtos.ListItemForm.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
-      
-      private Builder(BuilderParent parent) {
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
@@ -6494,7 +9934,7 @@ public final class WebProtos {
       private static Builder create() {
         return new Builder();
       }
-      
+
       public Builder clear() {
         super.clear();
         if (errorMessageBuilder_ == null) {
@@ -6521,20 +9961,20 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000010);
         return this;
       }
-      
+
       public Builder clone() {
         return create().mergeFrom(buildPartial());
       }
-      
+
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return me.yabble.web.proto.WebProtos.ListItemForm.getDescriptor();
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_ListItemForm_descriptor;
       }
-      
+
       public me.yabble.web.proto.WebProtos.ListItemForm getDefaultInstanceForType() {
         return me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance();
       }
-      
+
       public me.yabble.web.proto.WebProtos.ListItemForm build() {
         me.yabble.web.proto.WebProtos.ListItemForm result = buildPartial();
         if (!result.isInitialized()) {
@@ -6542,17 +9982,7 @@ public final class WebProtos {
         }
         return result;
       }
-      
-      private me.yabble.web.proto.WebProtos.ListItemForm buildParsed()
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        me.yabble.web.proto.WebProtos.ListItemForm result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(
-            result).asInvalidProtocolBufferException();
-        }
-        return result;
-      }
-      
+
       public me.yabble.web.proto.WebProtos.ListItemForm buildPartial() {
         me.yabble.web.proto.WebProtos.ListItemForm result = new me.yabble.web.proto.WebProtos.ListItemForm(this);
         int from_bitField0_ = bitField0_;
@@ -6596,7 +10026,7 @@ public final class WebProtos {
         onBuilt();
         return result;
       }
-      
+
       public Builder mergeFrom(com.google.protobuf.Message other) {
         if (other instanceof me.yabble.web.proto.WebProtos.ListItemForm) {
           return mergeFrom((me.yabble.web.proto.WebProtos.ListItemForm)other);
@@ -6605,7 +10035,7 @@ public final class WebProtos {
           return this;
         }
       }
-      
+
       public Builder mergeFrom(me.yabble.web.proto.WebProtos.ListItemForm other) {
         if (other == me.yabble.web.proto.WebProtos.ListItemForm.getDefaultInstance()) return this;
         if (errorMessageBuilder_ == null) {
@@ -6635,7 +10065,9 @@ public final class WebProtos {
           }
         }
         if (other.hasListId()) {
-          setListId(other.getListId());
+          bitField0_ |= 0x00000002;
+          listId_ = other.listId_;
+          onChanged();
         }
         if (other.hasTitle()) {
           mergeTitle(other.getTitle());
@@ -6656,7 +10088,7 @@ public final class WebProtos {
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
       }
-      
+
       public final boolean isInitialized() {
         if (!hasListId()) {
           
@@ -6686,70 +10118,26 @@ public final class WebProtos {
         }
         return true;
       }
-      
+
       public Builder mergeFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder(
-            this.getUnknownFields());
-        while (true) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              this.setUnknownFields(unknownFields.build());
-              onChanged();
-              return this;
-            default: {
-              if (!parseUnknownField(input, unknownFields,
-                                     extensionRegistry, tag)) {
-                this.setUnknownFields(unknownFields.build());
-                onChanged();
-                return this;
-              }
-              break;
-            }
-            case 10: {
-              me.yabble.web.proto.WebProtos.Message.Builder subBuilder = me.yabble.web.proto.WebProtos.Message.newBuilder();
-              input.readMessage(subBuilder, extensionRegistry);
-              addErrorMessage(subBuilder.buildPartial());
-              break;
-            }
-            case 18: {
-              bitField0_ |= 0x00000002;
-              listId_ = input.readBytes();
-              break;
-            }
-            case 26: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasTitle()) {
-                subBuilder.mergeFrom(getTitle());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setTitle(subBuilder.buildPartial());
-              break;
-            }
-            case 34: {
-              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = me.yabble.web.proto.WebProtos.FormField.newBuilder();
-              if (hasBody()) {
-                subBuilder.mergeFrom(getBody());
-              }
-              input.readMessage(subBuilder, extensionRegistry);
-              setBody(subBuilder.buildPartial());
-              break;
-            }
-            case 42: {
-              ensureImageUrlIsMutable();
-              imageUrl_.add(input.readBytes());
-              break;
-            }
+        me.yabble.web.proto.WebProtos.ListItemForm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (me.yabble.web.proto.WebProtos.ListItemForm) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
           }
         }
+        return this;
       }
-      
       private int bitField0_;
-      
+
       // repeated .me.yabble.web.proto.Message error_message = 1;
       private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_ =
         java.util.Collections.emptyList();
@@ -6759,10 +10147,13 @@ public final class WebProtos {
           bitField0_ |= 0x00000001;
          }
       }
-      
+
       private com.google.protobuf.RepeatedFieldBuilder<
           me.yabble.web.proto.WebProtos.Message, me.yabble.web.proto.WebProtos.Message.Builder, me.yabble.web.proto.WebProtos.MessageOrBuilder> errorMessageBuilder_;
-      
+
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
         if (errorMessageBuilder_ == null) {
           return java.util.Collections.unmodifiableList(errorMessage_);
@@ -6770,6 +10161,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageList();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public int getErrorMessageCount() {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.size();
@@ -6777,6 +10171,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getCount();
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           return errorMessage_.get(index);
@@ -6784,6 +10181,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessage(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -6798,6 +10198,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder setErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -6809,6 +10212,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
           if (value == null) {
@@ -6822,6 +10228,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message value) {
         if (errorMessageBuilder_ == null) {
@@ -6836,6 +10245,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -6847,6 +10259,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addErrorMessage(
           int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
         if (errorMessageBuilder_ == null) {
@@ -6858,6 +10273,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder addAllErrorMessage(
           java.lang.Iterable<? extends me.yabble.web.proto.WebProtos.Message> values) {
         if (errorMessageBuilder_ == null) {
@@ -6869,6 +10287,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder clearErrorMessage() {
         if (errorMessageBuilder_ == null) {
           errorMessage_ = java.util.Collections.emptyList();
@@ -6879,6 +10300,9 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public Builder removeErrorMessage(int index) {
         if (errorMessageBuilder_ == null) {
           ensureErrorMessageIsMutable();
@@ -6889,10 +10313,16 @@ public final class WebProtos {
         }
         return this;
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder getErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().getBuilder(index);
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
           int index) {
         if (errorMessageBuilder_ == null) {
@@ -6900,6 +10330,9 @@ public final class WebProtos {
           return errorMessageBuilder_.getMessageOrBuilder(index);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
            getErrorMessageOrBuilderList() {
         if (errorMessageBuilder_ != null) {
@@ -6908,15 +10341,24 @@ public final class WebProtos {
           return java.util.Collections.unmodifiableList(errorMessage_);
         }
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder() {
         return getErrorMessageFieldBuilder().addBuilder(
             me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder(
           int index) {
         return getErrorMessageFieldBuilder().addBuilder(
             index, me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
       }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
       public java.util.List<me.yabble.web.proto.WebProtos.Message.Builder> 
            getErrorMessageBuilderList() {
         return getErrorMessageFieldBuilder().getBuilderList();
@@ -6935,23 +10377,50 @@ public final class WebProtos {
         }
         return errorMessageBuilder_;
       }
-      
+
       // required string list_id = 2;
       private java.lang.Object listId_ = "";
+      /**
+       * <code>required string list_id = 2;</code>
+       */
       public boolean hasListId() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
-      public String getListId() {
+      /**
+       * <code>required string list_id = 2;</code>
+       */
+      public java.lang.String getListId() {
         java.lang.Object ref = listId_;
-        if (!(ref instanceof String)) {
-          String s = ((com.google.protobuf.ByteString) ref).toStringUtf8();
+        if (!(ref instanceof java.lang.String)) {
+          java.lang.String s = ((com.google.protobuf.ByteString) ref)
+              .toStringUtf8();
           listId_ = s;
           return s;
         } else {
-          return (String) ref;
+          return (java.lang.String) ref;
         }
       }
-      public Builder setListId(String value) {
+      /**
+       * <code>required string list_id = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getListIdBytes() {
+        java.lang.Object ref = listId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          listId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>required string list_id = 2;</code>
+       */
+      public Builder setListId(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -6960,25 +10429,42 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>required string list_id = 2;</code>
+       */
       public Builder clearListId() {
         bitField0_ = (bitField0_ & ~0x00000002);
         listId_ = getDefaultInstance().getListId();
         onChanged();
         return this;
       }
-      void setListId(com.google.protobuf.ByteString value) {
-        bitField0_ |= 0x00000002;
+      /**
+       * <code>required string list_id = 2;</code>
+       */
+      public Builder setListIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  bitField0_ |= 0x00000002;
         listId_ = value;
         onChanged();
+        return this;
       }
-      
+
       // required .me.yabble.web.proto.FormField title = 3;
       private me.yabble.web.proto.WebProtos.FormField title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> titleBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       public boolean hasTitle() {
         return ((bitField0_ & 0x00000004) == 0x00000004);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getTitle() {
         if (titleBuilder_ == null) {
           return title_;
@@ -6986,6 +10472,9 @@ public final class WebProtos {
           return titleBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       public Builder setTitle(me.yabble.web.proto.WebProtos.FormField value) {
         if (titleBuilder_ == null) {
           if (value == null) {
@@ -6999,6 +10488,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       public Builder setTitle(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (titleBuilder_ == null) {
@@ -7010,6 +10502,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       public Builder mergeTitle(me.yabble.web.proto.WebProtos.FormField value) {
         if (titleBuilder_ == null) {
           if (((bitField0_ & 0x00000004) == 0x00000004) &&
@@ -7026,6 +10521,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000004;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       public Builder clearTitle() {
         if (titleBuilder_ == null) {
           title_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -7036,11 +10534,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000004);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getTitleBuilder() {
         bitField0_ |= 0x00000004;
         onChanged();
         return getTitleFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getTitleOrBuilder() {
         if (titleBuilder_ != null) {
           return titleBuilder_.getMessageOrBuilder();
@@ -7048,6 +10552,9 @@ public final class WebProtos {
           return title_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField title = 3;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getTitleFieldBuilder() {
@@ -7061,14 +10568,20 @@ public final class WebProtos {
         }
         return titleBuilder_;
       }
-      
+
       // required .me.yabble.web.proto.FormField body = 4;
       private me.yabble.web.proto.WebProtos.FormField body_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> bodyBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       public boolean hasBody() {
         return ((bitField0_ & 0x00000008) == 0x00000008);
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField getBody() {
         if (bodyBuilder_ == null) {
           return body_;
@@ -7076,6 +10589,9 @@ public final class WebProtos {
           return bodyBuilder_.getMessage();
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       public Builder setBody(me.yabble.web.proto.WebProtos.FormField value) {
         if (bodyBuilder_ == null) {
           if (value == null) {
@@ -7089,6 +10605,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       public Builder setBody(
           me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
         if (bodyBuilder_ == null) {
@@ -7100,6 +10619,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       public Builder mergeBody(me.yabble.web.proto.WebProtos.FormField value) {
         if (bodyBuilder_ == null) {
           if (((bitField0_ & 0x00000008) == 0x00000008) &&
@@ -7116,6 +10638,9 @@ public final class WebProtos {
         bitField0_ |= 0x00000008;
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       public Builder clearBody() {
         if (bodyBuilder_ == null) {
           body_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
@@ -7126,11 +10651,17 @@ public final class WebProtos {
         bitField0_ = (bitField0_ & ~0x00000008);
         return this;
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormField.Builder getBodyBuilder() {
         bitField0_ |= 0x00000008;
         onChanged();
         return getBodyFieldBuilder().getBuilder();
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getBodyOrBuilder() {
         if (bodyBuilder_ != null) {
           return bodyBuilder_.getMessageOrBuilder();
@@ -7138,6 +10669,9 @@ public final class WebProtos {
           return body_;
         }
       }
+      /**
+       * <code>required .me.yabble.web.proto.FormField body = 4;</code>
+       */
       private com.google.protobuf.SingleFieldBuilder<
           me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
           getBodyFieldBuilder() {
@@ -7151,7 +10685,7 @@ public final class WebProtos {
         }
         return bodyBuilder_;
       }
-      
+
       // repeated string image_url = 5;
       private com.google.protobuf.LazyStringList imageUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureImageUrlIsMutable() {
@@ -7160,18 +10694,37 @@ public final class WebProtos {
           bitField0_ |= 0x00000010;
          }
       }
-      public java.util.List<String>
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
+      public java.util.List<java.lang.String>
           getImageUrlList() {
         return java.util.Collections.unmodifiableList(imageUrl_);
       }
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
       public int getImageUrlCount() {
         return imageUrl_.size();
       }
-      public String getImageUrl(int index) {
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
+      public java.lang.String getImageUrl(int index) {
         return imageUrl_.get(index);
       }
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
+      public com.google.protobuf.ByteString
+          getImageUrlBytes(int index) {
+        return imageUrl_.getByteString(index);
+      }
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
       public Builder setImageUrl(
-          int index, String value) {
+          int index, java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -7180,7 +10733,11 @@ public final class WebProtos {
         onChanged();
         return this;
       }
-      public Builder addImageUrl(String value) {
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
+      public Builder addImageUrl(
+          java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
@@ -7189,36 +10746,1363 @@ public final class WebProtos {
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
       public Builder addAllImageUrl(
-          java.lang.Iterable<String> values) {
+          java.lang.Iterable<java.lang.String> values) {
         ensureImageUrlIsMutable();
         super.addAll(values, imageUrl_);
         onChanged();
         return this;
       }
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
       public Builder clearImageUrl() {
         imageUrl_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
-      void addImageUrl(com.google.protobuf.ByteString value) {
-        ensureImageUrlIsMutable();
+      /**
+       * <code>repeated string image_url = 5;</code>
+       */
+      public Builder addImageUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureImageUrlIsMutable();
         imageUrl_.add(value);
         onChanged();
+        return this;
       }
-      
+
       // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.ListItemForm)
     }
-    
+
     static {
       defaultInstance = new ListItemForm(true);
       defaultInstance.initFields();
     }
-    
+
     // @@protoc_insertion_point(class_scope:me.yabble.web.proto.ListItemForm)
   }
-  
+
+  public interface UserFormOrBuilder
+      extends com.google.protobuf.MessageOrBuilder {
+
+    // repeated .me.yabble.web.proto.Message error_message = 1;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    java.util.List<me.yabble.web.proto.WebProtos.Message> 
+        getErrorMessageList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    me.yabble.web.proto.WebProtos.Message getErrorMessage(int index);
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    int getErrorMessageCount();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
+        getErrorMessageOrBuilderList();
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
+        int index);
+
+    // required .me.yabble.web.proto.FormField name = 2;
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
+    boolean hasName();
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
+    me.yabble.web.proto.WebProtos.FormField getName();
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
+    me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder();
+
+    // required .me.yabble.web.proto.FormField email = 3;
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
+    boolean hasEmail();
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
+    me.yabble.web.proto.WebProtos.FormField getEmail();
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
+    me.yabble.web.proto.WebProtos.FormFieldOrBuilder getEmailOrBuilder();
+
+    // required .me.yabble.web.proto.FormField password = 4;
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
+    boolean hasPassword();
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
+    me.yabble.web.proto.WebProtos.FormField getPassword();
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
+    me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder();
+  }
+  /**
+   * Protobuf type {@code me.yabble.web.proto.UserForm}
+   */
+  public static final class UserForm extends
+      com.google.protobuf.GeneratedMessage
+      implements UserFormOrBuilder {
+    // Use UserForm.newBuilder() to construct.
+    private UserForm(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+      super(builder);
+      this.unknownFields = builder.getUnknownFields();
+    }
+    private UserForm(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+
+    private static final UserForm defaultInstance;
+    public static UserForm getDefaultInstance() {
+      return defaultInstance;
+    }
+
+    public UserForm getDefaultInstanceForType() {
+      return defaultInstance;
+    }
+
+    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+        getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UserForm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      initFields();
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownField(input, unknownFields,
+                                     extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              if (!((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+                errorMessage_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Message>();
+                mutable_bitField0_ |= 0x00000001;
+              }
+              errorMessage_.add(input.readMessage(me.yabble.web.proto.WebProtos.Message.PARSER, extensionRegistry));
+              break;
+            }
+            case 18: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000001) == 0x00000001)) {
+                subBuilder = name_.toBuilder();
+              }
+              name_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(name_);
+                name_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000001;
+              break;
+            }
+            case 26: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000002) == 0x00000002)) {
+                subBuilder = email_.toBuilder();
+              }
+              email_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(email_);
+                email_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000002;
+              break;
+            }
+            case 34: {
+              me.yabble.web.proto.WebProtos.FormField.Builder subBuilder = null;
+              if (((bitField0_ & 0x00000004) == 0x00000004)) {
+                subBuilder = password_.toBuilder();
+              }
+              password_ = input.readMessage(me.yabble.web.proto.WebProtos.FormField.PARSER, extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(password_);
+                password_ = subBuilder.buildPartial();
+              }
+              bitField0_ |= 0x00000004;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e.getMessage()).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000001) == 0x00000001)) {
+          errorMessage_ = java.util.Collections.unmodifiableList(errorMessage_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_UserForm_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_UserForm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              me.yabble.web.proto.WebProtos.UserForm.class, me.yabble.web.proto.WebProtos.UserForm.Builder.class);
+    }
+
+    public static com.google.protobuf.Parser<UserForm> PARSER =
+        new com.google.protobuf.AbstractParser<UserForm>() {
+      public UserForm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UserForm(input, extensionRegistry);
+      }
+    };
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UserForm> getParserForType() {
+      return PARSER;
+    }
+
+    private int bitField0_;
+    // repeated .me.yabble.web.proto.Message error_message = 1;
+    public static final int ERROR_MESSAGE_FIELD_NUMBER = 1;
+    private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_;
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
+      return errorMessage_;
+    }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
+        getErrorMessageOrBuilderList() {
+      return errorMessage_;
+    }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    public int getErrorMessageCount() {
+      return errorMessage_.size();
+    }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
+      return errorMessage_.get(index);
+    }
+    /**
+     * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+     */
+    public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
+        int index) {
+      return errorMessage_.get(index);
+    }
+
+    // required .me.yabble.web.proto.FormField name = 2;
+    public static final int NAME_FIELD_NUMBER = 2;
+    private me.yabble.web.proto.WebProtos.FormField name_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
+    public boolean hasName() {
+      return ((bitField0_ & 0x00000001) == 0x00000001);
+    }
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
+    public me.yabble.web.proto.WebProtos.FormField getName() {
+      return name_;
+    }
+    /**
+     * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+     */
+    public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder() {
+      return name_;
+    }
+
+    // required .me.yabble.web.proto.FormField email = 3;
+    public static final int EMAIL_FIELD_NUMBER = 3;
+    private me.yabble.web.proto.WebProtos.FormField email_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
+    public boolean hasEmail() {
+      return ((bitField0_ & 0x00000002) == 0x00000002);
+    }
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
+    public me.yabble.web.proto.WebProtos.FormField getEmail() {
+      return email_;
+    }
+    /**
+     * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+     */
+    public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getEmailOrBuilder() {
+      return email_;
+    }
+
+    // required .me.yabble.web.proto.FormField password = 4;
+    public static final int PASSWORD_FIELD_NUMBER = 4;
+    private me.yabble.web.proto.WebProtos.FormField password_;
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
+    public boolean hasPassword() {
+      return ((bitField0_ & 0x00000004) == 0x00000004);
+    }
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
+    public me.yabble.web.proto.WebProtos.FormField getPassword() {
+      return password_;
+    }
+    /**
+     * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+     */
+    public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder() {
+      return password_;
+    }
+
+    private void initFields() {
+      errorMessage_ = java.util.Collections.emptyList();
+      name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      email_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      password_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+    }
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized != -1) return isInitialized == 1;
+
+      if (!hasName()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasEmail()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!hasPassword()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      for (int i = 0; i < getErrorMessageCount(); i++) {
+        if (!getErrorMessage(i).isInitialized()) {
+          memoizedIsInitialized = 0;
+          return false;
+        }
+      }
+      if (!getName().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getEmail().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      if (!getPassword().isInitialized()) {
+        memoizedIsInitialized = 0;
+        return false;
+      }
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      getSerializedSize();
+      for (int i = 0; i < errorMessage_.size(); i++) {
+        output.writeMessage(1, errorMessage_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        output.writeMessage(2, name_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        output.writeMessage(3, email_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        output.writeMessage(4, password_);
+      }
+      getUnknownFields().writeTo(output);
+    }
+
+    private int memoizedSerializedSize = -1;
+    public int getSerializedSize() {
+      int size = memoizedSerializedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      for (int i = 0; i < errorMessage_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(1, errorMessage_.get(i));
+      }
+      if (((bitField0_ & 0x00000001) == 0x00000001)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(2, name_);
+      }
+      if (((bitField0_ & 0x00000002) == 0x00000002)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, email_);
+      }
+      if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(4, password_);
+      }
+      size += getUnknownFields().getSerializedSize();
+      memoizedSerializedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    protected java.lang.Object writeReplace()
+        throws java.io.ObjectStreamException {
+      return super.writeReplace();
+    }
+
+    public static me.yabble.web.proto.WebProtos.UserForm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseDelimitedFrom(input, extensionRegistry);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input);
+    }
+    public static me.yabble.web.proto.WebProtos.UserForm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return PARSER.parseFrom(input, extensionRegistry);
+    }
+
+    public static Builder newBuilder() { return Builder.create(); }
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder(me.yabble.web.proto.WebProtos.UserForm prototype) {
+      return newBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() { return newBuilder(this); }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code me.yabble.web.proto.UserForm}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessage.Builder<Builder>
+       implements me.yabble.web.proto.WebProtos.UserFormOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_UserForm_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessage.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_UserForm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                me.yabble.web.proto.WebProtos.UserForm.class, me.yabble.web.proto.WebProtos.UserForm.Builder.class);
+      }
+
+      // Construct using me.yabble.web.proto.WebProtos.UserForm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessage.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
+          getErrorMessageFieldBuilder();
+          getNameFieldBuilder();
+          getEmailFieldBuilder();
+          getPasswordFieldBuilder();
+        }
+      }
+      private static Builder create() {
+        return new Builder();
+      }
+
+      public Builder clear() {
+        super.clear();
+        if (errorMessageBuilder_ == null) {
+          errorMessage_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+        } else {
+          errorMessageBuilder_.clear();
+        }
+        if (nameBuilder_ == null) {
+          name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+        } else {
+          nameBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        if (emailBuilder_ == null) {
+          email_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+        } else {
+          emailBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        if (passwordBuilder_ == null) {
+          password_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+        } else {
+          passwordBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+
+      public Builder clone() {
+        return create().mergeFrom(buildPartial());
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return me.yabble.web.proto.WebProtos.internal_static_me_yabble_web_proto_UserForm_descriptor;
+      }
+
+      public me.yabble.web.proto.WebProtos.UserForm getDefaultInstanceForType() {
+        return me.yabble.web.proto.WebProtos.UserForm.getDefaultInstance();
+      }
+
+      public me.yabble.web.proto.WebProtos.UserForm build() {
+        me.yabble.web.proto.WebProtos.UserForm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public me.yabble.web.proto.WebProtos.UserForm buildPartial() {
+        me.yabble.web.proto.WebProtos.UserForm result = new me.yabble.web.proto.WebProtos.UserForm(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        if (errorMessageBuilder_ == null) {
+          if (((bitField0_ & 0x00000001) == 0x00000001)) {
+            errorMessage_ = java.util.Collections.unmodifiableList(errorMessage_);
+            bitField0_ = (bitField0_ & ~0x00000001);
+          }
+          result.errorMessage_ = errorMessage_;
+        } else {
+          result.errorMessage_ = errorMessageBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
+          to_bitField0_ |= 0x00000001;
+        }
+        if (nameBuilder_ == null) {
+          result.name_ = name_;
+        } else {
+          result.name_ = nameBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000004) == 0x00000004)) {
+          to_bitField0_ |= 0x00000002;
+        }
+        if (emailBuilder_ == null) {
+          result.email_ = email_;
+        } else {
+          result.email_ = emailBuilder_.build();
+        }
+        if (((from_bitField0_ & 0x00000008) == 0x00000008)) {
+          to_bitField0_ |= 0x00000004;
+        }
+        if (passwordBuilder_ == null) {
+          result.password_ = password_;
+        } else {
+          result.password_ = passwordBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof me.yabble.web.proto.WebProtos.UserForm) {
+          return mergeFrom((me.yabble.web.proto.WebProtos.UserForm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(me.yabble.web.proto.WebProtos.UserForm other) {
+        if (other == me.yabble.web.proto.WebProtos.UserForm.getDefaultInstance()) return this;
+        if (errorMessageBuilder_ == null) {
+          if (!other.errorMessage_.isEmpty()) {
+            if (errorMessage_.isEmpty()) {
+              errorMessage_ = other.errorMessage_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+            } else {
+              ensureErrorMessageIsMutable();
+              errorMessage_.addAll(other.errorMessage_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.errorMessage_.isEmpty()) {
+            if (errorMessageBuilder_.isEmpty()) {
+              errorMessageBuilder_.dispose();
+              errorMessageBuilder_ = null;
+              errorMessage_ = other.errorMessage_;
+              bitField0_ = (bitField0_ & ~0x00000001);
+              errorMessageBuilder_ = 
+                com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders ?
+                   getErrorMessageFieldBuilder() : null;
+            } else {
+              errorMessageBuilder_.addAllMessages(other.errorMessage_);
+            }
+          }
+        }
+        if (other.hasName()) {
+          mergeName(other.getName());
+        }
+        if (other.hasEmail()) {
+          mergeEmail(other.getEmail());
+        }
+        if (other.hasPassword()) {
+          mergePassword(other.getPassword());
+        }
+        this.mergeUnknownFields(other.getUnknownFields());
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        if (!hasName()) {
+          
+          return false;
+        }
+        if (!hasEmail()) {
+          
+          return false;
+        }
+        if (!hasPassword()) {
+          
+          return false;
+        }
+        for (int i = 0; i < getErrorMessageCount(); i++) {
+          if (!getErrorMessage(i).isInitialized()) {
+            
+            return false;
+          }
+        }
+        if (!getName().isInitialized()) {
+          
+          return false;
+        }
+        if (!getEmail().isInitialized()) {
+          
+          return false;
+        }
+        if (!getPassword().isInitialized()) {
+          
+          return false;
+        }
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        me.yabble.web.proto.WebProtos.UserForm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (me.yabble.web.proto.WebProtos.UserForm) e.getUnfinishedMessage();
+          throw e;
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      // repeated .me.yabble.web.proto.Message error_message = 1;
+      private java.util.List<me.yabble.web.proto.WebProtos.Message> errorMessage_ =
+        java.util.Collections.emptyList();
+      private void ensureErrorMessageIsMutable() {
+        if (!((bitField0_ & 0x00000001) == 0x00000001)) {
+          errorMessage_ = new java.util.ArrayList<me.yabble.web.proto.WebProtos.Message>(errorMessage_);
+          bitField0_ |= 0x00000001;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilder<
+          me.yabble.web.proto.WebProtos.Message, me.yabble.web.proto.WebProtos.Message.Builder, me.yabble.web.proto.WebProtos.MessageOrBuilder> errorMessageBuilder_;
+
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public java.util.List<me.yabble.web.proto.WebProtos.Message> getErrorMessageList() {
+        if (errorMessageBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(errorMessage_);
+        } else {
+          return errorMessageBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public int getErrorMessageCount() {
+        if (errorMessageBuilder_ == null) {
+          return errorMessage_.size();
+        } else {
+          return errorMessageBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Message getErrorMessage(int index) {
+        if (errorMessageBuilder_ == null) {
+          return errorMessage_.get(index);
+        } else {
+          return errorMessageBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder setErrorMessage(
+          int index, me.yabble.web.proto.WebProtos.Message value) {
+        if (errorMessageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureErrorMessageIsMutable();
+          errorMessage_.set(index, value);
+          onChanged();
+        } else {
+          errorMessageBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder setErrorMessage(
+          int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
+        if (errorMessageBuilder_ == null) {
+          ensureErrorMessageIsMutable();
+          errorMessage_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          errorMessageBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder addErrorMessage(me.yabble.web.proto.WebProtos.Message value) {
+        if (errorMessageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureErrorMessageIsMutable();
+          errorMessage_.add(value);
+          onChanged();
+        } else {
+          errorMessageBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder addErrorMessage(
+          int index, me.yabble.web.proto.WebProtos.Message value) {
+        if (errorMessageBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureErrorMessageIsMutable();
+          errorMessage_.add(index, value);
+          onChanged();
+        } else {
+          errorMessageBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder addErrorMessage(
+          me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
+        if (errorMessageBuilder_ == null) {
+          ensureErrorMessageIsMutable();
+          errorMessage_.add(builderForValue.build());
+          onChanged();
+        } else {
+          errorMessageBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder addErrorMessage(
+          int index, me.yabble.web.proto.WebProtos.Message.Builder builderForValue) {
+        if (errorMessageBuilder_ == null) {
+          ensureErrorMessageIsMutable();
+          errorMessage_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          errorMessageBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder addAllErrorMessage(
+          java.lang.Iterable<? extends me.yabble.web.proto.WebProtos.Message> values) {
+        if (errorMessageBuilder_ == null) {
+          ensureErrorMessageIsMutable();
+          super.addAll(values, errorMessage_);
+          onChanged();
+        } else {
+          errorMessageBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder clearErrorMessage() {
+        if (errorMessageBuilder_ == null) {
+          errorMessage_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000001);
+          onChanged();
+        } else {
+          errorMessageBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public Builder removeErrorMessage(int index) {
+        if (errorMessageBuilder_ == null) {
+          ensureErrorMessageIsMutable();
+          errorMessage_.remove(index);
+          onChanged();
+        } else {
+          errorMessageBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Message.Builder getErrorMessageBuilder(
+          int index) {
+        return getErrorMessageFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public me.yabble.web.proto.WebProtos.MessageOrBuilder getErrorMessageOrBuilder(
+          int index) {
+        if (errorMessageBuilder_ == null) {
+          return errorMessage_.get(index);  } else {
+          return errorMessageBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public java.util.List<? extends me.yabble.web.proto.WebProtos.MessageOrBuilder> 
+           getErrorMessageOrBuilderList() {
+        if (errorMessageBuilder_ != null) {
+          return errorMessageBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(errorMessage_);
+        }
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder() {
+        return getErrorMessageFieldBuilder().addBuilder(
+            me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public me.yabble.web.proto.WebProtos.Message.Builder addErrorMessageBuilder(
+          int index) {
+        return getErrorMessageFieldBuilder().addBuilder(
+            index, me.yabble.web.proto.WebProtos.Message.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .me.yabble.web.proto.Message error_message = 1;</code>
+       */
+      public java.util.List<me.yabble.web.proto.WebProtos.Message.Builder> 
+           getErrorMessageBuilderList() {
+        return getErrorMessageFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilder<
+          me.yabble.web.proto.WebProtos.Message, me.yabble.web.proto.WebProtos.Message.Builder, me.yabble.web.proto.WebProtos.MessageOrBuilder> 
+          getErrorMessageFieldBuilder() {
+        if (errorMessageBuilder_ == null) {
+          errorMessageBuilder_ = new com.google.protobuf.RepeatedFieldBuilder<
+              me.yabble.web.proto.WebProtos.Message, me.yabble.web.proto.WebProtos.Message.Builder, me.yabble.web.proto.WebProtos.MessageOrBuilder>(
+                  errorMessage_,
+                  ((bitField0_ & 0x00000001) == 0x00000001),
+                  getParentForChildren(),
+                  isClean());
+          errorMessage_ = null;
+        }
+        return errorMessageBuilder_;
+      }
+
+      // required .me.yabble.web.proto.FormField name = 2;
+      private me.yabble.web.proto.WebProtos.FormField name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> nameBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      public boolean hasName() {
+        return ((bitField0_ & 0x00000002) == 0x00000002);
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormField getName() {
+        if (nameBuilder_ == null) {
+          return name_;
+        } else {
+          return nameBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      public Builder setName(me.yabble.web.proto.WebProtos.FormField value) {
+        if (nameBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          name_ = value;
+          onChanged();
+        } else {
+          nameBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      public Builder setName(
+          me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
+        if (nameBuilder_ == null) {
+          name_ = builderForValue.build();
+          onChanged();
+        } else {
+          nameBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      public Builder mergeName(me.yabble.web.proto.WebProtos.FormField value) {
+        if (nameBuilder_ == null) {
+          if (((bitField0_ & 0x00000002) == 0x00000002) &&
+              name_ != me.yabble.web.proto.WebProtos.FormField.getDefaultInstance()) {
+            name_ =
+              me.yabble.web.proto.WebProtos.FormField.newBuilder(name_).mergeFrom(value).buildPartial();
+          } else {
+            name_ = value;
+          }
+          onChanged();
+        } else {
+          nameBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000002;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      public Builder clearName() {
+        if (nameBuilder_ == null) {
+          name_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+          onChanged();
+        } else {
+          nameBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000002);
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormField.Builder getNameBuilder() {
+        bitField0_ |= 0x00000002;
+        onChanged();
+        return getNameFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getNameOrBuilder() {
+        if (nameBuilder_ != null) {
+          return nameBuilder_.getMessageOrBuilder();
+        } else {
+          return name_;
+        }
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField name = 2;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
+          getNameFieldBuilder() {
+        if (nameBuilder_ == null) {
+          nameBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder>(
+                  name_,
+                  getParentForChildren(),
+                  isClean());
+          name_ = null;
+        }
+        return nameBuilder_;
+      }
+
+      // required .me.yabble.web.proto.FormField email = 3;
+      private me.yabble.web.proto.WebProtos.FormField email_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> emailBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      public boolean hasEmail() {
+        return ((bitField0_ & 0x00000004) == 0x00000004);
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormField getEmail() {
+        if (emailBuilder_ == null) {
+          return email_;
+        } else {
+          return emailBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      public Builder setEmail(me.yabble.web.proto.WebProtos.FormField value) {
+        if (emailBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          email_ = value;
+          onChanged();
+        } else {
+          emailBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      public Builder setEmail(
+          me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
+        if (emailBuilder_ == null) {
+          email_ = builderForValue.build();
+          onChanged();
+        } else {
+          emailBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      public Builder mergeEmail(me.yabble.web.proto.WebProtos.FormField value) {
+        if (emailBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004) &&
+              email_ != me.yabble.web.proto.WebProtos.FormField.getDefaultInstance()) {
+            email_ =
+              me.yabble.web.proto.WebProtos.FormField.newBuilder(email_).mergeFrom(value).buildPartial();
+          } else {
+            email_ = value;
+          }
+          onChanged();
+        } else {
+          emailBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000004;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      public Builder clearEmail() {
+        if (emailBuilder_ == null) {
+          email_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+          onChanged();
+        } else {
+          emailBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormField.Builder getEmailBuilder() {
+        bitField0_ |= 0x00000004;
+        onChanged();
+        return getEmailFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getEmailOrBuilder() {
+        if (emailBuilder_ != null) {
+          return emailBuilder_.getMessageOrBuilder();
+        } else {
+          return email_;
+        }
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField email = 3;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
+          getEmailFieldBuilder() {
+        if (emailBuilder_ == null) {
+          emailBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder>(
+                  email_,
+                  getParentForChildren(),
+                  isClean());
+          email_ = null;
+        }
+        return emailBuilder_;
+      }
+
+      // required .me.yabble.web.proto.FormField password = 4;
+      private me.yabble.web.proto.WebProtos.FormField password_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> passwordBuilder_;
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      public boolean hasPassword() {
+        return ((bitField0_ & 0x00000008) == 0x00000008);
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormField getPassword() {
+        if (passwordBuilder_ == null) {
+          return password_;
+        } else {
+          return passwordBuilder_.getMessage();
+        }
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      public Builder setPassword(me.yabble.web.proto.WebProtos.FormField value) {
+        if (passwordBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          password_ = value;
+          onChanged();
+        } else {
+          passwordBuilder_.setMessage(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      public Builder setPassword(
+          me.yabble.web.proto.WebProtos.FormField.Builder builderForValue) {
+        if (passwordBuilder_ == null) {
+          password_ = builderForValue.build();
+          onChanged();
+        } else {
+          passwordBuilder_.setMessage(builderForValue.build());
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      public Builder mergePassword(me.yabble.web.proto.WebProtos.FormField value) {
+        if (passwordBuilder_ == null) {
+          if (((bitField0_ & 0x00000008) == 0x00000008) &&
+              password_ != me.yabble.web.proto.WebProtos.FormField.getDefaultInstance()) {
+            password_ =
+              me.yabble.web.proto.WebProtos.FormField.newBuilder(password_).mergeFrom(value).buildPartial();
+          } else {
+            password_ = value;
+          }
+          onChanged();
+        } else {
+          passwordBuilder_.mergeFrom(value);
+        }
+        bitField0_ |= 0x00000008;
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      public Builder clearPassword() {
+        if (passwordBuilder_ == null) {
+          password_ = me.yabble.web.proto.WebProtos.FormField.getDefaultInstance();
+          onChanged();
+        } else {
+          passwordBuilder_.clear();
+        }
+        bitField0_ = (bitField0_ & ~0x00000008);
+        return this;
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormField.Builder getPasswordBuilder() {
+        bitField0_ |= 0x00000008;
+        onChanged();
+        return getPasswordFieldBuilder().getBuilder();
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      public me.yabble.web.proto.WebProtos.FormFieldOrBuilder getPasswordOrBuilder() {
+        if (passwordBuilder_ != null) {
+          return passwordBuilder_.getMessageOrBuilder();
+        } else {
+          return password_;
+        }
+      }
+      /**
+       * <code>required .me.yabble.web.proto.FormField password = 4;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilder<
+          me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder> 
+          getPasswordFieldBuilder() {
+        if (passwordBuilder_ == null) {
+          passwordBuilder_ = new com.google.protobuf.SingleFieldBuilder<
+              me.yabble.web.proto.WebProtos.FormField, me.yabble.web.proto.WebProtos.FormField.Builder, me.yabble.web.proto.WebProtos.FormFieldOrBuilder>(
+                  password_,
+                  getParentForChildren(),
+                  isClean());
+          password_ = null;
+        }
+        return passwordBuilder_;
+      }
+
+      // @@protoc_insertion_point(builder_scope:me.yabble.web.proto.UserForm)
+    }
+
+    static {
+      defaultInstance = new UserForm(true);
+      defaultInstance.initFields();
+    }
+
+    // @@protoc_insertion_point(class_scope:me.yabble.web.proto.UserForm)
+  }
+
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_me_yabble_web_proto_Session_descriptor;
   private static
@@ -7229,6 +12113,11 @@ public final class WebProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_me_yabble_web_proto_Session_Attribute_fieldAccessorTable;
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_me_yabble_web_proto_Session_FormEntry_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_me_yabble_web_proto_Session_FormEntry_fieldAccessorTable;
   private static com.google.protobuf.Descriptors.Descriptor
     internal_static_me_yabble_web_proto_Message_descriptor;
   private static
@@ -7259,7 +12148,12 @@ public final class WebProtos {
   private static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable;
-  
+  private static com.google.protobuf.Descriptors.Descriptor
+    internal_static_me_yabble_web_proto_UserForm_descriptor;
+  private static
+    com.google.protobuf.GeneratedMessage.FieldAccessorTable
+      internal_static_me_yabble_web_proto_UserForm_fieldAccessorTable;
+
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
     return descriptor;
@@ -7268,7 +12162,7 @@ public final class WebProtos {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tweb.proto\022\023me.yabble.web.proto\"\237\003\n\007Ses" +
+      "\n\tweb.proto\022\023me.yabble.web.proto\"\221\005\n\007Ses" +
       "sion\022\n\n\002id\030\001 \002(\t\022\025\n\rcreation_date\030\002 \002(\t\022" +
       "\017\n\007user_id\030\003 \001(\t\0229\n\tattribute\030\004 \003(\0132&.me" +
       ".yabble.web.proto.Session.Attribute\0220\n\tl" +
@@ -7278,31 +12172,42 @@ public final class WebProtos {
       " \001(\0132\036.me.yabble.web.proto.LoginForm\022!\n\031" +
       "after_login_redirect_path\030\010 \001(\t\0228\n\rregis" +
       "ter_form\030\t \001(\0132!.me.yabble.web.proto.Reg",
-      "isterForm\032\'\n\tAttribute\022\013\n\003key\030\001 \002(\t\022\r\n\005v" +
-      "alue\030\002 \001(\t\"=\n\007Message\022\014\n\004code\030\001 \002(\t\022\r\n\005p" +
-      "aram\030\002 \003(\t\022\025\n\rdisplay_value\030\003 \001(\t\"O\n\tFor" +
-      "mField\022\r\n\005value\030\001 \001(\t\0223\n\rerror_message\030\002" +
-      " \003(\0132\034.me.yabble.web.proto.Message\"\240\001\n\tL" +
-      "oginForm\0223\n\rerror_message\030\001 \003(\0132\034.me.yab" +
-      "ble.web.proto.Message\022,\n\004name\030\002 \002(\0132\036.me" +
-      ".yabble.web.proto.FormField\0220\n\010password\030" +
-      "\003 \002(\0132\036.me.yabble.web.proto.FormField\"\322\001" +
-      "\n\014RegisterForm\0223\n\rerror_message\030\001 \003(\0132\034.",
-      "me.yabble.web.proto.Message\022,\n\004name\030\002 \002(" +
-      "\0132\036.me.yabble.web.proto.FormField\022-\n\005ema" +
-      "il\030\003 \002(\0132\036.me.yabble.web.proto.FormField" +
-      "\0220\n\010password\030\004 \002(\0132\036.me.yabble.web.proto" +
-      ".FormField\"\234\001\n\010ListForm\0223\n\rerror_message" +
-      "\030\001 \003(\0132\034.me.yabble.web.proto.Message\022-\n\005" +
-      "title\030\002 \002(\0132\036.me.yabble.web.proto.FormFi" +
-      "eld\022,\n\004body\030\003 \002(\0132\036.me.yabble.web.proto." +
-      "FormField\"\304\001\n\014ListItemForm\0223\n\rerror_mess" +
-      "age\030\001 \003(\0132\034.me.yabble.web.proto.Message\022",
-      "\017\n\007list_id\030\002 \002(\t\022-\n\005title\030\003 \002(\0132\036.me.yab" +
-      "ble.web.proto.FormField\022,\n\004body\030\004 \002(\0132\036." +
-      "me.yabble.web.proto.FormField\022\021\n\timage_u" +
-      "rl\030\005 \003(\tB \n\023me.yabble.web.protoB\tWebProt" +
-      "os"
+      "isterForm\022\025\n\rredirect_path\030\n \001(\t\0220\n\tuser" +
+      "_form\030\013 \001(\0132\035.me.yabble.web.proto.UserFo" +
+      "rm\0224\n\004form\030\014 \003(\0132&.me.yabble.web.proto.S" +
+      "ession.FormEntry\032\'\n\tAttribute\022\013\n\003key\030\001 \002" +
+      "(\t\022\r\n\005value\030\002 \001(\t\032q\n\tFormEntry\0229\n\004type\030\001" +
+      " \002(\0162+.me.yabble.web.proto.Session.FormE" +
+      "ntry.Type\022\027\n\017serialized_form\030\002 \002(\014\"\020\n\004Ty" +
+      "pe\022\010\n\004USER\020\001\"=\n\007Message\022\014\n\004code\030\001 \002(\t\022\r\n" +
+      "\005param\030\002 \003(\t\022\025\n\rdisplay_value\030\003 \001(\t\"O\n\tF" +
+      "ormField\022\r\n\005value\030\001 \001(\t\0223\n\rerror_message",
+      "\030\002 \003(\0132\034.me.yabble.web.proto.Message\"\240\001\n" +
+      "\tLoginForm\0223\n\rerror_message\030\001 \003(\0132\034.me.y" +
+      "abble.web.proto.Message\022,\n\004name\030\002 \002(\0132\036." +
+      "me.yabble.web.proto.FormField\0220\n\010passwor" +
+      "d\030\003 \002(\0132\036.me.yabble.web.proto.FormField\"" +
+      "\322\001\n\014RegisterForm\0223\n\rerror_message\030\001 \003(\0132" +
+      "\034.me.yabble.web.proto.Message\022,\n\004name\030\002 " +
+      "\002(\0132\036.me.yabble.web.proto.FormField\022-\n\005e" +
+      "mail\030\003 \002(\0132\036.me.yabble.web.proto.FormFie" +
+      "ld\0220\n\010password\030\004 \002(\0132\036.me.yabble.web.pro",
+      "to.FormField\"\234\001\n\010ListForm\0223\n\rerror_messa" +
+      "ge\030\001 \003(\0132\034.me.yabble.web.proto.Message\022-" +
+      "\n\005title\030\002 \002(\0132\036.me.yabble.web.proto.Form" +
+      "Field\022,\n\004body\030\003 \002(\0132\036.me.yabble.web.prot" +
+      "o.FormField\"\304\001\n\014ListItemForm\0223\n\rerror_me" +
+      "ssage\030\001 \003(\0132\034.me.yabble.web.proto.Messag" +
+      "e\022\017\n\007list_id\030\002 \002(\t\022-\n\005title\030\003 \002(\0132\036.me.y" +
+      "abble.web.proto.FormField\022,\n\004body\030\004 \002(\0132" +
+      "\036.me.yabble.web.proto.FormField\022\021\n\timage" +
+      "_url\030\005 \003(\t\"\316\001\n\010UserForm\0223\n\rerror_message",
+      "\030\001 \003(\0132\034.me.yabble.web.proto.Message\022,\n\004" +
+      "name\030\002 \002(\0132\036.me.yabble.web.proto.FormFie" +
+      "ld\022-\n\005email\030\003 \002(\0132\036.me.yabble.web.proto." +
+      "FormField\0220\n\010password\030\004 \002(\0132\036.me.yabble." +
+      "web.proto.FormFieldB \n\023me.yabble.web.pro" +
+      "toB\tWebProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {
@@ -7314,65 +12219,61 @@ public final class WebProtos {
           internal_static_me_yabble_web_proto_Session_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_Session_descriptor,
-              new java.lang.String[] { "Id", "CreationDate", "UserId", "Attribute", "ListForm", "ListItemForm", "LoginForm", "AfterLoginRedirectPath", "RegisterForm", },
-              me.yabble.web.proto.WebProtos.Session.class,
-              me.yabble.web.proto.WebProtos.Session.Builder.class);
+              new java.lang.String[] { "Id", "CreationDate", "UserId", "Attribute", "ListForm", "ListItemForm", "LoginForm", "AfterLoginRedirectPath", "RegisterForm", "RedirectPath", "UserForm", "Form", });
           internal_static_me_yabble_web_proto_Session_Attribute_descriptor =
             internal_static_me_yabble_web_proto_Session_descriptor.getNestedTypes().get(0);
           internal_static_me_yabble_web_proto_Session_Attribute_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_Session_Attribute_descriptor,
-              new java.lang.String[] { "Key", "Value", },
-              me.yabble.web.proto.WebProtos.Session.Attribute.class,
-              me.yabble.web.proto.WebProtos.Session.Attribute.Builder.class);
+              new java.lang.String[] { "Key", "Value", });
+          internal_static_me_yabble_web_proto_Session_FormEntry_descriptor =
+            internal_static_me_yabble_web_proto_Session_descriptor.getNestedTypes().get(1);
+          internal_static_me_yabble_web_proto_Session_FormEntry_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_me_yabble_web_proto_Session_FormEntry_descriptor,
+              new java.lang.String[] { "Type", "SerializedForm", });
           internal_static_me_yabble_web_proto_Message_descriptor =
             getDescriptor().getMessageTypes().get(1);
           internal_static_me_yabble_web_proto_Message_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_Message_descriptor,
-              new java.lang.String[] { "Code", "Param", "DisplayValue", },
-              me.yabble.web.proto.WebProtos.Message.class,
-              me.yabble.web.proto.WebProtos.Message.Builder.class);
+              new java.lang.String[] { "Code", "Param", "DisplayValue", });
           internal_static_me_yabble_web_proto_FormField_descriptor =
             getDescriptor().getMessageTypes().get(2);
           internal_static_me_yabble_web_proto_FormField_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_FormField_descriptor,
-              new java.lang.String[] { "Value", "ErrorMessage", },
-              me.yabble.web.proto.WebProtos.FormField.class,
-              me.yabble.web.proto.WebProtos.FormField.Builder.class);
+              new java.lang.String[] { "Value", "ErrorMessage", });
           internal_static_me_yabble_web_proto_LoginForm_descriptor =
             getDescriptor().getMessageTypes().get(3);
           internal_static_me_yabble_web_proto_LoginForm_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_LoginForm_descriptor,
-              new java.lang.String[] { "ErrorMessage", "Name", "Password", },
-              me.yabble.web.proto.WebProtos.LoginForm.class,
-              me.yabble.web.proto.WebProtos.LoginForm.Builder.class);
+              new java.lang.String[] { "ErrorMessage", "Name", "Password", });
           internal_static_me_yabble_web_proto_RegisterForm_descriptor =
             getDescriptor().getMessageTypes().get(4);
           internal_static_me_yabble_web_proto_RegisterForm_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_RegisterForm_descriptor,
-              new java.lang.String[] { "ErrorMessage", "Name", "Email", "Password", },
-              me.yabble.web.proto.WebProtos.RegisterForm.class,
-              me.yabble.web.proto.WebProtos.RegisterForm.Builder.class);
+              new java.lang.String[] { "ErrorMessage", "Name", "Email", "Password", });
           internal_static_me_yabble_web_proto_ListForm_descriptor =
             getDescriptor().getMessageTypes().get(5);
           internal_static_me_yabble_web_proto_ListForm_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_ListForm_descriptor,
-              new java.lang.String[] { "ErrorMessage", "Title", "Body", },
-              me.yabble.web.proto.WebProtos.ListForm.class,
-              me.yabble.web.proto.WebProtos.ListForm.Builder.class);
+              new java.lang.String[] { "ErrorMessage", "Title", "Body", });
           internal_static_me_yabble_web_proto_ListItemForm_descriptor =
             getDescriptor().getMessageTypes().get(6);
           internal_static_me_yabble_web_proto_ListItemForm_fieldAccessorTable = new
             com.google.protobuf.GeneratedMessage.FieldAccessorTable(
               internal_static_me_yabble_web_proto_ListItemForm_descriptor,
-              new java.lang.String[] { "ErrorMessage", "ListId", "Title", "Body", "ImageUrl", },
-              me.yabble.web.proto.WebProtos.ListItemForm.class,
-              me.yabble.web.proto.WebProtos.ListItemForm.Builder.class);
+              new java.lang.String[] { "ErrorMessage", "ListId", "Title", "Body", "ImageUrl", });
+          internal_static_me_yabble_web_proto_UserForm_descriptor =
+            getDescriptor().getMessageTypes().get(7);
+          internal_static_me_yabble_web_proto_UserForm_fieldAccessorTable = new
+            com.google.protobuf.GeneratedMessage.FieldAccessorTable(
+              internal_static_me_yabble_web_proto_UserForm_descriptor,
+              new java.lang.String[] { "ErrorMessage", "Name", "Email", "Password", });
           return null;
         }
       };
@@ -7381,6 +12282,6 @@ public final class WebProtos {
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
   }
-  
+
   // @@protoc_insertion_point(outer_class_scope)
 }

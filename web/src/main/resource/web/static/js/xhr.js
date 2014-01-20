@@ -27,7 +27,7 @@
               }
               $.ajax(props)
                 .done(function(data, status, xhr) {
-                  if(data && !data.statusCode !== ResponseStatusCode.ERROR) {
+                  if(data && data.statusCode !== ResponseStatusCode.ERROR) {
                     requestFinished.resolve.apply(requestFinished, arguments);
                   } else {
                     requestFinished.reject.apply(

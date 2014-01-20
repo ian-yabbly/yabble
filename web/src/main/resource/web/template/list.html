@@ -52,7 +52,8 @@
       <ul>
         #foreach($item in $list.items())
           <li class="list-item" data-item-id="$item.id()">
-            <a href=#appUrl("/list/$list.id()/item/$item.id()") 
+            <a name="list-item-$item.id()"
+               href=#appUrl("/list/$list.id()/item/$item.id()") 
                class=list-item-link>
               #itemImage($item, 325)
               <span class="list-item-body">

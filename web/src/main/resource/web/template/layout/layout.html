@@ -14,9 +14,11 @@
         document.YABBLE_USER = {};
         document.YABBLE_USER.id = '$__user.id()';
         #if($__user.email().isDefined())
-          document.YABBLE_USER.email = '$__user.email()';
+          document.YABBLE_USER.email = '$__user.email().get()';
         #end
         document.YABBLE_USER.displayName = '$__user.displayName()';
+        document.YABBLE_ENV = {};
+        document.YABBLE_ENV.contextPath = '$__contextPath';
       </script>
     #end
     #if($__minifyJs == "true")

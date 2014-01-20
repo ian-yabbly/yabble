@@ -22,9 +22,10 @@ import scala.collection.JavaConversions._
 
 class LoginHandler(
     val sessionService: SessionService,
-    val userService: IUserService,
+    val userService: UserService,
     val encoding: String,
-    template: VelocityTemplate)
+    template: VelocityTemplate,
+    val yabbleService: YabbleService)
   extends TemplateHandler(template)
   with FormHandler
 {
@@ -99,12 +100,24 @@ class LoginHandler(
           }
 
           // optUser must be Some(user) here
+          val user = optUser.get
+
+          val optSession = optionalSession()
+          optSession.filter(_.hasUserId)
+              .filter(_.getUserId != user.id)
+              .foreach(session => {
+                val sessionUser = userService.find(session.getUserId)
+                if (sessionUser.email.orElse(sessionUser.name).isEmpty) {
+                  // Anonymous user... do a merge
+                  yabbleService.mergeUsers(sessionUser.id, user.id)
+                }
+              })
 
           val session = sessionService.withSession(true, new Function[Session, Session]() {
             override def apply(session: Session): Session = {
               session.toBuilder()
                   .clearLoginForm()
-                  .setUserId(optUser.get.id)
+                  .setUserId(user.id)
                   .build()
             }
           })

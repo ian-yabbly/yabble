@@ -90,7 +90,7 @@ public class SessionService {
 
     private Optional<Session> find(boolean create) {
         try {
-            ExecutionContext ctx = ExecutionContext.getRequired();
+            ExecutionContext ctx = ExecutionContext.get();
             Optional<String> optSessionId = ctx.optionalAttribute("web-session-id", String.class);
 
             if (optSessionId.isPresent()) {
@@ -123,7 +123,7 @@ public class SessionService {
 
     public void maybeRemove() {
         try {
-            ExecutionContext ctx = ExecutionContext.getRequired();
+            ExecutionContext ctx = ExecutionContext.get();
             final Optional<String> optSessionId = ctx.optionalAttribute("web-session-id", String.class);
             if (optSessionId.isPresent()) {
                 remove();
@@ -134,7 +134,7 @@ public class SessionService {
     }
 
     public void remove() {
-        ExecutionContext ctx = ExecutionContext.getRequired();
+        ExecutionContext ctx = ExecutionContext.get();
         final Optional<String> optSessionId = ctx.optionalAttribute("web-session-id", String.class);
         if (!optSessionId.isPresent()) {
             throw new RuntimeException("Cannot remove absent session");
@@ -208,7 +208,7 @@ public class SessionService {
             Optional<Integer> optMaxCookieAge,
             final Function<Session, Session> f)
     {
-        ExecutionContext ctx = ExecutionContext.getRequired();
+        ExecutionContext ctx = ExecutionContext.get();
         Optional<String> optSessionId = ctx.optionalAttribute("web-session-id", String.class);
 
         if (optSessionId.isPresent()) {
@@ -312,7 +312,7 @@ public class SessionService {
             }
         });
 
-        ExecutionContext ctx = ExecutionContext.getRequired();
+        ExecutionContext ctx = ExecutionContext.get();
         ctx.removeAttribute("locked-session-id");
     }
 
@@ -334,6 +334,19 @@ public class SessionService {
             jedis.hdel("sessions", id);
             jedis.zrem("session-ids", id);
             // TODO `session-uid-%d-ids` may still be populated
+
+            ExecutionContext ctx = ExecutionContext.get();
+            HttpExchange exchange = (HttpExchange) ctx.getAttribute("http-exchange");
+            if (null != exchange) {
+                DateTime cookieExpr = new DateTime(0l);
+                exchange.getResponseHeaders().add("Set-Cookie", String.format("%s=; Path=/; Domain=%s; Expires=%s;",
+                        sessionCookieName,
+                        sessionCookieDomain,
+                        DateUtils.formatDate(cookieExpr.toDate())));
+            } else {
+                log.info("Not setting HTTP session cookie because http-exchange is not present in execution context");
+            }
+
             return Optional.<Session>absent();
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -363,7 +376,7 @@ public class SessionService {
     }
 
     private Session create(Optional<Integer> optMaxCookieAge) {
-        ExecutionContext ctx = ExecutionContext.getRequired();
+        ExecutionContext ctx = ExecutionContext.get();
         String sessionId = randomAlphanumeric(32).toLowerCase();
 
         log.info("Creating new session [{}]", sessionId);
@@ -381,20 +394,11 @@ public class SessionService {
         if (null != exchange) {
             DateTime cookieExpr = new DateTime(DateTimeZone.UTC);
             cookieExpr = cookieExpr.plusSeconds(COOKIE_MAX_AGE_SECONDS);
-            /*
-            exchange.getResponseHeaders().add("Set-Cookie", String.format("%s=%s; Path=/; Expires=%s;",
-                    sessionCookieName,
-                    sessionId,
-                    DateUtils.formatDate(cookieExpr.toDate())));
-            */
             exchange.getResponseHeaders().add("Set-Cookie", String.format("%s=%s; Path=/; Domain=%s; Expires=%s;",
                     sessionCookieName,
                     sessionId,
                     sessionCookieDomain,
                     DateUtils.formatDate(cookieExpr.toDate())));
-            //exchange.getResponseHeaders().add("Set-Cookie", "anothe=another;");
-            //exchange.getResponseHeaders().add("Set-Cookie", "anotheew=anotherdasf;");
-            //exchange.getResponseHeaders().add("Set-Cookie", String.format("anotheew=%s;", sessionId));
         } else {
             log.info("Not setting HTTP session cookie because http-exchange is not present in execution context");
         }
@@ -402,4 +406,3 @@ public class SessionService {
         return session;
     }
 }
-

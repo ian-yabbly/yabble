@@ -28,7 +28,7 @@ public class ExecutionContext {
         return ExecutionContextUtils.getOptional();
     }
 
-    public static ExecutionContext getRequired() {
+    public static ExecutionContext get() {
         return ExecutionContextUtils.getRequired();
     }
 

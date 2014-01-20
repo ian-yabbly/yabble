@@ -15,7 +15,29 @@
       ],
       function($, Dialog, mustache, stringUtils, formUtils, strings, utils, 
         textFormAddItem, textImageSearchResult) {
-        var AddItemDialog, tmplFormAddItem, tmplImageSearchResultItem;
+        var AddItemDialog, tmplFormAddItem, tmplImageSearchResultItem,
+            getPreviewImage;
+            
+        getPreviewImage = function(elContainer, imageUrl) {
+          var elImageAndHidden, elImage, 
+              displayed = $.Deferred();
+          elImageAndHidden = $(
+            stringUtils.format(
+              '<input type=hidden name=image-url value={}>',
+              imageUrl
+            )
+          ); 
+          elImage = $('<img width=100%>');
+          elImageAndHidden = elImageAndHidden.add(elImage);
+          elImage.one('load error', function(e) {
+            if(e.type === 'load') {
+              displayed.resolve(elImageAndHidden);
+            } else {
+              displayed.reject();
+            }
+          }).attr('src', imageUrl);
+          return displayed;                   
+        };                    
 
         tmplFormAddItem = mustache.compile(textFormAddItem);
         tmplImageSearchResultItem = mustache.compile(textImageSearchResult)
@@ -184,7 +206,7 @@
                       })
                     ).click(function() {
                       var i = $(this).find('img');
-                      self.showDetailsForm(i.data('full-url'));
+                      self.showDetailsForm(i.data('full-url'), i.attr('src'));
                     })                    
                     elItem.find('img').one('load error', function(e) {
                       if(e.type === 'load') {
@@ -243,26 +265,33 @@
           this.element.removeClass('item-details');
           return this;          
         };
-        
-        AddItemDialog.prototype.showDetailsForm = function(imageUrl) {
-          var elImageAndHidden, elImage,
-              elImagePreview = this.find('#image-preview');
-          elImagePreview.empty().addClass('is-loading');
-          elImageAndHidden = $(
-            stringUtils.format(
-              '<input type=hidden name=image-url value={}>',
-              imageUrl
-            )
-          );
-          elImage = $('<img width=100%>');
-          elImageAndHidden = elImageAndHidden.add(elImage);
-          elImage.one('load error', function(e) {
-            if(e.type === 'load') {
-              elImagePreview.removeClass('is-loading').append(elImageAndHidden);
-            } else {
-              elImagePreview.removeClass('is-loading').addClass('has-error');
-            }
-          }).attr('src', imageUrl);
+      
+        AddItemDialog.prototype.showDetailsForm = function(imageUrl, altImageUrl) {
+          var elImagePreview = this.find('#image-preview');
+          elImagePreview.empty()
+            .removeClass('no-list-item-image')
+            .addClass('is-loading');
+          getPreviewImage(elImagePreview, imageUrl)
+            .done(function(elPreview) {
+              elImagePreview.removeClass('is-loading').append(elPreview);
+            })
+            .fail(function() {
+              if(altImageUrl) {
+                getPreviewImage(elImagePreview, altImageUrl)
+                  .done(function(elPreview) {
+                    elImagePreview.removeClass('is-loading').append(elPreview);                  
+                  })
+                  .fail(function() {
+                    elImagePreview.removeClass('is-loading')
+                      .addClass('no-list-item-image')
+                      .text('i');                       
+                  });
+              } else {
+                elImagePreview.removeClass('is-loading')
+                  .addClass('no-list-item-image')
+                  .text('i');              
+              }
+            });
           this.element.removeClass(this.mode).addClass('item-details');
           return this;
         };

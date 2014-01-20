@@ -26,7 +26,7 @@ import scala.collection.JavaConversions._
 class UserPushWorker(
     txnTemplate: TransactionTemplate,
     private val workQueue: WorkQueue,
-    private val ylistService: IYListService,
+    private val ylistService: YListService,
     private val fromEmail: String,
     private val fromName: String,
     private val template: VelocityTemplate)

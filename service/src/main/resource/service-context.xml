@@ -204,12 +204,12 @@
   <bean
       id='service.user-service'
       class='org.springframework.aop.framework.ProxyFactoryBean'
-      p:proxy-interfaces='me.yabble.service.IUserService'
+      p:proxy-interfaces='me.yabble.service.UserService'
       p:interceptor-names='service.txn-interceptor'
       >
     <property name='target'>
       <bean
-          class='me.yabble.service.UserService'
+          class='me.yabble.service.UserServiceImpl'
           c:user-dao-ref='service.user-dao'
           c:user-auth-dao-ref='service.user-auth-dao'
           c:user-notification-dao-ref='service.user-notification-dao'
@@ -220,12 +220,12 @@
   <bean
       id='service.ylist-service'
       class='org.springframework.aop.framework.ProxyFactoryBean'
-      p:proxy-interfaces='me.yabble.service.IYListService'
+      p:proxy-interfaces='me.yabble.service.YListService'
       p:interceptor-names='service.txn-interceptor'
       >
     <property name='target'>
       <bean
-          class='me.yabble.service.YListService'
+          class='me.yabble.service.YListServiceImpl'
           c:ylist-dao-ref='service.ylist-dao'
           c:ylist-comment-dao-ref='service.ylist-comment-dao'
           c:ylist-item-dao-ref='service.ylist-item-dao'
@@ -250,6 +250,20 @@
           c:convert-path='${imagemagick.convert-path}'
           c:identify-path='${imagemagick.identify-path}'
           c:default-profile-image-url='${service.default-profile-image-url}'
+          />
+    </property>
+  </bean>
+
+  <bean
+      id='service.yabble-service'
+      class='org.springframework.aop.framework.ProxyFactoryBean'
+      p:proxy-interfaces='me.yabble.service.YabbleService'
+      p:interceptor-names='service.txn-interceptor'
+      >
+    <property name='target'>
+      <bean
+          class='me.yabble.service.YabbleServiceImpl'
+          c:ylist-service-ref='service.ylist-service'
           />
     </property>
   </bean>
