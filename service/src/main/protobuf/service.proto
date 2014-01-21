@@ -6,18 +6,21 @@ option java_package = "me.yabble.service.proto";
 option java_outer_classname = "ServiceProtos";
 
 enum EntityType {
-  USER                   =  1;
-  YLIST                  =  2;
-  YLIST_COMMENT          =  3;
-  YLIST_ITEM             =  4;
-  YLIST_ITEM_COMMENT     =  5;
-  IMAGE                  =  6;
-  YLIST_ITEM_VOTE        =  7;
-  USER_NOTIFICATION      =  8;
-  YLIST_VOTE             =  9;
-  YLIST_USER             = 10;
-  USER_NOTIFICATION_PUSH = 11;
-  USER_AUTH              = 12;
+  USER                                   =  1;
+  YLIST                                  =  2;
+  YLIST_COMMENT                          =  3;
+  YLIST_ITEM                             =  4;
+  YLIST_ITEM_COMMENT                     =  5;
+  IMAGE                                  =  6;
+  YLIST_ITEM_VOTE                        =  7;
+  USER_NOTIFICATION                      =  8;
+  YLIST_VOTE                             =  9;
+  YLIST_USER                             = 10;
+  USER_NOTIFICATION_PUSH                 = 11;
+  USER_AUTH                              = 12;
+  USER_ATTRIBUTE                         = 13;
+  USER_LIST_NOTIFICATION_PUSH_SCHEDULE   = 14;
+  USER_LIST_NOTIFICATION_PUSH_PREFERENCE = 15;
 }
 
 enum EventType {
@@ -51,6 +54,12 @@ message Notification {
   message YListInvite {
     required string list_id     = 1;
     required string user_id     = 2;
+    required EntityEvent source = 3;
+  }
+
+  message YListItem {
+    required string list_id      = 1;
+    required string list_item_id = 2;
     required EntityEvent source = 3;
   }
 }

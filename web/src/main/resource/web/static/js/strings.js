@@ -19,7 +19,7 @@
     'comment.new.empty' : 'Say something awesome.',
     'user.me' : 'You',
     'user.email.empty' : 'Enter your email.',
-    'user.email.duplicate' : 'This email already exists. Click <a href='+YABBLY_ENV.contextPath+'/login?r={}>here</a> to login.',
+    'user.email.duplicate' : 'This email already exists. Click <a href='+document.YABBLE_ENV.contextPath+'/login?r={}>here</a> to login.',
     'user.password.invalid' : 'Enter a password that is at least 6 characters long.',
     'form.miscServerError' : 'Doh! Something went wrong. We&rsquo;re on it.'
   };

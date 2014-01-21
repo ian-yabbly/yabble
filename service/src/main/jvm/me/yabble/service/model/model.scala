@@ -37,13 +37,12 @@ trait HasUserId {
 
 object UserNotification {
   class Free(
-      val userId: String,
+      userId: String,
       val kind: UserNotificationType,
       val refId: Option[String],
       val refType: Option[EntityType],
       val data: Option[Array[Byte]])
-    extends Entity.Free
-    with HasUserId
+    extends EntityWithUser.Free(userId)
 
   class Update(
       id: String)
@@ -54,13 +53,12 @@ object UserNotification {
       creationDate: DateTime,
       lastUpdatedDate: DateTime,
       isActive: Boolean,
-      val user: User.Persisted,
+      user: User.Persisted,
       val kind: UserNotificationType,
       val refId: Option[String],
       val refType: Option[EntityType],
       val data: Option[Array[Byte]])
-    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
-    with HasUser
+    extends EntityWithUser.Persisted(id, creationDate, lastUpdatedDate, isActive, user)
 
   object Push {
     class Free(
@@ -79,6 +77,59 @@ object UserNotification {
         val userNotificationId: String)
       extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
   }
+}
+
+object UserListNotificationPushSchedule {
+  class Free(
+      val userId: String,
+      val listId: String,
+      val pushDate: DateTime)
+    extends Entity.Free
+
+  class Update(
+      id: String,
+      val isCompleted: Boolean,
+      val pushDate: DateTime)
+    extends Entity.Update(id)
+
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val userId: String,
+      val listId: String,
+      val isCompleted: Boolean,
+      val pushDate: DateTime,
+      val userNotifications: List[UserNotification.Persisted])
+    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+}
+
+object Attribute {
+  class Free(
+      val parentId: String,
+      val attribute: String,
+      val value: Option[String])
+    extends Entity.Free
+
+  class Update(
+      id: String,
+      val value: Option[String])
+    extends Entity.Update(id)
+
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val parentId: String,
+      val attribute: String,
+      val value: Option[String])
+    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+}
+
+trait HasAttributes {
+  val attributes: List[Attribute.Persisted]
 }
 
 object User {
@@ -105,8 +156,10 @@ object User {
       val name: Option[String],
       val email: Option[String],
       val tz: Option[DateTimeZone],
-      val image: Option[Image.Persisted])
+      val image: Option[Image.Persisted],
+      val attributes: List[Attribute.Persisted])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+    with HasAttributes
   {
     def displayName(): String = name.orElse(email).getOrElse("Guest")
 
@@ -331,4 +384,27 @@ object YList {
       }
     }
   }
+}
+
+object UserListNotificationPreference {
+  class Free(
+      val userId: String,
+      val listId: String,
+      val maxNotificationPushesPerDay: Int)
+    extends Entity.Free
+
+  class Update(
+      id: String,
+      val maxNotificationPushesPerDay: Int)
+    extends Entity.Update(id)
+
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val userId: String,
+      val listId: String,
+      val maxNotificationPushesPerDay: Int)
+    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
 }

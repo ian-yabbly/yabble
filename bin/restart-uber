@@ -3,4 +3,4 @@ set -e
 source $(dirname $0)/include
 
 $BASEDIR/bin/restart-daemon "$@" uber web-logback.xml me.yabble.common.spring.Main \
-{common,service,{common,service}-worker,web}-context.xml
+{common{,-worker},service{,-worker,-daemon},web}-context.xml

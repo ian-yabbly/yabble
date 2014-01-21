@@ -75,7 +75,7 @@ class BaseFilter(sessionService: SessionService, sessionCookieName: String)
       optCookie.foreach(v => ctx.setAttribute("web-session-id", v))
       chain.doFilter(exchange)
     } catch {
-      case e: EntityNotFoundException => e.kind match {
+      case e: EntityNotFoundByIdException => e.kind match {
         case EntityType.USER => {
           optional2Option(sessionService.optional()) match {
             case Some(session) => {

@@ -80,11 +80,14 @@ class NewYListItemHandler(
               }).flatten.toList
             }
 
+        val optTitle = if (form.getTitle.hasValue()) Some(form.getTitle.getValue) else None
+        val optBody = if (form.getBody.hasValue()) Some(form.getBody.getValue) else None
+
         val itemId = ylistService.create(new YList.Item.Free(
             form.getListId,
             me.id,
-            Option(form.getTitle.getValue),
-            Option(form.getBody.getValue),
+            optTitle,
+            optBody,
             imageIds))
 
         sessionService.withSession(true, new Function[Session, Session]() {

@@ -101,15 +101,28 @@
         <entry key='__securityUtilsBean' value-ref='common.security-utils-bean'/>
         <entry key='__imageService' value-ref='service.image-service'/>
         <entry key='__rootUrl' value='${service.canonical-base-url}'/>
+        <entry key='__ylistService' value-ref='service.ylist-service'/>
       </map>
     </constructor-arg>
   </bean>
+
+  <bean
+      id='service.user-list-notification-push-mailer'
+      class='me.yabble.service.mail.UserListNotificationPushMailer'
+      c:from-email='${service.notification.from-email}'
+      c:from-name='${service.notification.from-email.name}'
+      c:template-ref='service.mail-velocity-template'
+      c:user-service-ref='service.user-service'
+      c:ylist-service-ref='service.ylist-service'
+      c:work-queue-ref='common.work-queue'
+      />
   <!-- END MISC -->
 
   <!-- DAO -->
   <bean
       id='service.user-dao'
       class='me.yabble.service.dao.UserDao'
+      c:user-attribute-dao-ref='service.user-attribute-dao'
       c:image-dao-ref='service.image-dao'
       c:npt-ref='service.jdbc-template'
       c:txn-sync-ref='common.txn-sync'
@@ -136,6 +149,23 @@
   <bean
       id='service.user-notification-push-dao'
       class='me.yabble.service.dao.UserNotificationPushDao'
+      c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
+      />
+
+  <bean
+      id='service.user-list-notification-push-schedule-dao'
+      class='me.yabble.service.dao.UserListNotificationPushScheduleDao'
+      c:user-notification-dao-ref='service.user-notification-dao'
+      c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
+      />
+
+  <bean
+      id='service.user-list-notification-preference-dao'
+      class='me.yabble.service.dao.UserListNotificationPreferenceDao'
       c:npt-ref='service.jdbc-template'
       c:txn-sync-ref='common.txn-sync'
       c:work-queue-ref='common.work-queue'
@@ -198,6 +228,14 @@
       c:txn-sync-ref='common.txn-sync'
       c:work-queue-ref='common.work-queue'
       />
+
+  <bean
+      id='service.user-attribute-dao'
+      class='me.yabble.service.dao.UserAttributeDao'
+      c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
+      />
   <!-- END DAO -->
 
   <!-- Service -->
@@ -213,6 +251,10 @@
           c:user-dao-ref='service.user-dao'
           c:user-auth-dao-ref='service.user-auth-dao'
           c:user-notification-dao-ref='service.user-notification-dao'
+          c:user-notification-push-dao-ref='service.user-notification-push-dao'
+          c:user-list-notification-push-schedule-dao-ref='service.user-list-notification-push-schedule-dao'
+          c:user-list-notification-preference-dao-ref='service.user-list-notification-preference-dao'
+          c:user-attribute-dao-ref='service.user-attribute-dao'
           />
     </property>
   </bean>

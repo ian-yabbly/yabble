@@ -22,7 +22,10 @@ trait YListService extends IService[YList.Free, YList.Persisted, YList.Update] {
 
   def mergeUsers(srcUid: String, destUid: String)
 
+  def findByItem(itemId: String): YList.Persisted
   def allByUser(uid: String): List[YList.Persisted]
+
+  def findItem(itemId: String): YList.Item.Persisted
 }
 
 class YListServiceImpl(
@@ -67,5 +70,8 @@ class YListServiceImpl(
     ylistItemVoteDao.mergeUsers(srcUid, destUid)
   }
 
+  override def findByItem(itemId: String): YList.Persisted = ylistDao.findByItem(itemId)
   override def allByUser(uid: String) = ylistDao.allByUser(uid)
+
+  override def findItem(itemId: String) = ylistItemDao.find(itemId)
 }

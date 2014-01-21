@@ -1,5 +1,10 @@
 package me.yabble.common;
 
+import org.joda.time.LocalDate;
+
+import java.net.URI;
+import java.net.URISyntaxException;
+
 public class SecurityUtilsBean {
     private String secret;
 
@@ -42,5 +47,28 @@ public class SecurityUtilsBean {
             ret = SecurityUtils.md5Hex(ret);
         }
         return ret;
+    }
+
+    public String loginUrl(String userId, String httpUrl) throws URISyntaxException {
+        URI uri = new URI(httpUrl);
+        LocalDate now = LocalDate.now();
+        StringBuilder buf = new StringBuilder();
+        buf.append(uri.getScheme()).append("://").append(uri.getHost());
+        if (uri.getPort() != 80 && uri.getPort() != 443) {
+            buf.append(":").append(uri.getPort());
+        }
+
+        String sigPath = String.format("/l%s/%s/%s", uri.getPath(), userId, now.toString());
+        String sig = sign(userId, sigPath);
+
+        buf.append(sigPath).append("/").append(sig);
+
+        if (uri.getQuery() != null) {
+            buf.append("?").append(uri.getQuery());
+        }
+        if (uri.getFragment() != null) {
+            buf.append("#").append(uri.getFragment());
+        }
+        return buf.toString();
     }
 }

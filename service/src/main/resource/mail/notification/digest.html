@@ -1,0 +1,19 @@
+#foreach ($n in $notifications)
+  #if ($n.kind().name() == "YLIST_ITEM_CREATE")
+    #set ($_item = $__ylistService.findItem($n.refId().get()))
+  <p>
+    A new item was added:
+    <a href='#ll("/list/$list.id()/$list.slug()#list-item-$_item.id()")' style='font-size: 14px; font-weight: bold; text-decoration: none;'>
+    #if ($_item.title().isDefined())
+      $_item.title().get()
+    #elseif ($_item.body().isDefined())
+      $_item.body().get()
+    #else
+      [This item has no name]
+    #end
+    </a>
+  </p>
+  #end
+#end
+
+<p>View this list: <a href='#ll("/list/$list.id()/$list.slug()")' style='font-size: 16px; font-weight: bold; text-decoration: none;'>$list.title()</a></p>

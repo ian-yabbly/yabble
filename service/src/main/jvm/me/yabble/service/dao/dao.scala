@@ -9,7 +9,9 @@ import me.yabble.common.wq.WorkQueue
 import me.yabble.service._
 import me.yabble.service.dao.Predef._
 import me.yabble.service.model._
-import me.yabble.service.proto.ServiceProtos._
+import me.yabble.service.proto.ServiceProtos.EntityEvent
+import me.yabble.service.proto.ServiceProtos.EntityType
+import me.yabble.service.proto.ServiceProtos.EventType
 
 import com.google.common.base.Function
 
@@ -57,6 +59,7 @@ class UnexpectedNumberOfRowsSelectedException(message: String)
 class ORM(
     protected val tableName: String,
     protected val npt: NamedParameterJdbcTemplate)
+  extends Log
 {
   private val statements = new Properties()
 
@@ -218,6 +221,15 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
 
   protected def optionalQuery(params: Map[String, Any], activeOnly: Boolean = true): Option[P] = optional(allQuery(params, activeOnly))
 
+  protected def oneQuery(params: Map[String, Any]): P = {
+    val stmt = stmtFromParams(params)
+    try {
+      npt.queryForObject(stmt, params, getRowMapper)
+    } catch {
+      case e: EmptyResultDataAccessException => throw new EntityNotFoundException(kind, params.mkString(", "))
+    }
+  }
+
   def createOrUpdate(f: F): String = {
     optional(f) match {
       case Some(v) => v.id
@@ -302,7 +314,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     try {
       t.queryForObject(stmt, getRowMapper, id)
     } catch {
-      case e: EmptyResultDataAccessException => throw new EntityNotFoundException(kind, id)
+      case e: EmptyResultDataAccessException => throw new EntityNotFoundByIdException(kind, id)
     }
   }
 
@@ -317,7 +329,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
         getRowMapper).toList
   }
 
-  def all(stmtName: String, params: Map[String, Any]): List[P] = npt.query(
+  def all(stmtName: String, params: Map[String, Any] = Map()): List[P] = npt.query(
       optionalStatement(stmtName).getOrElse(stmtName),
       mapAsJavaMap(params),
       getRowMapper).toList
@@ -332,7 +344,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
 
   protected def getInsertParams(f: F): Map[String, Any]
   protected def getUpdateParams(u: U): Map[String, Any]
-  protected def getQueryParams(f: F): Map[String, Any]
+  protected def getQueryParams(f: F): Map[String, Any] = getInsertParams(f)
   protected def getRowMapper(): RowMapper[P]
 
   protected final def optionalLong(rs: ResultSet, name: String): Option[Long] = {
@@ -470,7 +482,12 @@ class ImageDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchr
   }
 }
 
-class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
+class UserDao(
+    userAttributeDao: UserAttributeDao,
+    imageDao: ImageDao,
+    npt: NamedParameterJdbcTemplate,
+    txnSync: SpringTransactionSynchronization,
+    workQueue: WorkQueue)
   extends EntityDao[User.Free, User.Persisted, User.Update]("users", EntityType.USER, npt, txnSync, workQueue)
   with Log
 {
@@ -507,6 +524,7 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
   override def getRowMapper() = new RowMapper[User.Persisted]() {
     override def mapRow(rs: ResultSet, rowNum: Int): User.Persisted = {
       val id = rs.getString("id")
+      val attributes = userAttributeDao.allByParent(id)
       new User.Persisted(
           id,
           rs.getTimestamp("creation_date"),
@@ -515,7 +533,8 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
           Option(rs.getString("name")),
           Option(rs.getString("email")),
           Option(rs.getString("tz")).map(tz => DateTimeZone.forID(tz)),
-          Option(rs.getString("image_id")).map(iid => imageDao.find(iid)))
+          Option(rs.getString("image_id")).map(iid => imageDao.find(iid)),
+          attributes)
     }
   }
 }
@@ -569,6 +588,11 @@ class YListDao(
   extends EntityWithUserDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.YLIST, npt, txnSync, workQueue)
   with Log
 {
+  def findByItem(itemId: String): YList.Persisted = npt.queryForObject(
+      findStatement("find-by-item"),
+      Map("item_id" -> itemId),
+      getRowMapper)
+
   def addUser(lid: String, uid: String): Boolean = {
     val params = Map("list_id" -> lid, "user_id" -> uid)
     npt.queryForList("select * from list_users where list_id = :list_id and user_id = :user_id for update", params).toList match {
@@ -734,6 +758,9 @@ class UserNotificationDao(userDao: UserDao, npt: NamedParameterJdbcTemplate, txn
     extends EntityDao[UserNotification.Free, UserNotification.Persisted, UserNotification.Update]("user_notifications", EntityType.USER_NOTIFICATION, npt, txnSync, workQueue)
     with Log
 {
+  def allByUserListNotificationPushSchedule(ulnpsid: String): List[UserNotification.Persisted] =
+      all("all-by-user-list-notification-push-schedule", Map("ulnpsid" -> ulnpsid))
+
   override def getInsertParams(f: UserNotification.Free) = Map(
       "user_id" -> f.userId,
       "type" -> enumToCode(f.kind),
@@ -789,6 +816,137 @@ class UserNotificationPushDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTr
           rs.getTimestamp("last_updated_date"),
           rs.getBoolean("is_active"),
           rs.getString("user_notification_id"))
+    }
+  }
+}
+
+abstract class AttributeDao(
+    tableName: String,
+    kind: EntityType,
+    npt: NamedParameterJdbcTemplate,
+    txnSync: SpringTransactionSynchronization,
+    workQueue: WorkQueue)
+  extends EntityDao[Attribute.Free, Attribute.Persisted, Attribute.Update](tableName, kind, npt, txnSync, workQueue)
+  with Log
+{
+  def allByParent(id: String) = all(
+      "select * from %s where parent_id = :parent_id and is_active = true order by creation_date asc".format(tableName),
+      Map("parent_id" -> id))
+
+  override def getInsertParams(f: Attribute.Free) = Map("parent_id" -> f.parentId, "attribute" -> f.attribute, "value" -> f.value.orNull)
+
+  override def getUpdateParams(u: Attribute.Update) = Map("value" -> u.value.orNull)
+
+  override def getQueryParams(f: Attribute.Free) = Map("parent_id" -> f.parentId, "attribute" -> f.attribute, "value" -> f.value.orNull)
+
+  override def getRowMapper() = new RowMapper[Attribute.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): Attribute.Persisted = {
+      val id = rs.getString("id")
+
+      new Attribute.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("parent_id"),
+          rs.getString("attribute"),
+          Option(rs.getString("value")))
+    }
+  }
+}
+
+class UserAttributeDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
+  extends AttributeDao("user_attributes", EntityType.USER_ATTRIBUTE, npt, txnSync, workQueue)
+
+class UserListNotificationPushScheduleDao(
+    private val userNotificationDao: UserNotificationDao,
+    npt: NamedParameterJdbcTemplate,
+    txnSync: SpringTransactionSynchronization,
+    workQueue: WorkQueue)
+  extends EntityDao[UserListNotificationPushSchedule.Free, UserListNotificationPushSchedule.Persisted, UserListNotificationPushSchedule.Update](
+      "user_list_notification_push_schedules",
+      EntityType.USER_LIST_NOTIFICATION_PUSH_SCHEDULE,
+      npt,
+      txnSync,
+      workQueue)
+{
+  def allForProcessing(): List[UserListNotificationPushSchedule.Persisted] = all("all-for-processing")
+
+  def addNotification(id: String, unid: String) {
+    npt.update(
+        "insert into user_list_notification_push_schedule_user_notifications (user_list_notification_push_schedule_id, user_notification_id) values (:ulnpsid, :unid)",
+        Map("ulnpsid" -> id, "unid" -> unid))
+  }
+
+  def optionalByUserAndListAndCompleted(uid: String, lid: String, isCompleted: Boolean) = optionalQuery(Map(
+      "user_id" -> uid,
+      "list_id" -> lid,
+      "is_completed" -> isCompleted))
+
+  override def getInsertParams(f: UserListNotificationPushSchedule.Free) = Map(
+      "user_id" -> f.userId,
+      "list_id" -> f.listId,
+      "push_date" -> dateTime2SqlTimestamp(f.pushDate))
+
+  override def getUpdateParams(u: UserListNotificationPushSchedule.Update) = Map(
+      "is_completed" -> u.isCompleted,
+      "push_date" -> dateTime2SqlTimestamp(u.pushDate))
+
+  override def getRowMapper() = new RowMapper[UserListNotificationPushSchedule.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): UserListNotificationPushSchedule.Persisted = {
+      val id = rs.getString("id")
+
+      new UserListNotificationPushSchedule.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("user_id"),
+          rs.getString("list_id"),
+          rs.getBoolean("is_completed"),
+          rs.getTimestamp("push_date"),
+          userNotificationDao.allByUserListNotificationPushSchedule(id))
+    }
+  }
+}
+
+class UserListNotificationPreferenceDao(
+    npt: NamedParameterJdbcTemplate,
+    txnSync: SpringTransactionSynchronization,
+    workQueue: WorkQueue)
+  extends EntityDao[UserListNotificationPreference.Free, UserListNotificationPreference.Persisted, UserListNotificationPreference.Update](
+      "user_list_notification_push_preferences",
+      EntityType.USER_LIST_NOTIFICATION_PUSH_PREFERENCE,
+      npt,
+      txnSync,
+      workQueue)
+{
+  def optionalByUserAndList(uid: String, lid: String): Option[UserListNotificationPreference.Persisted] = optionalQuery(Map("user_id" -> uid, "list_id" -> lid))
+
+  override def getInsertParams(f: UserListNotificationPreference.Free) = Map(
+      "user_id" -> f.userId,
+      "list_id" -> f.listId,
+      "max_notification_pushes_per_day" -> f.maxNotificationPushesPerDay)
+
+  override def getUpdateParams(u: UserListNotificationPreference.Update) = Map("max_notification_pushes_per_day" -> u.maxNotificationPushesPerDay)
+
+  override def getQueryParams(f: UserListNotificationPreference.Free) = Map(
+      "user_id" -> f.userId,
+      "list_id" -> f.listId,
+      "max_notification_pushes_per_day" -> f.maxNotificationPushesPerDay)
+
+  override def getRowMapper() = new RowMapper[UserListNotificationPreference.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): UserListNotificationPreference.Persisted = {
+      val id = rs.getString("id")
+
+      new UserListNotificationPreference.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("user_id"),
+          rs.getString("list_id"),
+          rs.getInt("max_notification_pushes_per_day"))
     }
   }
 }

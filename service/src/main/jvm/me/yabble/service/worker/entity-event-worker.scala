@@ -1,7 +1,7 @@
 package me.yabble.service.worker
 
 import me.yabble.common.Log
-//import me.yabble.common.TextUtils._
+import me.yabble.common.TextUtils._
 import me.yabble.common.wq._
 import me.yabble.service.ImageService
 import me.yabble.service.proto.ServiceProtos._
@@ -19,7 +19,7 @@ class EntityEventWorker(
     val e = EntityEvent.parseFrom(item.getValue)
     val id = e.getEntityId
 
-    //log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
+    log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
 
     workQueue.submit("user-notification", item.getValue)
 
