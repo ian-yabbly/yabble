@@ -9,7 +9,9 @@ import me.yabble.common.wq.WorkQueue
 import me.yabble.service._
 import me.yabble.service.dao.Predef._
 import me.yabble.service.model._
-import me.yabble.service.proto.ServiceProtos._
+import me.yabble.service.proto.ServiceProtos.EntityEvent
+import me.yabble.service.proto.ServiceProtos.EntityType
+import me.yabble.service.proto.ServiceProtos.EventType
 
 import com.google.common.base.Function
 
@@ -479,7 +481,12 @@ class ImageDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchr
   }
 }
 
-class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
+class UserDao(
+    userAttributeDao: UserAttributeDao,
+    imageDao: ImageDao,
+    npt: NamedParameterJdbcTemplate,
+    txnSync: SpringTransactionSynchronization,
+    workQueue: WorkQueue)
   extends EntityDao[User.Free, User.Persisted, User.Update]("users", EntityType.USER, npt, txnSync, workQueue)
   with Log
 {
@@ -516,6 +523,7 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
   override def getRowMapper() = new RowMapper[User.Persisted]() {
     override def mapRow(rs: ResultSet, rowNum: Int): User.Persisted = {
       val id = rs.getString("id")
+      val attributes = userAttributeDao.allByParent(id)
       new User.Persisted(
           id,
           rs.getTimestamp("creation_date"),
@@ -524,7 +532,8 @@ class UserDao(imageDao: ImageDao, npt: NamedParameterJdbcTemplate, txnSync: Spri
           Option(rs.getString("name")),
           Option(rs.getString("email")),
           Option(rs.getString("tz")).map(tz => DateTimeZone.forID(tz)),
-          Option(rs.getString("image_id")).map(iid => imageDao.find(iid)))
+          Option(rs.getString("image_id")).map(iid => imageDao.find(iid)),
+          attributes)
     }
   }
 }
@@ -578,7 +587,10 @@ class YListDao(
   extends EntityWithUserDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.YLIST, npt, txnSync, workQueue)
   with Log
 {
-  def findByItem(itemId: String): YList.Persisted = oneQuery(Map("item_id" -> itemId))
+  def findByItem(itemId: String): YList.Persisted = npt.queryForObject(
+      findStatement("find-by-item"),
+      Map("item_id" -> itemId),
+      getRowMapper)
 
   def addUser(lid: String, uid: String): Boolean = {
     val params = Map("list_id" -> lid, "user_id" -> uid)
@@ -803,3 +815,41 @@ class UserNotificationPushDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTr
     }
   }
 }
+
+abstract class AttributeDao(
+    tableName: String,
+    kind: EntityType,
+    npt: NamedParameterJdbcTemplate,
+    txnSync: SpringTransactionSynchronization,
+    workQueue: WorkQueue)
+  extends EntityDao[Attribute.Free, Attribute.Persisted, Attribute.Update](tableName, kind, npt, txnSync, workQueue)
+  with Log
+{
+  def allByParent(id: String) = all(
+      "select * from %s where parent_id = :parent_id and is_active = true order by creation_date asc".format(tableName),
+      Map("parent_id" -> id))
+
+  override def getInsertParams(f: Attribute.Free) = Map("parent_id" -> f.parentId, "attribute" -> f.attribute, "value" -> f.value.orNull)
+
+  override def getUpdateParams(u: Attribute.Update) = Map("value" -> u.value.orNull)
+
+  override def getQueryParams(f: Attribute.Free) = Map("parent_id" -> f.parentId, "attribute" -> f.attribute, "value" -> f.value.orNull)
+
+  override def getRowMapper() = new RowMapper[Attribute.Persisted]() {
+    override def mapRow(rs: ResultSet, rowNum: Int): Attribute.Persisted = {
+      val id = rs.getString("id")
+
+      new Attribute.Persisted(
+          id,
+          rs.getTimestamp("creation_date"),
+          rs.getTimestamp("last_updated_date"),
+          rs.getBoolean("is_active"),
+          rs.getString("parent_id"),
+          rs.getString("attribute"),
+          Option(rs.getString("value")))
+    }
+  }
+}
+
+class UserAttributeDao(npt: NamedParameterJdbcTemplate, txnSync: SpringTransactionSynchronization, workQueue: WorkQueue)
+  extends AttributeDao("user_attributes", EntityType.USER_ATTRIBUTE, npt, txnSync, workQueue)

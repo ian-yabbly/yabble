@@ -61,6 +61,10 @@ public final class ServiceProtos {
      * <code>USER_AUTH = 12;</code>
      */
     USER_AUTH(11, 12),
+    /**
+     * <code>USER_ATTRIBUTE = 13;</code>
+     */
+    USER_ATTRIBUTE(12, 13),
     ;
 
     /**
@@ -111,6 +115,10 @@ public final class ServiceProtos {
      * <code>USER_AUTH = 12;</code>
      */
     public static final int USER_AUTH_VALUE = 12;
+    /**
+     * <code>USER_ATTRIBUTE = 13;</code>
+     */
+    public static final int USER_ATTRIBUTE_VALUE = 13;
 
 
     public final int getNumber() { return value; }
@@ -129,6 +137,7 @@ public final class ServiceProtos {
         case 10: return YLIST_USER;
         case 11: return USER_NOTIFICATION_PUSH;
         case 12: return USER_AUTH;
+        case 13: return USER_ATTRIBUTE;
         default: return null;
       }
     }
@@ -7084,16 +7093,16 @@ public final class ServiceProtos {
       "ush.YListLink\022I\n\017forgot_password\030\002 \001(\01320" +
       ".me.yabble.service.proto.UserPush.Forgot" +
       "Password\032\034\n\tYListLink\022\017\n\007list_id\030\001 \002(\t\032!" +
-      "\n\016ForgotPassword\022\017\n\007user_id\030\001 \002(\t*\336\001\n\nEn" +
+      "\n\016ForgotPassword\022\017\n\007user_id\030\001 \002(\t*\362\001\n\nEn" +
       "tityType\022\010\n\004USER\020\001\022\t\n\005YLIST\020\002\022\021\n\rYLIST_C" +
       "OMMENT\020\003\022\016\n\nYLIST_ITEM\020\004\022\026\n\022YLIST_ITEM_C" +
       "OMMENT\020\005\022\t\n\005IMAGE\020\006\022\023\n\017YLIST_ITEM_VOTE\020\007" +
       "\022\025\n\021USER_NOTIFICATION\020\010\022\016\n\nYLIST_VOTE\020\t\022" +
       "\016\n\nYLIST_USER\020\n\022\032\n\026USER_NOTIFICATION_PUS" +
-      "H\020\013\022\r\n\tUSER_AUTH\020\014*D\n\tEventType\022\n\n\006CREAT",
-      "E\020\001\022\010\n\004READ\020\002\022\n\n\006UPDATE\020\003\022\n\n\006DELETE\020\004\022\t\n" +
-      "\005TOUCH\020\005B(\n\027me.yabble.service.protoB\rSer" +
-      "viceProtos"
+      "H\020\013\022\r\n\tUSER_AUTH\020\014\022\022\n\016USER_ATTRIBUTE\020\r*D",
+      "\n\tEventType\022\n\n\006CREATE\020\001\022\010\n\004READ\020\002\022\n\n\006UPD" +
+      "ATE\020\003\022\n\n\006DELETE\020\004\022\t\n\005TOUCH\020\005B(\n\027me.yabbl" +
+      "e.service.protoB\rServiceProtos"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
       new com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner() {

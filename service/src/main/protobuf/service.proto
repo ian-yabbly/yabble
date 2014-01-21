@@ -18,6 +18,7 @@ enum EntityType {
   YLIST_USER             = 10;
   USER_NOTIFICATION_PUSH = 11;
   USER_AUTH              = 12;
+  USER_ATTRIBUTE         = 13;
 }
 
 enum EventType {

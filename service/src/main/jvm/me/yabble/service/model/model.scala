@@ -81,6 +81,33 @@ object UserNotification {
   }
 }
 
+object Attribute {
+  class Free(
+      val parentId: String,
+      val attribute: String,
+      val value: Option[String])
+    extends Entity.Free
+
+  class Update(
+      id: String,
+      val value: Option[String])
+    extends Entity.Update(id)
+
+  class Persisted(
+      id: String,
+      creationDate: DateTime,
+      lastUpdatedDate: DateTime,
+      isActive: Boolean,
+      val parentId: String,
+      val attribute: String,
+      val value: Option[String])
+    extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+}
+
+trait HasAttributes {
+  val attributes: List[Attribute.Persisted]
+}
+
 object User {
   class Free(
       val name: Option[String],
@@ -105,8 +132,10 @@ object User {
       val name: Option[String],
       val email: Option[String],
       val tz: Option[DateTimeZone],
-      val image: Option[Image.Persisted])
+      val image: Option[Image.Persisted],
+      val attributes: List[Attribute.Persisted])
     extends Entity.Persisted(id, creationDate, lastUpdatedDate, isActive)
+    with HasAttributes
   {
     def displayName(): String = name.orElse(email).getOrElse("Guest")
 

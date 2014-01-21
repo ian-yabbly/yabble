@@ -21,12 +21,20 @@ trait UserService extends IService[User.Free, User.Persisted, User.Update] {
   def create(f: UserNotification.Free): String
   def findNotification(id: String): UserNotification.Persisted
   // END User notifications
+
+  // User Attributes
+  def create(f: Attribute.Free): String
+  def update(u: Attribute.Update): Int
+  def deactivateAttribute(id: String): Boolean
+  def activateAttribute(id: String): Boolean
+  // END User Attributes
 }
 
 class UserServiceImpl(
     private val userDao: UserDao,
     private val userAuthDao: UserAuthDao,
-    private val userNotificationDao: UserNotificationDao)
+    private val userNotificationDao: UserNotificationDao,
+    private val userAttributeDao: UserAttributeDao)
   extends Service(userDao)
   with UserService
   with Log
@@ -70,4 +78,11 @@ class UserServiceImpl(
   override def create(f: UserNotification.Free) = userNotificationDao.create(f)
   override def findNotification(id: String) = userNotificationDao.find(id)
   // END User notifications
+
+  // User Attributes
+  def create(f: Attribute.Free) = userAttributeDao.create(f)
+  def update(u: Attribute.Update) = userAttributeDao.update(u)
+  def deactivateAttribute(id: String) = userAttributeDao.deactivate(id)
+  def activateAttribute(id: String) = userAttributeDao.activate(id)
+  // END User Attributes
 }

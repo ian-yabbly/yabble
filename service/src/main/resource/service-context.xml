@@ -198,6 +198,14 @@
       c:txn-sync-ref='common.txn-sync'
       c:work-queue-ref='common.work-queue'
       />
+
+  <bean
+      id='service.user-attribute-dao'
+      class='me.yabble.service.dao.UserAttributeDao'
+      c:npt-ref='service.jdbc-template'
+      c:txn-sync-ref='common.txn-sync'
+      c:work-queue-ref='common.work-queue'
+      />
   <!-- END DAO -->
 
   <!-- Service -->
@@ -213,6 +221,7 @@
           c:user-dao-ref='service.user-dao'
           c:user-auth-dao-ref='service.user-auth-dao'
           c:user-notification-dao-ref='service.user-notification-dao'
+          c: user-attribute-dao-ref='service.user-attribute-dao'
           />
     </property>
   </bean>

@@ -1,7 +1,7 @@
 package me.yabble.service.worker
 
 import me.yabble.common.Log
-//import me.yabble.common.TextUtils._
+import me.yabble.common.TextUtils._
 import me.yabble.common.wq._
 import me.yabble.service._
 import me.yabble.service.model.UserNotification
@@ -23,7 +23,7 @@ class UserNotificationWorker(
     val e = EntityEvent.parseFrom(item.getValue)
     val id = e.getEntityId
 
-    //log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
+    log.info("Handling event [{}] [{}]", enumToCode(e.getEntityType), enumToCode(e.getEventType))
 
     e.getEntityType match {
       case EntityType.YLIST_USER => {
@@ -50,17 +50,25 @@ class UserNotificationWorker(
         e.getEventType match {
           case EventType.CREATE => {
             val list = ylistService.findByItem(id)
-            userService.create(new UserNotification.Free(
-                e.getUserId,
-                UserNotificationType.YLIST_ITEM_CREATE,
-                Some(id),
-                Some(e.getEntityType),
-                Some(Notification.YListItem.newBuilder()
-                    .setListId(list.id)
-                    .setListItemId(id)
-                    .setSource(e)
-                    .build()
-                    .toByteArray())))
+            list.optionalItem(id) match {
+              case Some(item) => {
+                (list.users :+ list.user).filter(_.id != item.user.id).foreach(user => {
+                  userService.create(new UserNotification.Free(
+                      user.id,
+                      UserNotificationType.YLIST_ITEM_CREATE,
+                      Some(id),
+                      Some(e.getEntityType),
+                      Some(Notification.YListItem.newBuilder()
+                          .setListId(list.id)
+                          .setListItemId(id)
+                          .setSource(e)
+                          .build()
+                          .toByteArray())))
+                  })
+              }
+
+              case None => // Do nothing
+            }
           }
 
           case _ => // Do nothing
