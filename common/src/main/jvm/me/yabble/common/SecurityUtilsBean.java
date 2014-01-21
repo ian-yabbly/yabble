@@ -54,7 +54,7 @@ public class SecurityUtilsBean {
         LocalDate now = LocalDate.now();
         StringBuilder buf = new StringBuilder();
         buf.append(uri.getScheme()).append("://").append(uri.getHost());
-        if (uri.getPort() != 80 && uri.getPort() != 443) {
+        if (uri.getPort() != -1) {
             buf.append(":").append(uri.getPort());
         }
 
