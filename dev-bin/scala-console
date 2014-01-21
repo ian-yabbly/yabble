@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+source $(dirname $0)/include
+
+name=scala-console
+
+scala \
+-J"-Xmx1g" \
+$YABBLY_JAVA_OPTS \
+-classpath $BASEDIR/lib/\*:$BASEDIR/artifact/\* \
+-Yrepl-sync \
+"$@"

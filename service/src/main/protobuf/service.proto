@@ -53,6 +53,12 @@ message Notification {
     required string user_id     = 2;
     required EntityEvent source = 3;
   }
+
+  message YListItem {
+    required string list_id      = 1;
+    required string list_item_id = 2;
+    required EntityEvent source = 3;
+  }
 }
 
 message UserCommunication {

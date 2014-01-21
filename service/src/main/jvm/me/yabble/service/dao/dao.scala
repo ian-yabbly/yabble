@@ -218,6 +218,15 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
 
   protected def optionalQuery(params: Map[String, Any], activeOnly: Boolean = true): Option[P] = optional(allQuery(params, activeOnly))
 
+  protected def oneQuery(params: Map[String, Any]): P = {
+    val stmt = stmtFromParams(params)
+    try {
+      npt.queryForObject(stmt, params, getRowMapper)
+    } catch {
+      case e: EmptyResultDataAccessException => throw new EntityNotFoundException(kind, params.mkString(", "))
+    }
+  }
+
   def createOrUpdate(f: F): String = {
     optional(f) match {
       case Some(v) => v.id
@@ -302,7 +311,7 @@ abstract class EntityDao[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Up
     try {
       t.queryForObject(stmt, getRowMapper, id)
     } catch {
-      case e: EmptyResultDataAccessException => throw new EntityNotFoundException(kind, id)
+      case e: EmptyResultDataAccessException => throw new EntityNotFoundByIdException(kind, id)
     }
   }
 
@@ -569,6 +578,8 @@ class YListDao(
   extends EntityWithUserDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.YLIST, npt, txnSync, workQueue)
   with Log
 {
+  def findByItem(itemId: String): YList.Persisted = oneQuery(Map("item_id" -> itemId))
+
   def addUser(lid: String, uid: String): Boolean = {
     val params = Map("list_id" -> lid, "user_id" -> uid)
     npt.queryForList("select * from list_users where list_id = :list_id and user_id = :user_id for update", params).toList match {

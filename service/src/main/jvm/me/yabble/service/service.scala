@@ -7,7 +7,8 @@ import me.yabble.service.dao._
 import me.yabble.service.proto.ServiceProtos._
 
 class NotFoundException(message: String) extends RuntimeException(message)
-class EntityNotFoundException(val kind: EntityType, val id: String) extends NotFoundException("[%s] not found [%s]".format(enumToString(kind), id))
+class EntityNotFoundException(val kind: EntityType, val message: String) extends NotFoundException("[%s] not found: [%s]".format(enumToString(kind), message))
+class EntityNotFoundByIdException(kind: EntityType, val id: String) extends EntityNotFoundException(kind, id)
 
 trait IService[F <: Entity.Free, P <: Entity.Persisted, U <: Entity.Update] {
   def create(f: F): String
