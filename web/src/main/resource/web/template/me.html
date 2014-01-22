@@ -12,11 +12,42 @@
         <th>email</th><td>$__user.email()</td>
       </tr>
     </table>
+
+    #if ($myLists.nonEmpty())
+    <h3>My Lists</h3>
     <ul>
-      #foreach ($l in $lists)
-      <li><a href=#appUrl("/list/$l.id()/$l.slug()")>$l.title()</a></li>
+      #foreach ($l in $myLists)
+      <li>
+        <p style='margin-bottom: 3px;'><a href=#appUrl("/list/$l.id()/$l.slug()") style='font-weight: bold;'>$l.title()</a></p>
+        <p style='margin-top: 3px; font-size: 80%;'>
+          Subscription: 
+          <a href=#appUrl("/x/list/$l.id()/notification-preference/-1")>Immediate</a><br>
+          <a href=#appUrl("/x/list/$l.id()/notification-preference/0")>None</a><br>
+          <a href=#appUrl("/x/list/$l.id()/notification-preference/3")>Three/day</a><br>
+        </p>
+      </li>
       #end
     </ul>
+    #end
+
+    #if ($contribLists.nonEmpty())
+    <h3>Contrib Lists</h3>
+    <ul>
+      #foreach ($l in $contribLists)
+      <li>
+        <p style='margin-bottom: 3px;'><a href=#appUrl("/list/$l.id()/$l.slug()") style='font-weight: bold;'>$l.title()</a></p>
+        <p style='margin-top: 3px; font-size: 80%;'>
+          Subscription: 
+          <a href=#appUrl("/x/list/$l.id()/notification-preference/-1")>Immediate</a><br>
+          <a href=#appUrl("/x/list/$l.id()/notification-preference/0")>None</a><br>
+          <a href=#appUrl("/x/list/$l.id()/notification-preference/3")>Three/day</a><br>
+        </p>
+      </li>
+      #end
+    </ul>
+    #end
+
+
 
     <h2>Edit</h2>
     <form method=post>

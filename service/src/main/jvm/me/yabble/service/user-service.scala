@@ -36,6 +36,10 @@ trait UserService extends IService[User.Free, User.Persisted, User.Update] {
   def activateAttribute(id: String): Boolean
   // END User Attributes
 
+  // User list notification preferences
+  def createOrUpdate(f: UserListNotificationPreference.Free)
+  // END User list notification preferences
+
   // User list notification push schedules
   def update(u: UserListNotificationPushSchedule.Update): Int
   def scheduleUserListNotificationPush(unid: String, uid: String, lid: String, maxPushesPerDay: Int)
@@ -108,6 +112,12 @@ class UserServiceImpl(
   override def deactivateAttribute(id: String) = userAttributeDao.deactivate(id)
   override def activateAttribute(id: String) = userAttributeDao.activate(id)
   // END User Attributes
+
+  // User list notification preferences
+  override def createOrUpdate(f: UserListNotificationPreference.Free) {
+    userListNotificationPreferenceDao.createOrUpdate(f)
+  }
+  // END User list notification preferences
 
   // User list notification push schedules
   override def update(u: UserListNotificationPushSchedule.Update) = userListNotificationPushScheduleDao.update(u)

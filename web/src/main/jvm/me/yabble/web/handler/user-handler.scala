@@ -74,7 +74,8 @@ class UserHandler(
 
         optionalMe().foreach(me => {
           context.put("form", getOrCreateForm())
-          context.put("lists", ylistService.allByUser(me.id))
+          context.put("myLists", ylistService.allByUser(me.id))
+          context.put("contribLists", ylistService.allByListUser(me.id))
         })
 
         htmlTemplateResponse(exchange, List("me.html", "layout/layout.html"), context.toMap)

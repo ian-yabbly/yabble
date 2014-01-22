@@ -24,6 +24,7 @@ trait YListService extends IService[YList.Free, YList.Persisted, YList.Update] {
 
   def findByItem(itemId: String): YList.Persisted
   def allByUser(uid: String): List[YList.Persisted]
+  def allByListUser(uid: String): List[YList.Persisted]
 
   def findItem(itemId: String): YList.Item.Persisted
 }
@@ -72,6 +73,7 @@ class YListServiceImpl(
 
   override def findByItem(itemId: String): YList.Persisted = ylistDao.findByItem(itemId)
   override def allByUser(uid: String) = ylistDao.allByUser(uid)
+  override def allByListUser(uid: String) = ylistDao.allByListUser(uid)
 
   override def findItem(itemId: String) = ylistItemDao.find(itemId)
 }

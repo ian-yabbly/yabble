@@ -40,7 +40,8 @@ class YListHandler(
       "/x/list/{id}/item/{item-id}/vote",
       "/x/list/{id}/item/{item-id}/vote/delete",
       "/list/{id}/item/{item-id}",
-      "/x/list/{id}/item/{item-id}/delete")
+      "/x/list/{id}/item/{item-id}/delete",
+      "/x/list/{id}/notification-preference/{value}")
 
   override def maybeHandle(exchange: HttpExchange): Boolean = {
     val pathMatcher = new AntPathMatcher()
@@ -63,6 +64,7 @@ class YListHandler(
           case 10 => itemVoteDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case 11 => item(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case 12 => itemDelete(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
+          case 13 => notificationPreference(exchange, pathMatcher.extractUriTemplateVariables(t._1, path).toMap)
           case _ => error(s"Unexpected match [${t._1}]")
         })
         .isDefined
@@ -224,6 +226,16 @@ class YListHandler(
     val me = requiredMe()
     val itemId = pathVars("item-id")
     ylistService.deactivateItem(itemId)
+    val list = ylistService.find(id)
+    redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
+  }
+ 
+  def notificationPreference(exchange: HttpExchange, pathVars: Map[String, String]) {
+    val id = pathVars("id")
+    val me = requiredMe()
+    val value = pathVars("value").toInt
+    userService.createOrUpdate(new UserListNotificationPreference.Free(me.id, id, value))
+
     val list = ylistService.find(id)
     redirectResponse(exchange, "/list/%s/%s".format(list.id, list.slug()))
   }

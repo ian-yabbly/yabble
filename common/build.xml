@@ -19,7 +19,7 @@
   </path>
 
   <target name='gen'>
-    <delete dir='src/main/gen-java'/>
+    <delete dir='src/main/gen-jvm'/>
     <mkdir dir='src/main/gen-jvm'/>                    
     <exec executable='protoc' failonerror='true'>     
       <arg value='--java_out=src/main/gen-jvm'/>       

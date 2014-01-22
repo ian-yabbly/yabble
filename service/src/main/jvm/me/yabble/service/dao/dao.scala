@@ -588,6 +588,8 @@ class YListDao(
   extends EntityWithUserDao[YList.Free, YList.Persisted, YList.Update]("lists", EntityType.YLIST, npt, txnSync, workQueue)
   with Log
 {
+  def allByListUser(uid: String): List[YList.Persisted] = all("all-by-list-user", Map("user_id" -> uid))
+
   def findByItem(itemId: String): YList.Persisted = npt.queryForObject(
       findStatement("find-by-item"),
       Map("item_id" -> itemId),
