@@ -8,13 +8,13 @@
     margin: 0 0 @margin-small;
     font-size: 0.8;
     font-weight: 500;
-    
+
     &.radio-label {
       display: inline-block;
       margin: 0 @margin-regular 0 (@margin-small / 2);
     }
   }
-  
+
   .radio-label,
   input[type="checkbox"],
   input[type="radio"] {
@@ -31,7 +31,7 @@
   .button {
     font-size: 1em;
   }
-  
+
   input[type="radio"],
   input[type="checkbox"] {
     margin: 0;
@@ -132,6 +132,7 @@
 
     &:disabled {
       .opacity(0.6);
+      text-shadow: none;
     }
   }
 
@@ -148,7 +149,7 @@
       background: @dark-orange;
     }
   }
-  
+
   a[href].gray-button,
   .gray-button {
     background: @dark-gray;

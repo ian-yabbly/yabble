@@ -18,13 +18,13 @@
       'tabset',
       'user',
       'text!template/mustache/contributor.mustache',
-      'text!template/mustache/voter.mustache',      
+      'text!template/mustache/voter.mustache',
       'menu'
     ],
     function($, utils, xhr, AddItemDialog, UserEmailDialog, formUtils,
-      mustache, strings, stringUtils, TabSet, User, textContribTmpl, 
+      mustache, strings, stringUtils, TabSet, User, textContribTmpl,
       textVoterTmpl) {
-      var dlgAddItem, dlgUserEmail,        
+      var dlgAddItem, dlgUserEmail,
           tmplContributor = mustache.compile(textContribTmpl),
           tmplVoter       = mustache.compile(textVoterTmpl);
 
@@ -37,13 +37,13 @@
             elContribCount.text(parseInt(elContribCount.text(), 10) + change);
           }
         };
-        
+
         utils.exists($('#button-add-item'), function(btnAddItem) {
           var elItemList = $('#list-items ul');
           btnAddItem.click(function() {
             var user = User.getLoggedInUser();
             if(!dlgAddItem) {
-              dlgAddItem = new AddItemDialog({ 
+              dlgAddItem = new AddItemDialog({
                  listId : btnAddItem.data('list-id')
                });
             }
@@ -64,7 +64,7 @@
           var txtInviteeEmail = $('#email'),
               user = User.getLoggedInUser(),
               listContribs  = $('#list-contributors ul');
-              
+
           if(user && !user.email) {
             txtInviteeEmail.focus(function() {
               if(!user.email) {
@@ -79,7 +79,7 @@
               return false;
             })
           }
-              
+
           elFormInviteToList.submit(function() {
             var email = $.trim(txtInviteeEmail.val());
             txtInviteeEmail.focus();
@@ -94,10 +94,10 @@
                   listContribs.append(tmplContributor({ email : email }));
                   txtInviteeEmail.val('');
                   changeContribCount(1);
-                }).fail(function() {                  
+                }).fail(function() {
                   setTimeout(function() {
                     elFormInviteToList.removeClass('loading error');
-                  }, 2000);                  
+                  }, 2000);
                   elFormInviteToList.addClass('error');
                 })
             } else {
@@ -122,7 +122,7 @@
 
         utils.exists($('.button-toggle-list-item-vote'), function(btnToggleVote) {
           btnToggleVote.click(function() {
-            var newVoteCount, countText, 
+            var newVoteCount, countText,
                 user        = User.getLoggedInUser(),
                 button      = $(this),
                 voteCount   = button.data('vote-count'),
@@ -135,11 +135,11 @@
 
             if(user) {
               button.addClass('loading');
-              
+
               $.get(href).done(function() {
-                button.removeClass('loading');                
+                button.removeClass('loading');
               });
-            
+
               newVoteCount = voteCount + (isVote ? 1 : -1);
               button.data('vote-count', newVoteCount)
                     .toggleClass('has-voted')
@@ -147,17 +147,17 @@
                       'href',
                       isVote ? href + '/delete' : href.replace('/delete', '')
                     );
-                  
+
               buttonTxt.text(
-                isVote 
-                  ? strings.get('item.vote.delete') 
+                isVote
+                  ? strings.get('item.vote.delete')
                   : strings.get('item.vote')
               );
-            
+
               if(newVoteCount > 0) {
                 countText = strings.get(
-                  'item.voteCount', 
-                  newVoteCount, 
+                  'item.voteCount',
+                  newVoteCount,
                   newVoteCount === 1 ? 'person' : 'people'
                 );
               } else {
@@ -184,7 +184,7 @@
             return false;
           });
         });
-        
+
         utils.exists($('#button-share-list'), function(btnShareList) {
           var txtShareList = $('#list-share-url');
           txtShareList.click(function() {
@@ -200,7 +200,7 @@
                   .val(response && response.url)
                   .select();
               } else {
-                txtShareList.removeClass('is-loading').addClass('has-error');                
+                txtShareList.removeClass('is-loading').addClass('has-error');
               }
             }).fail(function() {
               txtShareList.removeClass('is-loading').addClass('has-error');

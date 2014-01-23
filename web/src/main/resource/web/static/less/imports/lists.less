@@ -21,11 +21,11 @@
 
   .list-item-image {
     border: 4px solid @gray;
-        
+
     img {
       display: block;
     }
-    
+
     &.no-list-item-image {
       .icon;
       background: @light-gray;
@@ -38,22 +38,22 @@
   .list-item .list-item-image {
     margin: 0 @margin-regular 0 0;
   }
-  
+
   a[href].list-item-link {
     min-height: 100px;
     display: block;
     color: #000;
     text-decoration: none;
-    
+
     &:hover,
     &:focus {
       color: @light-blue;
-      
+
       .list-item-image {
         border-color: @blue;
       }
     }
-    
+
     &:focus {
       outline: none;
     }
@@ -62,26 +62,26 @@
   .list-item-body {
     max-width: 40%;
   }
-  
+
 /* list item controls */
-    
+
   .list-item-controls {
     display: block;
     line-height: 40px;
     margin: @margin-regular 0 0;
-    
+
     a[href].button,
     .list-item-vote-count,
     a {
       display: inline-block;
       vertical-align: top;
       margin: 0 @margin-regular @margin-small 0;
-      
+
       &:last-child {
         margin-right: 0;
       }
     }
-    
+
     .icon {
       display: inline-block;
       width: 30px;
@@ -91,22 +91,22 @@
       text-align: center;
       text-transform: none;
     }
-    
+
     .list-item-vote-count {
       color: @orange;
       cursor: default;
-      
+
       .icon {
         background: @orange;
         color: #fff;
       }
-      
+
       .tooltip {
         margin-left: -@margin-small;
         margin-top: 40px + @margin-small;
         min-width: 200px;
         max-width: 300px;
-        
+
         li {
           padding: @padding-small;
           line-height: 1;
@@ -116,7 +116,7 @@
         }
       }
     }
-    
+
     .list-item-comment-count {
       .icon {
         background: @blue;
@@ -124,41 +124,41 @@
         font-size: 0.9em;
       }
     }
-    
+
     a[href].button {
       padding-left: 5px;
-      text-align: left;      
-      
+      text-align: left;
+
       .icon {
         background: #fff;
         margin-top: 5px;
         color: @dark-gray;
         font-size: 1.25em;
       }
-      
+
       &:hover {
         .icon {
           color: @medium-gray;
         }
-      }      
-      
+      }
+
       &:active {
         .icon {
           color: @very-dark-gray;
         }
-      }         
+      }
     }
-    
-    a[href].button-toggle-list-item-vote {      
+
+    a[href].button-toggle-list-item-vote {
       &.has-voted {
         .orange-button;
         margin-top: 0;
-      
+
         .icon {
           color: @orange;
         }
       }
-           
+
       &,
       &.has-voted {
         &.loading .icon {
@@ -168,7 +168,7 @@
           background-size: 25px 25px;
         }
       }
-    }    
+    }
   }
 
   #list-items .flexible-container {
@@ -197,7 +197,7 @@
       .rounded(50px);
     }
   }
-  
+
 
 /* list content */
 
@@ -205,10 +205,10 @@
     .flexible-container {
       text-align: left;
     }
-  }  
-  
-/* add option button */  
-  
+  }
+
+/* add option button */
+
   #button-add-item {
     min-width: 300px;
   }
@@ -336,7 +336,7 @@
       .rounded(15px);
       .transition-property(opacity, 250ms, linear);
     }
-    
+
     #success-indicator {
       color: #fff;
       text-align: center;
@@ -351,23 +351,23 @@
         color: transparent;
       }
     }
-    
+
     &.error {
       input[type="submit"] {
         .has-error;
         color: transparent;
-      }      
+      }
     }
-    
+
     &.success {
       input[type="submit"] {
         .opacity(0);
       }
-      
+
       #success-indicator {
         .opacity(1);
       }
-    }      
+    }
   }
 
 /* list activity */
@@ -381,42 +381,42 @@
       color: @dark-gray;
     }
   }
-  
+
 /* share list */
-  
+
   #button-share-list  {
     display: none;
     overflow: visible;
-    
+
     .tooltip,
     .pointer span {
       background: #fff;
       .box-shadow(0 0 8px rgba(0, 0, 0, 0.55));
     }
-    
+
     .tooltip {
       left: auto;
       right: 0px;
       margin-top: 45px + @margin-small;
       line-height: 1.4;
-      
+
       .pointer {
         left: auto;
         right: 29px;
       }
-    }    
-    
+    }
+
     label {
       text-align: left;
     }
-    
+
     input[type="text"] {
       padding: @padding-small;
       background-size: 20px 20px;
     }
-    
-    &:hover, 
-    &.show-menu {    
+
+    &:hover,
+    &.show-menu {
       background: @dark-blue;
     }
   }
@@ -424,46 +424,46 @@
 /* add item dialog */
 
   #add-item {
-    position: static;
+    position: relative;
     margin: @margin-large auto;
     width: 800px;
-    
+
     .no-list-item-image {
       height: 512px;
       line-height: 512px;
     }
-    
+
     h3 {
       margin: 0 0 @margin-large;
     }
   }
-  
+
   #add-item-image-search,
   #add-item-image-url,
   #add-item-details,
   #add-item-back {
     display: none;
   }
-  
+
   #add-item-image-search-results {
     margin-top: @margin-large;
     text-align: left;
-    
+
     li {
-      cursor: pointer;           
+      cursor: pointer;
     }
     li:hover {
       border-color: @blue;
     }
   }
-  
+
   #image-url-preview {
     &.is-loading,
     &.has-error {
       min-height: 150px;
     }
-  }  
-  
+  }
+
   #image-preview {
     width: 100%;
 
@@ -472,13 +472,13 @@
       min-height: 200px;
     }
   }
-  
+
   #add-item-image-search-results li,
   #image-preview {
     img {
       .transition-property(opacity, 250ms, linear);
     }
-    
+
     &.is-loading,
     &.has-error {
       img {
@@ -486,19 +486,19 @@
       }
     }
   }
-  
+
   .image-search {
     #add-item-image-search {
       display: block;
     }
   }
-  
+
   .image-url {
     #add-item-image-url {
       display: block;
     }
   }
-  
+
   .item-details {
     #add-item-details {
       display: block;
@@ -528,7 +528,7 @@
       }
     }
   }
- 
+
 
 
 

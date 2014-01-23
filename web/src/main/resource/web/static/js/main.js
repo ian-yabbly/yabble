@@ -30,7 +30,7 @@
         'comments'
       ],
       function($, utils, stringUtils) {
-        utils.log(stringUtils.format('yabble.me application version {} started...', document.YABBLY_UI_VERSION));
+        utils.log(stringUtils.format('yabble.me application version {} started...', document.YABBLE_UI_VERSION));
       }
   );
 

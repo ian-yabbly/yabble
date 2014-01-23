@@ -12,19 +12,13 @@
       ],
       function($, Observable, utils, stringUtils, mustache, txtDialogTmpl) {
 
-        var overlay, container, visibleDialog, body, containers,
+        var container, visibleDialog, body, container,
             init, Dialog, tmpl;
 
         tmpl = mustache.compile(txtDialogTmpl);
 
         init = function() {
           body = $(document.body);
-
-          // We use a single modal overlay for all dialogs on a given page.
-          overlay = $('#dialog-overlay');
-          if(overlay.length === 0) {
-            overlay = $('<div id="dialog-overlay"></div>').appendTo(body);
-          }
 
           // We use a single dialog container for all dialogs on a given page
           container = $('#dialog-container');
@@ -34,13 +28,11 @@
 
           container.click(function(e) {
             var target = $(e.target);
-            if(visibleDialog && target !== visibleDialog.element
+            if(visibleDialog && !target.is('.active-dialog')
                 && target.parents('.active-dialog').length === 0) {
               visibleDialog.hide();
             }
           });
-
-          containers = $().add(container).add(overlay);
 
           init = undefined;
         };
@@ -68,7 +60,7 @@
           this.setCloseButtonListener();
 
           if(body.hasClass('dialog-visible') && this.element.hasClass('active-dialog')) {
-            containers.css('display', 'block');
+            container.css('display', 'block');
             visibleDialog = this;
           }
         };
@@ -94,7 +86,7 @@
           this.updatePositionListener = function() {
             self.getDimensions();
             utils.requestAnimationFrame(function() {
-              self.setPosition();              
+              self.setPosition();
             });
           };
           $(window).bind('resize', this.updatePositionListener);
@@ -129,8 +121,7 @@
           var self = this,
               show = function() {
                 visibleDialog = self;
-                containers.css('display', 'block');
-                self.element.css('display', 'block');
+                container.css('display', 'block');
                 utils.requestAnimationFrame(function() {
                   self.getDimensions();
                   if(!self.fixed) {
@@ -138,7 +129,7 @@
                     self.bindResizeListeners();
                   }
                   utils.onTransitionEnd(
-                      self.element,
+                      container,
                       function() {
                         self.publish(Dialog.Event.SHOWN, self);
                       }
@@ -168,8 +159,7 @@
                 container,
                 function() {
                   self.element.removeClass('active-dialog');
-                  containers.css('display', '');
-                  self.element.css('display', '');
+                  container.css('display', '');
                   self.hideLoading();
                   self.publish.apply(self, [ Dialog.Event.HIDDEN, self ].concat(args));
                 }

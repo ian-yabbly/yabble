@@ -18,7 +18,6 @@
     if(transEndEventNames.hasOwnProperty(name)) {
       if(typeof document.body.style[name] !== 'undefined') {
         transEndEventName = transEndEventNames[name];
-        break;
       }
     }
   }
@@ -30,7 +29,11 @@
         if(args.length > 0 && typeof args[0] === 'string') {
           args[0] = '[yabble] ' + args[0];
         }
-        console.log.apply(console, args);
+        if(typeof console.log.apply === 'function') {
+            console.log.apply(console, args);
+        } else {
+            console.log(args && args[0]);
+        }
       }
       return this;
     },
@@ -39,11 +42,11 @@
     },
     requestAnimationFrame : function() {
       var reqFrame = (
-        requestAnimationFrame ||
-        webkitRequestAnimationFrame ||
-        mozRequestAnimationFrame ||
-        msRequestAnimationFrame ||
-        oRequestAnimationFrame ||
+        window.requestAnimationFrame ||
+        window.webkitRequestAnimationFrame ||
+        window.mozRequestAnimationFrame ||
+        window.msRequestAnimationFrame ||
+        window.oRequestAnimationFrame ||
         function( callback ) {
           window.setTimeout(callback, 1000 / 60);
         }

@@ -3,50 +3,36 @@
 */
 
   .dialog,
-  #dialog-overlay,
   #dialog-container {
     position: fixed;
     top: 0;
     left: 0;
-    -webkit-transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
-    .opacity(0);
-    .transition-property(opacity, 250ms, ease-in-out);
-  }
-
-  #dialog-overlay,
-  #dialog-container {
-    width: 100%;
-    height: 100%;
     display: none;
   }
 
   #dialog-container {
+    width: 100%;
+    height: 100%;
     z-index: 10001;
+    background-color: rgba(0, 0, 0, 0.5);
     overflow: auto;
+    .opacity(0);
+    .transition-property(opacity, 250ms, ease-in-out);
+    -webkit-transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
   }
 
-  #dialog-overlay {
-    z-index: 10000;
-    background-color: rgba(0, 0, 0, 0.75);
-  }
-
-  .dialog-visible {   
-    overflow: hidden;
-     
-    .active-dialog,
+  .dialog-visible {
     #dialog-container {
       .opacity(1);
     }
-
-    #dialog-overlay {
-      .opacity(0.5);
+    .active-dialog {
+      display: block;
     }
   }
 
   .dialog {
     position: absolute;
-    display: none;
     z-index: 10002;
     max-width: (@max-site-width - (@margin-regular * 2));
     background: #fff;
