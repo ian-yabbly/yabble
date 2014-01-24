@@ -23,12 +23,42 @@
         .rounded(100px);
         .centered;
       }
-      
+
       &:hover {
         .icon {
           background: @light-blue;
         }
       }
+    }
+  }
+
+  #landing-explanation {
+    position: relative;
+    padding: 0 (@margin-xlarge * 2 + 300) 0 @margin-xlarge;
+    text-align: left;
+    line-height: 300px;
+
+    > div {
+      line-height: 1.4;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    svg {
+      position: absolute;
+      right: @margin-xlarge;
+      top: 0;
+
+      circle,
+      path {
+        fill: @blue;
+      }
+    }
+
+    ul {
+      display: inline-block;
+      text-align: left;
+      font-size: 1.4em;
     }
   }
 

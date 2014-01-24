@@ -56,15 +56,21 @@
 #if ($_optTi.isPresent())$_optTi.get().secureUrl()#end
 #end
 
+#macro(userName $u)
+  #if($u.email().isDefined())
+    $u.email().get()
+  #elseif($u.name().isDefined())
+    $u.name().get()
+  #else
+    $u.displayName()
+  #end
+#end
+
 #macro(userDisplayName $u)
   #if($__optUser.isDefined() && $__user.id() == $u.id())
     You
-  #elseif($u.name().isDefined())
-    $u.name().get()    
-  #elseif($u.email().isDefined())
-    $u.email().get()    
   #else
-    $u.displayName()
+    #userName($u)
   #end
 #end
 
@@ -121,7 +127,7 @@
             #if($dims.isPresent())height=$dims.get().height()#end>
     </span>
   #else
-    <span class="list-item-image no-list-item-image" 
+    <span class="list-item-image no-list-item-image"
           style="width: ${width}px; height: ${width}px; line-height: ${width}px;">
       i
     </span>
