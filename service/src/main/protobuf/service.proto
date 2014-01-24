@@ -57,10 +57,30 @@ message Notification {
     required EntityEvent source = 3;
   }
 
+  message YListComment {
+    required string list_id         = 1;
+    required string list_comment_id = 2;
+    required EntityEvent source     = 3;
+  }
+
   message YListItem {
     required string list_id      = 1;
     required string list_item_id = 2;
-    required EntityEvent source = 3;
+    required EntityEvent source  = 3;
+  }
+
+  message YListItemComment {
+    required string list_id              = 1;
+    required string list_item_id         = 2;
+    required string list_item_comment_id = 3;
+    required EntityEvent source          = 4;
+  }
+
+  message YListItemVote {
+    required string list_id           = 1;
+    required string list_item_id      = 2;
+    required string list_item_vote_id = 3;
+    required EntityEvent source       = 4;
   }
 }
 

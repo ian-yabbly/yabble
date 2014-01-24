@@ -595,6 +595,16 @@ class YListDao(
       Map("item_id" -> itemId),
       getRowMapper)
 
+  def findByItemComment(commentId: String): YList.Persisted = npt.queryForObject(
+      findStatement("find-by-item-comment"),
+      Map("comment_id" -> commentId),
+      getRowMapper)
+
+  def findByItemVote(voteId: String): YList.Persisted = npt.queryForObject(
+      findStatement("find-by-item-vote"),
+      Map("vote_id" -> voteId),
+      getRowMapper)
+
   def addUser(lid: String, uid: String): Boolean = {
     val params = Map("list_id" -> lid, "user_id" -> uid)
     npt.queryForList("select * from list_users where list_id = :list_id and user_id = :user_id for update", params).toList match {

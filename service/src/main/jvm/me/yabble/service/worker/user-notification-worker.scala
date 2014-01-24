@@ -71,6 +71,34 @@ class UserNotificationWorker(
         }
       }
 
+      case EntityType.YLIST_ITEM_COMMENT => {
+        e.getEventType match {
+          case EventType.CREATE => {
+            val list = ylistService.findByItemComment(id)
+            list.optionalItemComment(id).foreach(comment => {
+              val item = list.itemByComment(id)
+
+              (list.users :+ list.user).filter(_.id != comment.user.id).foreach(user => {
+                userService.create(new UserNotification.Free(
+                    user.id,
+                    UserNotificationType.YLIST_ITEM_COMMENT_CREATE,
+                    Some(id),
+                    Some(e.getEntityType),
+                    Some(Notification.YListItemComment.newBuilder()
+                        .setListId(list.id)
+                        .setListItemId(item.id)
+                        .setListItemCommentId(id)
+                        .setSource(e)
+                        .build()
+                        .toByteArray())))
+                })
+            })
+          }
+
+          case _ => // Do nothing
+        }
+      }
+
       case _ => // Do nothing
     }
   }

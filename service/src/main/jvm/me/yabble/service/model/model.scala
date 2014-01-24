@@ -315,12 +315,16 @@ object YList {
       case None => throw new NotFoundException("List item [%s]".format(itemId))
     }
 
-    def itemComment(commentId: String): Comment.Persisted = items.flatMap(_.comments).find(commentId == _.id) match {
+    def optionalItemComment(commentId: String): Option[Comment.Persisted] = items.flatMap(_.comments).find(commentId == _.id)
+
+    def itemComment(commentId: String): Comment.Persisted = optionalItemComment(commentId) match {
       case Some(comment) => comment
       case None => throw new NotFoundException("List item comment [%s]".format(commentId))
     }
 
-    def itemVote(voteId: String): Vote.Persisted = items.flatMap(_.votes).find(voteId == _.id) match {
+    def optionalItemVote(voteId: String): Option[Vote.Persisted] = items.flatMap(_.votes).find(voteId == _.id)
+
+    def itemVote(voteId: String): Vote.Persisted = optionalItemVote(voteId) match {
       case Some(vote) => vote
       case None => throw new NotFoundException("List item vote [%s]".format(voteId))
     }
